@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+
+  <title>Pre-commit hooks for Python code
+
+</title>
+
+  <link rel="icon" href="/static/images/favicon.ico" />
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="/" rel="canonical" />
+  
+  <!-- Feed -->
+  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+    title="Code Disciples Full Atom Feed" />
+  <link href="/feeds/{slug}.atom.xml" type="application/atom+xml"
+    rel="alternate" title="Code Disciples Categories Atom Feed" />
+
+  <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+  <link href="/theme/css/code_blocks/monokai.css" rel="stylesheet">
+
+  <!-- CSS specified by the user -->
+
+
+  <link href="/theme/css/blog.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+<link href="/2019/08/pre-commit.html" rel="canonical" />
+
+<meta name="description" content="Using black and flake-8 as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively">
+
+<meta name="author" content="Abhishek Pednekar">
+
+<meta name="tags" content="Python">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Code Disciples"/>
+<meta property="og:title" content="Pre-commit hooks for Python code"/>
+<meta property="og:description" content="Using black and flake-8 as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2019/08/pre-commit.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-12 12:00:00+05:30"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/abhishek-pednekar">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="Python"/>
+<meta property="og:image" content="//static/images/black-gradient-article.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Pre-commit hooks for Python code",
+  "headline": "Pre-commit hooks for Python code",
+  "datePublished": "2019-08-12 12:00:00+05:30",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Abhishek Pednekar",
+    "url": "/author/abhishek-pednekar"
+  },
+  "image": "//static/images/black-gradient-article.jpg",
+  "url": "/2019/08/pre-commit.html",
+  "description": "Using black and flake-8 as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively"
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+
+<body class="home-template">
+
+  <!--<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>-->
+
+<!-- Progressbar -->
+<div class="progress-container">
+  <span class="progress-bar"></span>
+</div>
+
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header id="post-header" class="has-cover" >
+  <div class="inner">
+    <nav id="navigation">
+      <span id="home-button" class="nav-button">
+        <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+      </span>
+      <!-- <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span> -->
+    </nav>
+    <h1 class="post-title">Pre-commit hooks for Python code</h1>
+    <!-- TODO : Proper class for headline -->
+    <span class="post-meta">
+      <a href="/author/abhishek-pednekar">Abhishek Pednekar</a>
+      | <time datetime="Mon 12 August 2019">Mon 12 August 2019</time>
+    </span>
+    <!-- TODO : Modified check -->
+    <div class="post-cover cover" style="background-image: url('//static/images/black-gradient-article.jpg')">
+      </div>
+</header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+<!-- Post content -->
+<main class="content" role="main">
+  <article class="post">
+    <div class="article-inner">
+      <section class="post-content">
+        <p>Code reviews are great. But at the same time, they can be frustrating if the code being reviewed is not formatted uniformly. This is a common scenario in larger teams wherein multiple developers are working on the same feature branch or code base. More hours spent on fixing the formatting also results in loss of productive time which could be used to further improve code logic. Also, none of us like being that super nitpicky team member who comments on a trailing whitespace or the fact that one string has single quotes while another is enclosed within double quotes. </p>
+<p>Luckily, <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">pre-commit</a> hooks exist to alleviate these concerns by eliminating the need to manually review formatting and <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> checks. A pre-commit hook is a short script that runs before committing our code. The script can be a means to check the code formatting or its compliance to PEP8. If the script runs successfully, the code is committed to source control, else the commit is unsuccessful.</p>
+<p>In this post, we’ll take a look at two popular Python libraries and how we can add them to a pre-commit hook. Please note that I am using a <strong>Windows</strong> laptop for this demo. The same commands should work on <strong>macOS</strong> as well.</p>
+<ol>
+<li><a href="https://black.readthedocs.io/en/stable/">black</a> - a code formatter</li>
+<li><a href="http://flake8.pycqa.org/en/latest/">flake8</a> - a PEP8 compliance checker</li>
+</ol>
+<p>Please refer to this <a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_1-pre-commit-hooks">Github repository</a> for the complete code.</p>
+<h3>Pre-commit framework</h3>
+<p>Creating a pre-commit hook is made really simple by this <a href="https://github.com/pre-commit">pre-commit framework</a> written in Python. To incorporate <code>pre-commit</code> into a project, one needs to follow these steps.</p>
+<ol>
+<li>Create a <a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a> (optional but recommended)</li>
+<li>Install the pre-commit library: <code>pip install pre-commit</code></li>
+<li>Add the hooks (black and flake-8 in our case) to the <code>.pre-commit-config.yaml</code> file </li>
+<li>Run the <code>pre-commit install</code> command to install the hook in the <code>.git/</code> directory</li>
+</ol>
+<p>Here is what our <code>.pre-commit-config.yaml</code> file will look like.</p>
+<div class="highlight"><pre><span></span><span class="n">repos</span><span class="p">:</span>
+<span class="o">-</span>   <span class="n">repo</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ambv</span><span class="o">/</span><span class="n">black</span>
+    <span class="n">rev</span><span class="p">:</span> <span class="k">stable</span>
+    <span class="n">hooks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">id</span><span class="p">:</span> <span class="n">black</span>
+      <span class="n">language_version</span><span class="p">:</span> <span class="n">python3</span><span class="p">.</span><span class="mi">7</span>
+<span class="o">-</span>   <span class="n">repo</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">pre</span><span class="o">-</span><span class="k">commit</span><span class="o">/</span><span class="n">pre</span><span class="o">-</span><span class="k">commit</span><span class="o">-</span><span class="n">hooks</span>
+    <span class="n">rev</span><span class="p">:</span> <span class="n">v2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">0</span>
+    <span class="n">hooks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">id</span><span class="p">:</span> <span class="n">flake8</span>
+</pre></div>
+
+
+<p>The <code>pre-commit</code> framework that we installed (step 2) includes <code>flake8</code>. Hence all we need to specify is it's id. For <code>back</code> however, we need to specify the exact path from where it needs to be sourced.</p>
+<p>In the following sections, we'll take a look at these libraries in detail.</p>
+<h3>Code formatter - <code>black</code></h3>
+<p>Black is an uncompromisingly opinionated code formatter. It has been implemented with certain design decisions that are applied to the code being formatted. By adopting <code>black</code> into your project, you are essentially letting the library take all the code formatting decisions for you. Therefore, please read through the <a href="https://black.readthedocs.io/en/stable/">documentation</a> to understand what the design decisions are. Below are some of the notable one's. </p>
+<ul>
+<li>The number of characters per line are 88 (as opposed to 79 defined in PEP8)</li>
+<li>Strings are always enclosed in double quotes</li>
+<li>A trailing comma is added to comma separated elements</li>
+<li>For functions with multiple arguments, each argument is wrapped per line </li>
+</ul>
+<p>If any of these decisions are not acceptable to your formatting guidelines, <code>autopep8</code> is a good alternative. Also, this is part of the <code>pre-commit</code> framework like <code>flake8</code>.   </p>
+<p>In order to use <code>black</code> we will need to include a <code>pyproject.toml</code> file in our project folder. This file contains details of file types that are included and excluded during formatting. More importantly, if you would like to change the number of characters per line, just modify the <code>line-length</code> attribute in the TOML file.</p>
+<div class="highlight"><pre><span></span><span class="k">[tool.black]</span>
+<span class="c1"># Changed line-length to 80 from the default 88</span>
+<span class="na">line-length</span> <span class="o">=</span> <span class="s">80 </span>
+<span class="na">include</span> <span class="o">=</span> <span class="s">&#39;\.pyi?$&#39;</span>
+<span class="na">exclude</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="na">/(</span>
+    <span class="na">\.git</span>
+  <span class="na">| \.hg</span>
+  <span class="na">| \.mypy_cache</span>
+  <span class="na">| \.tox</span>
+  <span class="na">| \.venv</span>
+  <span class="na">| _build</span>
+  <span class="na">| buck-out</span>
+  <span class="na">| build</span>
+  <span class="na">| dist</span>
+<span class="na">)/</span>
+<span class="na">&#39;&#39;&#39;</span>
+</pre></div>
+
+
+<h3>PEP8 checker - <code>flake8</code></h3>
+<p><code>flake8</code> is a great library that check's our code compliance with PEP8. In order for <code>black</code> to function smoothly with <code>flake8</code>, we need to specify some <a href="https://flake8.pycqa.org/en/latest/user/error-codes.html">error codes</a> in the <code>.flak8</code> configuration file.</p>
+<div class="highlight"><pre><span></span><span class="k">[flake8]</span>
+<span class="na">ignore</span> <span class="o">=</span> <span class="s">E203, E266, E501</span>
+<span class="na">max-line-length</span> <span class="o">=</span> <span class="s">80</span>
+<span class="na">max-complexity</span> <span class="o">=</span> <span class="s">10</span>
+<span class="na">select</span> <span class="o">=</span> <span class="s">B,C,E,F,W,T4,B9</span>
+</pre></div>
+
+
+<p>To go over this very quickly, in the first like, we are specifying the error codes that we would like flak8 to ignore. The <code>max-line-length</code> has been set to 80 to match our <code>black</code> configuration values. <code>max-complexity' defines the [McCabe complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) of a function. This is deactivated by default. The</code>select` attribute enables errors and warnings which are turned off by default.</p>
+<p>That's it, with all this in place, we are ready to run the hook on our code. </p>
+<p>Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator, one element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.</p>
+<p><img alt="Unformatted-Code" src="/images/Unformatted_Code.jpg"></p>
+<p>Let's create and run or hook on this code. As indicated earlier, once we <code>pip install</code> the <code>pre-commit</code> library, we need to install it using the <code>pre-commit install</code> command.</p>
+<p><img alt="Pre-Commit" src="/images/Pre-Commit.jpg"></p>
+<p>Now, when we run our <code>git commit</code>, we see that <code>black</code> fails the commit but auto-formats the file. <code>flake8</code> fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next <code>git commit</code>.</p>
+<p><img alt="Initial-Commit" src="/images/Initial_Commit.jpg"></p>
+<p>Here's what our code looks like after all the formatting and the whitespace correction. Note that the list elements are now wrapped on separate lines. The spacing around the operators and the function definition is uniform. Also, all our strings are now enclosed within double quotes.</p>
+<p><img alt="Formatted-Code" src="/images/Formatted_Code.jpg"></p>
+<p>Let's go ahead and commit this. If all is good, both out hooks should pass followed by a successful <code>git commit</code>.</p>
+<p><img alt="Final-Commit" src="/images/Final_Commit.jpg"></p>
+      </section>
+
+      <section class="post-info">
+        <div class="post-share">
+          <a class="rss"
+            href="/feeds/all.atom.xml"
+            target="_blank">
+            <i class="ic ic-rss"></i><span class="hidden">rss</span>
+          </a>
+          <a class="twitter"
+            href="https://twitter.com/share?text=Pre-commit hooks for Python code&amp;url=/2019/08/pre-commit.html"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+          </a>
+          <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2019/08/pre-commit.html"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+          </a>
+          <a class="googleplus" href="https://plus.google.com/share?url=/2019/08/pre-commit.html"
+            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+            <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+          </a>
+          <div class="clear"></div>
+        </div>
+
+        <aside class="post-tags">
+<a
+            href="/tag/python">Python</a>        </aside>
+
+        <div class="clear"></div>
+
+        <aside class="post-author">
+          <div class="post-author-bio">
+            <h4 class="post-author-name">Abhishek Pednekar</h4>
+            <p class="post-author-about">Get in touch :)</p>
+            <span class="post-author-location"><i class="ic ic-location"></i>
+              Bangalore</span>
+            <span class="post-author-website"><a href="http://codedisciples.in"><i
+                  class="ic ic-link"></i> Website</a></span>
+            <!-- Social linkes in alphabet order. -->
+            <span class="post-author-github"><a target="_blank"
+                href="https://github.com/AbhishekPednekar84"><i class="ic ic-link"></i>
+                GitHub</a></span>
+            <span class="post-author-linkedin"><a target="_blank"
+                href="https://www.linkedin.com/in/unavailable"><i
+                  class="ic ic-link"></i> LinkedIn</a></span>
+          </div>
+          <div class="clear"></div>
+        </aside>
+
+      </section>
+
+      <script type="text/javascript">
+        var disqus = 'codedisciples';
+        var disqus_shortname = 'codedisciples';
+        var disqus_identifier = '/2019/08/pre-commit.html';
+        var disqus_url = '/2019/08/pre-commit.html';
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+      <section class="post-comments">
+        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/2019/08/pre-commit.html">Show Comments</a>
+        <div id="disqus_thread"></div>
+      </section>
+
+      <aside class="post-nav">
+        <div class="clear"></div>
+      </aside>
+
+    </div>
+  </article>
+</main>
+    <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Powered by <a href="https://www.netlify.com/" rel="nofollow">Netlify</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="/theme/js/script.js"></script>
+
+<script type="text/javascript">
+    var disqus_shortname = 'codedisciples';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+</body>
+
+</html>

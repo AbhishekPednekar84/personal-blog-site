@@ -1,0 +1,63 @@
+body {
+    font-family: 'Fira-Sans';
+    color: #45484d;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden
+}
+
+p, ul, ol {
+    margin: 1.5em, auto;
+}
+
+h2 {
+    margin: 1.5em 0 -0.571em;
+}
+
+.post-share a {
+    color: #fff
+}
+
+.post-share .rss {
+    background-color: #ff935c
+}
+
+.post-share a:hover,
+.post-share a:focus {
+    background-color: #000;
+}
+
+.article-inner {
+    max-width: 65em;
+    margin: 0 auto;
+    padding: 0 2em;
+    text-justify: inter-word;
+}
+
+.post-author-avatar {
+    height: 100px;
+    width: 100px;
+}
+
+.post-author-bio {
+    text-align: center;
+    padding: 0;
+}
+
+#footer .inner {
+    max-width: 65em;
+}
+
+/* For the images in the markdown file */
+.post-content img {
+    max-width: 65em;
+    margin-left: 0;
+    border: 1px solid #000;
+}
+
+@media only screen and (max-width: 480px) {
+    .article-inner {
+        padding: 0 16px
+    }
+}    
