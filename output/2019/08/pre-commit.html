@@ -144,23 +144,23 @@
   <article class="post">
     <div class="article-inner">
       <section class="post-content">
-        <p>Code reviews are great. But at the same time, they can be frustrating if the code being reviewed is not formatted uniformly. This is a common scenario in larger teams wherein multiple developers are working on the same feature branch or code base. More hours spent on fixing the formatting also results in loss of productive time which could be used to further improve code logic. Also, none of us like being that super nitpicky team member who comments on a trailing whitespace or the fact that one string has single quotes while another is enclosed within double quotes. </p>
+        <p>Code reviews are great. But at the same time, they can be frustrating if the code being reviewed is not formatted uniformly. This is a common scenario in large teams wherein multiple developers are working on the same feature branch or code base. More hours spent on fixing the formatting also results in loss of productive time which could be used to further improve code logic. Also, none of us like being that super nitpicky team member who comments on a trailing whitespace or the fact that one string has single quotes while another is enclosed within double quotes. </p>
 <p>Luckily, <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">pre-commit</a> hooks exist to alleviate these concerns by eliminating the need to manually review formatting and <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> checks. A pre-commit hook is a short script that runs before committing our code. The script can be a means to check the code formatting or its compliance to PEP8. If the script runs successfully, the code is committed to source control, else the commit is unsuccessful.</p>
 <p>In this post, we’ll take a look at two popular Python libraries and how we can add them to a pre-commit hook. Please note that I am using a <strong>Windows</strong> laptop for this demo. The same commands should work on <strong>macOS</strong> as well.</p>
 <ol>
-<li><a href="https://black.readthedocs.io/en/stable/">black</a> - a code formatter</li>
-<li><a href="http://flake8.pycqa.org/en/latest/">flake8</a> - a PEP8 compliance checker</li>
+<li><em><a href="https://black.readthedocs.io/en/stable/">black</a></em> - a code formatter</li>
+<li><em><a href="http://flake8.pycqa.org/en/latest/">flake8</a></em> - a PEP8 compliance checker</li>
 </ol>
 <p>Please refer to this <a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_1-pre-commit-hooks">Github repository</a> for the complete code.</p>
 <h3>Pre-commit framework</h3>
-<p>Creating a pre-commit hook is made really simple by this <a href="https://github.com/pre-commit">pre-commit framework</a> written in Python. To incorporate <code>pre-commit</code> into a project, one needs to follow these steps.</p>
+<p>Creating a pre-commit hook is made really simple by this <a href="https://github.com/pre-commit">pre-commit framework</a> written in Python. To incorporate <em>pre-commit</em> into a project, one needs to follow these steps.</p>
 <ol>
 <li>Create a <a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a> (optional but recommended)</li>
 <li>Install the pre-commit library: <code>pip install pre-commit</code></li>
-<li>Add the hooks (black and flake-8 in our case) to the <code>.pre-commit-config.yaml</code> file </li>
-<li>Run the <code>pre-commit install</code> command to install the hook in the <code>.git/</code> directory</li>
+<li>Add the hooks (<em>black</em> and <em>flake8</em> in our case) to the <em>.pre-commit-config.yaml</em> file </li>
+<li>Run the <code>pre-commit install</code> command to install the hook in the <em>.git/</em> directory</li>
 </ol>
-<p>Here is what our <code>.pre-commit-config.yaml</code> file will look like.</p>
+<p>Here is what our <em>.pre-commit-config.yaml</em> file will look like.</p>
 <div class="highlight"><pre><span></span><span class="n">repos</span><span class="p">:</span>
 <span class="o">-</span>   <span class="n">repo</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ambv</span><span class="o">/</span><span class="n">black</span>
     <span class="n">rev</span><span class="p">:</span> <span class="k">stable</span>
@@ -174,18 +174,18 @@
 </pre></div>
 
 
-<p>The <code>pre-commit</code> framework that we installed (step 2) includes <code>flake8</code>. Hence all we need to specify is it's id. For <code>back</code> however, we need to specify the exact path from where it needs to be sourced.</p>
+<p>The <em>pre-commit</em> framework that we installed (step 2) includes <em>flake8</em>. Hence all we need to specify is it's id. For <em>black</em> however, we need to specify the exact path from where it needs to be sourced.</p>
 <p>In the following sections, we'll take a look at these libraries in detail.</p>
-<h3>Code formatter - <code>black</code></h3>
-<p>Black is an uncompromisingly opinionated code formatter. It has been implemented with certain design decisions that are applied to the code being formatted. By adopting <code>black</code> into your project, you are essentially letting the library take all the code formatting decisions for you. Therefore, please read through the <a href="https://black.readthedocs.io/en/stable/">documentation</a> to understand what the design decisions are. Below are some of the notable one's. </p>
+<h3>Code formatter - <em>black</em></h3>
+<p><em>black</em> is an uncompromisingly opinionated code formatter. It has been implemented with certain design decisions that are applied to the code being formatted. By adopting <em>black</em> into your project, you are essentially letting the library take all the code formatting decisions for you. Therefore, please read through the <a href="https://black.readthedocs.io/en/stable/">documentation</a> to understand what the design decisions are. Below are some of the notable one's. </p>
 <ul>
 <li>The number of characters per line are 88 (as opposed to 79 defined in PEP8)</li>
 <li>Strings are always enclosed in double quotes</li>
 <li>A trailing comma is added to comma separated elements</li>
 <li>For functions with multiple arguments, each argument is wrapped per line </li>
 </ul>
-<p>If any of these decisions are not acceptable to your formatting guidelines, <code>autopep8</code> is a good alternative. Also, this is part of the <code>pre-commit</code> framework like <code>flake8</code>.   </p>
-<p>In order to use <code>black</code> we will need to include a <code>pyproject.toml</code> file in our project folder. This file contains details of file types that are included and excluded during formatting. More importantly, if you would like to change the number of characters per line, just modify the <code>line-length</code> attribute in the TOML file.</p>
+<p>If any of these decisions are not acceptable to your formatting guidelines, <em>autopep8</em> is a good alternative. Also, this is part of the <em>pre-commit</em> framework like <em>flake8</em>.   </p>
+<p>To use <em>black</em>, we will need to include a <em>pyproject.toml</em> file in our project folder. This file contains details of file types that are included and excluded during formatting. More importantly, if you would like to change the number of characters per line, just modify the <code>line-length</code> attribute in the TOML file.</p>
 <div class="highlight"><pre><span></span><span class="k">[tool.black]</span>
 <span class="c1"># Changed line-length to 80 from the default 88</span>
 <span class="na">line-length</span> <span class="o">=</span> <span class="s">80 </span>
@@ -206,8 +206,8 @@
 </pre></div>
 
 
-<h3>PEP8 checker - <code>flake8</code></h3>
-<p><code>flake8</code> is a great library that check's our code compliance with PEP8. In order for <code>black</code> to function smoothly with <code>flake8</code>, we need to specify some <a href="https://flake8.pycqa.org/en/latest/user/error-codes.html">error codes</a> in the <code>.flak8</code> configuration file.</p>
+<h3>PEP8 checker - <em>flake8</em></h3>
+<p><em>flake8</em> is a great library that verifies our code's compliance with PEP8. In order for <em>black</em> to function smoothly with <em>flake8</em>, we need to specify some <a href="https://flake8.pycqa.org/en/latest/user/error-codes.html">error codes</a> in the <em>flake8</em> configuration file.</p>
 <div class="highlight"><pre><span></span><span class="k">[flake8]</span>
 <span class="na">ignore</span> <span class="o">=</span> <span class="s">E203, E266, E501</span>
 <span class="na">max-line-length</span> <span class="o">=</span> <span class="s">80</span>
@@ -216,13 +216,13 @@
 </pre></div>
 
 
-<p>To go over this very quickly, in the first like, we are specifying the error codes that we would like flak8 to ignore. The <code>max-line-length</code> has been set to 80 to match our <code>black</code> configuration values. <code>max-complexity' defines the [McCabe complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) of a function. This is deactivated by default. The</code>select` attribute enables errors and warnings which are turned off by default.</p>
+<p>To go over this file very quickly, in the first line, we are specifying the error codes that we would like <em>flake8</em> to ignore. The <code>max-line-length</code> has been set to 80 to match our <em>black</em> configuration values. <code>max-complexity</code> defines the <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">McCabe complexity</a> of a function. This is deactivated by default. The <code>select</code> attribute enables errors and warnings which are turned off by default.</p>
 <p>That's it, with all this in place, we are ready to run the hook on our code. </p>
-<p>Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator, one element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.</p>
+<p>Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator. One element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.</p>
 <p><img alt="Unformatted-Code" src="/images/Unformatted_Code.jpg"></p>
-<p>Let's create and run or hook on this code. As indicated earlier, once we <code>pip install</code> the <code>pre-commit</code> library, we need to install it using the <code>pre-commit install</code> command.</p>
+<p>Let's create and run or hook on this code. As indicated earlier, once we <code>pip install</code> the <em>pre-commit</em> library, we need to install it using the <code>pre-commit install</code> command.</p>
 <p><img alt="Pre-Commit" src="/images/Pre-Commit.jpg"></p>
-<p>Now, when we run our <code>git commit</code>, we see that <code>black</code> fails the commit but auto-formats the file. <code>flake8</code> fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next <code>git commit</code>.</p>
+<p>Now, when we run our <code>git commit</code>, we see that <em>black</em> fails the commit but auto-formats the file. <em>flake8</em> fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next <code>git commit</code>.</p>
 <p><img alt="Initial-Commit" src="/images/Initial_Commit.jpg"></p>
 <p>Here's what our code looks like after all the formatting and the whitespace correction. Note that the list elements are now wrapped on separate lines. The spacing around the operators and the function definition is uniform. Also, all our strings are now enclosed within double quotes.</p>
 <p><img alt="Formatted-Code" src="/images/Formatted_Code.jpg"></p>
