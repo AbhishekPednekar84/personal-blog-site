@@ -11,30 +11,30 @@
 
 </title>
 
-  <link rel="icon" href="/static/images/favicon.ico" />
+  <link rel="icon" href="codedisciples.in/static/images/favicon.ico" />
 
 
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="origin" />
   <meta name="generator" content="Pelican" />
-  <link href="/" rel="canonical" />
+  <link href="codedisciples.in/" rel="canonical" />
   
   <!-- Feed -->
-  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+  <link href="codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
     title="Code Disciples Full Atom Feed" />
-  <link href="/feeds/{slug}.atom.xml" type="application/atom+xml"
+  <link href="codedisciples.in/feeds/{slug}.atom.xml" type="application/atom+xml"
     rel="alternate" title="Code Disciples Categories Atom Feed" />
 
-  <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
+  <link href="codedisciples.in/theme/css/style.css" type="text/css" rel="stylesheet" />
 
   <!-- Code highlight color scheme -->
-  <link href="/theme/css/code_blocks/monokai.css" rel="stylesheet">
+  <link href="codedisciples.in/theme/css/code_blocks/monokai.css" rel="stylesheet">
 
   <!-- CSS specified by the user -->
 
 
-  <link href="/theme/css/blog.css" type="text/css" rel="stylesheet" />
+  <link href="codedisciples.in/theme/css/blog.css" type="text/css" rel="stylesheet" />
 
   <!-- Custom fonts -->
   <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
@@ -47,7 +47,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-<link href="/2019/08/pre-commit.html" rel="canonical" />
+<link href="codedisciples.in/2019/08/pre-commit.html" rel="canonical" />
 
 <meta name="description" content="Using black and flake-8 as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively">
 
@@ -63,14 +63,14 @@
 <meta property="og:title" content="Pre-commit hooks for Python code"/>
 <meta property="og:description" content="Using black and flake-8 as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/2019/08/pre-commit.html"/>
+<meta property="og:url" content="codedisciples.in/2019/08/pre-commit.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-08-12 12:00:00+05:30"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/abhishek-pednekar">
+<meta property="article:author" content="codedisciples.in/author/abhishek-pednekar">
 <meta property="article:section" content="Python"/>
 <meta property="article:tag" content="Python"/>
-<meta property="og:image" content="//static/images/black-gradient-article.jpg">
+<meta property="og:image" content="codedisciples.in//static/images/black-gradient-article.jpg">
 
 <!-- Twitter Card -->
 
@@ -85,10 +85,10 @@
   "author": {
     "@type": "Person",
     "name": "Abhishek Pednekar",
-    "url": "/author/abhishek-pednekar"
+    "url": "codedisciples.in/author/abhishek-pednekar"
   },
-  "image": "//static/images/black-gradient-article.jpg",
-  "url": "/2019/08/pre-commit.html",
+  "image": "codedisciples.in//static/images/black-gradient-article.jpg",
+  "url": "codedisciples.in/2019/08/pre-commit.html",
   "description": "Using black and flake-8 as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively"
 }
 </script>
@@ -119,7 +119,7 @@
   <div class="inner">
     <nav id="navigation">
       <span id="home-button" class="nav-button">
-        <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+        <a class="home-button" href="codedisciples.in/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
       </span>
       <!-- <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -128,11 +128,11 @@
     <h1 class="post-title">Pre-commit hooks for Python code</h1>
     <!-- TODO : Proper class for headline -->
     <span class="post-meta">
-      <a href="/author/abhishek-pednekar">Abhishek Pednekar</a>
+      <a href="codedisciples.in/author/abhishek-pednekar">Abhishek Pednekar</a>
       | <time datetime="Mon 12 August 2019">Mon 12 August 2019</time>
     </span>
     <!-- TODO : Modified check -->
-    <div class="post-cover cover" style="background-image: url('//static/images/black-gradient-article.jpg')">
+    <div class="post-cover cover" style="background-image: url('codedisciples.in//static/images/black-gradient-article.jpg')">
       </div>
 </header>
 
@@ -219,34 +219,34 @@
 <p>To go over this file very quickly, in the first line, we are specifying the error codes that we would like <em>flake8</em> to ignore. The <code>max-line-length</code> has been set to 80 to match our <em>black</em> configuration values. <code>max-complexity</code> defines the <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">McCabe complexity</a> of a function. This is deactivated by default. The <code>select</code> attribute enables errors and warnings which are turned off by default.</p>
 <p>That's it, with all this in place, we are ready to run the hook on our code. </p>
 <p>Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator. One element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.</p>
-<p><img alt="Unformatted-Code" src="/images/Unformatted_Code.jpg"></p>
+<p><img alt="Unformatted-Code" src="codedisciples.in/images/Unformatted_Code.jpg"></p>
 <p>Let's create and run or hook on this code. As indicated earlier, once we <code>pip install</code> the <em>pre-commit</em> library, we need to install it using the <code>pre-commit install</code> command.</p>
-<p><img alt="Pre-Commit" src="/images/Pre-Commit.jpg"></p>
+<p><img alt="Pre-Commit" src="codedisciples.in/images/Pre-Commit.jpg"></p>
 <p>Now, when we run our <code>git commit</code>, we see that <em>black</em> fails the commit but auto-formats the file. <em>flake8</em> fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next <code>git commit</code>.</p>
-<p><img alt="Initial-Commit" src="/images/Initial_Commit.jpg"></p>
+<p><img alt="Initial-Commit" src="codedisciples.in/images/Initial_Commit.jpg"></p>
 <p>Here's what our code looks like after all the formatting and the whitespace correction. Note that the list elements are now wrapped on separate lines. The spacing around the operators and the function definition is uniform. Also, all our strings are now enclosed within double quotes.</p>
-<p><img alt="Formatted-Code" src="/images/Formatted_Code.jpg"></p>
+<p><img alt="Formatted-Code" src="codedisciples.in/images/Formatted_Code.jpg"></p>
 <p>Let's go ahead and commit this. If all is good, both out hooks should pass followed by a successful <code>git commit</code>.</p>
-<p><img alt="Final-Commit" src="/images/Final_Commit.jpg"></p>
+<p><img alt="Final-Commit" src="codedisciples.in/images/Final_Commit.jpg"></p>
       </section>
 
       <section class="post-info">
         <div class="post-share">
           <a class="rss"
-            href="/feeds/all.atom.xml"
+            href="codedisciples.in/feeds/all.atom.xml"
             target="_blank">
             <i class="ic ic-rss"></i><span class="hidden">rss</span>
           </a>
           <a class="twitter"
-            href="https://twitter.com/share?text=Pre-commit hooks for Python code&amp;url=/2019/08/pre-commit.html"
+            href="https://twitter.com/share?text=Pre-commit hooks for Python code&amp;url=codedisciples.in/2019/08/pre-commit.html"
             onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
             <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
           </a>
-          <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2019/08/pre-commit.html"
+          <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=codedisciples.in/2019/08/pre-commit.html"
             onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
             <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
           </a>
-          <a class="googleplus" href="https://plus.google.com/share?url=/2019/08/pre-commit.html"
+          <a class="googleplus" href="https://plus.google.com/share?url=codedisciples.in/2019/08/pre-commit.html"
             onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
             <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
           </a>
@@ -255,7 +255,7 @@
 
         <aside class="post-tags">
 <a
-            href="/tag/python">Python</a>        </aside>
+            href="codedisciples.in/tag/python">Python</a>        </aside>
 
         <div class="clear"></div>
 
@@ -284,7 +284,7 @@
         var disqus = 'codedisciples';
         var disqus_shortname = 'codedisciples';
         var disqus_identifier = '/2019/08/pre-commit.html';
-        var disqus_url = '/2019/08/pre-commit.html';
+        var disqus_url = 'codedisciples.in/2019/08/pre-commit.html';
       </script>
       <noscript>Please enable JavaScript to view the comments.</noscript>
       <section class="post-comments">
@@ -314,7 +314,7 @@
     </footer>
   </section>
 
-  <script type="text/javascript" src="/theme/js/script.js"></script>
+  <script type="text/javascript" src="codedisciples.in/theme/js/script.js"></script>
 
 <script type="text/javascript">
     var disqus_shortname = 'codedisciples';

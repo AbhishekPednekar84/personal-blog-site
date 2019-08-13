@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Abhishek Pednekar'
 SITENAME = 'Code Disciples'
-SITEURL = '/'
+SITEURL = 'codedisciples.in'
 SITESUBTITLE = u'A blog for all things code'
 
 PATH = 'content'
