@@ -111,6 +111,6 @@ Here's what our code looks like after all the formatting and the whitespace corr
 
 ![Formatted-Code]({static}/images/Formatted_Code.jpg)
 
-Let's go ahead and commit this. If all is good, both out hooks should pass followed by a successful `git commit`.
+Let's go ahead and commit this. If all is good, both our hooks should pass followed by a successful `git commit`.
 
 ![Final-Commit]({static}/images/Final_Commit.jpg)
