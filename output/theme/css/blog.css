@@ -1,4 +1,5 @@
-body {
+/* Commented out the attila theme */
+/* body {
     font-family: 'Fira-Sans';
     color: #45484d;
     text-rendering: optimizeLegibility;
@@ -49,7 +50,6 @@ h2 {
     max-width: 65em;
 }
 
-/* For the images in the markdown file */
 .post-content img {
     max-width: 65em;
     margin-left: 0;
@@ -60,4 +60,49 @@ h2 {
     .article-inner {
         padding: 0 16px
     }
-}    
+}     */
+
+/* Custom CSS for Voidy Bootstrap */
+img {
+    width: 100%;
+    border: 1px solid #000;
+}
+
+#sidebar a {
+    color: #366ed8;
+}
+
+a {
+    color: #2d3561;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #6384b3;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #95bb8f;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
+    color: #2d3561;
+    text-shadow: 2px 2px 3px #9c8fbb;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+#footer-image {
+    height: 16px;
+    width: 16px;
+    border: none;
+}
+
+.jumbotron {
+    background-image: url('/static/images/black-gradient-home.jpg');
+    color: #fff;
+}
+
+.jumbotron>a {
+    color: #fff;
+}
