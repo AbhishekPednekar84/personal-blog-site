@@ -67,7 +67,7 @@ AUTHORS_BIO = {
 RSS = 'feeds/all.atom.xml'
 
 # Comments - https://disqus.com/home/forums/codedisciples/
-DISQUS_SITENAME = "codedisciples"
+DISQUS_SITENAME = "code-disciples"
 
 # Analytics
 GOOGLE_ANALYTICS = "UA-145611420-1"
