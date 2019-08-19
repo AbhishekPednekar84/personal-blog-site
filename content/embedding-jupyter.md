@@ -1,4 +1,4 @@
-Title: Embedding Jupyter Notebooks on a website
+Title: Embedding Jupyter Notebooks in a website
 Date: 2019-08-19 12:00
 Category: Python
 Tags: Python, Jupyter
@@ -7,7 +7,7 @@ Authors: Abhishek Pednekar
 Summary: Embed Jupyter Notebooks in your website using Github and NBInteract
 Cover: /static/images/black-gradient-article.jpg
 
-In this post, we will learn how to embed **Jupyter Notebooks** on a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like **[Code Disciples](https://codedesiples.in)**) since the content can be added directly to the **Markdown**. Readers do not need to navigate to a notebook server or a repository to explicitly view the notebook.
+In this post, we will learn how to embed **Jupyter Notebooks** in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like **[Code Disciples](https://codedesiples.in)**) since the content can be added directly to the **Markdown**. Readers do not need to navigate to a notebook server or a repository to explicitly view the notebook.
 
 To start off, we will create a **[Github Gist](https://gist.github.com/)** by uploading a **Jupyter Notebook (.ipynb file)**. To keep it simple, we will be using a notebook containing some Math formulae in **Markdown**. We can use a repository instead of a Gist. However, since we are dealing with just a few lines of Markdown, a Gist seems more appropriate. 
 
