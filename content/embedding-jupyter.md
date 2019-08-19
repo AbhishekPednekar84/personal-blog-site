@@ -4,7 +4,7 @@ Category: Python
 Tags: Python, Jupyter
 Slug: embedding-jupyter
 Authors: Abhishek Pednekar
-Summary: Embed Jupyter Notebooks in your website using MyBinder and NBInteract
+Summary: Embed Jupyter Notebooks in your website using Github and NBInteract
 Cover: /static/images/black-gradient-article.jpg
 
 In this post, we will learn how to embed **Jupyter Notebooks** on a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like **[Code Disciples](https://codedesiples.in)**) since the content can be added directly to the **Markdown**. Readers do not need to navigate to a notebook server or a repository to explicitly view the notebook.
@@ -79,6 +79,6 @@ Now, let's embed an iframe tag in our blog, linking to the html file. I will be 
 ```
 Just like in a Jupyter notebook, you can view the underlying code (Markdown in our case) by right-clicking on any of the formulae and viewing the plain text source. 
 
-<iframe style="height: 500px" src="http://localhost:8000/Index_2-Embed_Jupyter.html"></iframe>
+<iframe style="height: 500px" src="https://codedisciples.in/Index_2-Embed_Jupyter.html"></iframe>
 
 In conclusion, I would like to say that the best use case for embedding a notebook is interactive content. If your notebook contains plots which have interactive IPython widgets, those can be embedded into your blog. Users can then interact with the plot on the website using the widgets. Some great examples have been provided in the NBInteract documentation. 
