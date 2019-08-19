@@ -73,7 +73,7 @@ img {
 }
 
 a {
-    color: #2d3561;
+    color: #216583;
     text-decoration: none;
 }
 
@@ -86,7 +86,7 @@ a:hover {
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-    color: #2d3561;
+    color: #216583;
     text-shadow: 2px 2px 3px #9c8fbb;
     letter-spacing: 1px;
     font-weight: 700;

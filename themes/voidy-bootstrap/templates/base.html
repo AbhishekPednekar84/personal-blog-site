@@ -158,7 +158,7 @@
       {% block container_footer %}
 	  {% endblock %}
     </div><!--/.container /#main-container -->
-
+    <br>
     <footer id="site-footer">
       {% include 'includes/' + CUSTOM_FOOTER|default('footer.html') ignore missing %} 
       {% if SKIP_COLOPHON %}
@@ -166,9 +166,7 @@
       {% else %}
       <address id="site-colophon">
         <p class="text-center text-muted">
-        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
-        &nbsp;&bull;&nbsp; Built with <img id="footer-image" src="static/images/love.ico"> in Bangalore &nbsp;&bull;&nbsp; Powered by
-        <a href="https://www.netlify.com"
+        Built with <img id="footer-image" src="static/images/love.ico"> in Bangalore&nbsp;&bull;&nbsp; Powered by <a href="http://getpelican.com/" target="_blank">Pelican</a> and <a href="https://www.netlify.com"
            target="_blank">Netlify</a>
         </p>
       </address><!-- /colophon  -->

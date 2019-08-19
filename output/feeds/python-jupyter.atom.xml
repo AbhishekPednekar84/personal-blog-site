@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Python, Jupyter</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/python-jupyter.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-08-19T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Embedding Jupyter Notebooks in a website</title><link href="https://codedisciples.in/embedding-jupyter.html" rel="alternate"></link><published>2019-08-19T12:00:00+05:30</published><updated>2019-08-19T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-08-19:/embedding-jupyter.html</id><summary type="html">&lt;p&gt;Embed Jupyter Notebooks in your website using MyBinder and NBInteract&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will learn how to embed &lt;strong&gt;Jupyter Notebooks&lt;/strong&gt; in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly in a website or a blog post. This is especially helpful for static sites (like &lt;a href="https://codedesiples.in"&gt;Code Disciples&lt;/a&gt;) since the content can be added directly to the &lt;strong&gt;Markdown&lt;/strong&gt;. Readers do not need to navigate to a notebook server or a repository to explicity view the notebook.&lt;/p&gt;
+&lt;p&gt;To start off, we will create a &lt;em&gt;Github Gist&lt;/em&gt; by uploading a &lt;strong&gt;Jupyter Notebook (.ipynb file)&lt;/strong&gt; containing some Math formulae written in &lt;strong&gt;Markdown&lt;/strong&gt;. We can use a repository instead of a &lt;strong&gt;Gist&lt;/strong&gt;. However, since we are dealing with just a few lines of &lt;strong&gt;Markdown&lt;/strong&gt;, a &lt;strong&gt;Gist&lt;/strong&gt; seems more appropriate. &lt;/p&gt;
+&lt;p&gt;Once our &lt;strong&gt;Gist&lt;/strong&gt; is in place, we will be using a tool called &lt;em&gt;NBInteract&lt;/em&gt; to generate an &lt;strong&gt;html&lt;/strong&gt; file corresponding to our notebook. After a few modifications to the html file, we will embed the content to this blog post using an &lt;strong&gt;iframe&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So let' get started.&lt;/p&gt;
+&lt;h3&gt;Creating the Gist&lt;/h3&gt;
+&lt;p&gt;To create a &lt;em&gt;Gist&lt;/em&gt; one needs to have a &lt;a href="https://github.com/"&gt;Github&lt;/a&gt; account. Once logged in, select the &lt;strong&gt;New gist&lt;/strong&gt; option on the top right. &lt;/p&gt;
+&lt;p&gt;Before we proceed to create the gist, we will need a Jupyter Notebook to work with. The one used for this blog is avilable in &lt;a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_2-markdown-cheat-sheet"&gt;this&lt;/a&gt; repository. &lt;/p&gt;
+&lt;p&gt;On the gist creation page, we will need to add a description and the notebook filename with extension (.ipynb). To add the contents, we can simply drag and drop our notebook to the large text area. If there are any dependencies (third party packages) that are needed in order for the code in our notebook to run, we will need to add those as well. Dependencies if any, will need to be added to  requirements.txt (pypi) or environment.yml (Conda / pypi) files. These files will also need to be added to the gist by clicking on the &lt;strong&gt;Add file&lt;/strong&gt; button. Finally, to create the &lt;strong&gt;Gist&lt;/strong&gt; click either of the &lt;strong&gt;Create gist&lt;/strong&gt; buttons. &lt;/p&gt;
+&lt;h3&gt;Creating the iframe&lt;/h3&gt;
+&lt;p&gt;To create our iframe that will be embedded into the blog, we will first convert our &lt;strong&gt;Jupyter Notebook&lt;/strong&gt; into an &lt;em&gt;html&lt;/em&gt;&lt;em&gt; file. This will be achieved via a third party package called &lt;/em&gt;NBInteract*. So let's first create a &lt;a href="https://www.youtube.com/watch?v=APOPm01BVrk"&gt;virtual environment&lt;/a&gt; in the directory containing our notebook.&lt;/p&gt;
+&lt;p&gt;Once the virtual environment is activated, let us run the &lt;code&gt;pip install nbinteract&lt;/code&gt; command to install the library.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;nbinteract&lt;/strong&gt; is a command line application (CLI). In order to use it, first navigate to directory containing the .ipynb file and then run the below command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;nbinteract&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;notebook_filename&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ipynb&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;GitHub_Username&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;/&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Gist_ID&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will create an &lt;strong&gt;html&lt;/strong&gt; file with the same name as your &lt;strong&gt;Jupyter Notebook&lt;/strong&gt;. Now before creating the iframe, we will need to make a couple of changes to the &lt;strong&gt;html&lt;/strong&gt; file.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In the embedded &lt;strong&gt;JvaScript&lt;/strong&gt; at the end of the file, change the provider from &lt;em&gt;gh&lt;/em&gt; to &lt;em&gt;gist&lt;/em&gt;. No change will be needed if you are using a &lt;strong&gt;GitHub Repository&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;!--&lt;/span&gt; &lt;span class="nv"&gt;Loads&lt;/span&gt; &lt;span class="nv"&gt;nbinteract&lt;/span&gt; &lt;span class="nv"&gt;package&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt; &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;https://unpkg.com/nbinteract-core&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;async&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;function&lt;/span&gt; &lt;span class="nv"&gt;setupNbinteract&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; {
+    &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="nv"&gt;NbInteract&lt;/span&gt; &lt;span class="nv"&gt;hasn&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;t loaded, wait one second and try again&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;window&lt;/span&gt;.&lt;span class="nv"&gt;NbInteract&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="nv"&gt;undefined&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; {
+      &lt;span class="nv"&gt;setTimeout&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;setupNbinteract&lt;/span&gt;, &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt;
+    }
+
+    &lt;span class="nv"&gt;var&lt;/span&gt; &lt;span class="nv"&gt;interact&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;new&lt;/span&gt; &lt;span class="nv"&gt;window&lt;/span&gt;.&lt;span class="nv"&gt;NbInteract&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;{
+      &lt;span class="nv"&gt;spec&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;GitHub_Username&amp;gt;/&amp;lt;Gist_ID&amp;gt;/master&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;,
+      &lt;span class="nv"&gt;baseUrl&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;https://mybinder.org&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;,
+      &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nv"&gt;provider&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;gh&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;,
+      &lt;span class="nv"&gt;provider&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;gist&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;,
+    }&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;interact&lt;/span&gt;.&lt;span class="nv"&gt;prepare&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+
+    &lt;span class="nv"&gt;window&lt;/span&gt;.&lt;span class="nv"&gt;interact&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;interact&lt;/span&gt;
+  }&lt;span class="ss"&gt;)()&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;nbinteract&lt;/strong&gt; inserts a whole bunch of &lt;strong&gt;Bootstrap&lt;/strong&gt; and &lt;strong&gt;Font Awesome&lt;/strong&gt; &lt;em&gt;CSS&lt;/em&gt; in the file. So keep as much or as little of it as you need&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, let's embed an &lt;strong&gt;iframe&lt;/strong&gt; tag in our blog linking to the html file&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://codedisciples.in/Index_2-Embed_Jupyter.html&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;iframe src="http://localhost:8000/Index_2-Embed_Jupyter.html"&gt;&lt;/iframe&gt;</content><category term="Python"></category><category term="Jupyter"></category></entry></feed>

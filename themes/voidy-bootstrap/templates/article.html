@@ -89,7 +89,7 @@
   {% for file in CUSTOM_ARTICLE_FOOTERS %}
     {% include "includes/" + file %}
   {% endfor %}
-
+  <br>
   {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
   <div class="comments">
 	<h2>Comments</h2>
