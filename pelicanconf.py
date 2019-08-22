@@ -7,7 +7,7 @@ SITENAME = 'Code Disciples'
 SITEURL = 'https://codedisciples.in'
 
 ## Development
-## SITEURL = "http://localhost:8000"
+# SITEURL = "http://localhost:8000"
 SITESUBTITLE = u'A blog for all things code'
 
 PATH = 'content'
@@ -28,7 +28,7 @@ STYLESHEET_FILES = ("blog.css",)
 
 SIDEBAR = "sidebar.html"
 
-DEFAULT_PAGINATION = 7
+DEFAULT_PAGINATION = 5
 
 FAVICON = "static/images/favicon.ico"
 

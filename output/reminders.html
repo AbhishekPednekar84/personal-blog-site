@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Abhishek Pednekar" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>A reminder app with Python, Twilio and AWS Lambda - Code Disciples</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/blog.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://codedisciples.in/static/images/favicon.ico" />
+        <link href="https://codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-145611420-1', '');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://codedisciples.in/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://codedisciples.in/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://codedisciples.in/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1>Code Disciples</h1>
+		<p class="lead">A blog for all things code</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Thu 22 August 2019
+</abbr> <h1>
+  <a href="https://codedisciples.in/reminders.html" rel="bookmark"
+     title="Permalink to A reminder app with Python, Twilio and AWS Lambda">
+    A reminder app with Python, Twilio and AWS Lambda
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
+    in 
+    <a href="https://codedisciples.in/category/python.html">
+      Python</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>Recently, my wife and I missed the due date alert on a pretty important payment. This, despite having reminders set on our phones. Although we were able to sort it out without a lot of hassle, we knew that we couldn't afford a repeat of this scenario. Since an auto-payment (which I am not a big fan of anyways) wasn't an option here, additional alerting was the way to go. So as a true engineer, I decided to set up a custom alerting mechanism to which I would "hopefully" pay more attention. Since WhatsApp is pretty heavily used in my household, sending the reminder as a WhatsApp message to multiple phones seemed like a good idea. </p>
+<p>In this post, we will create a very simple Python (v3.7) script that calls the Twilio sandbox API to send an event reminder via WhatsApp. The reminder details and the list of recipients will be stored in separate json files. To run the script daily, we will be creating a function in AWS Lambda. </p>
+<p>The entire code is available in <a href="https://github.com/AbhishekPednekar84/reminder_app_twilio_aws_lambda">this Github repository</a></p>
+<h3>Twilio</h3>
+<p>Before we get to the code, we will need to create a <a href="https://www.twilio.com/try-twilio">Twilio</a> account. The process is pretty straightforward. Once you are logged in, you will see an <strong>Account Security ID (SID)</strong> and an <strong>Authentication Token</strong> in your Twilio Console Dashboard. Those are key parameters that will be needed to send the WhatsApp message. We'll be using those later when working with AWS. </p>
+<p>To set up the sandbox, navigate to the All Products and Services console and click on WhatsApp. Twilio will then give you a sandbox number (that can be saved as a contact on your phone) and walk you through the setup which involves sending an <strong>activation code</strong> to the sandbox number to enable messaging between your phone number and the sandbox. The short tutorial will also cover one-way and two-way messaging. Once you have sent the activation code from your phone to the sandbox number, you are all set to send and receive messages. If you would like other's to be able to communicate with the sandbox, the same activation code will need to be sent from their phones to the sandbox number. All the phone numbers that send the activation code will be listed as sandbox participants in your Twilio account.</p>
+<p><img alt="twilio1" src="https://codedisciples.in/images/index3/twilio1.jpg"></p>
+<p><img alt="twilio1" src="https://codedisciples.in/images/index3/twilio2.jpg"></p>
+<p>When you use the sandbox to send a random message to your number, a 24-hour messaging window is created between the sandbox and your number. To extend this window for whatever reason, you will need to send a message back to the sandbox within those 24 hours. Luckily, the sandbox provides three messaging templates that do not follow this 24-hour rule. Messages composed using these templates can be sent any number of times at varying frequencies. The template that we will be using is <code>Your {{1}} appointment is coming up on {{2}}</code>. More on this in the next section.</p>
+<h3>Python</h3>
+<p>To work with Twilio using Python, we'll need to install the twilio library using <code>pip install twilio</code>. But before that, let's create a <a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a>. This is optional but always a good practice to keep your project dependencies isolated. Alternately, you can <code>pip install</code> from the <em>requirements.txt</em> file in the repository - <code>pip install -r requirements.txt</code>. Next, let's create the two json files that I mentioned earlier.</p>
+<ul>
+<li><strong>reminder_events.json</strong></li>
+</ul>
+<p>This file contains details such as the title of our reminder, it's frequency (monthly / yearly) and the due date. For monthly reminders, the due date will contain only the <strong>day</strong> as the reminder will be triggered on the same day each month. For the yearly reminders, the due date is in the format <em>month-day</em>. I did not have any weekly or quarterly events. Hence the subsequent code does not take those frequencies into consideration.</p>
+<div class="highlight"><pre><span></span><span class="err">{</span>
+    <span class="ss">&quot;events&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="err">{</span>
+            <span class="ss">&quot;title&quot;</span><span class="p">:</span> <span class="ss">&quot;Electricity Bill&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;due&quot;</span><span class="p">:</span> <span class="ss">&quot;17&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;frequency&quot;</span><span class="p">:</span> <span class="ss">&quot;M&quot;</span>
+        <span class="err">}</span><span class="p">,</span>
+        <span class="err">{</span>
+            <span class="ss">&quot;title&quot;</span><span class="p">:</span> <span class="ss">&quot;Car Insurance Premium&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;due&quot;</span><span class="p">:</span> <span class="ss">&quot;10-1&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;frequency&quot;</span><span class="p">:</span> <span class="ss">&quot;Y&quot;</span>
+        <span class="err">}</span>
+    <span class="p">]</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<ul>
+<li><strong>directory.json</strong></li>
+</ul>
+<p>This file contains all our recipient names and phone numbers.</p>
+<div class="highlight"><pre><span></span><span class="err">{</span>
+    <span class="ss">&quot;members&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="err">{</span>
+            <span class="ss">&quot;name&quot;</span><span class="p">:</span> <span class="ss">&quot;Recipient 1&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;phone&quot;</span><span class="p">:</span> <span class="ss">&quot;+919xxxxxxxxx&quot;</span>
+        <span class="err">}</span><span class="p">,</span>
+        <span class="err">{</span>
+            <span class="ss">&quot;name&quot;</span><span class="p">:</span> <span class="ss">&quot;Recipient 2&quot;</span><span class="p">,</span>
+            <span class="ss">&quot;phone&quot;</span><span class="p">:</span> <span class="ss">&quot;+919xxxxxxxxx&quot;</span>
+        <span class="err">}</span>
+    <span class="p">]</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p><em>check_appointments()</em> is our primary method which will look for events that are due. This will also be called by the AWS Lambda function. Lambda refers to this method as the <em>handler</em>. The <em>event</em> and <em>context</em> parameters are specific to Lambda. <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html">Click here</a> for additional information.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">twilio.rest</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+
+<span class="k">def</span> <span class="nf">check_appointments</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This method reads the reminder_events.json file to determine if any of the monthly or annual reminders are due today. If yes, a call is made to the send_WhatsApp_message() method to send an event reminder to the recipients listed in directory.json</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+
+
+<p>Next, we extract the day and month from today's date. Additionally, we will format the date as <em>month, day</em> (Ex: <em>August, 22</em>). This is just a personal preference. Please refer to the <a href="https://docs.python.org/3.7/library/datetime.html?highlight=datetime#strftime-and-strptime-behavior">docs</a> in case you would like a different format.</p>
+<div class="highlight"><pre><span></span>    <span class="o">#</span> <span class="k">Extract</span> <span class="n">the</span> <span class="k">day</span> <span class="k">and</span> <span class="k">month</span> <span class="k">from</span> <span class="n">today</span><span class="err">&#39;</span><span class="n">s</span> <span class="nb">date</span>
+    <span class="n">current_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">today</span><span class="p">().</span><span class="k">day</span>
+    <span class="n">current_month</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">today</span><span class="p">().</span><span class="k">month</span>
+
+    <span class="o">#</span> <span class="n">Sent</span> <span class="n">the</span> <span class="nb">date</span> <span class="n">format</span> <span class="k">as</span> <span class="k">Month</span><span class="p">,</span> <span class="k">Day</span> <span class="n">Ex</span><span class="p">:</span> <span class="n">August</span><span class="p">,</span> <span class="mi">21</span>
+    <span class="n">formatted_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">today</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="ss">&quot;%B, %d&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="ss">&quot;reminder_events.json&quot;</span><span class="p">,</span> <span class="ss">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reminders</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="k">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Finally, our script will read the reminder_events.json file (using the <a href="https://www.youtube.com/watch?v=9N6a-VLBa2I&amp;t=543s">json</a> library and a <a href="https://www.youtube.com/watch?v=-aKFBoZpiqA">context manager</a>) and iterate over its contents. In the <code>for</code> loop, the code checks if the due date (day or month-day combination) matches the current day. If yes, we then make a call to the <em>send_whatsapp_message</em> method to send the WhatsApp message. </p>
+<div class="highlight"><pre><span></span>    # <span class="nv">Read</span> <span class="nv">the</span> <span class="nv">event</span> <span class="nv">reminders</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">reminders</span>.<span class="nv">json</span> <span class="nv">file</span>
+    <span class="k">for</span> <span class="nv">reminder</span> <span class="nv">in</span> <span class="nv">reminders</span>[<span class="s2">&quot;</span><span class="s">events</span><span class="s2">&quot;</span>]:
+        <span class="k">if</span> <span class="nv">reminder</span>[<span class="s2">&quot;</span><span class="s">frequency</span><span class="s2">&quot;</span>] <span class="o">==</span> <span class="s2">&quot;</span><span class="s">M</span><span class="s2">&quot;</span>:
+            <span class="k">if</span> <span class="nv">reminder</span>[<span class="s2">&quot;</span><span class="s">due</span><span class="s2">&quot;</span>] <span class="o">==</span> <span class="nv">str</span><span class="ss">(</span><span class="nv">current_day</span><span class="ss">)</span>:
+                <span class="nv">send_whatsapp_message</span><span class="ss">(</span><span class="nv">reminder</span>[<span class="s2">&quot;</span><span class="s">title</span><span class="s2">&quot;</span>], <span class="nv">formatted_date</span><span class="ss">)</span>
+        <span class="nv">elif</span> <span class="nv">reminder</span>[<span class="s2">&quot;</span><span class="s">frequency</span><span class="s2">&quot;</span>] <span class="o">==</span> <span class="s2">&quot;</span><span class="s">Y</span><span class="s2">&quot;</span>:
+            <span class="nv">r_month</span>, <span class="nv">r_day</span> <span class="o">=</span> <span class="nv">reminder</span>[<span class="s2">&quot;</span><span class="s">due</span><span class="s2">&quot;</span>].<span class="nv">split</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">-</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+            <span class="k">if</span> <span class="nv">r_month</span> <span class="o">==</span> <span class="nv">str</span><span class="ss">(</span><span class="nv">current_month</span><span class="ss">)</span> <span class="nv">and</span> <span class="nv">r_day</span> <span class="o">==</span> <span class="nv">str</span><span class="ss">(</span><span class="nv">current_day</span><span class="ss">)</span>:
+                <span class="nv">send_whatsapp_message</span><span class="ss">(</span><span class="nv">reminder</span>[<span class="s2">&quot;</span><span class="s">title</span><span class="s2">&quot;</span>], <span class="nv">formatted_date</span><span class="ss">)</span>
+</pre></div>
+
+
+<p><em>send_whatsapp_message</em> takes the event name from the json file and the formatted date as parameters.</p>
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">send_whatsapp_message</span><span class="ss">(</span><span class="nv">event_name</span>, <span class="nv">event_date</span><span class="ss">)</span>:
+    # <span class="nv">The</span> <span class="nv">SID</span> <span class="nv">and</span> <span class="nv">TOKEN</span> <span class="nv">values</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">read</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">AWS</span> <span class="nv">Lambda</span> <span class="nv">Console</span>
+    <span class="nv">account_sid</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">environ</span>[<span class="s2">&quot;</span><span class="s">account_sid</span><span class="s2">&quot;</span>]
+    <span class="nv">auth_token</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">environ</span>[<span class="s2">&quot;</span><span class="s">auth_token</span><span class="s2">&quot;</span>]
+
+    # <span class="nv">Create</span> <span class="nv">the</span> <span class="nv">Twilio</span> <span class="nv">client</span> <span class="nv">object</span>
+    <span class="nv">client</span> <span class="o">=</span> <span class="nv">Client</span><span class="ss">(</span><span class="nv">account_sid</span>, <span class="nv">auth_token</span><span class="ss">)</span>
+
+    <span class="nv">event_name</span> <span class="o">=</span> <span class="nv">f</span><span class="s2">&quot;</span><span class="s">10 AM ({event_name})</span><span class="s2">&quot;</span>
+
+    # <span class="nv">Read</span> <span class="nv">the</span> <span class="nv">recipient</span> <span class="nv">data</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">directory</span>.<span class="nv">json</span> <span class="nv">file</span>
+    <span class="nv">with</span> <span class="nv">open</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">directory.json</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">r</span><span class="s2">&quot;</span><span class="ss">)</span> <span class="nv">as</span> <span class="nv">f</span>:
+        <span class="nv">recipients</span> <span class="o">=</span> <span class="nv">json</span>.<span class="nv">load</span><span class="ss">(</span><span class="nv">f</span><span class="ss">)</span>
+
+    <span class="k">for</span> <span class="nv">recipient</span> <span class="nv">in</span> <span class="nv">recipients</span>[<span class="s2">&quot;</span><span class="s">members</span><span class="s2">&quot;</span>]:
+        <span class="nv">message</span> <span class="o">=</span> <span class="nv">client</span>.<span class="nv">messages</span>.<span class="nv">create</span><span class="ss">(</span>
+            <span class="nv">body</span><span class="o">=</span><span class="nv">f</span><span class="s2">&quot;</span><span class="s">Your appointment is coming up on {event_date} at {event_name}</span><span class="s2">&quot;</span>,
+            <span class="nv">from_</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">WhatsApp:+14155238886</span><span class="s2">&quot;</span>,
+            <span class="nv">to</span><span class="o">=</span><span class="nv">f</span><span class="s2">&quot;</span><span class="s">WhatsApp:{recipient[&#39;phone&#39;]}</span><span class="s2">&quot;</span>,
+</pre></div>
+
+
+<p>Remember the Twilio Account SID and the Authentication Token? We'll be adding them as environment variables in AWS in the next section. Right now, we will read the environment variable values into Python variables using <code>os.environ</code>. Once we read the contents of <em>directory.json</em>, we iterate over them and compose a message for each recipient.  +14155238886 is the sandbox number. Prefixing the <strong>whatsapp:</strong> is required for both the sender and the recipient numbers. </p>
+<p>Finally, the body of the message uses the template I mentioned earlier. In this pre-provisioned sandbox template, we only have the freedom to modify the values of the <em>event_name</em> and <em>event_date</em>. Although both are being passed as arguments to the method, I am modifying event name as <em>10 AM ({event_name})</em> just to make the message grammatically correct. So if I am being reminded about an electricity bill payment on August 31st, the message would read as <code>Your appointment is coming up on August, 31 at 10 AM (Electricity Bill)</code>. 10 AM is just a random time that I chose since my script will be running at around 10 AM local time. The message can, however, be modified in any way that one chooses as long as we stay true to the template.</p>
+<h3>AWS Lambda</h3>
+<p>Now that we have our Python script and our Twilio sandbox ready to go, let's schedule the script in AWS Lambda. Sign up for the <a href="https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&amp;all-free-tier.sort-order=asc">AWS Free Tier</a>. In the AWS Management Console, look for Lambda.  </p>
+<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda1.jpg"></p>
+<p>On the following page, you will see an option to create a Lambda function. The free tier for Lambda offers 1M free requests per month. So its a great platform to run simple scripts like this. </p>
+<p>Give your function a name and select the runtime as Python 3.7</p>
+<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda2.jpg"></p>
+<p>On the configuration page, set the code entry type as Upload zip file. Next, set the two environment variables for the Account SID and the Authentication Token. Change the Handler to <code>module_name.function_name</code>. In this case, all our code is in the <em>reminders.py</em> file and we require the Lambda function to call the <em>check_appointments()</em> method. So, the handler will be <code>reminders.check_appointments</code>. I also set the timeout to 10 seconds from the default 3 seconds under Basic Settings. The script however, takes less than three seconds to complete, making this step optional.</p>
+<p><strong>Creating the zip file</strong> - copy reminders.py and the two json files to the <em>site-packages</em> directory. Since I used a virtual environment, the path on my laptop is <code>&lt;Project_folder&gt;/venv/Lib/site-packages</code>. Now, select all the contents of your site-packages directory and zip them. Please <u>do not</u> zip the site-packages directory itself, just the contents. Zipping the directory will result in a <em>Module not found</em> error when running the Lambda function. Give an appropriate name to the zip file and add it to the configuration.</p>
+<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda3.jpg"></p>
+<p>Next, add a trigger to set up our <strong>cron</strong> job. </p>
+<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda4.jpg"></p>
+<p>In the Trigger configuration, select <em>CloudWatch Events</em>. Create a new rule with an appropriate name, specify the Rule Type as Schedule Expression and provide a cron expression. If you are new to cron, here's a link to the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html?source=post_page---------------------------#CronExpressions">AWS cron documentation</a>. The time zone specified in the cron expression on Lambda is UTC by default. So `cron(30 4 * <em> ? </em>)' will execute our script at 4:30 AM UTC every day which is 10 AM local time for me. Make sure that the trigger is enabled and add it to the configuration. </p>
+<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda5.jpg"></p>
+<p>If added successfully, you will see a new CloudWatch Event added to your function configuration.</p>
+<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda6.jpg"></p>
+<p>That's it! Now, whenever the script runs and finds an event that is due on the current day, it will send a WhatsApp message to your number.</p>
+<p><img alt="lambda1" src="https://codedisciples.in/images/index3/WhatsApp-final.jpg"></p>
+  </div>
+  
+  <br>
+  <div class="comments">
+	<h2>Comments</h2>
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+				   (function() {
+						var dsq = document.createElement('script');
+						dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = '//code-disciples.disqus.com/embed.js';
+						(document.getElementsByTagName('head')[0] ||
+						 document.getElementsByTagName('body')[0]).appendChild(dsq);
+				  })();
+	</script>
+  </div>
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://codedisciples.in/category/python.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+    <br>
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Built with <img id="footer-image" src="static/images/love.ico"> in Bangalore&nbsp;&bull;&nbsp; Powered by <a href="http://getpelican.com/" target="_blank">Pelican</a> and <a href="https://www.netlify.com"
+           target="_blank">Netlify</a>
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+<!-- DISQUS script for displaying comment count -->
+<script type="text/javascript">
+    var disqus_shortname = 'code-disciples';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
