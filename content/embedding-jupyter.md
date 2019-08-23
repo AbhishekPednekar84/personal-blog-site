@@ -18,7 +18,7 @@ Now, while I agree that there might be other ways to achieve the same results, t
 ### Creating the Gist
 To create a gist, one needs to have a [Github](https://github.com/) account. Assuming you already have one, click on the *New Gist* option on the top right of the page. 
 
-Before we proceed, we will need a Jupyter Notebook to work with. The one used for this blog is available in this *[Github repository](https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_2-markdown-cheat-sheet)*. 
+Before we proceed, we will need a Jupyter Notebook to work with. The one used for this blog is available in this *[Github repository](https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_2-embed-jupyter)*. 
 
 On the gist creation page, we will need to add a description and the notebook filename with the extension (.ipynb). To add the contents, we can simply drag and drop our notebook to the page. If there are any dependencies (third-party packages) that are needed in order for the code in our notebook to run, we will need to add those as well. Dependencies if any, will need to be added to either *requirements.txt* (pypi) or *environment.yml* (Conda / pypi) files. These files will also need to be added to the gist by clicking on the **Add file** button. Finally, to create the gist click either of the **Create gist** buttons. I will be creating a public gist.
 
