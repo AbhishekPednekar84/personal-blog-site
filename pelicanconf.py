@@ -82,3 +82,6 @@ GOOGLE_ANALYTICS = "UA-145611420-1"
 
 # Google site verification
 GOOGLE_SITE_VERIFICATION = "PUuuDE6varF3pT3Vgy0WO0YJqvRxjfwVqwxo9Jz1awE"
+
+# Add tags to the sidebar
+CUSTOM_SIDEBAR_MIDDLES = ("sb_taglist.html", )
