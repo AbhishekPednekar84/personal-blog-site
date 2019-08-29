@@ -36,6 +36,7 @@ Once we import the library, we will create an object of the *GoogleMapPlotter* c
 We'll be using the coordinates in our example. We will also need to specify our api key in the code. I'll be including this in an [environment vraiable](https://www.youtube.com/watch?v=IolxqkL7cD8). To generate coordinates, use this [website](https://www.latlong.net)
 
 ```
+import os
 from gmplot import gmplot
 
 # Using the location coordinates
@@ -44,7 +45,7 @@ gmap = gmplot.GoogleMapPlotter(13.004707, 77.564177, 18)
 # Using the location name
 gmap = gmplot.GoogleMapPlotter.from_geocode("Bangalore")
 
-gmap.apikey='AIzaSyDhOLCCollTax7L7G9bj2BxXhfVESdOwRc'
+gmap.apikey=os.environ.get(GOOGLE_API_KEY)
 ```
 
 Now, let's start plotting. The coordinates above are of my old high school. We will add a marker for those coordinates and also specify additional coordinates to plot a polygon highlighting the school.

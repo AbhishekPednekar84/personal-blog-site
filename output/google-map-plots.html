@@ -124,7 +124,8 @@
 <li>Using the <em>from_geocode</em> method and passing the name of our location</li>
 </ol>
 <p>We'll be using the coordinates in our example. We will also need to specify our api key in the code. I'll be including this in an <a href="https://www.youtube.com/watch?v=IolxqkL7cD8">environment vraiable</a>. To generate coordinates, use this <a href="https://www.latlong.net">website</a></p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gmplot</span> <span class="kn">import</span> <span class="n">gmplot</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">gmplot</span> <span class="kn">import</span> <span class="n">gmplot</span>
 
 <span class="c1"># Using the location coordinates</span>
 <span class="n">gmap</span> <span class="o">=</span> <span class="n">gmplot</span><span class="o">.</span><span class="n">GoogleMapPlotter</span><span class="p">(</span><span class="mf">13.004707</span><span class="p">,</span> <span class="mf">77.564177</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
@@ -132,7 +133,7 @@
 <span class="c1"># Using the location name</span>
 <span class="n">gmap</span> <span class="o">=</span> <span class="n">gmplot</span><span class="o">.</span><span class="n">GoogleMapPlotter</span><span class="o">.</span><span class="n">from_geocode</span><span class="p">(</span><span class="s2">&quot;Bangalore&quot;</span><span class="p">)</span>
 
-<span class="n">gmap</span><span class="o">.</span><span class="n">apikey</span><span class="o">=</span><span class="s1">&#39;AIzaSyDhOLCCollTax7L7G9bj2BxXhfVESdOwRc&#39;</span>
+<span class="n">gmap</span><span class="o">.</span><span class="n">apikey</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GOOGLE_API_KEY</span><span class="p">)</span>
 </pre></div>
 
 
