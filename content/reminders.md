@@ -70,7 +70,9 @@ This file contains all our recipient names and phone numbers.
 }
 ```
 
-*check_appointments()* is our primary method which will look for events that are due. This will also be called by the AWS Lambda function. Lambda refers to this method as the *handler*. The *event* and *context* parameters are specific to Lambda. [Click here](https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html) for additional information.
+*check_appointments()* is our primary method which will look for events that are due. This will also be called by the AWS Lambda function. Lambda refers to this method as the *handler*. The *event* and *context* parameters are specific to Lambda. [Click here](https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html) for additional information.   
+
+First, we will extract the day and month from today's date. Additionally, we will format the date as *month, day* (Ex: *August, 22*). This is just a personal preference. Please refer to the [docs](https://docs.python.org/3.7/library/datetime.html?highlight=datetime#strftime-and-strptime-behavior) in case you would like a different format.
 
 ```
 import json
@@ -80,18 +82,9 @@ from datetime import datetime
 
 
 def check_appointments(event=None, context=None):
-    """This method reads the reminder_events.json file to determine if any of the monthly or annual reminders are due today. If yes, a call is made to the send_WhatsApp_message() method to send an event reminder to the recipients listed in directory.json
-    """
-```    
-
-Next, we extract the day and month from today's date. Additionally, we will format the date as *month, day* (Ex: *August, 22*). This is just a personal preference. Please refer to the [docs](https://docs.python.org/3.7/library/datetime.html?highlight=datetime#strftime-and-strptime-behavior) in case you would like a different format.
-
-```
-    # Extract the day and month from today's date
     current_day = datetime.today().day
     current_month = datetime.today().month
 
-    # Sent the date format as Month, Day Ex: August, 21
     formatted_date = datetime.today().strftime("%B, %d")
 
     with open("reminder_events.json", "r") as f:
@@ -101,7 +94,6 @@ Next, we extract the day and month from today's date. Additionally, we will form
 Finally, our script will read the reminder_events.json file (using the [json](https://www.youtube.com/watch?v=9N6a-VLBa2I&t=543s) library and a [context manager](https://www.youtube.com/watch?v=-aKFBoZpiqA)) and iterate over its contents. In the `for` loop, the code checks if the due date (day or month-day combination) matches the current day. If yes, we then make a call to the *send_whatsapp_message* method to send the WhatsApp message. 
 
 ```
-    # Read the event reminders from the reminders.json file
     for reminder in reminders["events"]:
         if reminder["frequency"] == "M":
             if reminder["due"] == str(current_day):
@@ -163,7 +155,7 @@ Next, add a trigger to set up our **cron** job.
 
 ![lambda1]({static}/images/index3/lambda4.jpg)
 
-In the Trigger configuration, select *CloudWatch Events*. Create a new rule with an appropriate name, specify the Rule Type as Schedule Expression and provide a cron expression. If you are new to cron, here's a link to the [AWS cron documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html?source=post_page---------------------------#CronExpressions). The time zone specified in the cron expression on Lambda is UTC by default. So `cron(30 4 * * ? *)' will execute our script at 4:30 AM UTC every day which is 10 AM local time for me. Make sure that the trigger is enabled and add it to the configuration. 
+In the Trigger configuration, select *CloudWatch Events*. Create a new rule with an appropriate name, specify the Rule Type as Schedule Expression and provide a cron expression. If you are new to cron, here's a link to the [AWS cron documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html?source=post_page---------------------------#CronExpressions). The time zone specified in the cron expression on Lambda is UTC by default. So `cron(30 4 * * ? *)` will execute our script at 4:30 AM UTC every day which is 10 AM local time for me. Make sure that the trigger is enabled and add it to the configuration. 
 
 ![lambda1]({static}/images/index3/lambda5.jpg)
 

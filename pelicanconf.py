@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Abhishek Pednekar'
 SITENAME = 'Code Disciples'
-SITEURL = 'https://codedisciples.in'
+# SITEURL = 'https://codedisciples.in'
 
-## Development
-# SITEURL = "http://localhost:8000"
+## Development and testing
+SITEURL = "http://localhost:8000"
 SITESUBTITLE = u'A blog for all things code'
 
 PATH = 'content'
@@ -24,7 +24,7 @@ THEME = "themes/voidy-bootstrap"
 # CSS_OVERRIDE = ['theme/css/blog.css']
 # COLOR_SCHEME_CSS = 'monokai.css'
 
-STYLESHEET_FILES = ("blog.css",)
+STYLESHEET_FILES = ("blog.css", "pygment.css")
 
 SIDEBAR = "sidebar.html"
 
