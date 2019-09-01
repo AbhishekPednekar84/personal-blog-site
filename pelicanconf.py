@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Abhishek Pednekar'
 SITENAME = 'Code Disciples'
-SITEURL = 'https://codedisciples.in'
+#SITEURL = 'https://codedisciples.in'
 
 ## Development and testing
-# SITEURL = "http://localhost:8000"
+SITEURL = "http://localhost:8000"
 SITESUBTITLE = u'A blog for all things code'
 
 PATH = 'content'

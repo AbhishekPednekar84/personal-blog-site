@@ -6,7 +6,6 @@ Slug: google-map-plots
 Authors: Abhishek Pednekar
 Summary: Add markers, polygons, heatmaps and more to Google Maps with Python
 Cover: /static/images/black-gradient-article.jpg
-Draft: True
 
 In this post, we'll look at plotting different plot types on Google maps using the [gmplot](https://github.com/vgm64/gmplot) library in Python (v3.7). This is great if you need to highlight a specific section like a building, a street, a locality or other areas of interest on a map. **gmplot** provides a variety of plots out of the box.
 
