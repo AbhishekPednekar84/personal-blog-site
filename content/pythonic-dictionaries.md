@@ -7,7 +7,7 @@ Authors: Abhishek Pednekar
 Summary: An overview of some dictionary methods
 Cover: /static/images/black-gradient-article.jpg
 
-Dictionaries are one of the most helpful data structures in Python. In this post, we'll look at some dictionary methods that make dictionaries more pythonic.
+Dictionaries are one of the most helpful data structures in Python. In this post, we'll look at some methods that make dictionary usage more pythonic.
 
 ### The `get()` method
 A common way to check whether a key exists in a dictionary is to iterate over the dictionary using a loop. Another way would be to use, the *"`if` key `in` dict"* syntax. While these work, they do not keep in line with the *easier to ask for forgiveness than permission* (EAFP) coding style specified in the Python documentation.
@@ -61,9 +61,9 @@ Conversely, if we try to set the value of an existing key, it remains unchanged.
 Iterating over dictionaries may or may not return a sorted order of key-value pairs. However, if for any reason, we required either keys or values of a dictionary in a sorted order, then using the `sorted()` method in conjunction with `items()`, will serve the purpose. 
 
 ```
->>> # Sorting the keys in order
 >>> my_dict = {"A": 4, "D": 1, "B": 3, "C": 2}
 
+>>> # Sorting based on keys
 >>> sorted(my_dict.items())
 [('A', 4), ('B', 3), ('C', 2), ('D', 1)]
 ```
@@ -79,11 +79,11 @@ The `sorted` method also provides a `reverse` parameter (that takes a boolean va
 If we need to sort based on the values rather than the keys, we can use the `key` parameter of the `sorted()` method and set its value to the below lambda function.
 
 ```
->>> # Sorting based on values
 >>> sorted(my_dict.items(), 
            key=lambda x: x[1],)
 [('D', 1), ('C', 2), ('B', 3), ('A', 4)]
 
+>>> # Sorting based on values
 >>> sorted(my_dict.items(), 
            key=lambda x: x[1], 
            reverse=True,)
@@ -93,7 +93,7 @@ If we need to sort based on the values rather than the keys, we can use the `key
 ### Merging dictionaries
 Sometimes, we may need a way to combine multiple dictionaries into one so that the resulting dictionary is a combination of the key-value pairs from all the source dictionaries. Python offers multiple ways to merge dictionaries into one. One of them is using the `update()` method.
 
-In the below example, we are combining two dictionaries, *dict1* and *dict2* into a new dictionary *dict3*. Note that both the source dictionaries contain the key *B*. The way we call `update()` on the source dictionaries determines which value of *B* will be included in the new dictionary. The `update()` method can be used to merge any number of dictionaries.
+In the below example, we are combining two dictionaries, *dict1* and *dict2* into a new dictionary *dict3*. Note that both the source dictionaries contain the key *B*. The way we call `update()` on the source dictionaries determines which value of *B* will be included in the new dictionary. Since the `update()` method is being run on *dict2* last, the resulting dictionary contains `"B": 3` rather than `"B": 2`. The `update()` method can be used to merge any number of dictionaries.
 
 ```
 >>> dict1 = {"A": 1, "B": 2}
@@ -107,7 +107,7 @@ In the below example, we are combining two dictionaries, *dict1* and *dict2* int
 {'A': 1, 'B': 3, 'C': 4}
 ```
 
-Another way to merge dictionaries is to use the ** operator for unpacking objects. The below syntax is applicable starting with Python 3.5.
+Another way to merge dictionaries is to use the ** operator for unpacking objects. Again in case of repeating keys in any of the source dictionaries, the order of unpacking will determine which value is chosen for that key. The below syntax is applicable starting with Python 3.5.
 
 ```
 >>> dict1 = {"A": 1, "B": 2}
@@ -121,7 +121,7 @@ Another way to merge dictionaries is to use the ** operator for unpacking object
 ```
 
 ### Emulate a switch statement with dictionaries
-Unlike languages like C# and Java, Python does not provide a `switch` statement out of the box. A `switch` statement is essentially a cleaner representation of an `if-elif-else` block and has a "fall-through" for each block with a `break` statement. We can however, use a Python dictionary combined with a `get()` (for the `default` case in a `switch` statement) to obtain a `switch` like representation.
+Unlike languages such as C# and Java, Python does not provide a `switch` statement out of the box. A `switch` statement is essentially a cleaner representation of an `if-elif-else` block containing a "fall-through" for each block with a `break` statement. We can however, use a Python dictionary combined with a `get()` (for the `default` case in a `switch` statement) to obtain a `switch` like representation.
 
 ```
 >>> def f1_teams(random_team):
