@@ -86,16 +86,20 @@ Here's what our commit history looks like at the moment. What we want to do now 
 We will use the `git cherry-pick` command to copy this commit to the new branch. This command creates a new commit based on an existing one. Please note, that cherry-pick will <u>not</u> delete the original commit. 
 
 To cherry-pick,
+<br>
 1. Copy the hash of the commit that needs to be copied over to the new branch (the first six characters will do)
+<br>
 2. Switch to the branch where the commit will be copied. In our case, we will run `git checkout new-feature` to switch from the *master* to the *new-feature* branch
+<br>
 3. Now, run the cherry-pick command to copy the commit - `git cherry-pick 7f5fa7`
+<br>
 4. Run a `git log` to confirm whether the branch was copied over
 
 ![cp2]({static}/images/index6/cp2.jpg)
 
 Now that our commit has been copied over to the *new-feature* branch, we need to remove it from our *master* branch. To do this, we will use the `git reset` command. There are three types of reset's in git - soft, mixed (default) and hard. Let's try each one of them on our **master** branch to remove the commit. To run `git reset`, we will first need to copy the hash of the commit that was made <u>before</u> the one that needs to be deleted (The "Inital commit" in our case).
 
-<b>Soft Reset</b>
+<b><u>Soft Reset</u></b><br>
 To run a soft reset on our *master* branch, we will first need to switch to the *master* branch - `git checkout master`. Next, we will run `git reset --soft 2da509` on the branch. On running the soft reset, the *master* branch will no longer have the commit that was copied over to *new-feature*.
 
 ![reset1]({static}/images/index6/reset1.jpg)
@@ -104,12 +108,12 @@ However, if we now run a `git status` in *master*, we will see the changes from 
 
 ![reset2]({static}/images/index6/reset2.jpg)
 
-<b>Mixed Reset</b>
+<b><u>Mixed Reset</u></b><br>
 This is the default reset option provided by git. Again, we will run this command using the hash of the "Initial commit" - `git reset 2da509``. Like the soft reset, we do not lose any changes. However, the changes will now be in the working directory as opposed to the staging area.
 
 ![reset3]({static}/images/index6/reset3.jpg)
 
-<b>Hard Reset</b>
+<b><u>Hard Reset</u></b><br>
 Since our intent of running the reset was to completely get rid of the changes (in *master*) that were moved to the *new-feature* branch, neither the soft nor the mixed reset options served our purpose. We will now look at the hard reset option, which will revert tracked files (calc.py) to their original state and will leave untracked files (.gitignore) alone. So let's run `git reset --hard 2da509`. Notice that a `git status` only shows us the untracked files now.
 
 ![reset4]({static}/images/index6/reset4.jpg)
@@ -139,7 +143,7 @@ Let us now undo the changes that we introduced in the "Updated calc function to 
 
 ![revert2]({static}/images/index6/revert2.jpg)
 
-Now, running a `git log` will show us a new commit that was created by reversing the previous commit which is exactly what we wanted. Also, notice that the hashes of the older commits are unchanged. We have therefore not modified the git history. If others were to now pull our changes, they will just be pulling in the new commit that will reverse the previous commit in their code base as well.
+Now, running a `git log` will show us the new commit that was created by reversing the previous commit which is exactly what we wanted. Also, notice that the hashes of the older commits are unchanged. We have therefore not modified the git history. If others were to now pull our changes, they will just be pulling in the new commit that will reverse the previous commit in their code base as well.
 
 ![revert3]({static}/images/index6/revert3.jpg)
 
