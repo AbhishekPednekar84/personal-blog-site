@@ -43,7 +43,7 @@ To undo the changes, let's run `git checkout calc.py`. Running a `git status` or
 ### Fixing `git commit`'s
 Providing a descriptive commit message is very important as it helps other developers get a high level of understating of the changes that were checked-in. However, there could be scenarios wherein we may provide an incorrect commit message or inadvertently make a typo in our message. These issues can be fixed using the `git commit --amend` command.
 
-To demonstrate, I will add a new item to our dictionary - `"Exp": f"{x} ** {y} = {x ** y}" and commit the change using - `git commit -m "Updated calc function to include square root"`. Clearly, this message is incorrect as we've added an entry for *exponent* and not *square root*.
+To demonstrate, we will add a new item to our dictionary - `"Exp": f"{x} ** {y} = {x ** y}"` and commit the change using - `git commit -m "Updated calc function to include square root"`. Clearly, this message is incorrect as we've added an entry for *exponent* and not *square root*.
 
 ```
 # Code snippet - basic Arithematic operations - calc.py
