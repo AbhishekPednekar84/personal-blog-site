@@ -7,7 +7,7 @@ Authors: Abhishek Pednekar
 Summary: A look at some git commands beyond the usual workflow
 Cover: /static/images/black-gradient-article.jpg
 
-In this post, we will take a look at some useful advanced **git** commands. These commands essentially supplement the usual git workflow and help in fixing or undoing mistakes. This post assumes that the reader already knows the usage of basic git commands like `git status`, `git add`, `git commit`, `git branch`, `git push` etc...
+In this post, we will take a look at some useful advanced **git** commands. These commands essentially supplement the usual git workflow and help in fixing mistakes or undoing changes. This post assumes that the reader already knows the usage of basic git commands like `git status`, `git add`, `git commit`, `git branch`, `git push` etc...
 
 To demonstrate the usage of these git commands, we will use a simple code snippet. The snippet will be saved in a file named **calc.py**. The file itself will be present in a local git repository with two branches - **master** and **new-feature**
 
@@ -77,7 +77,7 @@ We can verify the addition of the .gitignore file by running a `git log --stat`.
 ![amend4]({static}/images/index6/amend4.jpg)
 
 ### Cherry picking with git
-A very common issue that developers run into is making commits to an incorrect branch by forgetting to run the `git checkout <branchname>` command before committing their changes. So in our case, say we intended to make our last commit in the **new-feature** branch but accidentally ended up making the commits in *master*. Luckily, git provides a way to correct this easily.
+A very common issue that developers run into is making commits to an incorrect branch by forgetting to run the `git checkout <branchname>` command before committing their changes. So in our case, say we intended to make our last commit in the **new-feature** branch but accidentally ended up making the commits in **master**. Luckily, git provides a way to correct this easily.
 
 Below is what our commit history looks like at the moment. What we want to do now is to move the "Updated calc function to include exponents" commit to the **new-feature** branch after which **master** will only have the "Initial commit".
 
@@ -97,10 +97,10 @@ To cherry-pick,
 
 ![cp2]({static}/images/index6/cp2.jpg)
 
-Now that our commit has been copied over to the *new-feature* branch, we need to remove it from our *master* branch. To do this, we will use the `git reset` command. There are three types of reset's in git - soft, mixed (default) and hard. Let's try each one of them on our **master** branch to remove the commit. To run `git reset`, we will first need to copy the hash of the commit that was made <u>before</u> the one that needs to be deleted (the "Inital commit" in our case).
+Now that our commit has been copied over to the **new-feature** branch, we need to remove it from our **master** branch. To do this, we will use the `git reset` command. There are three types of reset's in git - soft, mixed (default) and hard. Let's try each one of them on our **master** branch to remove the commit. To run `git reset`, we will first need to copy the hash of the commit that was made <u>before</u> the one that needs to be deleted (the "Inital commit" in our case).
 
 <b><u>Soft Reset</u></b><br>
-To run a soft reset on our *master* branch, we will first need to switch to the *master* branch - `git checkout master`. Next, we will run `git reset --soft 2da509` on the branch. On running the soft reset, the *master* branch will no longer have the commit that was copied over to *new-feature*.
+To run a soft reset on our **master** branch, we will first need to switch to the **master** branch - `git checkout master`. Next, we will run `git reset --soft 2da509` on the branch. On running the soft reset, the **master** branch will no longer have the commit that was copied over to **new-feature**.
 
 ![reset1]({static}/images/index6/reset1.jpg)
 
@@ -118,7 +118,7 @@ Since our intent of running the reset was to completely get rid of the changes (
 
 ![reset4]({static}/images/index6/reset4.jpg)
 
-Removing an untracked file can be achieved by using the `git clean -df` command. The -df force deletes files and directories. Our *master* branch is now in its desired state.
+Removing an untracked file can be achieved by using the `git clean -df` command. The -df force deletes files and directories. Our **master** branch is now in its desired state.
 
 ![reset5]({static}/images/index6/reset5.jpg)
 

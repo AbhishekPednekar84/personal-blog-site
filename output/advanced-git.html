@@ -103,7 +103,7 @@
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In this post, we will take a look at some useful advanced <strong>git</strong> commands. These commands essentially supplement the usual git workflow and help in fixing or undoing mistakes. This post assumes that the reader already knows the usage of basic git commands like <code>git status</code>, <code>git add</code>, <code>git commit</code>, <code>git branch</code>, <code>git push</code> etc...</p>
+	<p>In this post, we will take a look at some useful advanced <strong>git</strong> commands. These commands essentially supplement the usual git workflow and help in fixing mistakes or undoing changes. This post assumes that the reader already knows the usage of basic git commands like <code>git status</code>, <code>git add</code>, <code>git commit</code>, <code>git branch</code>, <code>git push</code> etc...</p>
 <p>To demonstrate the usage of these git commands, we will use a simple code snippet. The snippet will be saved in a file named <strong>calc.py</strong>. The file itself will be present in a local git repository with two branches - <strong>master</strong> and <strong>new-feature</strong></p>
 <p>Running a <code>git log</code> command shows that we have only had one commit so far in the local repository. The <code>git branch</code> command lists all the current local branches.</p>
 <p><img alt="initial-setup" src="https://codedisciples.in/images/index6/initial-setup.jpg"></p>
@@ -152,7 +152,7 @@
 <p>We can verify the addition of the .gitignore file by running a <code>git log --stat</code>. Also, note that the commit hash has changed which means we modified our git history.</p>
 <p><img alt="amend4" src="https://codedisciples.in/images/index6/amend4.jpg"></p>
 <h3>Cherry picking with git</h3>
-<p>A very common issue that developers run into is making commits to an incorrect branch by forgetting to run the <code>git checkout &lt;branchname&gt;</code> command before committing their changes. So in our case, say we intended to make our last commit in the <strong>new-feature</strong> branch but accidentally ended up making the commits in <em>master</em>. Luckily, git provides a way to correct this easily.</p>
+<p>A very common issue that developers run into is making commits to an incorrect branch by forgetting to run the <code>git checkout &lt;branchname&gt;</code> command before committing their changes. So in our case, say we intended to make our last commit in the <strong>new-feature</strong> branch but accidentally ended up making the commits in <strong>master</strong>. Luckily, git provides a way to correct this easily.</p>
 <p>Below is what our commit history looks like at the moment. What we want to do now is to move the "Updated calc function to include exponents" commit to the <strong>new-feature</strong> branch after which <strong>master</strong> will only have the "Initial commit".</p>
 <p><img alt="cp1" src="https://codedisciples.in/images/index6/cp1.jpg"></p>
 <p>We will use the <code>git cherry-pick</code> command to copy this commit to the new branch. This command creates a new commit based on an existing one. Please note, that cherry-pick will <u>not</u> delete the original commit. </p>
@@ -166,9 +166,9 @@
 <br>
 4. Run a <code>git log</code> to confirm whether the branch was copied over</p>
 <p><img alt="cp2" src="https://codedisciples.in/images/index6/cp2.jpg"></p>
-<p>Now that our commit has been copied over to the <em>new-feature</em> branch, we need to remove it from our <em>master</em> branch. To do this, we will use the <code>git reset</code> command. There are three types of reset's in git - soft, mixed (default) and hard. Let's try each one of them on our <strong>master</strong> branch to remove the commit. To run <code>git reset</code>, we will first need to copy the hash of the commit that was made <u>before</u> the one that needs to be deleted (the "Inital commit" in our case).</p>
+<p>Now that our commit has been copied over to the <strong>new-feature</strong> branch, we need to remove it from our <strong>master</strong> branch. To do this, we will use the <code>git reset</code> command. There are three types of reset's in git - soft, mixed (default) and hard. Let's try each one of them on our <strong>master</strong> branch to remove the commit. To run <code>git reset</code>, we will first need to copy the hash of the commit that was made <u>before</u> the one that needs to be deleted (the "Inital commit" in our case).</p>
 <p><b><u>Soft Reset</u></b><br>
-To run a soft reset on our <em>master</em> branch, we will first need to switch to the <em>master</em> branch - <code>git checkout master</code>. Next, we will run <code>git reset --soft 2da509</code> on the branch. On running the soft reset, the <em>master</em> branch will no longer have the commit that was copied over to <em>new-feature</em>.</p>
+To run a soft reset on our <strong>master</strong> branch, we will first need to switch to the <strong>master</strong> branch - <code>git checkout master</code>. Next, we will run <code>git reset --soft 2da509</code> on the branch. On running the soft reset, the <strong>master</strong> branch will no longer have the commit that was copied over to <strong>new-feature</strong>.</p>
 <p><img alt="reset1" src="https://codedisciples.in/images/index6/reset1.jpg"></p>
 <p>However, if we now run a <code>git status</code> in <strong>master</strong>, we will see the changes from the branch that was removed, in the staging area. So, a soft reset will revert our branch to the specified commit but will keep the changes (associated with the commit that was removed), in our staging area. We, therefore, do not lose any of the changes.</p>
 <p><img alt="reset2" src="https://codedisciples.in/images/index6/reset2.jpg"></p>
@@ -178,7 +178,7 @@ This is the default reset option provided by git. Again, we will run this comman
 <p><b><u>Hard Reset</u></b><br>
 Since our intent of running the reset was to completely get rid of the changes (in <strong>master</strong>) that were moved to the <strong>new-feature</strong> branch, neither the soft nor the mixed reset options served our purpose. We will now look at the hard reset option, which will revert tracked files (calc.py) to their original state and will leave untracked files (.gitignore) alone. So let's run <code>git reset --hard 2da509</code>. Notice that a <code>git status</code> only shows us the untracked files now.</p>
 <p><img alt="reset4" src="https://codedisciples.in/images/index6/reset4.jpg"></p>
-<p>Removing an untracked file can be achieved by using the <code>git clean -df</code> command. The -df force deletes files and directories. Our <em>master</em> branch is now in its desired state.</p>
+<p>Removing an untracked file can be achieved by using the <code>git clean -df</code> command. The -df force deletes files and directories. Our <strong>master</strong> branch is now in its desired state.</p>
 <p><img alt="reset5" src="https://codedisciples.in/images/index6/reset5.jpg"></p>
 <h3>Reverting to old commits</h3>
 <p>Let's assume that we ran the hard reset on our branch accidentally and we now need those changes back. Are we out of luck? Fortunately, no! Enter <code>git reflog</code>. The <code>git reflog</code> command shows us the entire history of all commits made in a particular branch. The commits are shown in the order of reference. The reflog expiration date is 90 days by default. </p>
