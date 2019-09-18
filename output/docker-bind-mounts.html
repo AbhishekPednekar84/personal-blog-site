@@ -104,12 +104,12 @@
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
 	<p>If you have racked your brains trying to get Docker bind mounting to work on Windows, you certainly are not alone. Documentation for Docker on Windows is not exactly verbose, especially if you are using the Docker Toolbox. In this post, we will look at binding a local folder in Windows to a directory in a Docker Container using Docker Toolbox. In the example below, we will create an <em>nginx</em> container with a bind to a local folder in "C:\Users".  </p>
-<p>An important thing to note on Windows is to use <code>//</code><drive letter><code>/</code> to reference our drive in the <code>docker container run</code> command. Therefore, to reference "C:\Users", we will use "//c/users".  </p>
+<p>An important thing to note on Windows is to use <code drive letter>//</code><code>/</code> to reference our drive in the <code>docker container run</code> command. Therefore, to reference "C:\Users", we will use "//c/users".  </p>
 <p>Next, we will add a shared folder on our virtual machine (VM). In this example, <strong>Oracle VirtualBox</strong> provides the VM to run Docker Toolbox. We can add a shared folder in the <em>Settings</em> of our VM.  </p>
 <p><br/>
 <img alt="vm1" src="https://codedisciples.in/images/index8/vm1.jpg">  </p>
 <p><br/>
-To add a shared folder, we will select <em>Shared Folders</em> and add a new folder. We will then need to select the desired folder on our computer and give it an appropriate name. This name will be used in the <code>docker container run</code> command. So for example, if we use "//c/Docker" in our command, we are essentially referring to "C:\Users\abhi_\Docker". Be sure to select the <em>Auto Mount</em> and <em>Make Permanent</em> options. For these settings to take effect, the VM will need to be restarted. To reboot, right-click on the VM and select <em>Reset</em>.</p>
+To add a shared folder, we will select the <em>Shared Folders</em> option and add a new folder. We will then need to select the desired folder on our computer and give it an appropriate name. This name will be used in the <code>docker container run</code> command. So for example, if we use "//c/Docker" in our command, we are essentially referring to "C:\Users\abhi_\Docker". Be sure to select the <em>Auto Mount</em> and <em>Make Permanent</em> options. For these settings to take effect, the VM will need to be restarted. To reboot, right-click on the VM and select <em>Reset</em>.</p>
 <p><br/>
 <img alt="vm2" src="https://codedisciples.in/images/index8/vm2.jpg">  </p>
 <p><br/>
