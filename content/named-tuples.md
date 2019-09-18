@@ -30,7 +30,7 @@ Using either of the above definitions, we can now create new Movie objects. This
 >>> movie_2 = Movie("It", "Horror", 2017, "Andy Muschietti")
 ```
 
-### Accessing namedtuple values
+## Accessing namedtuple values
 Accessing values using the field identifiers. This is one of the key advantages of namedtuples as it makes the code more readable.
 
 ```
@@ -42,6 +42,7 @@ Accessing values using the field identifiers. This is one of the key advantages 
 ```
 
 Accessing values using indices.
+
 ```
 >>> movie_1[3]
 'Christopher Nolan'
@@ -51,6 +52,7 @@ Accessing values using indices.
 ```
 
 Accessing values using `getattr()`.
+
 ```
 >>> getattr(movie_1, "year")
 2008
@@ -59,7 +61,7 @@ Accessing values using `getattr()`.
 'Horror'
 ```
 
-### Built-in methods
+## Built-in methods
 
 ### `_make()`
 The `_make()` method returns a namedtuple from an iterable. Let's say we have a list containing the attribute values of our Movie instance. By using `_make()`, we can convert the list to a namedtuple.

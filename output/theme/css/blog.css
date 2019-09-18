@@ -63,6 +63,10 @@ h2 {
 }     */
 
 /* Custom CSS for Voidy Bootstrap */
+p {
+    font-size: 18px;
+}
+
 img {
     width: 100%;
     border: 1px solid #000;

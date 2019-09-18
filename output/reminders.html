@@ -106,13 +106,16 @@
 	<p>Recently, my wife and I missed the due date alert on a pretty important payment. This, despite having reminders set on our phones. Although we were able to sort it out without a lot of hassle, we knew that we couldn't afford a repeat of this scenario. Since an auto-payment (which I am not a big fan of anyways) wasn't an option here, additional alerting was the way to go. So as a true engineer, I decided to set up a custom alerting mechanism to which I would "hopefully" pay more attention. Since WhatsApp is pretty heavily used in my household, sending the reminder as a WhatsApp message to multiple phones seemed like a good idea. </p>
 <p>In this post, we will create a very simple Python (v3.7) script that calls the Twilio sandbox API to send an event reminder via WhatsApp. The reminder details and the list of recipients will be stored in separate json files. To run the script daily, we will be creating a function in AWS Lambda. </p>
 <p>The entire code is available in <a href="https://github.com/AbhishekPednekar84/reminder_app_twilio_aws_lambda">this Github repository</a></p>
-<h3>Twilio</h3>
+<h2>Twilio</h2>
 <p>Before we get to the code, we will need to create a <a href="https://www.twilio.com/try-twilio">Twilio</a> account. The process is pretty straightforward. Once you are logged in, you will see an <strong>Account Security ID (SID)</strong> and an <strong>Authentication Token</strong> in your Twilio Console Dashboard. Those are key parameters that will be needed to send the WhatsApp message. We'll be using those later when working with AWS. </p>
 <p>To set up the sandbox, navigate to the All Products and Services console and click on WhatsApp. Twilio will then give you a sandbox number (that can be saved as a contact on your phone) and walk you through the setup which involves sending an <strong>activation code</strong> to the sandbox number to enable messaging between your phone number and the sandbox. The short tutorial will also cover one-way and two-way messaging. Once you have sent the activation code from your phone to the sandbox number, you are all set to send and receive messages. If you would like other's to be able to communicate with the sandbox, the same activation code will need to be sent from their phones to the sandbox number. All the phone numbers that send the activation code will be listed as sandbox participants in your Twilio account.</p>
-<p><img alt="twilio1" src="https://codedisciples.in/images/index3/twilio1.jpg"></p>
-<p><img alt="twilio1" src="https://codedisciples.in/images/index3/twilio2.jpg"></p>
-<p>When you use the sandbox to send a random message to your number, a 24-hour messaging window is created between the sandbox and your number. To extend this window for whatever reason, you will need to send a message back to the sandbox within those 24 hours. Luckily, the sandbox provides three messaging templates that do not follow this 24-hour rule. Messages composed using these templates can be sent any number of times at varying frequencies. The template that we will be using is <code>Your {{1}} appointment is coming up on {{2}}</code>. More on this in the next section.</p>
-<h3>Python</h3>
+<p><br/>
+<img alt="twilio1" src="https://codedisciples.in/images/index3/twilio1.jpg"></p>
+<p><br/>
+<img alt="twilio1" src="https://codedisciples.in/images/index3/twilio2.jpg"></p>
+<p><br/>
+When you use the sandbox to send a random message to your number, a 24-hour messaging window is created between the sandbox and your number. To extend this window for whatever reason, you will need to send a message back to the sandbox within those 24 hours. Luckily, the sandbox provides three messaging templates that do not follow this 24-hour rule. Messages composed using these templates can be sent any number of times at varying frequencies. The template that we will be using is <code>Your {{1}} appointment is coming up on {{2}}</code>. More on this in the next section.</p>
+<h2>Python</h2>
 <p>To work with Twilio using Python, we'll need to install the twilio library using <code>pip install twilio</code>. But before that, let's create a <a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a>. This is optional but always a good practice to keep your project dependencies isolated. Alternately, you can <code>pip install</code> from the <em>requirements.txt</em> file in the repository - <code>pip install -r requirements.txt</code>. The requirements file includes the <em>pytest</em> and <em>pre-commit</em> libraries as well. pytest is being used to run a really really basic test in test_reminders.py. pre-commit runs a hook on the Python code before committing the code. You can learn more about pre-commit hooks in <a href="https://www.codedisciples.in/pre-commit.html">this post</a>. </p>
 <p>Next, let's create the two json files that I mentioned earlier.</p>
 <ul>
@@ -212,23 +215,35 @@
 
 <p>Remember the Twilio Account SID and the Authentication Token? We'll be adding them as environment variables in AWS in the next section. Right now, we will read the environment variable values into Python variables using <code>os.environ</code>. Once we read the contents of <em>directory.json</em>, we iterate over them and compose a message for each recipient.  +14155238886 is the sandbox number. Prefixing the <strong>whatsapp:</strong> is required for both the sender and the recipient numbers. </p>
 <p>Finally, the body of the message uses the template I mentioned earlier. In this pre-provisioned sandbox template, we only have the freedom to modify the values of the <em>event_name</em> and <em>event_date</em>. Although both are being passed as arguments to the method, I am modifying event name as <em>10 AM ({event_name})</em> just to make the message grammatically correct. So if I am being reminded about an electricity bill payment on August 31st, the message would read as <code>Your appointment is coming up on August, 31 at 10 AM (Electricity Bill)</code>. 10 AM is just a random time that I chose since my script will be running at around 10 AM local time. The message can, however, be modified in any way that one chooses as long as we stay true to the template.</p>
-<h3>AWS Lambda</h3>
+<h2>AWS Lambda</h2>
 <p>Now that we have our Python script and our Twilio sandbox ready to go, let's schedule the script in AWS Lambda. Sign up for the <a href="https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&amp;all-free-tier.sort-order=asc">AWS Free Tier</a>. In the AWS Management Console, look for Lambda.  </p>
-<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda1.jpg"></p>
-<p>On the following page, you will see an option to create a Lambda function. The free tier for Lambda offers 1M free requests per month. So its a great platform to run simple scripts like this. </p>
+<p><br/>
+<img alt="lambda1" src="https://codedisciples.in/images/index3/lambda1.jpg"></p>
+<p><br/>
+On the following page, you will see an option to create a Lambda function. The free tier for Lambda offers 1M free requests per month. So its a great platform to run simple scripts like this. </p>
 <p>Give your function a name and select the runtime as Python 3.7</p>
-<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda2.jpg"></p>
-<p>On the configuration page, set the code entry type as Upload zip file. Next, set the two environment variables for the Account SID and the Authentication Token. Change the Handler to <code>module_name.function_name</code>. In this case, all our code is in the <em>reminders.py</em> file and we require the Lambda function to call the <em>check_appointments()</em> method. So, the handler will be <code>reminders.check_appointments</code>. I also set the timeout to 10 seconds from the default 3 seconds under Basic Settings. The script however, takes less than three seconds to complete, making this step optional.</p>
+<p><br/>
+<img alt="lambda1" src="https://codedisciples.in/images/index3/lambda2.jpg"></p>
+<p><br/>
+On the configuration page, set the code entry type as Upload zip file. Next, set the two environment variables for the Account SID and the Authentication Token. Change the Handler to <code>module_name.function_name</code>. In this case, all our code is in the <em>reminders.py</em> file and we require the Lambda function to call the <em>check_appointments()</em> method. So, the handler will be <code>reminders.check_appointments</code>. I also set the timeout to 10 seconds from the default 3 seconds under Basic Settings. The script however, takes less than three seconds to complete, making this step optional.</p>
 <p><strong>Creating the zip file</strong> - copy reminders.py and the two json files to the <em>site-packages</em> directory. Since I used a virtual environment, the path on my laptop is <code>&lt;Project_folder&gt;/venv/Lib/site-packages</code>. Now, select all the contents of your site-packages directory and zip them. Please <u>do not</u> zip the site-packages directory itself, just the contents. Zipping the directory will result in a <em>Module not found</em> error when running the Lambda function. Give an appropriate name to the zip file and add it to the configuration.</p>
-<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda3.jpg"></p>
-<p>Next, add a trigger to set up our <strong>cron</strong> job. </p>
-<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda4.jpg"></p>
+<p><br/>
+<img alt="lambda1" src="https://codedisciples.in/images/index3/lambda3.jpg"></p>
+<p><br/>
+Next, add a trigger to set up our <strong>cron</strong> job. </p>
+<p><br/>
+<img alt="lambda1" src="https://codedisciples.in/images/index3/lambda4.jpg"></p>
 <p>In the Trigger configuration, select <em>CloudWatch Events</em>. Create a new rule with an appropriate name, specify the Rule Type as Schedule Expression and provide a cron expression. If you are new to cron, here's a link to the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html?source=post_page---------------------------#CronExpressions">AWS cron documentation</a>. The time zone specified in the cron expression on Lambda is UTC by default. So <code>cron(30 4 * * ? *)</code> will execute our script at 4:30 AM UTC every day which is 10 AM local time for me. Make sure that the trigger is enabled and add it to the configuration. </p>
-<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda5.jpg"></p>
-<p>If added successfully, you will see a new CloudWatch Event added to your function configuration.</p>
-<p><img alt="lambda1" src="https://codedisciples.in/images/index3/lambda6.jpg"></p>
-<p>That's it! Now, whenever the script runs and finds an event that is due on the current day, it will send a WhatsApp message to your number.</p>
-<p><img alt="lambda1" src="https://codedisciples.in/images/index3/WhatsApp-final.jpg"></p>
+<p><br/>
+<img alt="lambda1" src="https://codedisciples.in/images/index3/lambda5.jpg"></p>
+<p><br/>
+If added successfully, you will see a new CloudWatch Event added to your function configuration.</p>
+<p><br/>
+<img alt="lambda1" src="https://codedisciples.in/images/index3/lambda6.jpg"></p>
+<p><br/>
+That's it! Now, whenever the script runs and finds an event that is due on the current day, it will send a WhatsApp message to your number.</p>
+<p><br/>
+<img alt="lambda1" src="https://codedisciples.in/images/index3/WhatsApp-final.jpg"></p>
   </div>
   
   <br>
@@ -256,6 +271,8 @@
 <div class="col-xs-6 col-md-12">
 <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
 <ul class="list-unstyled category-links">
+  <li><a href="https://codedisciples.in/category/docker.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
   <li><a href="https://codedisciples.in/category/git.html" >
     <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
   <li><a href="https://codedisciples.in/category/python.html" >
@@ -267,6 +284,9 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/docker.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Docker
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>

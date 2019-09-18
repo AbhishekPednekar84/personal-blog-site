@@ -9,7 +9,7 @@ Cover: /static/images/black-gradient-article.jpg
 
 Dictionaries are one of the most helpful data structures in Python. In this post, we'll look at some methods that make dictionary usage more pythonic.
 
-### The `get()` method
+## The `get()` method
 A common way to check whether a key exists in a dictionary is to iterate over the dictionary using a loop. Another way would be to use, the *"`if` key `in` dict"* syntax. While these work, they do not keep in line with the *easier to ask for forgiveness than permission* (EAFP) coding style specified in the Python documentation.
 
 Python dictionaries provide a `get()` method that allows a *default* parameter which can be used as a fall-back value in case the key does not exist. In the below example, we use the `get()` method to look for a key a dictionary. We also provide a default parameter of *Not found* that will be returned if the key does not exist. If the key is present, then the value associated with that key will be returned.
@@ -28,7 +28,7 @@ Python dictionaries provide a `get()` method that allows a *default* parameter w
 'Not found' 
 ```
 
-### The `setdefault()` method
+## The `setdefault()` method
 The `setdefault()` method is used to set a value for a key that does <u>not</u> exist in a dictionary. If the key exists, then its value remains unchanged.
 
 Here we see that by using the `setdefault()` method on the dictionary, we are able to add a new key-value pair that did not exist in the dictionary.
@@ -57,7 +57,7 @@ Conversely, if we try to set the value of an existing key, it remains unchanged.
 {'Bruce Wayne': 'Batman', 'Clark Kent': 'Superman', 'Peter Parker': 'Spiderman', 'Tony Stark': 'Ironman'}
 ```
 
-### Sorting Dictionaries
+## Sorting Dictionaries
 Iterating over dictionaries may or may not return a sorted order of key-value pairs. However, if for any reason, we required either keys or values of a dictionary in a sorted order, then using the `sorted()` method in conjunction with `items()`, will serve the purpose. 
 
 ```
@@ -90,7 +90,7 @@ If we need to sort based on the values rather than the keys, we can use the `key
 [('A', 4), ('B', 3), ('C', 2), ('D', 1)]
 ```
 
-### Merging dictionaries
+## Merging dictionaries
 Sometimes, we may need a way to combine multiple dictionaries into one so that the resulting dictionary is a combination of the key-value pairs from all the source dictionaries. Python offers multiple ways to merge dictionaries into one. One of them is using the `update()` method.
 
 In the below example, we are combining two dictionaries, *dict1* and *dict2* into a new dictionary *dict3*. Note that both the source dictionaries contain the key *B*. The way we call `update()` on the source dictionaries determines which value of *B* will be included in the new dictionary. Since the `update()` method is being run on *dict2* last, the resulting dictionary contains `"B": 3` rather than `"B": 2`. The `update()` method can be used to merge any number of dictionaries.
@@ -120,7 +120,7 @@ Another way to merge dictionaries is to use the ** operator for unpacking object
 {'A': 1, 'B': 3, 'C': 4, 'D': 5, 'E': 6 }
 ```
 
-### Emulate a switch statement with dictionaries
+## Emulate a switch statement with dictionaries
 Unlike languages such as C# and Java, Python does not provide a `switch` statement out of the box. A `switch` statement is essentially a cleaner representation of an `if-elif-else` block containing a "fall-through" for each block with a `break` statement. We can however, use a Python dictionary combined with a `get()` (for the `default` case in a `switch` statement) to obtain a `switch` like representation.
 
 ```

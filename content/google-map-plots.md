@@ -19,12 +19,13 @@ We'll be using a simple example of plotting a route between two points and highl
 
 The complete code is available in this [Github repository](https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_4-google-map-plots)
 
-### Google API Key
+## Google API Key
 Before we start coding, we need to procure an API key from the [Google Cloud Platform Console](https://cloud.google.com/console/google/maps-apis/overview). Refer to this [link](https://developers.google.com/maps/documentation/javascript/get-api-key) for steps to obtain a new key. Google recommends restricting the API key to avoid unauthorized usage. For this demo, we will be running our app on a local Python http server. Hence, we will need to add **localhost** as a referrer. To do this, select *HTTP referrers (web sites)* under *Application restrictions* and add **localhost**. This will ensure that when we use the API key to generate a map from our localhost, Google will <u>not</U> deny the request. Failing to do this, will result in a *referrer not allowed* error.
 
+<br/>
 ![Google-API_Key]({static}/images/index4/google-api-key.jpg)
 
-### Python code
+## Python code
 Before we start writing out Python code, we will need to install the **gmplot** library. But before that, let's create a [virtual environment](https://www.youtube.com/watch?v=APOPm01BVrk). Once the environment is created and activated run `pip install gmplot`.
 
 Once we import the library, we will create an object of the *GoogleMapPlotter* class. We can do this in one of two ways.
@@ -47,9 +48,11 @@ gmap = gmplot.GoogleMapPlotter.from_geocode("Bangalore")
 gmap.apikey=os.environ.get(GOOGLE_API_KEY)
 ```
 
+<br/>
 Now, let's start plotting. The coordinates above are of my old high school. We will add a marker for those coordinates and also specify additional coordinates to plot a polygon highlighting the school.
 
-<u>**Marker**</u>:<br>
+<br/>
+<u>**Marker**</u>:<br/>
 To add a **marker**, we will be passing the coordinates to the `marker` method. We will also include a color and a title for the marker. 
 
 Please note that `gmap.coloricon = "http://www.googlemapsmarkers.com/v1/%s/"` needs to be included **only** for the Windows platform. This is due to an existing issue in the library.
@@ -59,7 +62,8 @@ gmap.coloricon = "http://www.googlemapsmarkers.com/v1/%s/"
 gmap.marker(13.004707, 77.564177, "#f0dd92", title="School")
 ```
 
-<u>**Polygon**</u>:<br>
+<br/>
+<u>**Polygon**</u>:<br/>
 To add a **polygon with fill** to highlight our location, we will need to specify tuples of latitudes and longitudes and pass them to the `ploygon` method. We will also specify a color for the fill.
 
 ```
@@ -74,15 +78,18 @@ gmap.polygon(school_lats, school_longs, "cornflowerblue")
 
 gmap.draw("school_map.html")
 ```
+
 The `draw` method will generate our map. In this case, I am generating the html file in the project folder. We can provide an absolute path to the method. As mentioned earlier, we will be using a local http server to view the map. To start the server run `python -m http.server` in the activated virtual environment. The local server runs on port 8000 by default. So our url will be *http://localhost:8000/school_map.html*.
 
 I will also be dropping a point on, and adding a polygon around my old apartment. In the next section, we will plot couples our routes between the school and the apartment. The complete code will be available in the Github repository.
 
 Here's what our map looks like at the moment.
 
+<br/>
 ![Marker-Polygon]({static}/images/index4/marker-polygon.jpg)
 
-<u>**Line Plot**</u>:<br>
+<br/>
+<u>**Line Plot**</u>:<br/>
 We will now plot two routes between the school and the apartment. To do this, we will first need the coordinates for multiples points along the routes and pass them to the `plot` method. The color and the thickness of the plot can also be specified in the method call.
 
 ```
@@ -107,10 +114,11 @@ gmap.plot(path_two_lats, path_two_longs, "green", edge_width=3.0)
 
 Here's what our plots look like now. The alternate route is in green and has been specified only from the point where it diverges from the primary route.
 
+<br/>
 ![Routes]({static}/images/index4/routes.jpg)
 
-
-<u>**Scatter Plots and Heatmaps**</u>:<br>
+<br/>
+<u>**Scatter Plots and Heatmaps**</u>:<br/>
 Next, we will add some **scatters** and **heatmaps** to indicate some areas of interest around the school. Agreed, that this is not the best use case for a scatter plot or a heatmap. But the idea here is to only show the implementation.
 
 As was the case before, we will need to pass the desired coordinates to the `scatter` and the `heatmap` methods. In the `scatter` method, we will be passing `maker=False` since we do not want to drop pins on the coordinates. We will also be specifying the size and the color of the scatters.
@@ -127,10 +135,14 @@ gmap.heatmap(aoi_lats, aoi_longs)
 gmap.scatter(aoi_lats, aoi_longs, "#6e2142", marker=False, size=12)
 ```
 
+<br/>
 **Scatter plot**:
 
+<br/>
 ![Scatters]({static}/images/index4/scatters.jpg)
 
+<br/>
 **Heatmap**:
 
+<br/>
 ![Heatmaps]({static}/images/index4/heatmaps.jpg)

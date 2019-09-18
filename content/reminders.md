@@ -13,18 +13,21 @@ In this post, we will create a very simple Python (v3.7) script that calls the T
 
 The entire code is available in [this Github repository](https://github.com/AbhishekPednekar84/reminder_app_twilio_aws_lambda)
 
-### Twilio
+## Twilio
 Before we get to the code, we will need to create a [Twilio](https://www.twilio.com/try-twilio) account. The process is pretty straightforward. Once you are logged in, you will see an **Account Security ID (SID)** and an **Authentication Token** in your Twilio Console Dashboard. Those are key parameters that will be needed to send the WhatsApp message. We'll be using those later when working with AWS. 
 
 To set up the sandbox, navigate to the All Products and Services console and click on WhatsApp. Twilio will then give you a sandbox number (that can be saved as a contact on your phone) and walk you through the setup which involves sending an **activation code** to the sandbox number to enable messaging between your phone number and the sandbox. The short tutorial will also cover one-way and two-way messaging. Once you have sent the activation code from your phone to the sandbox number, you are all set to send and receive messages. If you would like other's to be able to communicate with the sandbox, the same activation code will need to be sent from their phones to the sandbox number. All the phone numbers that send the activation code will be listed as sandbox participants in your Twilio account.
 
+<br/>
 ![twilio1]({static}/images/index3/twilio1.jpg)
 
+<br/>
 ![twilio1]({static}/images/index3/twilio2.jpg)
 
+<br/>
 When you use the sandbox to send a random message to your number, a 24-hour messaging window is created between the sandbox and your number. To extend this window for whatever reason, you will need to send a message back to the sandbox within those 24 hours. Luckily, the sandbox provides three messaging templates that do not follow this 24-hour rule. Messages composed using these templates can be sent any number of times at varying frequencies. The template that we will be using is `Your {{1}} appointment is coming up on {{2}}`. More on this in the next section.
 
-### Python
+## Python
 To work with Twilio using Python, we'll need to install the twilio library using `pip install twilio`. But before that, let's create a [virtual environment](https://www.youtube.com/watch?v=APOPm01BVrk). This is optional but always a good practice to keep your project dependencies isolated. Alternately, you can `pip install` from the *requirements.txt* file in the repository - `pip install -r requirements.txt`. The requirements file includes the *pytest* and *pre-commit* libraries as well. pytest is being used to run a really really basic test in test_reminders.py. pre-commit runs a hook on the Python code before committing the code. You can learn more about pre-commit hooks in [this post](https://www.codedisciples.in/pre-commit.html). 
 
 
@@ -133,38 +136,49 @@ Remember the Twilio Account SID and the Authentication Token? We'll be adding th
 
 Finally, the body of the message uses the template I mentioned earlier. In this pre-provisioned sandbox template, we only have the freedom to modify the values of the *event_name* and *event_date*. Although both are being passed as arguments to the method, I am modifying event name as *10 AM ({event_name})* just to make the message grammatically correct. So if I am being reminded about an electricity bill payment on August 31st, the message would read as `Your appointment is coming up on August, 31 at 10 AM (Electricity Bill)`. 10 AM is just a random time that I chose since my script will be running at around 10 AM local time. The message can, however, be modified in any way that one chooses as long as we stay true to the template.
 
-### AWS Lambda
-
+## AWS Lambda
 Now that we have our Python script and our Twilio sandbox ready to go, let's schedule the script in AWS Lambda. Sign up for the [AWS Free Tier](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc). In the AWS Management Console, look for Lambda.  
 
+<br/>
 ![lambda1]({static}/images/index3/lambda1.jpg)
 
+<br/>
 On the following page, you will see an option to create a Lambda function. The free tier for Lambda offers 1M free requests per month. So its a great platform to run simple scripts like this. 
 
 Give your function a name and select the runtime as Python 3.7
 
+<br/>
 ![lambda1]({static}/images/index3/lambda2.jpg)
 
+<br/>
 On the configuration page, set the code entry type as Upload zip file. Next, set the two environment variables for the Account SID and the Authentication Token. Change the Handler to `module_name.function_name`. In this case, all our code is in the *reminders.py* file and we require the Lambda function to call the *check_appointments()* method. So, the handler will be `reminders.check_appointments`. I also set the timeout to 10 seconds from the default 3 seconds under Basic Settings. The script however, takes less than three seconds to complete, making this step optional.
 
 **Creating the zip file** - copy reminders.py and the two json files to the *site-packages* directory. Since I used a virtual environment, the path on my laptop is `<Project_folder>/venv/Lib/site-packages`. Now, select all the contents of your site-packages directory and zip them. Please <u>do not</u> zip the site-packages directory itself, just the contents. Zipping the directory will result in a *Module not found* error when running the Lambda function. Give an appropriate name to the zip file and add it to the configuration.
 
+<br/>
 ![lambda1]({static}/images/index3/lambda3.jpg)
 
+<br/>
 Next, add a trigger to set up our **cron** job. 
 
+<br/>
 ![lambda1]({static}/images/index3/lambda4.jpg)
 
 In the Trigger configuration, select *CloudWatch Events*. Create a new rule with an appropriate name, specify the Rule Type as Schedule Expression and provide a cron expression. If you are new to cron, here's a link to the [AWS cron documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html?source=post_page---------------------------#CronExpressions). The time zone specified in the cron expression on Lambda is UTC by default. So `cron(30 4 * * ? *)` will execute our script at 4:30 AM UTC every day which is 10 AM local time for me. Make sure that the trigger is enabled and add it to the configuration. 
 
+<br/>
 ![lambda1]({static}/images/index3/lambda5.jpg)
 
+<br/>
 If added successfully, you will see a new CloudWatch Event added to your function configuration.
 
+<br/>
 ![lambda1]({static}/images/index3/lambda6.jpg)
 
+<br/>
 That's it! Now, whenever the script runs and finds an event that is due on the current day, it will send a WhatsApp message to your number.
 
+<br/>
 ![lambda1]({static}/images/index3/WhatsApp-final.jpg)
 
 

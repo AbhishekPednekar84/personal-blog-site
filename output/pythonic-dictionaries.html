@@ -104,7 +104,7 @@
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
 	<p>Dictionaries are one of the most helpful data structures in Python. In this post, we'll look at some methods that make dictionary usage more pythonic.</p>
-<h3>The <code>get()</code> method</h3>
+<h2>The <code>get()</code> method</h2>
 <p>A common way to check whether a key exists in a dictionary is to iterate over the dictionary using a loop. Another way would be to use, the <em>"<code>if</code> key <code>in</code> dict"</em> syntax. While these work, they do not keep in line with the <em>easier to ask for forgiveness than permission</em> (EAFP) coding style specified in the Python documentation.</p>
 <p>Python dictionaries provide a <code>get()</code> method that allows a <em>default</em> parameter which can be used as a fall-back value in case the key does not exist. In the below example, we use the <code>get()</code> method to look for a key a dictionary. We also provide a default parameter of <em>Not found</em> that will be returned if the key does not exist. If the key is present, then the value associated with that key will be returned.</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">alter_ego</span> <span class="o">=</span> <span class="err">{</span>
@@ -121,7 +121,7 @@
 </pre></div>
 
 
-<h3>The <code>setdefault()</code> method</h3>
+<h2>The <code>setdefault()</code> method</h2>
 <p>The <code>setdefault()</code> method is used to set a value for a key that does <u>not</u> exist in a dictionary. If the key exists, then its value remains unchanged.</p>
 <p>Here we see that by using the <code>setdefault()</code> method on the dictionary, we are able to add a new key-value pair that did not exist in the dictionary.</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">alter_ego</span> <span class="o">=</span> <span class="err">{</span>
@@ -147,7 +147,7 @@
 </pre></div>
 
 
-<h3>Sorting Dictionaries</h3>
+<h2>Sorting Dictionaries</h2>
 <p>Iterating over dictionaries may or may not return a sorted order of key-value pairs. However, if for any reason, we required either keys or values of a dictionary in a sorted order, then using the <code>sorted()</code> method in conjunction with <code>items()</code>, will serve the purpose. </p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">my_dict</span> <span class="o">=</span> <span class="err">{</span><span class="ss">&quot;A&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">&quot;B&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="ss">&quot;C&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="err">}</span>
 
@@ -177,7 +177,7 @@
 </pre></div>
 
 
-<h3>Merging dictionaries</h3>
+<h2>Merging dictionaries</h2>
 <p>Sometimes, we may need a way to combine multiple dictionaries into one so that the resulting dictionary is a combination of the key-value pairs from all the source dictionaries. Python offers multiple ways to merge dictionaries into one. One of them is using the <code>update()</code> method.</p>
 <p>In the below example, we are combining two dictionaries, <em>dict1</em> and <em>dict2</em> into a new dictionary <em>dict3</em>. Note that both the source dictionaries contain the key <em>B</em>. The way we call <code>update()</code> on the source dictionaries determines which value of <em>B</em> will be included in the new dictionary. Since the <code>update()</code> method is being run on <em>dict2</em> last, the resulting dictionary contains <code>"B": 3</code> rather than <code>"B": 2</code>. The <code>update()</code> method can be used to merge any number of dictionaries.</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dict1</span> <span class="o">=</span> <span class="err">{</span><span class="ss">&quot;A&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">&quot;B&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="err">}</span>
@@ -204,7 +204,7 @@
 </pre></div>
 
 
-<h3>Emulate a switch statement with dictionaries</h3>
+<h2>Emulate a switch statement with dictionaries</h2>
 <p>Unlike languages such as C# and Java, Python does not provide a <code>switch</code> statement out of the box. A <code>switch</code> statement is essentially a cleaner representation of an <code>if-elif-else</code> block containing a "fall-through" for each block with a <code>break</code> statement. We can however, use a Python dictionary combined with a <code>get()</code> (for the <code>default</code> case in a <code>switch</code> statement) to obtain a <code>switch</code> like representation.</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nv">def</span> <span class="nv">f1_teams</span><span class="ss">(</span><span class="nv">random_team</span><span class="ss">)</span>:
         <span class="k">return</span> {
@@ -268,6 +268,8 @@
 <div class="col-xs-6 col-md-12">
 <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
 <ul class="list-unstyled category-links">
+  <li><a href="https://codedisciples.in/category/docker.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
   <li><a href="https://codedisciples.in/category/git.html" >
     <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
   <li><a href="https://codedisciples.in/category/python.html" >
@@ -279,6 +281,9 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/docker.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Docker
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>

@@ -113,10 +113,11 @@
 </ol>
 <p>We'll be using a simple example of plotting a route between two points and highlighting some areas of interest around them.</p>
 <p>The complete code is available in this <a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_4-google-map-plots">Github repository</a></p>
-<h3>Google API Key</h3>
+<h2>Google API Key</h2>
 <p>Before we start coding, we need to procure an API key from the <a href="https://cloud.google.com/console/google/maps-apis/overview">Google Cloud Platform Console</a>. Refer to this <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">link</a> for steps to obtain a new key. Google recommends restricting the API key to avoid unauthorized usage. For this demo, we will be running our app on a local Python http server. Hence, we will need to add <strong>localhost</strong> as a referrer. To do this, select <em>HTTP referrers (web sites)</em> under <em>Application restrictions</em> and add <strong>localhost</strong>. This will ensure that when we use the API key to generate a map from our localhost, Google will <u>not</U> deny the request. Failing to do this, will result in a <em>referrer not allowed</em> error.</p>
-<p><img alt="Google-API_Key" src="https://codedisciples.in/images/index4/google-api-key.jpg"></p>
-<h3>Python code</h3>
+<p><br/>
+<img alt="Google-API_Key" src="https://codedisciples.in/images/index4/google-api-key.jpg"></p>
+<h2>Python code</h2>
 <p>Before we start writing out Python code, we will need to install the <strong>gmplot</strong> library. But before that, let's create a <a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a>. Once the environment is created and activated run <code>pip install gmplot</code>.</p>
 <p>Once we import the library, we will create an object of the <em>GoogleMapPlotter</em> class. We can do this in one of two ways.</p>
 <ol>
@@ -137,8 +138,10 @@
 </pre></div>
 
 
-<p>Now, let's start plotting. The coordinates above are of my old high school. We will add a marker for those coordinates and also specify additional coordinates to plot a polygon highlighting the school.</p>
-<p><u><strong>Marker</strong></u>:<br>
+<p><br/>
+Now, let's start plotting. The coordinates above are of my old high school. We will add a marker for those coordinates and also specify additional coordinates to plot a polygon highlighting the school.</p>
+<p><br/>
+<u><strong>Marker</strong></u>:<br/>
 To add a <strong>marker</strong>, we will be passing the coordinates to the <code>marker</code> method. We will also include a color and a title for the marker. </p>
 <p>Please note that <code>gmap.coloricon = "http://www.googlemapsmarkers.com/v1/%s/"</code> needs to be included <strong>only</strong> for the Windows platform. This is due to an existing issue in the library.</p>
 <div class="highlight"><pre><span></span><span class="n">gmap</span><span class="p">.</span><span class="n">coloricon</span> <span class="o">=</span> <span class="ss">&quot;http://www.googlemapsmarkers.com/v1/%s/&quot;</span>
@@ -146,7 +149,8 @@ To add a <strong>marker</strong>, we will be passing the coordinates to the <cod
 </pre></div>
 
 
-<p><u><strong>Polygon</strong></u>:<br>
+<p><br/>
+<u><strong>Polygon</strong></u>:<br/>
 To add a <strong>polygon with fill</strong> to highlight our location, we will need to specify tuples of latitudes and longitudes and pass them to the <code>ploygon</code> method. We will also specify a color for the fill.</p>
 <div class="highlight"><pre><span></span><span class="n">school_lats</span><span class="p">,</span> <span class="n">school_longs</span> <span class="o">=</span> <span class="n">zip</span><span class="p">(</span>
     <span class="o">*</span><span class="p">[</span>
@@ -164,8 +168,10 @@ To add a <strong>polygon with fill</strong> to highlight our location, we will n
 <p>The <code>draw</code> method will generate our map. In this case, I am generating the html file in the project folder. We can provide an absolute path to the method. As mentioned earlier, we will be using a local http server to view the map. To start the server run <code>python -m http.server</code> in the activated virtual environment. The local server runs on port 8000 by default. So our url will be <em>http://localhost:8000/school_map.html</em>.</p>
 <p>I will also be dropping a point on, and adding a polygon around my old apartment. In the next section, we will plot couples our routes between the school and the apartment. The complete code will be available in the Github repository.</p>
 <p>Here's what our map looks like at the moment.</p>
-<p><img alt="Marker-Polygon" src="https://codedisciples.in/images/index4/marker-polygon.jpg"></p>
-<p><u><strong>Line Plot</strong></u>:<br>
+<p><br/>
+<img alt="Marker-Polygon" src="https://codedisciples.in/images/index4/marker-polygon.jpg"></p>
+<p><br/>
+<u><strong>Line Plot</strong></u>:<br/>
 We will now plot two routes between the school and the apartment. To do this, we will first need the coordinates for multiples points along the routes and pass them to the <code>plot</code> method. The color and the thickness of the plot can also be specified in the method call.</p>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Coordinates</span> <span class="o">-</span> <span class="n">path</span> <span class="n">one</span>
 <span class="n">path_one_lats</span><span class="p">,</span> <span class="n">path_one_longs</span> <span class="o">=</span> <span class="n">zip</span><span class="p">(</span>
@@ -188,8 +194,10 @@ We will now plot two routes between the school and the apartment. To do this, we
 
 
 <p>Here's what our plots look like now. The alternate route is in green and has been specified only from the point where it diverges from the primary route.</p>
-<p><img alt="Routes" src="https://codedisciples.in/images/index4/routes.jpg"></p>
-<p><u><strong>Scatter Plots and Heatmaps</strong></u>:<br>
+<p><br/>
+<img alt="Routes" src="https://codedisciples.in/images/index4/routes.jpg"></p>
+<p><br/>
+<u><strong>Scatter Plots and Heatmaps</strong></u>:<br/>
 Next, we will add some <strong>scatters</strong> and <strong>heatmaps</strong> to indicate some areas of interest around the school. Agreed, that this is not the best use case for a scatter plot or a heatmap. But the idea here is to only show the implementation.</p>
 <p>As was the case before, we will need to pass the desired coordinates to the <code>scatter</code> and the <code>heatmap</code> methods. In the <code>scatter</code> method, we will be passing <code>maker=False</code> since we do not want to drop pins on the coordinates. We will also be specifying the size and the color of the scatters.</p>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Coordinates</span> <span class="o">-</span> <span class="n">Scatters</span><span class="p">,</span> <span class="n">Heatmaps</span>
@@ -204,10 +212,14 @@ Next, we will add some <strong>scatters</strong> and <strong>heatmaps</strong> t
 </pre></div>
 
 
-<p><strong>Scatter plot</strong>:</p>
-<p><img alt="Scatters" src="https://codedisciples.in/images/index4/scatters.jpg"></p>
-<p><strong>Heatmap</strong>:</p>
-<p><img alt="Heatmaps" src="https://codedisciples.in/images/index4/heatmaps.jpg"></p>
+<p><br/>
+<strong>Scatter plot</strong>:</p>
+<p><br/>
+<img alt="Scatters" src="https://codedisciples.in/images/index4/scatters.jpg"></p>
+<p><br/>
+<strong>Heatmap</strong>:</p>
+<p><br/>
+<img alt="Heatmaps" src="https://codedisciples.in/images/index4/heatmaps.jpg"></p>
   </div>
   
   <br>
@@ -235,6 +247,8 @@ Next, we will add some <strong>scatters</strong> and <strong>heatmaps</strong> t
 <div class="col-xs-6 col-md-12">
 <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
 <ul class="list-unstyled category-links">
+  <li><a href="https://codedisciples.in/category/docker.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
   <li><a href="https://codedisciples.in/category/git.html" >
     <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
   <li><a href="https://codedisciples.in/category/python.html" >
@@ -246,6 +260,9 @@ Next, we will add some <strong>scatters</strong> and <strong>heatmaps</strong> t
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/docker.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Docker
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
