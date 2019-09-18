@@ -166,7 +166,7 @@ To save our changes, we will need to create a branch from the detached HEAD. So 
 ![dhead]({static}/images/index6/d-head2.jpg)
 
 <br/>
-Previously, we spoke about not modifying the git history if our commits have already been pulled by others. Let us now look at options to undo commits without changing the git history. This will ensure that when others pull in our changes, we will not be impacting their code base. We will use the `git revert` command will create a *new* commit to reverse changes from a previous commit.
+Previously, we spoke about not modifying the git history if our commits have already been pulled by others. Let us now look at options to undo commits without changing the git history. This will ensure that when others pull in our changes, we will not be impacting their code base. We will use the `git revert` command to create a *new* commit to reverse changes from a previous commit.
 
 Let us now undo the changes that we introduced in the "Updated calc function to include exponents" commit. To do that, copy the hash of that commit and run a `git revert <hash>`. This will open an interactive window. Since we are not making any other changes, let's save and exit using `:wq`.
 
