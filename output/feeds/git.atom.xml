@@ -90,7 +90,7 @@ However, if we now run a &lt;code&gt;git status&lt;/code&gt; in &lt;strong&gt;ma
 &lt;img alt="reset2" src="https://codedisciples.in/images/index6/reset2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;b&gt;&lt;u&gt;Mixed Reset&lt;/u&gt;&lt;/b&gt;&lt;br/&gt;
-This is the default reset option provided by git. Again, we will run this command using the hash of the "Initial commit" - `git reset 2da509``. Like the soft reset, we do not lose any changes. However, the changes will now be in the working directory as opposed to the staging area.&lt;/p&gt;
+This is the default reset option provided by git. Again, we will run this command using the hash of the "Initial commit" - &lt;code&gt;git reset 2da509&lt;/code&gt;. Like the soft reset, we do not lose any changes. However, the changes will now be in the working directory as opposed to the staging area.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="reset3" src="https://codedisciples.in/images/index6/reset3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
@@ -99,7 +99,7 @@ Since our intent of running the reset was to completely get rid of the changes (
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="reset4" src="https://codedisciples.in/images/index6/reset4.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-Removing an untracked file can be achieved by using the &lt;code&gt;git clean -df&lt;/code&gt; command. The -df force deletes files and directories. Our &lt;strong&gt;master&lt;/strong&gt; branch is now in its desired state.&lt;/p&gt;
+Removing an untracked file can be achieved by using the &lt;code&gt;git clean -df&lt;/code&gt; command. The &lt;code&gt;-df&lt;/code&gt; force deletes files and directories. Our &lt;strong&gt;master&lt;/strong&gt; branch is now in its desired state.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="reset5" src="https://codedisciples.in/images/index6/reset5.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Reverting to old commits&lt;/h2&gt;

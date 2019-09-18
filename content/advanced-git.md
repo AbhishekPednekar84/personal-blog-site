@@ -129,7 +129,7 @@ However, if we now run a `git status` in **master**, we will see the changes fro
 
 <br/>
 <b><u>Mixed Reset</u></b><br/>
-This is the default reset option provided by git. Again, we will run this command using the hash of the "Initial commit" - `git reset 2da509``. Like the soft reset, we do not lose any changes. However, the changes will now be in the working directory as opposed to the staging area.
+This is the default reset option provided by git. Again, we will run this command using the hash of the "Initial commit" - `git reset 2da509`. Like the soft reset, we do not lose any changes. However, the changes will now be in the working directory as opposed to the staging area.
 
 <br/>
 ![reset3]({static}/images/index6/reset3.jpg)
@@ -142,7 +142,7 @@ Since our intent of running the reset was to completely get rid of the changes (
 ![reset4]({static}/images/index6/reset4.jpg)
 
 <br/>
-Removing an untracked file can be achieved by using the `git clean -df` command. The -df force deletes files and directories. Our **master** branch is now in its desired state.
+Removing an untracked file can be achieved by using the `git clean -df` command. The `-df` force deletes files and directories. Our **master** branch is now in its desired state.
 
 <br/>
 ![reset5]({static}/images/index6/reset5.jpg)
