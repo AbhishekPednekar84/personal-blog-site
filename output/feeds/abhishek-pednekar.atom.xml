@@ -1,5 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Abhishek Pednekar</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/abhishek-pednekar.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-09-18T23:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Running PostgreSQL in a Docker Container</title><link href="https://codedisciples.in/docker-postgres.html" rel="alternate"></link><published>2019-09-18T23:00:00+05:30</published><updated>2019-09-18T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-18:/docker-postgres.html</id><summary type="html">&lt;p&gt;Running PostgreSQL and pgAdmin 4 in Docker containers&lt;/p&gt;</summary><content type="html">&lt;p&gt;Containers have revolutionized the way we code, build and ship software. They also provide a means wherein we no longer need to mandatorily install software but run the software in a container instead. In this post, we will run &lt;strong&gt;PostgreSQL&lt;/strong&gt; (postgres) and &lt;strong&gt;pgAdmin 4&lt;/strong&gt; in seprate &lt;strong&gt;Docker Containers&lt;/strong&gt; on a &lt;strong&gt;Windows&lt;/strong&gt; machine using Docker Toolbox. We will then connect to the postgres database from pgAdmin.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Abhishek Pednekar</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/abhishek-pednekar.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-09-27T17:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>git rebase - a cautious alternative to git merge</title><link href="https://codedisciples.in/git-rebase.html" rel="alternate"></link><published>2019-09-27T17:00:00+05:30</published><updated>2019-09-27T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-27:/git-rebase.html</id><summary type="html">&lt;p&gt;An overview of the rebase workflow for git repositories&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will look at &lt;code&gt;git rebase&lt;/code&gt; and scenarios where it can and should not be used as an alternative to &lt;code&gt;git merge&lt;/code&gt;. For those unfamiliar with the concept of merging - at a super high-level, when you are done developing and testing on your &lt;em&gt;feature&lt;/em&gt; branch and are ready to merge those changes with &lt;em&gt;master&lt;/em&gt;, &lt;code&gt;git merge&lt;/code&gt; performs the merge operation by creating a &lt;strong&gt;new&lt;/strong&gt; commit for the merge. With that said, let's look at what happens during a &lt;em&gt;rebase&lt;/em&gt; operation.&lt;/p&gt;
+&lt;p&gt;We will start by initializing an empty local repository called &lt;strong&gt;rebase-demo&lt;/strong&gt;. Note that we are in the &lt;em&gt;master&lt;/em&gt; branch.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;init&lt;/span&gt;
+&lt;span class="n"&gt;Initialized&lt;/span&gt; &lt;span class="n"&gt;empty&lt;/span&gt; &lt;span class="n"&gt;Git&lt;/span&gt; &lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+
+&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, we will add an index.html file directly in the master branch and commit it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="k"&gt;index&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+
+&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;
+
+&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="k"&gt;commit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;Initial Commit&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="n"&gt;ef361a&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;Initial&lt;/span&gt; &lt;span class="k"&gt;Commit&lt;/span&gt;
+ &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;changed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;insertions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;deletions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;mode&lt;/span&gt; &lt;span class="mi"&gt;100644&lt;/span&gt; &lt;span class="k"&gt;index&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, we will create a feature branch called &lt;em&gt;new-feature&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;branch&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt;
+
+&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;checkout&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt;
+&lt;span class="n"&gt;Switched&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;branch&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;new-feature&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;While in &lt;em&gt;new-feature&lt;/em&gt;, let's add a text file and commit the change.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="k"&gt;commit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;Added text.txt&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="n"&gt;a1cabb&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;Added&lt;/span&gt; &lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+ &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;changed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;insertions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;deletions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;mode&lt;/span&gt; &lt;span class="mi"&gt;100644&lt;/span&gt; &lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now let's add an image in &lt;em&gt;new-feature&lt;/em&gt; and commit the change again.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="k"&gt;commit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;Added image.jpg&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="mi"&gt;100152&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;Added&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;
+ &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;changed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;insertions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;deletions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="k"&gt;create&lt;/span&gt; &lt;span class="k"&gt;mode&lt;/span&gt; &lt;span class="mi"&gt;100644&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So at this point, we have two commits in the &lt;em&gt;new-feature&lt;/em&gt; branch that do not exist in master. This is what our commit tree looks like at the moment.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;-------O new-feature&lt;/span&gt;
+       &lt;span class="o"&gt;|&lt;/span&gt;
+       &lt;span class="o"&gt;|&lt;/span&gt;
+       &lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, let's say someone on our team added a new commit to the &lt;em&gt;remote master&lt;/em&gt; branch which we then pulled into our &lt;em&gt;local master&lt;/em&gt;. So now, the tree would look something like this. In our example, let's say a .py file was added as part of the new commit in the &lt;em&gt;master&lt;/em&gt; branch.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O new-feature&lt;/span&gt;
+       &lt;span class="o"&gt;|&lt;/span&gt;
+       &lt;span class="o"&gt;|&lt;/span&gt;
+       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O master&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Before we perform the &lt;code&gt;git rebase&lt;/code&gt;, let's quickly summarize the values of our commit hashes.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Initial commit - 8ef361a (master, new-feature)&lt;/li&gt;
+&lt;li&gt;Added text.txt - 5a1cabb (new-feature)&lt;/li&gt;
+&lt;li&gt;Added image.jpg - 100152d (new-feature)&lt;/li&gt;
+&lt;li&gt;Added python.py - 257bc71 (master)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We will also run &lt;code&gt;git log&lt;/code&gt; on both our branches.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="log-master" src="https://codedisciples.in/images/index10/log-master.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="log-feature" src="https://codedisciples.in/images/index10/log-feature.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Finally, let's run &lt;code&gt;git rebase&lt;/code&gt; on our &lt;em&gt;new-feature&lt;/em&gt; branch. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;rebase&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
+&lt;span class="k"&gt;First&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rewinding&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;replay&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="k"&gt;work&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="n"&gt;Applying&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Added&lt;/span&gt; &lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="n"&gt;Applying&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Added&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;By rebasing &lt;em&gt;new-feature&lt;/em&gt; onto &lt;em&gt;master&lt;/em&gt;, we are telling Git to find the most recent commit (Initial commit in our case) that is common to both branches. Git will then put all the commits from &lt;em&gt;master&lt;/em&gt; down and add the &lt;em&gt;new-feature&lt;/em&gt; commits one by one. This is what our tree will look like now.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O------O------O&lt;/span&gt;
+           &lt;span class="n"&gt;master&lt;/span&gt;        &lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that if there are any conflicts during the rebase, Git will call those out so that we can address them manually. Now let us once again run &lt;code&gt;git log&lt;/code&gt;. Notice that after the &lt;code&gt;git rebase&lt;/code&gt;, Git has moved the two commits in &lt;em&gt;master&lt;/em&gt; down and then added the two commits from &lt;em&gt;new feature&lt;/em&gt;. This, although the "Added python.py" commit was done after the two commits in &lt;em&gt;new-feature&lt;/em&gt;. Another crucial thing is that unlike &lt;code&gt;git merge&lt;/code&gt;, no new commit was created. Just the existing commits were realigned linearly. In other words, our &lt;em&gt;new-feature&lt;/em&gt; branch is now a fast forward from &lt;em&gt;master&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Also, did you notice the commit hash values? Other than the one for the "Initial Commit", all the hash values changed while Git moved our commits around during the &lt;code&gt;git rebase&lt;/code&gt;. We have therefore modified the Git history. My previous &lt;a href="https://www.codedisciples.in/advanced-git.html"&gt;post&lt;/a&gt; on Git briefly talked about modifying the Git history. This is a bad idea if we are planning to push changes that modified the Git history, to a remote repository from where others will pull in our changes. Modifying Git history is ideal if we are working on projects that do not involve a large scale sharing of the codebase. &lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="git-log-rebase" src="https://codedisciples.in/images/index10/git-log-rebase.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To further highlight the difference between &lt;code&gt;git rebase&lt;/code&gt; and &lt;code&gt;git merge&lt;/code&gt;, here is a screenshot of a &lt;code&gt;git log&lt;/code&gt; after the two branches were merged. Notice the additional commit created by the merge operation. Also, the git history remains unchanged.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Initial commit - ed4bee2 (master, new-feature)&lt;/li&gt;
+&lt;li&gt;Added text.txt - 88ea609 (new-feature)&lt;/li&gt;
+&lt;li&gt;Added image.jpg - f9a52da (new-feature)&lt;/li&gt;
+&lt;li&gt;Added python.py - 38fa1e0 (master)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="git-log-merge" src="https://codedisciples.in/images/index10/git-log-rebase.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Our tree would now look something like this.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                                 &lt;span class="n"&gt;master&lt;/span&gt;
+       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O------O------O------O&lt;/span&gt;
+                              &lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Git"></category></entry><entry><title>Running PostgreSQL in a Docker Container</title><link href="https://codedisciples.in/docker-postgres.html" rel="alternate"></link><published>2019-09-18T23:00:00+05:30</published><updated>2019-09-18T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-18:/docker-postgres.html</id><summary type="html">&lt;p&gt;Running PostgreSQL and pgAdmin 4 in Docker containers&lt;/p&gt;</summary><content type="html">&lt;p&gt;Containers have revolutionized the way we code, build and ship software. They also provide a means wherein we no longer need to mandatorily install software but run the software in a container instead. In this post, we will run &lt;strong&gt;PostgreSQL&lt;/strong&gt; (postgres) and &lt;strong&gt;pgAdmin 4&lt;/strong&gt; in seprate &lt;strong&gt;Docker Containers&lt;/strong&gt; on a &lt;strong&gt;Windows&lt;/strong&gt; machine using Docker Toolbox. We will then connect to the postgres database from pgAdmin.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt; is a free and open-source relational database management system&lt;br/&gt;
 &lt;strong&gt;pgAdmin 4&lt;/strong&gt; is an open-source database management tool for postgres&lt;/p&gt;
 &lt;h2&gt;Creating the Docker containers&lt;/h2&gt;
@@ -72,7 +187,7 @@ Here is a link to official postgres &lt;a href="https://www.postgresql.org/docs/
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm1" src="https://codedisciples.in/images/index8/vm1.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-To add a shared folder, we will select the &lt;em&gt;Shared Folders&lt;/em&gt; option. We will then need to specify the desired folder on our computer and give it an appropriate name. This name will be used in the &lt;code&gt;docker container run&lt;/code&gt; command. So in the example below, by specifying the name as "//c/Docker", we are simply referring to "C:\users\abhi_\Docker". Be sure to select the &lt;em&gt;Auto Mount&lt;/em&gt; and &lt;em&gt;Make Permanent&lt;/em&gt; options. For these settings to take effect, the VM will need to be restarted. To reboot, right-click on the VM and select &lt;em&gt;Reset&lt;/em&gt;.&lt;/p&gt;
+To add a shared folder, we will select the &lt;em&gt;Shared Folders&lt;/em&gt; option. We will then need to specify the desired folder on our computer and give it an appropriate name. This name will be used in the &lt;code&gt;docker container run&lt;/code&gt; command. So in the example below, by including "//c/Docker" in our command, we are simply referring to "C:\users\abhi_\Docker". Be sure to select the &lt;em&gt;Auto Mount&lt;/em&gt; and &lt;em&gt;Make Permanent&lt;/em&gt; options. For these settings to take effect, the VM will need to be restarted. To reboot, right-click on the VM and select &lt;em&gt;Reset&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm2" src="https://codedisciples.in/images/index8/vm2.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
@@ -80,9 +195,9 @@ The local "Docker" folder has two files. These will get copied over to the direc
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm3" src="https://codedisciples.in/images/index8/vm3.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-Finally, we will create our nginx container. The &lt;code&gt;-v //c/Docker:/usr/share/nginx/html&lt;/code&gt; in the command binds "C:\users\abhi_\Docker" to "/usr/share/nginx/html" on the container.  &lt;/p&gt;
+Finally, we will create our nginx container. The &lt;code&gt;-v //c/Docker:/usr/share/nginx/html&lt;/code&gt; in the command, binds "C:\users\abhi_\Docker" to "/usr/share/nginx/html" on the container.  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;docker container run -d --name nginx -p 80:80 -v //c/Docker:/usr/share/nginx/html nginx&lt;/code&gt;  &lt;/p&gt;
-&lt;p&gt;To verify if the bind mounting worked, we will run &lt;em&gt;bash&lt;/em&gt; on the container.  &lt;/p&gt;
+&lt;p&gt;To verify whether the bind mounting worked, we will run &lt;em&gt;bash&lt;/em&gt; on the container and look for the files in "/usr/share/nginx/html".  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm4" src="https://codedisciples.in/images/index8/vm4.jpg"&gt;&lt;/p&gt;</content><category term="Docker"></category></entry><entry><title>Namedtuples</title><link href="https://codedisciples.in/named-tuples.html" rel="alternate"></link><published>2019-09-13T23:00:00+05:30</published><updated>2019-09-13T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-13:/named-tuples.html</id><summary type="html">&lt;p&gt;An overview of the namedtuple container type in Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will take a look at Python's &lt;strong&gt;namedtuple&lt;/strong&gt; container type. Firstly, namedtuples are immutable containers just like regular tuples. However, unlike regular tuples, which can be accessed only through indices, namedtuples can be accessed via identifiers/keys as well as index values. To use namedtuples, we will need to import the &lt;strong&gt;collections&lt;/strong&gt; module.&lt;/p&gt;
 &lt;p&gt;Below, we are defining a namedtuple called &lt;em&gt;Movie&lt;/em&gt; with four fields in a list - &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;genre&lt;/em&gt;, &lt;em&gt;year&lt;/em&gt; and &lt;em&gt;director&lt;/em&gt;. Notice that we are passing &lt;em&gt;Movie&lt;/em&gt; as the first argument to the namedtuple method. This parameter is called the &lt;em&gt;typename&lt;/em&gt; and is essentially the name of the class being created by calling the namedtuple method.&lt;/p&gt;

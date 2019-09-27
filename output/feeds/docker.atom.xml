@@ -72,7 +72,7 @@ Here is a link to official postgres &lt;a href="https://www.postgresql.org/docs/
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm1" src="https://codedisciples.in/images/index8/vm1.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-To add a shared folder, we will select the &lt;em&gt;Shared Folders&lt;/em&gt; option. We will then need to specify the desired folder on our computer and give it an appropriate name. This name will be used in the &lt;code&gt;docker container run&lt;/code&gt; command. So in the example below, by specifying the name as "//c/Docker", we are simply referring to "C:\users\abhi_\Docker". Be sure to select the &lt;em&gt;Auto Mount&lt;/em&gt; and &lt;em&gt;Make Permanent&lt;/em&gt; options. For these settings to take effect, the VM will need to be restarted. To reboot, right-click on the VM and select &lt;em&gt;Reset&lt;/em&gt;.&lt;/p&gt;
+To add a shared folder, we will select the &lt;em&gt;Shared Folders&lt;/em&gt; option. We will then need to specify the desired folder on our computer and give it an appropriate name. This name will be used in the &lt;code&gt;docker container run&lt;/code&gt; command. So in the example below, by including "//c/Docker" in our command, we are simply referring to "C:\users\abhi_\Docker". Be sure to select the &lt;em&gt;Auto Mount&lt;/em&gt; and &lt;em&gt;Make Permanent&lt;/em&gt; options. For these settings to take effect, the VM will need to be restarted. To reboot, right-click on the VM and select &lt;em&gt;Reset&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm2" src="https://codedisciples.in/images/index8/vm2.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
@@ -80,8 +80,8 @@ The local "Docker" folder has two files. These will get copied over to the direc
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm3" src="https://codedisciples.in/images/index8/vm3.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-Finally, we will create our nginx container. The &lt;code&gt;-v //c/Docker:/usr/share/nginx/html&lt;/code&gt; in the command binds "C:\users\abhi_\Docker" to "/usr/share/nginx/html" on the container.  &lt;/p&gt;
+Finally, we will create our nginx container. The &lt;code&gt;-v //c/Docker:/usr/share/nginx/html&lt;/code&gt; in the command, binds "C:\users\abhi_\Docker" to "/usr/share/nginx/html" on the container.  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;docker container run -d --name nginx -p 80:80 -v //c/Docker:/usr/share/nginx/html nginx&lt;/code&gt;  &lt;/p&gt;
-&lt;p&gt;To verify if the bind mounting worked, we will run &lt;em&gt;bash&lt;/em&gt; on the container.  &lt;/p&gt;
+&lt;p&gt;To verify whether the bind mounting worked, we will run &lt;em&gt;bash&lt;/em&gt; on the container and look for the files in "/usr/share/nginx/html".  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="vm4" src="https://codedisciples.in/images/index8/vm4.jpg"&gt;&lt;/p&gt;</content><category term="Docker"></category></entry></feed>
