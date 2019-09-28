@@ -54,7 +54,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;So at this point, we have two commits in the &lt;em&gt;new-feature&lt;/em&gt; branch that do not exist in master. This is what our commit tree looks like at the moment.&lt;/p&gt;
+&lt;p&gt;So at this point, we have two commits in the &lt;em&gt;new-feature&lt;/em&gt; branch that do not exist in master. This is what our commits look like at the moment.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;-------O new-feature&lt;/span&gt;
        &lt;span class="o"&gt;|&lt;/span&gt;
        &lt;span class="o"&gt;|&lt;/span&gt;
@@ -62,7 +62,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now, let's say someone on our team added a new commit to the &lt;em&gt;remote master&lt;/em&gt; branch which we then pulled into our &lt;em&gt;local master&lt;/em&gt;. So now, the tree would look something like this. In our example, let's say a .py file was added as part of the new commit in the &lt;em&gt;master&lt;/em&gt; branch.&lt;/p&gt;
+&lt;p&gt;Now, let's say someone on our team added a new commit to the &lt;em&gt;remote master&lt;/em&gt; branch which we then pulled into our &lt;em&gt;local master&lt;/em&gt;. In our example, let's say a .py file was added as part of the new commit in the &lt;em&gt;master&lt;/em&gt; branch. So now, our commits would look something like this.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O new-feature&lt;/span&gt;
        &lt;span class="o"&gt;|&lt;/span&gt;
        &lt;span class="o"&gt;|&lt;/span&gt;
@@ -91,7 +91,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;By rebasing &lt;em&gt;new-feature&lt;/em&gt; onto &lt;em&gt;master&lt;/em&gt;, we are telling Git to find the most recent commit (Initial commit in our case) that is common to both branches. Git will then put all the commits from &lt;em&gt;master&lt;/em&gt; down and add the &lt;em&gt;new-feature&lt;/em&gt; commits one by one. This is what our tree will look like now.&lt;/p&gt;
+&lt;p&gt;By rebasing &lt;em&gt;new-feature&lt;/em&gt; onto &lt;em&gt;master&lt;/em&gt;, we are telling Git to find the most recent commit (Initial commit in our case) that is common to both branches. Git will then put all the commits from &lt;em&gt;master&lt;/em&gt; down and add the &lt;em&gt;new-feature&lt;/em&gt; commits one by one. This is what our commits look like now.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O------O------O&lt;/span&gt;
            &lt;span class="n"&gt;master&lt;/span&gt;        &lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -109,8 +109,8 @@
 &lt;li&gt;Added python.py - 38fa1e0 (master)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="git-log-merge" src="https://codedisciples.in/images/index10/git-log-rebase.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;Our tree would now look something like this.&lt;/p&gt;
+&lt;img alt="git-log-merge" src="https://codedisciples.in/images/index10/git-log-merge.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Our commits would now look something like this.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                                 &lt;span class="n"&gt;master&lt;/span&gt;
        &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O------O------O------O&lt;/span&gt;
                               &lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt;

@@ -68,14 +68,14 @@ git commit -m "Added image.jpg"
  create mode 100644 image.jpg
 ```
 
-So at this point, we have two commits in the *new-feature* branch that do not exist in master. This is what our commit tree looks like at the moment.
+So at this point, we have two commits in the *new-feature* branch that do not exist in master. This is what our commits look like at the moment.
 
            O-------O new-feature
            |
            |
            O master
 
-Now, let's say someone on our team added a new commit to the *remote master* branch which we then pulled into our *local master*. So now, the tree would look something like this. In our example, let's say a .py file was added as part of the new commit in the *master* branch.
+Now, let's say someone on our team added a new commit to the *remote master* branch which we then pulled into our *local master*. In our example, let's say a .py file was added as part of the new commit in the *master* branch. So now, our commits would look something like this.
 
            O------O new-feature
            |
@@ -107,7 +107,7 @@ Applying: Added text.txt
 Applying: Added image.jpg
 ```
 
-By rebasing *new-feature* onto *master*, we are telling Git to find the most recent commit (Initial commit in our case) that is common to both branches. Git will then put all the commits from *master* down and add the *new-feature* commits one by one. This is what our tree will look like now.
+By rebasing *new-feature* onto *master*, we are telling Git to find the most recent commit (Initial commit in our case) that is common to both branches. Git will then put all the commits from *master* down and add the *new-feature* commits one by one. This is what our commits look like now.
 
            O------O------O------O
                master        new-feature
@@ -127,9 +127,9 @@ To further highlight the difference between `git rebase` and `git merge`, here i
 4. Added python.py - 38fa1e0 (master)
 
 <br/>
-![git-log-merge]({static}/images/index10/git-log-rebase.jpg)
+![git-log-merge]({static}/images/index10/git-log-merge.jpg)
 
-Our tree would now look something like this.
+Our commits would now look something like this.
 
                                      master
            O------O------O------O------O

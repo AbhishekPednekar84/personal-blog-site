@@ -158,7 +158,7 @@
 </pre></div>
 
 
-<p>So at this point, we have two commits in the <em>new-feature</em> branch that do not exist in master. This is what our commit tree looks like at the moment.</p>
+<p>So at this point, we have two commits in the <em>new-feature</em> branch that do not exist in master. This is what our commits look like at the moment.</p>
 <div class="highlight"><pre><span></span>       <span class="n">O</span><span class="c1">-------O new-feature</span>
        <span class="o">|</span>
        <span class="o">|</span>
@@ -166,7 +166,7 @@
 </pre></div>
 
 
-<p>Now, let's say someone on our team added a new commit to the <em>remote master</em> branch which we then pulled into our <em>local master</em>. So now, the tree would look something like this. In our example, let's say a .py file was added as part of the new commit in the <em>master</em> branch.</p>
+<p>Now, let's say someone on our team added a new commit to the <em>remote master</em> branch which we then pulled into our <em>local master</em>. In our example, let's say a .py file was added as part of the new commit in the <em>master</em> branch. So now, our commits would look something like this.</p>
 <div class="highlight"><pre><span></span>       <span class="n">O</span><span class="c1">------O new-feature</span>
        <span class="o">|</span>
        <span class="o">|</span>
@@ -195,7 +195,7 @@
 </pre></div>
 
 
-<p>By rebasing <em>new-feature</em> onto <em>master</em>, we are telling Git to find the most recent commit (Initial commit in our case) that is common to both branches. Git will then put all the commits from <em>master</em> down and add the <em>new-feature</em> commits one by one. This is what our tree will look like now.</p>
+<p>By rebasing <em>new-feature</em> onto <em>master</em>, we are telling Git to find the most recent commit (Initial commit in our case) that is common to both branches. Git will then put all the commits from <em>master</em> down and add the <em>new-feature</em> commits one by one. This is what our commits look like now.</p>
 <div class="highlight"><pre><span></span>       <span class="n">O</span><span class="c1">------O------O------O</span>
            <span class="n">master</span>        <span class="k">new</span><span class="o">-</span><span class="n">feature</span>
 </pre></div>
@@ -213,8 +213,8 @@
 <li>Added python.py - 38fa1e0 (master)</li>
 </ol>
 <p><br/>
-<img alt="git-log-merge" src="https://codedisciples.in/images/index10/git-log-rebase.jpg"></p>
-<p>Our tree would now look something like this.</p>
+<img alt="git-log-merge" src="https://codedisciples.in/images/index10/git-log-merge.jpg"></p>
+<p>Our commits would now look something like this.</p>
 <div class="highlight"><pre><span></span>                                 <span class="n">master</span>
        <span class="n">O</span><span class="c1">------O------O------O------O</span>
                               <span class="k">new</span><span class="o">-</span><span class="n">feature</span>
