@@ -112,14 +112,14 @@ By rebasing *new-feature* onto *master*, we are telling Git to find the most rec
            O------O------O------O
                master        new-feature
 
-Note that if there are any conflicts during the rebase, Git will call those out so that we can address them manually. Now let us once again run `git log`. Notice that after the `git rebase`, Git has moved the two commits in *master* down and then added the two commits from *new feature*. This, although the "Added python.py" commit was done after the two commits in *new-feature*. Another crucial thing is that unlike `git merge`, no new commit was created. Just the existing commits were realigned linearly. In other words, our *new-feature* branch is now a fast forward from *master*.
+Note that if there are any conflicts during the rebase, Git will call those out so that we can address them manually. Now let us once again run `git log`. Notice that after the `git rebase`, Git has moved the two commits in *master* down and then added the two commits from *new feature*. This, although the "Added python.py" commit in *master* was done after the two commits in *new-feature*. Another crucial thing is that unlike `git merge`, no new commit was created. Just the existing commits were realigned linearly. In other words, our *new-feature* branch is now a fast forward from *master*.
 
-Also, did you notice the commit hash values? Other than the one for the "Initial Commit", all the hash values changed while Git moved our commits around during the `git rebase`. So essentially Git created new commit objects thereby modifying the Git history. My previous [post](https://www.codedisciples.in/advanced-git.html) on Git briefly talked about modifying the Git history. This is a bad idea if we are planning to push changes that modified the Git history, to a remote repository from where others will pull in our changes. Modifying Git history is ideal if we are working on projects that do not involve a large scale sharing of the codebase. 
+Also, did you notice the commit hash values? Other than the one for the "Initial Commit", all the hash values changed while Git moved our commits around during the `git rebase`. So essentially Git created new commit objects, thereby modifying the Git history. My previous [post](https://www.codedisciples.in/advanced-git.html) on Git briefly talked about modifying the Git history. This is a bad idea if we are planning to push changes that modified the Git history, to a remote repository from where others will pull in our changes. Modifying Git history is ideal if we are working on projects that do not involve a large scale sharing of the codebase. 
 
 <br/>
 ![git-log-rebase]({static}/images/index10/git-log-rebase.jpg)
 
-To further highlight the difference between `git rebase` and `git merge`, here is a screenshot of a `git log` after the two branches were merged. Notice the additional commit created by the merge operation. Also, the git history remains unchanged.
+To further highlight the difference between `git rebase` and `git merge`, here is a screenshot of a `git log` after the two branches were merged (as opposed to rebased). Notice the additional commit created by the merge operation. Also, the git history remains unchanged.
 
 1. Initial commit - ed4bee2 (master, new-feature)
 2. Added text.txt - 88ea609 (new-feature)

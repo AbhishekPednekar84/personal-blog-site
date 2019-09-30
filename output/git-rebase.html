@@ -201,11 +201,11 @@
 </pre></div>
 
 
-<p>Note that if there are any conflicts during the rebase, Git will call those out so that we can address them manually. Now let us once again run <code>git log</code>. Notice that after the <code>git rebase</code>, Git has moved the two commits in <em>master</em> down and then added the two commits from <em>new feature</em>. This, although the "Added python.py" commit was done after the two commits in <em>new-feature</em>. Another crucial thing is that unlike <code>git merge</code>, no new commit was created. Just the existing commits were realigned linearly. In other words, our <em>new-feature</em> branch is now a fast forward from <em>master</em>.</p>
-<p>Also, did you notice the commit hash values? Other than the one for the "Initial Commit", all the hash values changed while Git moved our commits around during the <code>git rebase</code>. So essentially Git created new commit objects thereby modifying the Git history. My previous <a href="https://www.codedisciples.in/advanced-git.html">post</a> on Git briefly talked about modifying the Git history. This is a bad idea if we are planning to push changes that modified the Git history, to a remote repository from where others will pull in our changes. Modifying Git history is ideal if we are working on projects that do not involve a large scale sharing of the codebase. </p>
+<p>Note that if there are any conflicts during the rebase, Git will call those out so that we can address them manually. Now let us once again run <code>git log</code>. Notice that after the <code>git rebase</code>, Git has moved the two commits in <em>master</em> down and then added the two commits from <em>new feature</em>. This, although the "Added python.py" commit in <em>master</em> was done after the two commits in <em>new-feature</em>. Another crucial thing is that unlike <code>git merge</code>, no new commit was created. Just the existing commits were realigned linearly. In other words, our <em>new-feature</em> branch is now a fast forward from <em>master</em>.</p>
+<p>Also, did you notice the commit hash values? Other than the one for the "Initial Commit", all the hash values changed while Git moved our commits around during the <code>git rebase</code>. So essentially Git created new commit objects, thereby modifying the Git history. My previous <a href="https://www.codedisciples.in/advanced-git.html">post</a> on Git briefly talked about modifying the Git history. This is a bad idea if we are planning to push changes that modified the Git history, to a remote repository from where others will pull in our changes. Modifying Git history is ideal if we are working on projects that do not involve a large scale sharing of the codebase. </p>
 <p><br/>
 <img alt="git-log-rebase" src="https://codedisciples.in/images/index10/git-log-rebase.jpg"></p>
-<p>To further highlight the difference between <code>git rebase</code> and <code>git merge</code>, here is a screenshot of a <code>git log</code> after the two branches were merged. Notice the additional commit created by the merge operation. Also, the git history remains unchanged.</p>
+<p>To further highlight the difference between <code>git rebase</code> and <code>git merge</code>, here is a screenshot of a <code>git log</code> after the two branches were merged (as opposed to rebased). Notice the additional commit created by the merge operation. Also, the git history remains unchanged.</p>
 <ol>
 <li>Initial commit - ed4bee2 (master, new-feature)</li>
 <li>Added text.txt - 88ea609 (new-feature)</li>
@@ -221,7 +221,28 @@
 </pre></div>
   </div>
   
-  <br>
+  <br/>
+  <div class="comments">
+  <h2>Share</h2>
+  <br/>
+  <!-- AddToAny BEGIN -->
+    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+      <a class="a2a_button_blogger"></a>
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_flipboard"></a>
+      <a class="a2a_button_google_gmail"></a>
+      <a class="a2a_button_hacker_news"></a>
+      <a class="a2a_button_linkedin"></a> 
+      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_wordpress"></a>
+    </div>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  </div>
+  <br/>
   <div class="comments">
 	<h2>Comments</h2>
 	<div id="disqus_thread"></div>
@@ -235,6 +256,7 @@
 				  })();
 	</script>
   </div>
+
 </article>
         </div><!-- /content -->
 
