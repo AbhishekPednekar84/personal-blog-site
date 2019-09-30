@@ -19,7 +19,7 @@ DEFAULT_LANG = u'en'
 # Theme info - https://github.com/robulouski/voidy-bootstrap
 THEME = "themes/voidy-bootstrap"
 
-STYLESHEET_FILES = ("blog.css", "pygment.css")
+STYLESHEET_FILES = ("blog.css", "tomorrow_night.css")
 
 SIDEBAR = "sidebar.html"
 
