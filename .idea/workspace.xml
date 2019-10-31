@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e311908c-4084-4b6a-9c30-35fcfccd0b54" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/output/advanced-git.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/advanced-git.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/archives.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/archives.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/author/abhishek-pednekar.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/author/abhishek-pednekar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/author/abhishek-pednekar2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/author/abhishek-pednekar2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/author/abhishek-pednekar3.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/author/abhishek-pednekar3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/authors.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/authors.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/categories.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/docker.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/docker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/git.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/git.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/python.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/python.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/python2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/python2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/celery-windows.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/celery-windows.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/docker-bind-mounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/docker-bind-mounts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/docker-postgres.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/docker-postgres.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/embedding-jupyter.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/embedding-jupyter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.rss.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/all-en.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/all-en.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/all.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/all.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/docker.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/docker.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/git.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/git.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/python.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/python.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/git-rebase.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/git-rebase.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/google-map-plots.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/google-map-plots.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/index2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/index3.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/index3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/named-tuples.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/named-tuples.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/pre-commit.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/pre-commit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/pythonic-dictionaries.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/pythonic-dictionaries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/reminders.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/reminders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/aws.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/aws.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/celery.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/celery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/docker.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/docker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/git.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/git.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/google-maps.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/google-maps.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/jupyter.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/jupyter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/postgres.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/postgres.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/python.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/python.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/python2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/python2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tags.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tags.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/theme/css/blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/output/theme/css/blog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pelicanconf.py" beforeDir="false" afterPath="$PROJECT_DIR$/pelicanconf.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1Sxcu0dXiK7dpRx5jbjh8IdGsfE" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e311908c-4084-4b6a-9c30-35fcfccd0b54" name="Default Changelist" comment="" />
+      <created>1572508905103</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572508905103</updated>
+      <workItem from="1572508909456" duration="2476000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Abhishek Pednekar" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Queries using Flask SQLAlchemy - Code Disciples</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/blog.css" />
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/tomorrow_night.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://codedisciples.in/static/images/favicon.ico" />
+        <link href="https://codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-145611420-1', '');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://codedisciples.in/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://codedisciples.in/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://codedisciples.in/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1>Code Disciples</h1>
+		<p class="lead">A blog for all things code</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Thu 31 October 2019
+</abbr> <h1>
+  <a href="https://codedisciples.in/flask-sqlalchemy-queries.html" rel="bookmark"
+     title="Permalink to Queries using Flask SQLAlchemy">
+    Queries using Flask SQLAlchemy
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
+    in 
+    <a href="https://codedisciples.in/category/flask.html">
+      Flask</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>In this post, we will go over writing database queries using the <strong>Flask SQLAlchemy</strong> library. The post assumes that the
+ reader has some basic knowledge of flask and SQL in general.</p>
+<p>First, we will create a simple flask application (app.py) with a SQLite backend database containing a couple of models. 
+Ideally, database models should be created as a separate module or package within the project for better maintainability. 
+However, for this demo application we will be writing all our python code in the same file.</p>
+<p>As always, we will first create our virtual environment using the command <code>python -m venv venv</code>. Once the virtual 
+environment is activated (<code>venv\Scripts\activate.bat</code> on Windows and <code>source venv/bin/activate</code> on Linux / OSx), we will 
+install the <em>flask</em> and <em>flask-sqlalchemy</em> packages - <code>pip install flask flask-sqlalchemy</code>.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///data.db&quot;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_TRACK_MODIFICATIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Folder</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;folder&quot;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;File&quot;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s2">&quot;files&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;Folder({self.name})&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">File</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">folder_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;folder.id&quot;</span><span class="p">))</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;File({self.folder_id}, {self.name}, {self.size})&quot;</span>
+</pre></div>
+
+
+<p>For this example, we will be using two database models / tables - <strong>folder</strong> and <strong>file</strong> that have a one to many relationship 
+(one folder can contain many files). This relationship is defined by the <code>db.relationship</code> construct. 
+The <code>__repr__</code> method is optional. However, it will give us a nice readable output. To create our database, 
+we will open a python REPL in the activated virtual environment and run the below commands. </p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">Folder</span><span class="p">,</span> <span class="n">File</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+</pre></div>
+
+
+<p>At this point, we will see a SQLite database called <em>data.db</em> in our project folder. </p>
+<h2>INSERT Queries</h2>
+<p>To create / insert new records, we will first create instances (with data) of our models. Next, we will use the 
+<code>db.session.add()</code> command to add objects to the session.</p>
+<p>To add multiple objects at once, we can use <code>db.session.add_all()</code> and pass a list containing all our objects as 
+shown below. Finally, we will commit our transaction using <code>db.session.commit()</code>.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">fld1</span> <span class="o">=</span> <span class="n">Folder</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;images&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fld2</span> <span class="o">=</span> <span class="n">Folder</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;flask-project&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fld3</span> <span class="o">=</span> <span class="n">Folder</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;bills&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">add_all</span><span class="p">([</span><span class="n">fld1</span><span class="p">,</span> <span class="n">fld2</span><span class="p">,</span> <span class="n">fld3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="k">commit</span><span class="p">()</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="o">#</span> <span class="k">Add</span> <span class="n">records</span> <span class="k">to</span> <span class="n">the</span> <span class="n">file</span> <span class="k">table</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fl1</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">folder_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="ss">&quot;image1.jpg&quot;</span><span class="p">,</span> <span class="k">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fl2</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">folder_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="ss">&quot;image2.jpg&quot;</span><span class="p">,</span> <span class="k">size</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fl3</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">folder_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="ss">&quot;image3.jpg&quot;</span><span class="p">,</span> <span class="k">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fl4</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">folder_id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="ss">&quot;flask1.py&quot;</span><span class="p">,</span> <span class="k">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fl5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">folder_id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="ss">&quot;flask2.py&quot;</span><span class="p">,</span> <span class="k">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">add_all</span><span class="p">([</span><span class="n">fl1</span><span class="p">,</span> <span class="n">fl2</span><span class="p">,</span> <span class="n">fl3</span><span class="p">,</span> <span class="n">fl4</span><span class="p">,</span> <span class="n">fl5</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="k">commit</span><span class="p">()</span>
+</pre></div>
+
+
+<hr>
+
+<h2>SELECT Queries</h2>
+<p>Querying all the records from a table - <code>all()</code></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">Folder</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[</span><span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">Folder</span><span class="p">(</span><span class="n">flask</span><span class="o">-</span><span class="n">project</span><span class="p">),</span> <span class="n">Folder</span><span class="p">(</span><span class="n">bills</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>Querying specific records from a table - <code>filter_by()</code></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">Folder</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;flask-project&quot;</span><span class="p">).</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[</span><span class="n">Folder</span><span class="p">(</span><span class="n">flask</span><span class="o">-</span><span class="n">project</span><span class="p">)]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Folder</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;flask-project&quot;</span><span class="p">).</span><span class="k">first</span><span class="p">()</span>
+
+<span class="n">Folder</span><span class="p">(</span><span class="n">flask</span><span class="o">-</span><span class="n">project</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Querying records by id - <code>get()</code></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">Folder</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image3</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+
+<p>While viewing the output delivered by the <code>__repr__</code> method might be helpful in our present case, practical scenarios 
+require us to get the actual data as stored in the table. This can be done as follows.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">result</span> <span class="o">=</span> <span class="n">Folder</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="k">first</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">result</span><span class="p">.</span><span class="n">name</span>
+
+<span class="s1">&#39;images&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">result</span> <span class="o">=</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;image1.jpg&quot;</span><span class="p">).</span><span class="k">first</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">result</span><span class="p">.</span><span class="k">size</span>
+
+<span class="mi">1000</span>
+</pre></div>
+
+
+<hr>
+
+<h2>UPDATE Queries</h2>
+<p>To update data, we will first need to fetch the record that requires the update. Next. we can simply assign the new 
+value to the attribute that needs the update and commit the transaction.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="o">#</span> <span class="k">Update</span> <span class="n">a</span> <span class="k">specific</span> <span class="n">record</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">result</span> <span class="o">=</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span>
+             <span class="p">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;image1.jpg&quot;</span><span class="p">)</span>
+             <span class="p">.</span><span class="k">first</span><span class="p">()</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">result</span><span class="p">.</span><span class="k">size</span> <span class="o">=</span> <span class="mi">5000</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="k">commit</span><span class="p">()</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="o">#</span> <span class="k">After</span> <span class="k">update</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;image1.jpg&quot;</span><span class="p">).</span><span class="k">first</span><span class="p">()</span>
+<span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image1</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To update all the records in a table, we will need to iterate over the results returned by <code>all()</code> and then apply the 
+update. To persist the changes (intentionally skipped), we will need to run <code>db.session.commit()</code></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> # <span class="nv">Updating</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">records</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">results</span> <span class="o">=</span> <span class="nv">File</span>.<span class="nv">query</span>.<span class="nv">all</span><span class="ss">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nb">result</span> <span class="nv">in</span> <span class="nv">results</span>:
+...     <span class="nb">result</span>.<span class="nv">size</span> <span class="o">=</span> <span class="mi">4000</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">File</span>.<span class="nv">query</span>.<span class="nv">all</span><span class="ss">()</span>
+
+[<span class="nv">File</span><span class="ss">(</span><span class="mi">1</span>, <span class="nv">image1</span>.<span class="nv">jpg</span>, <span class="mi">4000</span><span class="ss">)</span>, <span class="nv">File</span><span class="ss">(</span><span class="mi">1</span>, <span class="nv">image2</span>.<span class="nv">jpg</span>, <span class="mi">4000</span><span class="ss">)</span>, 
+<span class="nv">File</span><span class="ss">(</span><span class="mi">1</span>, <span class="nv">image3</span>.<span class="nv">jpg</span>, <span class="mi">4000</span><span class="ss">)</span>, <span class="nv">File</span><span class="ss">(</span><span class="mi">2</span>, <span class="nv">flask1</span>.<span class="nv">py</span>, <span class="mi">4000</span><span class="ss">)</span>, 
+<span class="nv">File</span><span class="ss">(</span><span class="mi">2</span>, <span class="nv">flask2</span>.<span class="nv">py</span>, <span class="mi">4000</span><span class="ss">)</span>]
+</pre></div>
+
+
+<hr>
+
+<h2>DELETE Queries</h2>
+<p>To delete a record, we will append <code>.delete()</code> to our select query. To persist the deletion, we will need to commit the transaction</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span>
+    <span class="p">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;image1.jpg&quot;</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">delete</span><span class="p">()</span>
+<span class="mi">1</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="k">commit</span><span class="p">()</span>
+</pre></div>
+
+
+<p>To delete all the records in a table, we will use the <code>&lt;model_name&gt;.query.delete()</code> syntax.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="k">delete</span><span class="p">()</span>
+<span class="mi">4</span>
+</pre></div>
+
+
+<hr>
+
+<h2>ROLLBACK</h2>
+<p>To rollback an update, delete or insert that has <u>not</u> been committed, use <code>db.session.rollback()</code></p>
+<hr>
+
+<h2>INNER JOIN</h2>
+<p>To perform an inner join between two tables, we will use the <code>.join()</code> method and specify the join attributes.
+The result is a list of tuples that can be iterated over.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">Folder</span><span class="p">,</span> <span class="n">File</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="n">Folder</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">File</span><span class="p">.</span><span class="n">folder_id</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[(</span><span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image1</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)),</span> <span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image2</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)),</span> 
+<span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image3</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span> <span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">flask</span><span class="o">-</span><span class="n">project</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">flask1</span><span class="p">.</span><span class="n">py</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span> 
+<span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">flask</span><span class="o">-</span><span class="n">project</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">flask2</span><span class="p">.</span><span class="n">py</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))]</span>
+</pre></div>
+
+
+<hr>
+
+<h2>OUTER JOIN</h2>
+<p>The syntax for an outer join is similar to an inner join. However we will be using the <code>.outerjoin()</code> method.</p>
+<p>Notice that in the result of the below query, the last tuple returns a <em>None</em> for the folder named <em>bills</em> as 
+there are no corresponding records in the <em>file</em> table.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">Folder</span><span class="p">,</span> <span class="n">File</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">outerjoin</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="n">Folder</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">File</span><span class="p">.</span><span class="n">folder_id</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[(</span><span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image1</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)),</span> <span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image2</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)),</span> 
+<span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image3</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span>  <span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">flask</span><span class="o">-</span><span class="n">project</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">flask1</span><span class="p">.</span><span class="n">py</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span> 
+<span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">flask</span><span class="o">-</span><span class="n">project</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">flask2</span><span class="p">.</span><span class="n">py</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span> 
+<span class="p">(</span><span class="n">Folder</span><span class="p">(</span><span class="n">bills</span><span class="p">),</span> <span class="k">None</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>Again, we can iterate over the results to pull specific attribute values. The <code>if</code> statement in the example is 
+to handle the <em>None</em> condition described above.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nb">result</span> <span class="nv">in</span> <span class="nv">results</span>:
+...     <span class="k">if</span> <span class="nb">result</span>[<span class="mi">1</span>]:
+...         <span class="nv">print</span><span class="ss">(</span><span class="nv">f</span><span class="s2">&quot;</span><span class="s">The folder {result[0].name} contains the file {result[1].name} with size {result[1].size} KB</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+<span class="nv">The</span> <span class="nv">folder</span> <span class="nv">images</span> <span class="nv">contains</span> <span class="nv">the</span> <span class="nv">file</span> <span class="nv">image1</span>.<span class="nv">jpg</span> <span class="nv">with</span> <span class="nv">size</span> <span class="mi">5000</span> <span class="nv">KB</span>
+<span class="nv">The</span> <span class="nv">folder</span> <span class="nv">images</span> <span class="nv">contains</span> <span class="nv">the</span> <span class="nv">file</span> <span class="nv">image2</span>.<span class="nv">jpg</span> <span class="nv">with</span> <span class="nv">size</span> <span class="mi">2000</span> <span class="nv">KB</span>
+<span class="nv">The</span> <span class="nv">folder</span> <span class="nv">images</span> <span class="nv">contains</span> <span class="nv">the</span> <span class="nv">file</span> <span class="nv">image3</span>.<span class="nv">jpg</span> <span class="nv">with</span> <span class="nv">size</span> <span class="mi">1000</span> <span class="nv">KB</span>
+<span class="nv">The</span> <span class="nv">folder</span> <span class="nv">flask</span><span class="o">-</span><span class="nv">project</span> <span class="nv">contains</span> <span class="nv">the</span> <span class="nv">file</span> <span class="nv">flask1</span>.<span class="nv">py</span> <span class="nv">with</span> <span class="nv">size</span> <span class="mi">1000</span> <span class="nv">KB</span>
+<span class="nv">The</span> <span class="nv">folder</span> <span class="nv">flask</span><span class="o">-</span><span class="nv">project</span> <span class="nv">contains</span> <span class="nv">the</span> <span class="nv">file</span> <span class="nv">flask2</span>.<span class="nv">py</span> <span class="nv">with</span> <span class="nv">size</span> <span class="mi">1000</span> <span class="nv">KB</span>
+</pre></div>
+
+
+<hr>
+
+<h2>AGGREGATE FUNCTIONS &amp; GROUP BY</h2>
+<p>To get the <strong>count</strong> of files in each folder, we will use the <em>count()</em> method along with a <em>group_by()</em></p>
+<p>Here, we are selecting the folder name and the file count (<code>db.func.count()</code>) using the same outer join as the previous
+ examples. However, we are grouping the results by the file name.</p>
+<div class="highlight"><pre><span></span> <span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">Folder</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="k">count</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">folder_id</span><span class="p">))</span>
+     <span class="p">.</span><span class="n">outerjoin</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="n">Folder</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">File</span><span class="p">.</span><span class="n">folder_id</span><span class="p">)</span>
+     <span class="p">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">Folder</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+     <span class="p">.</span><span class="k">all</span><span class="p">()</span>   
+     <span class="p">.</span><span class="k">all</span><span class="p">()</span>   
+
+ <span class="p">[(</span><span class="s1">&#39;bills&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flask-project&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>To get the <strong>sum</strong> of the file sizes in each folder, we can use a similar query.</p>
+<div class="highlight"><pre><span></span> <span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">Folder</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">func</span><span class="p">.</span><span class="k">sum</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="k">size</span><span class="p">))</span>
+     <span class="p">.</span><span class="n">outerjoin</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="n">Folder</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">File</span><span class="p">.</span><span class="n">folder_id</span><span class="p">)</span>
+     <span class="p">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">Folder</span><span class="p">.</span><span class="n">name</span><span class="p">).</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[(</span><span class="s1">&#39;bills&#39;</span><span class="p">,</span> <span class="k">None</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flask-project&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">)]</span>
+</pre></div>
+
+
+<hr>
+
+<h2>ORDER BY</h2>
+<p>To order the results based on a specific attribute, we will use the <code>order_by()</code> method. </p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">File</span><span class="p">.</span><span class="k">size</span><span class="p">).</span><span class="n">order_by</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">name</span><span class="p">).</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[(</span><span class="s1">&#39;flask1.py&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flask2.py&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;image1.jpg&#39;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;image2.jpg&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;image3.jpg&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>We can order results by more than one attribute.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">File</span><span class="p">.</span><span class="k">size</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="k">size</span><span class="p">,</span> <span class="n">File</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[(</span><span class="s1">&#39;flask1.py&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flask2.py&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;image3.jpg&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> 
+<span class="p">(</span><span class="s1">&#39;image2.jpg&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;image1.jpg&#39;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)]</span>
+</pre></div>
+
+
+<hr>
+
+<h2>LIMIT</h2>
+<p>We can limit the amount of data returned by a query using the <code>limit()</code> method. The method takes an integer as an argument.</p>
+<p>By specifying <code>limit(2)</code> in the below example, we are limiting the amount of data returned by the query. Instead of 
+returning a list with five tuples, we get a list with only two tuples.</p>
+<div class="highlight"><pre><span></span><span class="sx">&gt;&gt;&gt;</span> <span class="sx">db.session.query(File.name,</span> <span class="sx">File.size)</span>
+    <span class="sx">.order_by(File.size,</span> <span class="sx">File.name)</span>
+    <span class="sx">.limit(2)</span>
+    <span class="sx">.all()</span>
+
+<span class="sx">[(&#39;flask1.py&#39;,</span> <span class="sx">1000),</span> <span class="sx">(&#39;flask2.py&#39;,</span> <span class="sx">1000)]</span>
+</pre></div>
+
+
+<p>If we specify a limit higher than the total number of records that would otherwise be returned by the query 
+(without using limit()), the query will return all the data.</p>
+<div class="highlight"><pre><span></span><span class="sx">&gt;&gt;&gt;</span> <span class="sx">db.session.query(File.name,</span> <span class="sx">File.size)</span>
+    <span class="sx">.order_by(File.size,</span> <span class="sx">File.name)</span>
+    <span class="sx">.limit(200)</span>
+    <span class="sx">.all()</span>
+
+<span class="sx">[(&#39;flask1.py&#39;,</span> <span class="sx">1000),</span> <span class="sx">(&#39;flask2.py&#39;,</span> <span class="sx">1000),</span> <span class="sx">(&#39;image3.jpg&#39;,</span> <span class="sx">1000),</span> 
+<span class="sx">(&#39;image2.jpg&#39;,</span> <span class="sx">2000),</span> <span class="sx">(&#39;image1.jpg&#39;,</span> <span class="sx">5000)]</span>
+</pre></div>
+
+
+<hr>
+
+<h2>OFFSET</h2>
+<p>We can bypass a subset of our query results using the <code>offset()</code> method. This method also takes an integer as a parameter.</p>
+<p>Specifying an offset of 2, ignores the first two records (tuples in our case) and returns the rest.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">File</span><span class="p">.</span><span class="k">size</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="k">size</span><span class="p">,</span> <span class="n">File</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">offset</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[(</span><span class="s1">&#39;image3.jpg&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;image2.jpg&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;image1.jpg&#39;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)]</span>
+</pre></div>
+
+
+<hr>
+
+<h2>CONDITIONALS</h2>
+<p>To filter our results with <strong>and</strong> / <strong>or</strong> conditionals, we will use the <code>db.and_()</code> / <code>db.or_()</code> methods.
+To use a <strong>not</strong> conditional, we can simply use <strong>!=</strong> in place of <strong>==</strong> </p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="o">#</span> <span class="k">Using</span> <span class="k">OR</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">or_</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="ss">&quot;image1.jpg&quot;</span><span class="p">,</span> <span class="n">File</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="ss">&quot;flask1.py&quot;</span><span class="p">))</span>
+    <span class="p">.</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[</span><span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image1</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">5000</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">flask1</span><span class="p">.</span><span class="n">py</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="o">#</span> <span class="k">Using</span> <span class="k">AND</span> <span class="k">and</span> <span class="k">NOT</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">File</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">and_</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">name</span> <span class="o">!=</span> <span class="ss">&quot;image1.jpg&quot;</span><span class="p">,</span> <span class="n">File</span><span class="p">.</span><span class="n">name</span> <span class="o">!=</span> <span class="ss">&quot;flask1.py&quot;</span><span class="p">))</span>
+<span class="p">.</span><span class="k">all</span><span class="p">()</span>
+
+<span class="p">[</span><span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image2</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">image3</span><span class="p">.</span><span class="n">jpg</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="n">File</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">flask2</span><span class="p">.</span><span class="n">py</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)]</span>
+</pre></div>
+  </div>
+  
+  <br/>
+  <div class="comments">
+  <h2>Share</h2>
+  <br/>
+  <!-- AddToAny BEGIN -->
+    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+      <a class="a2a_button_blogger"></a>
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_flipboard"></a>
+      <a class="a2a_button_google_gmail"></a>
+      <a class="a2a_button_hacker_news"></a>
+      <a class="a2a_button_linkedin"></a> 
+      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_wordpress"></a>
+    </div>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  </div>
+  <br/>
+  <div class="comments">
+	<h2>Comments</h2>
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+				   (function() {
+						var dsq = document.createElement('script');
+						dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = '//code-disciples.disqus.com/embed.js';
+						(document.getElementsByTagName('head')[0] ||
+						 document.getElementsByTagName('body')[0]).appendChild(dsq);
+				  })();
+	</script>
+  </div>
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://codedisciples.in/category/docker.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
+  <li><a href="https://codedisciples.in/category/flask.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Flask</a></li>
+  <li><a href="https://codedisciples.in/category/git.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
+  <li><a href="https://codedisciples.in/category/python.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/flask.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Flask
+      </a>
+      <a href="https://codedisciples.in/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Python
+      </a>
+      <a href="https://codedisciples.in/tag/celery.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Celery
+      </a>
+      <a href="https://codedisciples.in/tag/git.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Git
+      </a>
+      <a href="https://codedisciples.in/tag/docker.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Docker
+      </a>
+      <a href="https://codedisciples.in/tag/postgres.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
+      </a>
+      <a href="https://codedisciples.in/tag/google-maps.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps
+      </a>
+      <a href="https://codedisciples.in/tag/aws.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>AWS
+      </a>
+      <a href="https://codedisciples.in/tag/jupyter.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Jupyter
+      </a>
+</p>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+    <br>
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Built with <img id="footer-image" src="/static/images/love.ico"> in Bangalore&nbsp;&bull;&nbsp; Powered by <a href="http://getpelican.com/" target="_blank">Pelican</a> and <a href="https://www.netlify.com"
+           target="_blank">Netlify</a>
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+<!-- DISQUS script for displaying comment count -->
+<script type="text/javascript">
+    var disqus_shortname = 'code-disciples';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>

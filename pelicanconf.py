@@ -6,7 +6,7 @@ AUTHOR = 'Abhishek Pednekar'
 SITENAME = 'Code Disciples'
 SITEURL = 'https://codedisciples.in'
 
-## Development and testing. Uncomment when running on local server
+# Development and testing. Uncomment when running on local server
 # SITEURL = "http://localhost:8000"
 
 SITESUBTITLE = u'A blog for all things code'

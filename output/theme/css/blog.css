@@ -110,3 +110,7 @@ a:hover {
 .jumbotron>a {
     color: #fff;
 }
+
+hr {
+    border: 1px solid darkgrey;
+}
