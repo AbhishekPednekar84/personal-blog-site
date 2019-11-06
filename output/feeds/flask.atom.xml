@@ -1,5 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Flask</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/flask.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-10-31T17:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Queries using Flask SQLAlchemy</title><link href="https://codedisciples.in/flask-sqlalchemy-queries.html" rel="alternate"></link><published>2019-10-31T17:00:00+05:30</published><updated>2019-10-31T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-10-31:/flask-sqlalchemy-queries.html</id><summary type="html">&lt;p&gt;Writing queries using the flask-sqlalchemy library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will go over writing database queries using the &lt;strong&gt;Flask SQLAlchemy&lt;/strong&gt; library. The post assumes that the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Flask</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/flask.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-11-06T17:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Deploying a Flask website on Heroku</title><link href="https://codedisciples.in/flask-heroku.html" rel="alternate"></link><published>2019-11-06T17:00:00+05:30</published><updated>2019-11-06T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-06:/flask-heroku.html</id><summary type="html">&lt;p&gt;Steps to deploy a Flask website using Heroku&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will be deploying a &lt;strong&gt;Flask&lt;/strong&gt; application using &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt;. Heroku is a popular 
+Platform as a Service (PaaS) that is used to deploy, manage and scale web applications. It comes with a lot of features 
+built-in that abstract away most of the complications involved in traditional web-based deployments. Deployments on 
+Heroku are quick and the platform ensures that you do not have to worry about the infrastructural maintenance headache's that accompany website / server maintenance.  &lt;/p&gt;
+&lt;p&gt;The site that we will be deploying is &lt;a href="https://bit.ly/flask-app"&gt;https://bit.ly/flask-app&lt;/a&gt;. The complete source code is 
+available &lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This post assumes that the reader is familiar with the basics of Python and Flask. The post does not include the steps to create an account on Heroku as the process is pretty straightforward.&lt;/p&gt;
+&lt;h2&gt;Our flask application&lt;/h2&gt;
+&lt;p&gt;The application that we are deploying uses some popular flask extensions like &lt;code&gt;flask-sqlalchemy&lt;/code&gt;, &lt;code&gt;flask-login&lt;/code&gt; etc... 
+A complete list can be found in the &lt;em&gt;requirements.txt&lt;/em&gt; file in the repository. It is critical to have the requirements file in our repository to not only have Heroku install the dependencies 
+but also because it helps Heroku identify this as a Python project. The application is a website for a fake organic produce startup and contains a few forms wherein a new user can register or an existing user may login. Upon 
+logging in, the user will be redirected to a feedback page to provide feedback of their most recent experience with the company.&lt;/p&gt;
+&lt;p&gt;Before we start deploying, let's clone the repository using &lt;code&gt;git clone https://github.com/AbhishekPednekar84/flask_demo_app&lt;/code&gt;. 
+As we will see later on, Heroku requires us to specify the repository url as part of the deployment process. Now, while 
+I admit that this repository contains our finished code (with the Heroku specific files) and can be deployed as-is, in a real scenario, we 
+will probably be working on a local repository and periodically pushing our changes to a remote repository. Since this is a demo, we will not be creating 
+new branches and will be using the &lt;em&gt;master&lt;/em&gt; branch itself. If you are planning to deploy the same demo application, you can push this to your remote 
+repository using &lt;code&gt;git push -u &amp;lt;your remote repo url&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Getting started with Heroku&lt;/h2&gt;
+&lt;p&gt;Once logged into Heroku, we will see an option called &lt;em&gt;Create new app&lt;/em&gt; on the dashboard. In Heroku nomenclature, a server 
+is called as a &lt;strong&gt;dyno&lt;/strong&gt;, We will be using a free dyno for this demo. &lt;/p&gt;
+&lt;p&gt;The region can be the United States or Europe. This doesn't matter for our demo application. I've chosen Europe simply 
+because, geographically, my current location is closer to Europe. We will not be adding a pipeline in this example.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="heroku-create" src="https://codedisciples.in/images/index13/heroku-create.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;On the subsequent page, we will be selecting our deployment method as &lt;strong&gt;GitHub&lt;/strong&gt;. As mentioned in the previous section, 
+this will trigger a build whenever we push changes to our GitHub repository. We will need to authorize Heroku to access 
+GitHub repositories and specify which repository will be used in our current deployment.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="heroku-setup" src="https://codedisciples.in/images/index13/heroku-setup.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Next, we will enable automatic deployments. At this point, I would like to point out that our repository does have continuous 
+integration (CI) configured in TravisCI due to which we will be checking the &lt;em&gt;Wait for CI to pass before deploy&lt;/em&gt; box. However, 
+this can be skipped by simply removing the .travis.yml file from the repository. A separate article pertaining to the CI pipeline will be posted soon.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="auto-deploy" src="https://codedisciples.in/images/index13/auto-deploy.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;This completes our initial setup on Heroku.&lt;/p&gt;
+&lt;h2&gt;Creating environment variables&lt;/h2&gt;
+&lt;p&gt;For the local deployment, all our environment variables were included in a &lt;code&gt;.env&lt;/code&gt; file (which was deliberately excluded 
+from the repository). There is however a skeleton file called &lt;code&gt;.env.example&lt;/code&gt; that shows all the attributes that need to 
+be configured. The values of these attributes are being read into our &lt;code&gt;Config&lt;/code&gt; class in &lt;code&gt;config.py&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;On Heroku, rather than using a &lt;code&gt;.env&lt;/code&gt; file, we will be creating the environment variables on the dashboard itself. The 
+first of these will be a connection string to a new &lt;strong&gt;Postgres&lt;/strong&gt; database. To do this, on the &lt;em&gt;Resources&lt;/em&gt; section of our 
+dashboard, we will specify &lt;strong&gt;heroku-postgres&lt;/strong&gt; and provision the database on our free dyno.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="postgres" src="https://codedisciples.in/images/index13/postgres.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="postgres2" src="https://codedisciples.in/images/index13/postgres2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Once this is complete, we can see the environment variable containing the connection string by navigating to the &lt;em&gt;Settings&lt;/em&gt; 
+and revealing our config variables.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="postgres3" src="https://codedisciples.in/images/index13/postgres3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Since we have a few more to add (see &lt;code&gt;.env.example&lt;/code&gt;), we will do that as well. To obtain the &lt;em&gt;reCAPTCHA&lt;/em&gt; public and private keys,
+ one will need to signup for the service on &lt;a href="https://www.google.com/recaptcha/"&gt;Google&lt;/a&gt; and follow the steps. &lt;/p&gt;
+&lt;p&gt;Here is a final screenshot of this section.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="env-vars" src="https://codedisciples.in/images/index13/env-vars.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Creating the Heroku &lt;code&gt;Procfile&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Heroku requires a file named &lt;code&gt;Procfile&lt;/code&gt; that contains all the commands to be executed by an app on startup. The commands 
+need to be specified using the syntax &lt;code&gt;&amp;lt;process name&amp;gt;: &amp;lt;command&amp;gt;&lt;/code&gt;. Before, we update this file, let's look at how we are exposing 
+our flask application instance.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;app.py&lt;/code&gt; file in our project contains a &lt;code&gt;create_app&lt;/code&gt; function which returns our flask application named &lt;strong&gt;app&lt;/strong&gt;. To correctly specify 
+this in our Procfile, we have a separate module called &lt;code&gt;wsgi.py&lt;/code&gt; containing the following code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_app&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;config&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;config_class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;app&lt;/code&gt; instance defined here can be used in our Procfile. For this demo, we will be using &lt;code&gt;gunicorn&lt;/code&gt; as our WSGI server. 
+So let's first install it using &lt;code&gt;pip install gunicorn&lt;/code&gt; and add it to our requirements using &lt;code&gt;pip freeze &amp;gt; requirements.txt&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;This is the command that will be included in the Procfile - &lt;code&gt;web: gunicorn wsgi:app&lt;/code&gt; This tells Heroku to use the Heroku &lt;strong&gt;web&lt;/strong&gt; process run an 
+application called &lt;strong&gt;app&lt;/strong&gt; that is present in a module named &lt;strong&gt;wsgi&lt;/strong&gt; using &lt;strong&gt;gunicorn&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;At this point, if you have worked on these changes locally, they should be pushed to the remote repository using &lt;code&gt;git push origin master&lt;/code&gt; 
+so that an initial build can be triggered. We can follow the build in the &lt;em&gt;Overview&lt;/em&gt; section of the dashboard. Details of 
+any build errors can be found in the logs - &lt;em&gt;More &amp;gt; View Logs&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="build" src="https://codedisciples.in/images/index13/build.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Creating our database tables&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;models.py&lt;/code&gt; file in our &lt;code&gt;models&lt;/code&gt; package indicates that the application uses two tables - &lt;code&gt;UserModel&lt;/code&gt; and &lt;code&gt;FeedbackModel&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To create these on Heroku, we will be using a custom flask command called &lt;em&gt;create_tables&lt;/em&gt; present in &lt;code&gt;commands.py&lt;/code&gt;. 
+The command is created in &lt;code&gt;app.py&lt;/code&gt; as part of the app creation process - &lt;code&gt;app.cli.add_command(create_tables)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To run this command, navigate to &lt;em&gt;More &amp;gt; Run Console&lt;/em&gt; and run the command - &lt;code&gt;flask run create_tables&lt;/code&gt;. If everything runs 
+as expected, we will simply see a &lt;em&gt;Process Exited&lt;/em&gt; message on the console.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="console" src="https://codedisciples.in/images/index13/console.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Now our app is fully set up and deployed. To run the application, click &lt;em&gt;Open App&lt;/em&gt; on the dashboard. The url 
+&lt;a href="https://flask-organic-foods-app.herokuapp.com/"&gt;https://flask-organic-foods-app.herokuapp.com/&lt;/a&gt; was assigned by Heroku. 
+This can be changed with a custom domain name in the application settings.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="site" src="https://codedisciples.in/images/index13/site.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category><category term="Heroku"></category></entry><entry><title>Queries using Flask SQLAlchemy</title><link href="https://codedisciples.in/flask-sqlalchemy-queries.html" rel="alternate"></link><published>2019-10-31T17:00:00+05:30</published><updated>2019-10-31T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-10-31:/flask-sqlalchemy-queries.html</id><summary type="html">&lt;p&gt;Writing queries using the flask-sqlalchemy library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will go over writing database queries using the &lt;strong&gt;Flask SQLAlchemy&lt;/strong&gt; library. The post assumes that the
  reader has some basic knowledge of flask and SQL in general.&lt;/p&gt;
 &lt;p&gt;First, we will create a simple flask application (app.py) with a SQLite backend database containing a couple of models. 
 Ideally, database models should be created as a separate module or package within the project for better maintainability. 
@@ -202,7 +292,7 @@ The result is a list of tuples that can be iterated over.&lt;/p&gt;
 &lt;h2&gt;OUTER JOIN&lt;/h2&gt;
 &lt;p&gt;The syntax for an outer join is similar to an inner join. However we will be using the &lt;code&gt;.outerjoin()&lt;/code&gt; method.&lt;/p&gt;
 &lt;p&gt;Notice that in the result of the below query, the last tuple returns a &lt;em&gt;None&lt;/em&gt; for the folder named &lt;em&gt;bills&lt;/em&gt; as 
-there are no corresponding records in the &lt;em&gt;file&lt;/em&gt; table.&lt;/p&gt;
+there are no corresponding records in the &lt;em&gt;file&lt;/em&gt; table. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Folder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;outerjoin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Folder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;folder_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;

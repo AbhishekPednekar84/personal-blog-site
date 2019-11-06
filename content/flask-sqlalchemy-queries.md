@@ -242,7 +242,7 @@ The result is a list of tuples that can be iterated over.
 The syntax for an outer join is similar to an inner join. However we will be using the `.outerjoin()` method.
 
 Notice that in the result of the below query, the last tuple returns a *None* for the folder named *bills* as 
-there are no corresponding records in the *file* table.
+there are no corresponding records in the *file* table. 
 
 ```
 >>> db.session.query(Folder, File)

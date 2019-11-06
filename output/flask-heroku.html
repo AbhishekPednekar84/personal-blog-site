@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Abhishek Pednekar" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Deploying a Flask website on Heroku - Code Disciples</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/blog.css" />
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/tomorrow_night.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://codedisciples.in/static/images/favicon.ico" />
+        <link href="https://codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-145611420-1', '');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://codedisciples.in/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://codedisciples.in/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://codedisciples.in/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1>Code Disciples</h1>
+		<p class="lead">A blog for all things code</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Wed 06 November 2019
+</abbr> <h1>
+  <a href="https://codedisciples.in/flask-heroku.html" rel="bookmark"
+     title="Permalink to Deploying a Flask website on Heroku">
+    Deploying a Flask website on Heroku
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
+    in 
+    <a href="https://codedisciples.in/category/flask.html">
+      Flask</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>In this post, we will be deploying a <strong>Flask</strong> application using <a href="https://www.heroku.com/">Heroku</a>. Heroku is a popular 
+Platform as a Service (PaaS) that is used to deploy, manage and scale web applications. It comes with a lot of features 
+built-in that abstract away most of the complications involved in traditional web-based deployments. Deployments on 
+Heroku are quick and the platform ensures that you do not have to worry about the infrastructural maintenance headache's that accompany website / server maintenance.  </p>
+<p>The site that we will be deploying is <a href="https://bit.ly/flask-app">https://bit.ly/flask-app</a>. The complete source code is 
+available <a href="https://github.com/AbhishekPednekar84/flask_demo_app">here</a>.</p>
+<p>This post assumes that the reader is familiar with the basics of Python and Flask. The post does not include the steps to create an account on Heroku as the process is pretty straightforward.</p>
+<h2>Our flask application</h2>
+<p>The application that we are deploying uses some popular flask extensions like <code>flask-sqlalchemy</code>, <code>flask-login</code> etc... 
+A complete list can be found in the <em>requirements.txt</em> file in the repository. It is critical to have the requirements file in our repository to not only have Heroku install the dependencies 
+but also because it helps Heroku identify this as a Python project. The application is a website for a fake organic produce startup and contains a few forms wherein a new user can register or an existing user may login. Upon 
+logging in, the user will be redirected to a feedback page to provide feedback of their most recent experience with the company.</p>
+<p>Before we start deploying, let's clone the repository using <code>git clone https://github.com/AbhishekPednekar84/flask_demo_app</code>. 
+As we will see later on, Heroku requires us to specify the repository url as part of the deployment process. Now, while 
+I admit that this repository contains our finished code (with the Heroku specific files) and can be deployed as-is, in a real scenario, we 
+will probably be working on a local repository and periodically pushing our changes to a remote repository. Since this is a demo, we will not be creating 
+new branches and will be using the <em>master</em> branch itself. If you are planning to deploy the same demo application, you can push this to your remote 
+repository using <code>git push -u &lt;your remote repo url&gt;</code>.</p>
+<h2>Getting started with Heroku</h2>
+<p>Once logged into Heroku, we will see an option called <em>Create new app</em> on the dashboard. In Heroku nomenclature, a server 
+is called as a <strong>dyno</strong>, We will be using a free dyno for this demo. </p>
+<p>The region can be the United States or Europe. This doesn't matter for our demo application. I've chosen Europe simply 
+because, geographically, my current location is closer to Europe. We will not be adding a pipeline in this example.</p>
+<p><br/>
+<img alt="heroku-create" src="https://codedisciples.in/images/index13/heroku-create.jpg"></p>
+<p>On the subsequent page, we will be selecting our deployment method as <strong>GitHub</strong>. As mentioned in the previous section, 
+this will trigger a build whenever we push changes to our GitHub repository. We will need to authorize Heroku to access 
+GitHub repositories and specify which repository will be used in our current deployment.</p>
+<p><br/>
+<img alt="heroku-setup" src="https://codedisciples.in/images/index13/heroku-setup.jpg"></p>
+<p>Next, we will enable automatic deployments. At this point, I would like to point out that our repository does have continuous 
+integration (CI) configured in TravisCI due to which we will be checking the <em>Wait for CI to pass before deploy</em> box. However, 
+this can be skipped by simply removing the .travis.yml file from the repository. A separate article pertaining to the CI pipeline will be posted soon.</p>
+<p><br/>
+<img alt="auto-deploy" src="https://codedisciples.in/images/index13/auto-deploy.jpg"></p>
+<p>This completes our initial setup on Heroku.</p>
+<h2>Creating environment variables</h2>
+<p>For the local deployment, all our environment variables were included in a <code>.env</code> file (which was deliberately excluded 
+from the repository). There is however a skeleton file called <code>.env.example</code> that shows all the attributes that need to 
+be configured. The values of these attributes are being read into our <code>Config</code> class in <code>config.py</code>.</p>
+<p>On Heroku, rather than using a <code>.env</code> file, we will be creating the environment variables on the dashboard itself. The 
+first of these will be a connection string to a new <strong>Postgres</strong> database. To do this, on the <em>Resources</em> section of our 
+dashboard, we will specify <strong>heroku-postgres</strong> and provision the database on our free dyno.</p>
+<p><br/>
+<img alt="postgres" src="https://codedisciples.in/images/index13/postgres.jpg"></p>
+<p><br/>
+<img alt="postgres2" src="https://codedisciples.in/images/index13/postgres2.jpg"></p>
+<p>Once this is complete, we can see the environment variable containing the connection string by navigating to the <em>Settings</em> 
+and revealing our config variables.</p>
+<p><br/>
+<img alt="postgres3" src="https://codedisciples.in/images/index13/postgres3.jpg"></p>
+<p>Since we have a few more to add (see <code>.env.example</code>), we will do that as well. To obtain the <em>reCAPTCHA</em> public and private keys,
+ one will need to signup for the service on <a href="https://www.google.com/recaptcha/">Google</a> and follow the steps. </p>
+<p>Here is a final screenshot of this section.</p>
+<p><br/>
+<img alt="env-vars" src="https://codedisciples.in/images/index13/env-vars.jpg"></p>
+<h2>Creating the Heroku <code>Procfile</code></h2>
+<p>Heroku requires a file named <code>Procfile</code> that contains all the commands to be executed by an app on startup. The commands 
+need to be specified using the syntax <code>&lt;process name&gt;: &lt;command&gt;</code>. Before, we update this file, let's look at how we are exposing 
+our flask application instance.</p>
+<p>The <code>app.py</code> file in our project contains a <code>create_app</code> function which returns our flask application named <strong>app</strong>. To correctly specify 
+this in our Procfile, we have a separate module called <code>wsgi.py</code> containing the following code.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">Config</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">config_class</span><span class="o">=</span><span class="n">Config</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The <code>app</code> instance defined here can be used in our Procfile. For this demo, we will be using <code>gunicorn</code> as our WSGI server. 
+So let's first install it using <code>pip install gunicorn</code> and add it to our requirements using <code>pip freeze &gt; requirements.txt</code>. </p>
+<p>This is the command that will be included in the Procfile - <code>web: gunicorn wsgi:app</code> This tells Heroku to use the Heroku <strong>web</strong> process run an 
+application called <strong>app</strong> that is present in a module named <strong>wsgi</strong> using <strong>gunicorn</strong>. </p>
+<p>At this point, if you have worked on these changes locally, they should be pushed to the remote repository using <code>git push origin master</code> 
+so that an initial build can be triggered. We can follow the build in the <em>Overview</em> section of the dashboard. Details of 
+any build errors can be found in the logs - <em>More &gt; View Logs</em>.</p>
+<p><br/>
+<img alt="build" src="https://codedisciples.in/images/index13/build.jpg"></p>
+<h2>Creating our database tables</h2>
+<p>The <code>models.py</code> file in our <code>models</code> package indicates that the application uses two tables - <code>UserModel</code> and <code>FeedbackModel</code>.</p>
+<p>To create these on Heroku, we will be using a custom flask command called <em>create_tables</em> present in <code>commands.py</code>. 
+The command is created in <code>app.py</code> as part of the app creation process - <code>app.cli.add_command(create_tables)</code>.</p>
+<p>To run this command, navigate to <em>More &gt; Run Console</em> and run the command - <code>flask run create_tables</code>. If everything runs 
+as expected, we will simply see a <em>Process Exited</em> message on the console.</p>
+<p><br/>
+<img alt="console" src="https://codedisciples.in/images/index13/console.jpg"></p>
+<p>Now our app is fully set up and deployed. To run the application, click <em>Open App</em> on the dashboard. The url 
+<a href="https://flask-organic-foods-app.herokuapp.com/">https://flask-organic-foods-app.herokuapp.com/</a> was assigned by Heroku. 
+This can be changed with a custom domain name in the application settings.</p>
+<p><br/>
+<img alt="site" src="https://codedisciples.in/images/index13/site.jpg"></p>
+  </div>
+  
+  <br/>
+  <div class="comments">
+  <h2>Share</h2>
+  <br/>
+  <!-- AddToAny BEGIN -->
+    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+      <a class="a2a_button_blogger"></a>
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_flipboard"></a>
+      <a class="a2a_button_google_gmail"></a>
+      <a class="a2a_button_hacker_news"></a>
+      <a class="a2a_button_linkedin"></a> 
+      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_wordpress"></a>
+    </div>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  </div>
+  <br/>
+  <div class="comments">
+	<h2>Comments</h2>
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+				   (function() {
+						var dsq = document.createElement('script');
+						dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = '//code-disciples.disqus.com/embed.js';
+						(document.getElementsByTagName('head')[0] ||
+						 document.getElementsByTagName('body')[0]).appendChild(dsq);
+				  })();
+	</script>
+  </div>
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://codedisciples.in/category/docker.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
+  <li><a href="https://codedisciples.in/category/flask.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Flask</a></li>
+  <li><a href="https://codedisciples.in/category/git.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
+  <li><a href="https://codedisciples.in/category/python.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/flask.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Flask
+      </a>
+      <a href="https://codedisciples.in/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Python
+      </a>
+      <a href="https://codedisciples.in/tag/heroku.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Heroku
+      </a>
+      <a href="https://codedisciples.in/tag/celery.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Celery
+      </a>
+      <a href="https://codedisciples.in/tag/git.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Git
+      </a>
+      <a href="https://codedisciples.in/tag/docker.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Docker
+      </a>
+      <a href="https://codedisciples.in/tag/postgres.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
+      </a>
+      <a href="https://codedisciples.in/tag/google-maps.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps
+      </a>
+      <a href="https://codedisciples.in/tag/aws.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>AWS
+      </a>
+      <a href="https://codedisciples.in/tag/jupyter.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Jupyter
+      </a>
+</p>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+    <br>
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Built with <img id="footer-image" src="/static/images/love.ico"> in Bangalore&nbsp;&bull;&nbsp; Powered by <a href="http://getpelican.com/" target="_blank">Pelican</a> and <a href="https://www.netlify.com"
+           target="_blank">Netlify</a>
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+<!-- DISQUS script for displaying comment count -->
+<script type="text/javascript">
+    var disqus_shortname = 'code-disciples';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
