@@ -1,5 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-11-06T17:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Deploying a Flask website on Heroku</title><link href="https://codedisciples.in/flask-heroku.html" rel="alternate"></link><published>2019-11-06T17:00:00+05:30</published><updated>2019-11-06T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-06:/flask-heroku.html</id><summary type="html">&lt;p&gt;Steps to deploy a Flask website using Heroku&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will be deploying a &lt;strong&gt;Flask&lt;/strong&gt; application using &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt;. Heroku is a popular 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-11-07T07:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Custom Commands with Flask</title><link href="https://codedisciples.in/flask-commands.html" rel="alternate"></link><published>2019-11-07T07:00:00+05:30</published><updated>2019-11-07T07:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-07:/flask-commands.html</id><summary type="html">&lt;p&gt;Writing custom commands in Flask using the &lt;code&gt;click&lt;/code&gt; library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will explore creating custom commands in Flask using the &lt;a href="https://click.palletsprojects.com/en/7.x/"&gt;Click&lt;/a&gt; 
+library. Click is one of the dependencies that is installed along with Flask. &lt;/p&gt;
+&lt;p&gt;Whenever we run &lt;code&gt;pip install flask&lt;/code&gt;, the &lt;code&gt;flask&lt;/code&gt; command is also installed. &lt;code&gt;flask --help&lt;/code&gt; lists all the options that can 
+be run along with the &lt;code&gt;flask&lt;/code&gt; command. For example, &lt;code&gt;flask run&lt;/code&gt;, &lt;code&gt;flask shell&lt;/code&gt; etc.&lt;/p&gt;
+&lt;p&gt;In the subsequent sections, we will create custom &lt;code&gt;flask&lt;/code&gt; commands, starting with a simple example and then moving onto 
+a more practical scenario.&lt;/p&gt;
+&lt;h2&gt;Custom Command - Example 1&lt;/h2&gt;
+&lt;p&gt;In our first example, we will create a command that simply prints a message to the console. As always, we will create a 
+virtual environment using &lt;code&gt;python -m venv venv&lt;/code&gt;. After activating the environment - &lt;code&gt;source venv/Scripts/activate&lt;/code&gt;, we will 
+install flask - &lt;code&gt;pip install flask&lt;/code&gt;. Next, we will create a python file (say app.py) and add the following code. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;click&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask.cli&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;with_appcontext&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@click.command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;print_text&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nd"&gt;@with_appcontext&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;print_text&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello from flask!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;print_text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let's look at each line of this code. First, we import the &lt;code&gt;click&lt;/code&gt; library that will be used to create our custom command. Next, we import 
+the &lt;code&gt;with_appcontext&lt;/code&gt; method from the &lt;code&gt;flask.cli&lt;/code&gt; module. This is needed since we are using click's &lt;code&gt;command()&lt;/code&gt; decorator. The execution of the 
+&lt;code&gt;@click.command()&lt;/code&gt; decorator requires the application context to be pushed so that our command has access to our application instance. To achieve 
+this, &lt;code&gt;with_appcontext&lt;/code&gt; will be used as a decorator for the &lt;code&gt;print_text()&lt;/code&gt; function. In addition to these, we also import the &lt;code&gt;Flask&lt;/code&gt; class to create 
+our application instance - &lt;code&gt;app&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;command&lt;/code&gt; decorator contains a parameter called &lt;code&gt;name&lt;/code&gt;, using which we specify the name of the custom command - &lt;em&gt;print_text&lt;/em&gt;. 
+Next, we define our &lt;code&gt;print_text()&lt;/code&gt; function. Note that the name of the function need not match the name of the command. 
+The function contains the code we would like to execute whenever we run our command. In this case, we simply print a string 
+&lt;em&gt;Hello from flask!&lt;/em&gt; on the console.&lt;/p&gt;
+&lt;p&gt;Next, we will pass the &lt;code&gt;print_text&lt;/code&gt; function to the &lt;code&gt;add_command&lt;/code&gt; method to create our custom command. To run this command, we use the syntax &lt;code&gt;flask &amp;lt;custom_command_name&lt;/code&gt; which in our case is 
+&lt;code&gt;flask print_text&lt;/code&gt;. Ensure that the virtual environment is activated before running the command.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;a href="https://codedisciples.in/images/index14/flask-command.jpg"&gt;flask-command&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Custom Command - Example 2&lt;/h2&gt;
+&lt;p&gt;In this example, we will create two custom commands. The first command will create a table called user in a SQLite database and the 
+second will add records to the table.&lt;/p&gt;
+&lt;p&gt;To do this, we will first install the flask-sqlalchemy library - &lt;code&gt;pip install flask-sqlalchemy&lt;/code&gt; in our virtual environment. In our code, we will add 
+a class &lt;em&gt;User&lt;/em&gt; that defines our database model. Finally, we will define a function called &lt;code&gt;create_tables()&lt;/code&gt; to create our SQLite database called &lt;em&gt;data.db&lt;/em&gt; and create the &lt;em&gt;user&lt;/em&gt; table in the database using 
+SQL Alchemy's &lt;code&gt;db.create_all()&lt;/code&gt; command. The function will use the same decorators as the previous example. However, in this case, we will be passing the name of the command 
+as &lt;code&gt;create_tables&lt;/code&gt; to the &lt;code&gt;command()&lt;/code&gt; decorator. Finally we will pass the &lt;code&gt;create_tables&lt;/code&gt; function to the &lt;code&gt;add_command()&lt;/code&gt; method to create our command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SQLAlchemy&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;SQLALCHEMY_DATABASE_URI&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sqlite:///data.db&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;SQLALCHEMY_TRACK_MODIFICATIONS&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+
+&lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SQLAlchemy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;primary_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;role&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="nd"&gt;@click.command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;create_tables&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nd"&gt;@with_appcontext&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create_tables&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;create_tables&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now running &lt;code&gt;flask create_tables&lt;/code&gt; in the terminal will create a database called &lt;em&gt;data.db&lt;/em&gt; in the project folder. The database should contain a 
+table called &lt;em&gt;user&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="flask-command" src="https://codedisciples.in/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="table" src="https://codedisciples.in/images/index14/table.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Next, we will add a couple of records to the table. The code will be similar to what we have seen thus far. However, our table has 
+two columns - &lt;em&gt;name&lt;/em&gt; and &lt;em&gt;role&lt;/em&gt;. We will need to specify values for these columns by passing them as arguments to the custom command. 
+To achieve this, we will need to specify these arguments using the &lt;code&gt;@click.argument()&lt;/code&gt; decorator. One decorator will need to be 
+specified per argument. We will also need to pass the &lt;em&gt;name&lt;/em&gt; and &lt;em&gt;role&lt;/em&gt; as parameters to the &lt;code&gt;create_user()&lt;/code&gt; function. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;@click&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;create_user&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nv"&gt;@click&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nv"&gt;@click&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;role&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nv"&gt;@with_appcontext&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;create_user&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;role&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;role&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;role&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;create_user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To create our users using the custom command, we will run &lt;code&gt;flask create_user &amp;lt;name&amp;gt; &amp;lt;role&amp;gt;&lt;/code&gt; in a terminal window.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="flask-command2" src="https://codedisciples.in/images/index14/flask-command2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img alt="table2" src="https://codedisciples.in/images/index14/table2.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Deploying a Flask website on Heroku</title><link href="https://codedisciples.in/flask-heroku.html" rel="alternate"></link><published>2019-11-06T17:00:00+05:30</published><updated>2019-11-06T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-06:/flask-heroku.html</id><summary type="html">&lt;p&gt;Steps to deploy a Flask website using Heroku&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will be deploying a &lt;strong&gt;Flask&lt;/strong&gt; application using &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt;. Heroku is a popular 
 Platform as a Service (PaaS) that is used to deploy, manage and scale web applications. It comes with a lot of features 
 built-in that abstract away most of the complications involved in traditional web-based deployments. Deployments on 
 Heroku are quick and the platform ensures that you do not have to worry about the infrastructural maintenance headache's that accompany website / server maintenance.  &lt;/p&gt;
