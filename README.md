@@ -2,7 +2,9 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/654d61ed-8d1f-47bb-8105-5dd94d58d98f/deploy-status)](https://app.netlify.com/sites/cranky-boyd-328430/deploys)
 
-[Code Disciples](https://www.codedisciples.in) is a blog for all things code. The internet is vast and is full of great content and mostly awesome folks who are always willing to help. However, sometimes, we run into a real frustrating issue that we are unable to resolve even after rummaging through heaps of documentation or tutorials. It's not that the information did not exist, it's just that we did not look in all the right places. Most blogs on the site stem from such painful moments of frustration. Conversely, there are times when you come across something cool or interesting that you simply want to share. Some posts fall under this category as well.
+[Code Disciples](https://www.codedisciples.in) is a blog for all things code. The internet is vast and is full of great content and mostly awesome folks who are always willing to help. However, sometimes, we run into a real head-scratcher that requires rummaging through heaps of documentation or tutorials until we hit that "eureka!" moment. Most blogs on Code Disciples stem from such painful moments of frustration. The site provides a means for me to document topics or scenarios that I struggled with when I first encountered them or subjects that I simply felt would be fun to blog about. I hope you find at least some of them to be useful.
+
+The site is developed with Pelican and deployed using Netlify
 
 Here's a list of the articles on [Code Disciples](https://www.codedisciples.in)
 1. [Pre-commit hooks for Python code](https://codedisciples.in/pre-commit.html)
