@@ -166,7 +166,7 @@
 
 
 <h2>PEP8 checker - <em>flake8</em></h2>
-<p><em>flake8</em> is a great library that verifies our code's compliance with PEP8. In order for <em>black</em> to function smoothly with <em>flake8</em>, we need to specify some <a href="https://flake8.pycqa.org/en/latest/user/error-codes.html">error codes</a> in the <em>flake8</em> configuration file.</p>
+<p><em>flake8</em> is a great library that verifies our code's compliance with PEP8. In order for <em>black</em> to function smoothly with <em>flake8</em>, we need to specify some <a href="https://flake8.pycqa.org/en/latest/user/error-codes.html">error codes</a> in the <em>.flake8</em> configuration file.</p>
 <div class="highlight"><pre><span></span><span class="k">[flake8]</span>
 <span class="na">ignore</span> <span class="o">=</span> <span class="s">E203, E266, E501</span>
 <span class="na">max-line-length</span> <span class="o">=</span> <span class="s">80</span>
@@ -179,23 +179,23 @@
 <p>That's it, with all this in place, we are ready to run the hook on our code. </p>
 <p>Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator. One element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.</p>
 <p><br/>
-<img alt="Unformatted-Code" src="https://codedisciples.in/images/Unformatted_Code.jpg"></p>
+<img alt="Unformatted-Code" src="https://codedisciples.in/images/index1/Unformatted_Code.jpg"></p>
 <p><br/>
-Let's create and run or hook on this code. As indicated earlier, once we <code>pip install</code> the <em>pre-commit</em> library, we need to install it using the <code>pre-commit install</code> command.</p>
+Let's create and run our hook on this code. As indicated earlier, once we <code>pip install</code> the <em>pre-commit</em> library, we need to install it using the <code>pre-commit install</code> command.</p>
 <p><br/>
-<img alt="Pre-Commit" src="https://codedisciples.in/images/Pre-Commit.jpg"></p>
+<img alt="Pre-Commit" src="https://codedisciples.in/images/index1/Pre-Commit.jpg"></p>
 <p><br/>
 Now, when we run our <code>git commit</code>, we see that <em>black</em> fails the commit but auto-formats the file. <em>flake8</em> fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next <code>git commit</code>.</p>
 <p><br/>
-<img alt="Initial-Commit" src="https://codedisciples.in/images/Initial_Commit.jpg"></p>
+<img alt="Initial-Commit" src="https://codedisciples.in/images/index1/Initial_Commit.jpg"></p>
 <p><br/>
 Here's what our code looks like after all the formatting and the whitespace correction. Note that the list elements are now wrapped on separate lines. The spacing around the operators and the function definition is uniform. Also, all our strings are now enclosed within double quotes.</p>
 <p><br/>
-<img alt="Formatted-Code" src="https://codedisciples.in/images/Formatted_Code.jpg"></p>
+<img alt="Formatted-Code" src="https://codedisciples.in/images/index1/Formatted_Code.jpg"></p>
 <p><br/>
 Let's go ahead and commit this. If all is good, both our hooks should pass followed by a successful <code>git commit</code>.</p>
 <p><br/>
-<img alt="Final-Commit" src="https://codedisciples.in/images/Final_Commit.jpg"></p>
+<img alt="Final-Commit" src="https://codedisciples.in/images/index1/Final_Commit.jpg"></p>
   </div>
   
   <br/>

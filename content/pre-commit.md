@@ -5,7 +5,7 @@ Tags: Python
 Slug: pre-commit
 Authors: Abhishek Pednekar
 Summary: Using *black* and *flake-8* as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively
-Cover: /static/images/black-gradient-article.jpg
+Cover: /static/images/index1/black-gradient-article.jpg
 
 Code reviews are great. But at the same time, they can be frustrating if the code being reviewed is not formatted uniformly. This is a common scenario in large teams wherein multiple developers are working on the same feature branch or code base. More hours spent on fixing the formatting also results in loss of productive time which could be used to further improve code logic. Also, none of us like being that super nitpicky team member who comments on a trailing whitespace or the fact that one string has single quotes while another is enclosed within double quotes. 
 
@@ -78,7 +78,7 @@ exclude = '''
 ```
 
 ## PEP8 checker - *flake8*
-*flake8* is a great library that verifies our code's compliance with PEP8. In order for *black* to function smoothly with *flake8*, we need to specify some [error codes](https://flake8.pycqa.org/en/latest/user/error-codes.html) in the *flake8* configuration file.
+*flake8* is a great library that verifies our code's compliance with PEP8. In order for *black* to function smoothly with *flake8*, we need to specify some [error codes](https://flake8.pycqa.org/en/latest/user/error-codes.html) in the *.flake8* configuration file.
 
 ```
 [flake8]
@@ -95,28 +95,28 @@ That's it, with all this in place, we are ready to run the hook on our code.
 Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator. One element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.
 
 <br/>
-![Unformatted-Code]({static}/images/Unformatted_Code.jpg)
+![Unformatted-Code]({static}/images/index1/Unformatted_Code.jpg)
 
 <br/>
-Let's create and run or hook on this code. As indicated earlier, once we `pip install` the *pre-commit* library, we need to install it using the `pre-commit install` command.
+Let's create and run our hook on this code. As indicated earlier, once we `pip install` the *pre-commit* library, we need to install it using the `pre-commit install` command.
 
 <br/>
-![Pre-Commit]({static}/images/Pre-Commit.jpg)
+![Pre-Commit]({static}/images/index1/Pre-Commit.jpg)
 
 <br/>
 Now, when we run our `git commit`, we see that *black* fails the commit but auto-formats the file. *flake8* fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next `git commit`.
 
 <br/>
-![Initial-Commit]({static}/images/Initial_Commit.jpg)
+![Initial-Commit]({static}/images/index1/Initial_Commit.jpg)
 
 <br/>
 Here's what our code looks like after all the formatting and the whitespace correction. Note that the list elements are now wrapped on separate lines. The spacing around the operators and the function definition is uniform. Also, all our strings are now enclosed within double quotes.
 
 <br/>
-![Formatted-Code]({static}/images/Formatted_Code.jpg)
+![Formatted-Code]({static}/images/index1/Formatted_Code.jpg)
 
 <br/>
 Let's go ahead and commit this. If all is good, both our hooks should pass followed by a successful `git commit`.
 
 <br/>
-![Final-Commit]({static}/images/Final_Commit.jpg)
+![Final-Commit]({static}/images/index1/Final_Commit.jpg)

@@ -703,7 +703,7 @@ In conclusion, I would like to say that the best use case for embedding a notebo
 
 
 &lt;h2&gt;PEP8 checker - &lt;em&gt;flake8&lt;/em&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;flake8&lt;/em&gt; is a great library that verifies our code's compliance with PEP8. In order for &lt;em&gt;black&lt;/em&gt; to function smoothly with &lt;em&gt;flake8&lt;/em&gt;, we need to specify some &lt;a href="https://flake8.pycqa.org/en/latest/user/error-codes.html"&gt;error codes&lt;/a&gt; in the &lt;em&gt;flake8&lt;/em&gt; configuration file.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;flake8&lt;/em&gt; is a great library that verifies our code's compliance with PEP8. In order for &lt;em&gt;black&lt;/em&gt; to function smoothly with &lt;em&gt;flake8&lt;/em&gt;, we need to specify some &lt;a href="https://flake8.pycqa.org/en/latest/user/error-codes.html"&gt;error codes&lt;/a&gt; in the &lt;em&gt;.flake8&lt;/em&gt; configuration file.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[flake8]&lt;/span&gt;
 &lt;span class="na"&gt;ignore&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;E203, E266, E501&lt;/span&gt;
 &lt;span class="na"&gt;max-line-length&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;80&lt;/span&gt;
@@ -716,20 +716,20 @@ In conclusion, I would like to say that the best use case for embedding a notebo
 &lt;p&gt;That's it, with all this in place, we are ready to run the hook on our code. &lt;/p&gt;
 &lt;p&gt;Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator. One element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Unformatted-Code" src="https://codedisciples.in/images/Unformatted_Code.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Unformatted-Code" src="https://codedisciples.in/images/index1/Unformatted_Code.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-Let's create and run or hook on this code. As indicated earlier, once we &lt;code&gt;pip install&lt;/code&gt; the &lt;em&gt;pre-commit&lt;/em&gt; library, we need to install it using the &lt;code&gt;pre-commit install&lt;/code&gt; command.&lt;/p&gt;
+Let's create and run our hook on this code. As indicated earlier, once we &lt;code&gt;pip install&lt;/code&gt; the &lt;em&gt;pre-commit&lt;/em&gt; library, we need to install it using the &lt;code&gt;pre-commit install&lt;/code&gt; command.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Pre-Commit" src="https://codedisciples.in/images/Pre-Commit.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Pre-Commit" src="https://codedisciples.in/images/index1/Pre-Commit.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Now, when we run our &lt;code&gt;git commit&lt;/code&gt;, we see that &lt;em&gt;black&lt;/em&gt; fails the commit but auto-formats the file. &lt;em&gt;flake8&lt;/em&gt; fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next &lt;code&gt;git commit&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Initial-Commit" src="https://codedisciples.in/images/Initial_Commit.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Initial-Commit" src="https://codedisciples.in/images/index1/Initial_Commit.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Here's what our code looks like after all the formatting and the whitespace correction. Note that the list elements are now wrapped on separate lines. The spacing around the operators and the function definition is uniform. Also, all our strings are now enclosed within double quotes.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Formatted-Code" src="https://codedisciples.in/images/Formatted_Code.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Formatted-Code" src="https://codedisciples.in/images/index1/Formatted_Code.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Let's go ahead and commit this. If all is good, both our hooks should pass followed by a successful &lt;code&gt;git commit&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Final-Commit" src="https://codedisciples.in/images/Final_Commit.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category></entry></feed>
+&lt;img alt="Final-Commit" src="https://codedisciples.in/images/index1/Final_Commit.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category></entry></feed>
