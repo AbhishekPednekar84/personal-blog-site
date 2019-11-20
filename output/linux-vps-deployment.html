@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Abhishek Pednekar" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Deploying a Python application on a Linux server - Part I - Code Disciples</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/blog.css" />
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/tomorrow_night.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://codedisciples.in/static/images/favicon.ico" />
+        <link href="https://codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-145611420-1', '');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://codedisciples.in/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://codedisciples.in/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://codedisciples.in/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1>Code Disciples</h1>
+		<p class="lead">A blog for all things code</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Wed 20 November 2019
+</abbr> <h1>
+  <a href="https://codedisciples.in/linux-vps-deployment.html" rel="bookmark"
+     title="Permalink to Deploying a Python application on a Linux server - Part I">
+    Deploying a Python application on a Linux server - Part I
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
+    in 
+    <a href="https://codedisciples.in/category/linux.html">
+      Linux</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>In my <a href="https://www.codedisciples.in/flask-heroku.html">previous</a> post, we deployed a Flask application on Heroku. In this post, we will deploy the <a href="https://github.com/AbhishekPednekar84/flask_demo_app">same application</a> on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. <a href="https://linode.com">Linode</a> and <a href="https://digitalocean.com">DigitalOcean</a> are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider. </p>
+<p>This is the part one of a two-post series. In this post, we will set up a bare-bones Linux server and prime it for deployment. In part two, we will deploy the Flask application with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
+<p>The post assumes that the reader is familiar with the basics of Linux.</p>
+<h2>Getting started with DigitalOcean</h2>
+<p>At the time of posting this article, DigitalOcean is offering a <a href="https://try.digitalocean.com/python/?utm_medium=podcast&amp;utm_source=pythonbytes&amp;utm_campaign=DO_Dev_Signup_Cold_Python">$50 credit</a> as part of its sponsorship of the <a href="https://pythonbytes.fm">Python Bytes Podcast</a>. </p>
+<p>To get started with DigitalOcean, we will first need to <a href="https://www.digitalocean.com/">sign up</a> and create an account. Once logged in, we can create and configure a droplet (VPS). Below are the steps.</p>
+<ol>
+<li>Create a new project and provide an appropriate name (Ex: <em>Flask Demo App</em>)</li>
+<li>On the project's control panel, select <em>Get started with a Droplet</em> to create our VPS</li>
+<li>Choose an image. We will be using <em>Ubuntu 18.04.3</em> for our demo app. If choosing another Linux distribution, the commands in the subsequent section might vary.</li>
+<li>Choose a plan - the most inexpensive (Standard / $5 per month) plan will suffice</li>
+<li>Select a datacenter region. Since this is a demo app, I will be choosing the one closest to my current location</li>
+<li>For the authentication process, we will select <em>One-time password</em> for now and set up an SSH key later on. The password will be sent to the email address provided at the time of registration</li>
+<li>Give an appropriate name (Ex: <em>Flask-Demo-Server</em>) for the server and click on <em>Create Droplet</em>  </li>
+</ol>
+<h2>Setting up our server</h2>
+<h3>Step 1 - Logging in with the <strong>root</strong> user</h3>
+<p>To connect to the droplet via <strong>ssh</strong>, I will be using the <em>Cmder</em> CLI tool and <em>Windows Subsystem for Linux</em> (WSL). Our initial login will be with the <strong>root</strong> user. Also, we will need to note down the public ip address of our server (which can be found in our project's control panel) as that will be used several times during the setup.</p>
+<p><code>ssh root@159.65.149.153</code></p>
+<p>Once we run the above command, we will need to accept the authentication warning and provide the one-time <strong>root</strong> password sent to the registered email. Since this is our first time logging in, we will be prompted to change the <strong>root</strong> password. Since <strong>root</strong> is an admin account with extended privileges, we will create an alternate user with slightly lesser privileges (than the <strong>root</strong> user) and use that for the remainder of our setup and deployment.</p>
+<h3>Step 2 - Creating a new user</h3>
+<p>To create a new user, we will run the <code>adduser</code> command while logged in as the <strong>root</strong> user. We will be prompted to enter a password for the new user along with filling up some optional user-specific details.</p>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">#</span><span class="w"> </span><span class="n">adduser</span><span class="w"> </span><span class="n">flaskuser</span><span class="w"></span>
+</pre></div>
+
+
+<p>Next, we will add the new user (<em>flaskuser</em>) to the <em>sudo</em> group. This will ensure that when we are logged in with this user, we can prepend the <code>sudo</code> keyword to our commands and execute them with superuser privileges.</p>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">#</span><span class="w"> </span><span class="n">adduser</span><span class="w"> </span><span class="n">flaskuser</span><span class="w"> </span><span class="n">sudo</span><span class="w"></span>
+</pre></div>
+
+
+<h3>Step 3 - Setting up key-based authentication</h3>
+<p>To enhance security, we will now setup an <strong>SSH key</strong> with a passphrase for <em>flaskuser</em>. There are several ways to do this. My preferred way is to create the SSH keys on my local machine and then run a secure copy (<code>scp</code>) command to copy the public key to the <em>authorized_keys</em> file on the server.</p>
+<p>As mentioned earlier, I will be using WSL to generate the key locally using the <code>ssh-keygen</code> command. When prompted, just hit enter to create the keys with their default names and set a <strong>passphrase</strong>. Although the passphrase is optional, it is recommended for added security.</p>
+<div class="highlight"><pre><span></span><span class="n">abhi_ap</span><span class="nv">@Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"></span>
+</pre></div>
+
+
+<p>Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the /home/<user>/.ssh directory on the local machine. </p>
+<p>Prior to copying the key to the server, we will need to create a .ssh directory in <em>flaskuser</em>'s /home directory. So let's login with <em>flaskuser</em> and the password that we provided in the previous step and create the directory with the <code>mkdir .ssh</code> command.</p>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="p">@</span><span class="n">Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">#</span> <span class="n">ssh</span> <span class="n">flaskuser</span><span class="mf">@159.65.149.153</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="p">.</span><span class="n">ssh</span><span class="w"></span>
+</pre></div>
+
+
+<p>Now, from our local machine, we will run the <code>scp</code> command. We need to ensure that we are are in the local .ssh directory before running the below command.</p>
+<div class="highlight"><pre><span></span><span class="n">abhi_ap</span><span class="p">@</span><span class="n">Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="err">$</span> <span class="n">cd</span> <span class="o">~</span>
+<span class="n">abhi_ap</span><span class="p">@</span><span class="n">Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">cd</span> <span class="p">.</span><span class="n">ssh</span>
+
+<span class="n">abhi_ap</span><span class="p">@</span><span class="n">Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="err">$</span> <span class="n">scp</span> <span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span> <span class="n">flaskuser</span><span class="mf">@159.65.149.153</span><span class="o">:</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+
+<span class="n">flaskuser</span><span class="mf">@159.65.149.153</span><span class="err">&#39;</span><span class="n">s</span> <span class="nl">password</span><span class="p">:</span>
+<span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span>
+</pre></div>
+
+
+<p>Hopefully, that wasn't too confusing. To complete this part of the setup, we will use the <code>chmod</code> command to change the permissions of the .ssh directory and it's contents. For those unfamiliar with <code>chmod</code>, <a href="https://opensource.com/article/19/8/linux-chmod-command">here's a great article</a>.</p>
+<p>By default, the .ssh directory has 775 permissions whereas the authorized_keys file has 644 permissions. We will be changing these to 700 and 600 respectively.</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">chmod</span><span class="w"> </span><span class="mi">700</span><span class="w"> </span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="w"></span>
+<span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">chmod</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="w"></span>
+</pre></div>
+
+
+<p>Note that using <code>sudo</code> will occasionally require us to enter the password that we set in step 2.</p>
+<h3>Step 4 - Disallow root login</h3>
+<p>Now that <em>flaskuser</em> has been set up and primed for usage during our deployment, we do not want anyone to login to our server with <strong>root</strong> credentials. To prevent <strong>root</strong> logins, we will modify some settings in the sshd_config file using a file editor. I will be using nano throughout this deployment.</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">sshd_config</span><span class="w"></span>
+</pre></div>
+
+
+<p>In the editor, update the values of the <code>PermitRootLogin</code> and <code>PasswordAuthentication</code> keys from <em>yes</em> to <em>no</em>. Use <code>Ctrl + X</code> <code>Y</code> and <code>Enter</code> to save the file and close the editor.</p>
+<p>Finally, we will restart the ssh daemon (sshd) to apply our changes.</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">restart</span><span class="w"> </span><span class="n">sshd</span><span class="w"></span>
+</pre></div>
+
+
+<h3>Step 5 - Setting up a firewall</h3>
+<p>Ubuntu 18.04 servers can use an uncomplicated firewall (UFW) to permit connections only to specific services. Installing and setting up a UFW is fairly easy.</p>
+<p>Install a UFW:</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">ufw</span><span class="w"></span>
+</pre></div>
+
+
+<p>Setting default permissions for outgoing and incoming traffic:</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">outgoing</span><span class="w"></span>
+
+<span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">deny</span><span class="w"> </span><span class="n">incoming</span><span class="w"></span>
+</pre></div>
+
+
+<p>Allowing ssh connections to ensure that we can log in via <code>ssh</code> once the firewall is enabled:</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">ssh</span><span class="w"></span>
+</pre></div>
+
+
+<p>Next, we will open port 5000 to test our Flask application after deployment</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="mi">5000</span><span class="w"></span>
+</pre></div>
+
+
+<p>Finally, we will enable the firewall</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">enable</span><span class="w"></span>
+
+<span class="n">Command</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">disrupt</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">ssh</span><span class="w"> </span><span class="n">connections</span><span class="p">.</span><span class="w"> </span><span class="n">Proceed</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="k">operation</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">|</span><span class="n">n</span><span class="p">)</span><span class="vm">?</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="n">Firewall</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">active</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="n">startup</span><span class="w"></span>
+</pre></div>
+
+
+<p>To check the status of the firewall and list of the allowed applications/ports, we can run <code>sudo ufw status</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">status</span><span class="w"></span>
+
+<span class="nl">Status</span><span class="p">:</span><span class="w"> </span><span class="n">active</span><span class="w"></span>
+
+<span class="k">To</span><span class="w">                         </span><span class="k">Action</span><span class="w">      </span><span class="k">From</span><span class="w"></span>
+<span class="c1">--                         ------      ----</span>
+<span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">                     </span><span class="n">ALLOW</span><span class="w">       </span><span class="n">Anywhere</span><span class="w"></span>
+<span class="mi">5000</span><span class="w">                       </span><span class="n">ALLOW</span><span class="w">       </span><span class="n">Anywhere</span><span class="w"></span>
+<span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="p">(</span><span class="n">v6</span><span class="p">)</span><span class="w">                </span><span class="n">ALLOW</span><span class="w">       </span><span class="n">Anywhere</span><span class="w"> </span><span class="p">(</span><span class="n">v6</span><span class="p">)</span><span class="w"></span>
+<span class="mi">5000</span><span class="w"> </span><span class="p">(</span><span class="n">v6</span><span class="p">)</span><span class="w">                  </span><span class="n">ALLOW</span><span class="w">       </span><span class="n">Anywhere</span><span class="w"> </span><span class="p">(</span><span class="n">v6</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<p>That's it! Our set up is complete. In the next post, we will deploy our Flask application.</p>
+  </div>
+  
+  <br/>
+  <div class="comments">
+  <h2>Share</h2>
+  <br/>
+  <!-- AddToAny BEGIN -->
+    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+      <a class="a2a_button_blogger"></a>
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_flipboard"></a>
+      <a class="a2a_button_google_gmail"></a>
+      <a class="a2a_button_hacker_news"></a>
+      <a class="a2a_button_linkedin"></a> 
+      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_wordpress"></a>
+    </div>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  </div>
+  <br/>
+  <div class="comments">
+	<h2>Comments</h2>
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+				   (function() {
+						var dsq = document.createElement('script');
+						dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = '//code-disciples.disqus.com/embed.js';
+						(document.getElementsByTagName('head')[0] ||
+						 document.getElementsByTagName('body')[0]).appendChild(dsq);
+				  })();
+	</script>
+  </div>
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://codedisciples.in/category/docker.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
+  <li><a href="https://codedisciples.in/category/flask.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Flask</a></li>
+  <li><a href="https://codedisciples.in/category/git.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
+  <li><a href="https://codedisciples.in/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://codedisciples.in/category/python.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Python
+      </a>
+      <a href="https://codedisciples.in/tag/linux.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Linux
+      </a>
+      <a href="https://codedisciples.in/tag/flask.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Flask
+      </a>
+      <a href="https://codedisciples.in/tag/heroku.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Heroku
+      </a>
+      <a href="https://codedisciples.in/tag/celery.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Celery
+      </a>
+      <a href="https://codedisciples.in/tag/git.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Git
+      </a>
+      <a href="https://codedisciples.in/tag/docker.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Docker
+      </a>
+      <a href="https://codedisciples.in/tag/postgres.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
+      </a>
+      <a href="https://codedisciples.in/tag/google-maps.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps
+      </a>
+      <a href="https://codedisciples.in/tag/aws.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>AWS
+      </a>
+      <a href="https://codedisciples.in/tag/jupyter.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Jupyter
+      </a>
+</p>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+    <br>
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Built with <img id="footer-image" src="/static/images/love.ico"> in Bangalore&nbsp;&bull;&nbsp; Powered by <a href="http://getpelican.com/" target="_blank">Pelican</a> and <a href="https://www.netlify.com"
+           target="_blank">Netlify</a>
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+<!-- DISQUS script for displaying comment count -->
+<script type="text/javascript">
+    var disqus_shortname = 'code-disciples';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
