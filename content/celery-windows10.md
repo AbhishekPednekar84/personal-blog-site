@@ -6,12 +6,12 @@ Slug: celery-windows
 Authors: Abhishek Pednekar
 Summary: Running Celery (with Redis) on Windows 10 using Windows Subsystem for Linux
 
-
 Celery is an asynchronous task queue that is fairly easy to integrate with a Python application. It requires a messaging queue (also known as a broker) to send and receive messages. Popular brokers are Redis and RabbitMQ.
 
 In this post, we will see how to install and run Celery using Windows Subsystem for Linux (WSL) on Windows 10. **Redis** will be our broker in the example.  We will also be using the **Remote-WSL** extension in VS Code to develop our Python application in a Linux environment. Finally, we will store the results of the tasks executed by Celery in a **SQLite** database.
 
 This post assumes that the reader already has WSL setup and has installed Python and pip on WSL. If not, please refer to the below resources before proceeding further -
+
 1. [Setting up WSL](https://www.youtube.com/watch?v=xzgwDbe7foQ&t=533s)
 2. [Python setup on WSL](https://medium.com/@rhdzmota/python-development-on-the-windows-subsystem-for-linux-wsl-17a0fa1839d)
 
@@ -61,6 +61,7 @@ def multiply(num1, num2):
 ```
 
 Let's go over this line by line -
+
 1. First, we import the `Celery` class from the `celery` module
 2. Next, we create an instance of the class (called app) and pass our module name which is celery_demo in our case, the url of our redis server (running on localhost on the default port 6379) and lastly the link to our SQLite database which will store the task results
 3. Finally, we have our function which multiplies two numbers that are passed to it as parameters and returns their product. Note that the function is decorated with `@app.task` which will enable us to execute this function/task using our Celery worker

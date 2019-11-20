@@ -51,7 +51,7 @@ Next, we will pass the `print_text` function to the `add_command` method to crea
 `flask print_text`. Ensure that the virtual environment is activated before running the command.
 
 <br/>
-[flask-command]({static}/images/index14/flask-command.jpg)
+![flask-command]({static}/images/index14/flask-command.jpg)
 
 ## Custom Command - Example 2
 
