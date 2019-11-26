@@ -284,7 +284,6 @@ Here, we are selecting the folder name and the file count (`db.func.count()`) us
      .outerjoin(File, Folder.id == File.folder_id)
      .group_by(Folder.name)
      .all()   
-     .all()   
  
  [('bills', 0), ('flask-project', 2), ('images', 3)]
 ```

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Flask</title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/flask.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2019-11-07T07:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Custom Commands with Flask</title><link href="http://localhost:8000/flask-commands.html" rel="alternate"></link><published>2019-11-07T07:00:00+05:30</published><updated>2019-11-07T07:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-11-07:/flask-commands.html</id><summary type="html">&lt;p&gt;Writing custom commands in Flask using the &lt;code&gt;click&lt;/code&gt; library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will explore creating custom commands in Flask using the &lt;a href="https://click.palletsprojects.com/en/7.x/"&gt;Click&lt;/a&gt; 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Flask</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/flask.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-11-07T07:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Custom Commands with Flask</title><link href="https://codedisciples.in/flask-commands.html" rel="alternate"></link><published>2019-11-07T07:00:00+05:30</published><updated>2019-11-07T07:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-07:/flask-commands.html</id><summary type="html">&lt;p&gt;Writing custom commands in Flask using the &lt;code&gt;click&lt;/code&gt; library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will explore creating custom commands in Flask using the &lt;a href="https://click.palletsprojects.com/en/7.x/"&gt;Click&lt;/a&gt; 
 library. Click is one of the dependencies that is installed along with Flask. &lt;/p&gt;
 &lt;p&gt;Whenever we run &lt;code&gt;pip install flask&lt;/code&gt;, the &lt;code&gt;flask&lt;/code&gt; command is also installed. &lt;code&gt;flask --help&lt;/code&gt; lists all the options that can 
 be run along with the &lt;code&gt;flask&lt;/code&gt; command. For example, &lt;code&gt;flask run&lt;/code&gt;, &lt;code&gt;flask shell&lt;/code&gt; etc.&lt;/p&gt;
@@ -36,7 +36,7 @@ The function contains the code we would like to execute whenever we run our comm
 &lt;p&gt;Next, we will pass the &lt;code&gt;print_text&lt;/code&gt; function to the &lt;code&gt;add_command&lt;/code&gt; method to create our custom command. To run this command, we use the syntax &lt;code&gt;flask &amp;lt;custom_command_name&lt;/code&gt; which in our case is 
 &lt;code&gt;flask print_text&lt;/code&gt;. Ensure that the virtual environment is activated before running the command.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="flask-command" src="http://localhost:8000/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
+&lt;img alt="flask-command" src="https://codedisciples.in/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Custom Command - Example 2&lt;/h2&gt;
 &lt;p&gt;In this example, we will create two custom commands. The first command will create a table called user in a SQLite database and the 
 second will add records to the table.&lt;/p&gt;
@@ -70,9 +70,9 @@ as &lt;code&gt;create_tables&lt;/code&gt; to the &lt;code&gt;command()&lt;/code&
 &lt;p&gt;Now running &lt;code&gt;flask create_tables&lt;/code&gt; in the terminal will create a database called &lt;em&gt;data.db&lt;/em&gt; in the project folder. The database should contain a 
 table called &lt;em&gt;user&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="flask-command" src="http://localhost:8000/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
+&lt;img alt="flask-command" src="https://codedisciples.in/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="table" src="http://localhost:8000/images/index14/table.jpg"&gt;&lt;/p&gt;
+&lt;img alt="table" src="https://codedisciples.in/images/index14/table.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Next, we will add a couple of records to the table. The code will be similar to what we have seen thus far. However, our table has 
 two columns - &lt;em&gt;name&lt;/em&gt; and &lt;em&gt;role&lt;/em&gt;. We will need to specify values for these columns by passing them as arguments to the custom command. 
 To achieve this, we will need to specify these arguments using the &lt;code&gt;@click.argument()&lt;/code&gt; decorator. One decorator will need to be 
@@ -92,9 +92,9 @@ specified per argument. We will also need to pass the &lt;em&gt;name&lt;/em&gt; 
 
 &lt;p&gt;To create our users using the custom command, we will run &lt;code&gt;flask create_user &amp;lt;name&amp;gt; &amp;lt;role&amp;gt;&lt;/code&gt; in a terminal window.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="flask-command2" src="http://localhost:8000/images/index14/flask-command2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="flask-command2" src="https://codedisciples.in/images/index14/flask-command2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="table2" src="http://localhost:8000/images/index14/table2.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Deploying a Flask website on Heroku</title><link href="http://localhost:8000/flask-heroku.html" rel="alternate"></link><published>2019-11-06T17:00:00+05:30</published><updated>2019-11-06T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-11-06:/flask-heroku.html</id><summary type="html">&lt;p&gt;Steps to deploy a Flask website using Heroku&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will be deploying a &lt;strong&gt;Flask&lt;/strong&gt; application using &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt;. Heroku is a popular 
+&lt;img alt="table2" src="https://codedisciples.in/images/index14/table2.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Deploying a Flask website on Heroku</title><link href="https://codedisciples.in/flask-heroku.html" rel="alternate"></link><published>2019-11-06T17:00:00+05:30</published><updated>2019-11-06T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-06:/flask-heroku.html</id><summary type="html">&lt;p&gt;Steps to deploy a Flask website using Heroku&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will be deploying a &lt;strong&gt;Flask&lt;/strong&gt; application using &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt;. Heroku is a popular 
 Platform as a Service (PaaS) that is used to deploy, manage and scale web applications. It comes with a lot of features 
 built-in that abstract away most of the complications involved in traditional web-based deployments. Deployments on 
 Heroku are quick and the platform ensures that you do not have to worry about the infrastructural maintenance headache's that accompany website / server maintenance.  &lt;/p&gt;
@@ -118,17 +118,17 @@ is called as a &lt;strong&gt;dyno&lt;/strong&gt;, We will be using a free dyno f
 &lt;p&gt;The region can be the United States or Europe. This doesn't matter for our demo application. I've chosen Europe simply 
 because, geographically, my current location is closer to Europe. We will not be adding a pipeline in this example.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="heroku-create" src="http://localhost:8000/images/index13/heroku-create.jpg"&gt;&lt;/p&gt;
+&lt;img alt="heroku-create" src="https://codedisciples.in/images/index13/heroku-create.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;On the subsequent page, we will be selecting our deployment method as &lt;strong&gt;GitHub&lt;/strong&gt;. As mentioned in the previous section, 
 this will trigger a build whenever we push changes to our GitHub repository. We will need to authorize Heroku to access 
 GitHub repositories and specify which repository will be used in our current deployment.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="heroku-setup" src="http://localhost:8000/images/index13/heroku-setup.jpg"&gt;&lt;/p&gt;
+&lt;img alt="heroku-setup" src="https://codedisciples.in/images/index13/heroku-setup.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Next, we will enable automatic deployments. At this point, I would like to point out that our repository does have continuous 
 integration (CI) configured in TravisCI due to which we will be checking the &lt;em&gt;Wait for CI to pass before deploy&lt;/em&gt; box. However, 
 this can be skipped by simply removing the .travis.yml file from the repository. A separate article pertaining to the CI pipeline will be posted soon.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="auto-deploy" src="http://localhost:8000/images/index13/auto-deploy.jpg"&gt;&lt;/p&gt;
+&lt;img alt="auto-deploy" src="https://codedisciples.in/images/index13/auto-deploy.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;This completes our initial setup on Heroku.&lt;/p&gt;
 &lt;h2&gt;Creating environment variables&lt;/h2&gt;
 &lt;p&gt;For the local deployment, all our environment variables were included in a &lt;code&gt;.env&lt;/code&gt; file (which was deliberately excluded 
@@ -138,18 +138,18 @@ be configured. The values of these attributes are being read into our &lt;code&g
 first of these will be a connection string to a new &lt;strong&gt;Postgres&lt;/strong&gt; database. To do this, on the &lt;em&gt;Resources&lt;/em&gt; section of our 
 dashboard, we will specify &lt;strong&gt;heroku-postgres&lt;/strong&gt; and provision the database on our free dyno.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres" src="http://localhost:8000/images/index13/postgres.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres" src="https://codedisciples.in/images/index13/postgres.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres2" src="http://localhost:8000/images/index13/postgres2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres2" src="https://codedisciples.in/images/index13/postgres2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Once this is complete, we can see the environment variable containing the connection string by navigating to the &lt;em&gt;Settings&lt;/em&gt; 
 and revealing our config variables.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres3" src="http://localhost:8000/images/index13/postgres3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres3" src="https://codedisciples.in/images/index13/postgres3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Since we have a few more to add (see &lt;code&gt;.env.example&lt;/code&gt;), we will do that as well. To obtain the &lt;em&gt;reCAPTCHA&lt;/em&gt; public and private keys,
  one will need to signup for the service on &lt;a href="https://www.google.com/recaptcha/"&gt;Google&lt;/a&gt; and follow the steps. &lt;/p&gt;
 &lt;p&gt;Here is a final screenshot of this section.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="env-vars" src="http://localhost:8000/images/index13/env-vars.jpg"&gt;&lt;/p&gt;
+&lt;img alt="env-vars" src="https://codedisciples.in/images/index13/env-vars.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Creating the Heroku &lt;code&gt;Procfile&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Heroku requires a file named &lt;code&gt;Procfile&lt;/code&gt; that contains all the commands to be executed by an app on startup. The commands 
 need to be specified using the syntax &lt;code&gt;&amp;lt;process name&amp;gt;: &amp;lt;command&amp;gt;&lt;/code&gt;. Before, we update this file, let's look at how we are exposing 
@@ -171,7 +171,7 @@ application called &lt;strong&gt;app&lt;/strong&gt; that is present in a module 
 so that an initial build can be triggered. We can follow the build in the &lt;em&gt;Overview&lt;/em&gt; section of the dashboard. Details of 
 any build errors can be found in the logs - &lt;em&gt;More &amp;gt; View Logs&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="build" src="http://localhost:8000/images/index13/build.jpg"&gt;&lt;/p&gt;
+&lt;img alt="build" src="https://codedisciples.in/images/index13/build.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Creating our database tables&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;models.py&lt;/code&gt; file in our &lt;code&gt;models&lt;/code&gt; package indicates that the application uses two tables - &lt;code&gt;UserModel&lt;/code&gt; and &lt;code&gt;FeedbackModel&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To create these on Heroku, we will be using a custom flask command called &lt;em&gt;create_tables&lt;/em&gt; present in &lt;code&gt;commands.py&lt;/code&gt;. 
@@ -179,12 +179,12 @@ The command is created in &lt;code&gt;app.py&lt;/code&gt; as part of the app cre
 &lt;p&gt;To run this command, navigate to &lt;em&gt;More &amp;gt; Run Console&lt;/em&gt; and run the command - &lt;code&gt;flask run create_tables&lt;/code&gt;. If everything runs 
 as expected, we will simply see a &lt;em&gt;Process Exited&lt;/em&gt; message on the console.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="console" src="http://localhost:8000/images/index13/console.jpg"&gt;&lt;/p&gt;
+&lt;img alt="console" src="https://codedisciples.in/images/index13/console.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Now our app is fully set up and deployed. To run the application, click &lt;em&gt;Open App&lt;/em&gt; on the dashboard. The url 
 &lt;a href="https://flask-organic-foods-app.herokuapp.com/"&gt;https://flask-organic-foods-app.herokuapp.com/&lt;/a&gt; was assigned by Heroku. 
 This can be changed with a custom domain name in the application settings.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="site" src="http://localhost:8000/images/index13/site.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category><category term="Heroku"></category></entry><entry><title>Queries using Flask SQLAlchemy</title><link href="http://localhost:8000/flask-sqlalchemy-queries.html" rel="alternate"></link><published>2019-10-31T17:00:00+05:30</published><updated>2019-10-31T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-10-31:/flask-sqlalchemy-queries.html</id><summary type="html">&lt;p&gt;Writing queries using the flask-sqlalchemy library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will go over writing database queries using the &lt;strong&gt;Flask SQLAlchemy&lt;/strong&gt; library. The post assumes that the
+&lt;img alt="site" src="https://codedisciples.in/images/index13/site.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category><category term="Heroku"></category></entry><entry><title>Queries using Flask SQLAlchemy</title><link href="https://codedisciples.in/flask-sqlalchemy-queries.html" rel="alternate"></link><published>2019-10-31T17:00:00+05:30</published><updated>2019-10-31T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-10-31:/flask-sqlalchemy-queries.html</id><summary type="html">&lt;p&gt;Writing queries using the flask-sqlalchemy library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will go over writing database queries using the &lt;strong&gt;Flask SQLAlchemy&lt;/strong&gt; library. The post assumes that the
  reader has some basic knowledge of flask and SQL in general.&lt;/p&gt;
 &lt;p&gt;First, we will create a simple flask application (app.py) with a SQLite backend database containing a couple of models. 
 Ideally, database models should be created as a separate module or package within the project for better maintainability. 
@@ -422,7 +422,6 @@ to handle the &lt;em&gt;None&lt;/em&gt; condition described above.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Folder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;folder_id&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;outerjoin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Folder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;folder_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;group_by&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Folder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-     &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;   
      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;   
 
  &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bills&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;flask-project&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;images&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
