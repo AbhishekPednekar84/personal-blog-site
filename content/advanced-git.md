@@ -7,7 +7,7 @@ Authors: Abhishek Pednekar
 Summary: A look at some git commands beyond the usual workflow
 Cover: /static/images/black-gradient-article.jpg
 
-In this post, we will take a look at some useful advanced **git** commands. These commands essentially supplement the usual git workflow and help in fixing mistakes or undoing changes. This post assumes that the reader already knows the usage of basic git commands like `git status`, `git add`, `git commit`, `git branch`, `git pull`, `git push` etc...
+In this post, we will take a look at some useful advanced **git** commands. These commands essentially supplement the usual git workflow and help in fixing mistakes or undoing changes. This post assumes that the reader already knows the usage of basic git commands like `git status`, `git add`, `git commit`, `git branch`, `git push` etc...
 
 To demonstrate the usage of these git commands, we will use a simple code snippet. The snippet will be saved in a file named **calc.py**. The file itself will be present in a local git repository with two branches - **master** and **new-feature**
 
