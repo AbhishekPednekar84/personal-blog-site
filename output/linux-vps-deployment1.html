@@ -121,7 +121,7 @@
 <h2>Setting up our server</h2>
 <h3>Step 1 - Logging in with the <strong>root</strong> user</h3>
 <p>To connect to the droplet via <strong>ssh</strong>, I will be using the <em>Cmder</em> CLI tool and <em>Windows Subsystem for Linux</em> (WSL). Our initial login will be with the <strong>root</strong> user. Also, we will need to note down the public ip address of our server (which can be found in our project's control panel) as that will be used several times during the setup.</p>
-<p><code>ssh root@159.65.149.153</code></p>
+<p><code>ssh root@206.189.132.233</code></p>
 <p>Once we run the above command, we will need to accept the authentication warning and provide the one-time <strong>root</strong> password sent to the registered email. Since this is our first time logging in, we will be prompted to change the <strong>root</strong> password. Since <strong>root</strong> is an admin account with extended privileges, we will create an alternate user with slightly lesser privileges (than the <strong>root</strong> user) and use that for the remainder of our setup and deployment.</p>
 <h3>Step 2 - Creating a new user</h3>
 <p>To create a new user, we will run the <code>adduser</code> command while logged in as the <strong>root</strong> user. We will be prompted to enter a password for the new user along with filling up some optional user-specific details.</p>
@@ -143,7 +143,7 @@
 
 <p>Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the /home/<user>/.ssh directory on the local machine. </p>
 <p>Prior to copying the key to the server, we will need to create a .ssh directory in <em>flaskuser</em>'s /home directory. So let's login with <em>flaskuser</em> and the password that we provided in the previous step and create the directory with the <code>mkdir .ssh</code> command.</p>
-<div class="highlight"><pre><span></span><span class="n">root</span><span class="p">@</span><span class="n">Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">#</span> <span class="n">ssh</span> <span class="n">flaskuser</span><span class="mf">@159.65.149.153</span>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="p">@</span><span class="n">Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">#</span> <span class="n">ssh</span> <span class="n">flaskuser</span><span class="mf">@206.189.132.233</span>
 </pre></div>
 
 
@@ -155,9 +155,9 @@
 <div class="highlight"><pre><span></span><span class="n">abhi_ap</span><span class="p">@</span><span class="n">Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="err">$</span> <span class="n">cd</span> <span class="o">~</span>
 <span class="n">abhi_ap</span><span class="p">@</span><span class="n">Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">cd</span> <span class="p">.</span><span class="n">ssh</span>
 
-<span class="n">abhi_ap</span><span class="p">@</span><span class="n">Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="err">$</span> <span class="n">scp</span> <span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span> <span class="n">flaskuser</span><span class="mf">@159.65.149.153</span><span class="o">:</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+<span class="n">abhi_ap</span><span class="p">@</span><span class="n">Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="err">$</span> <span class="n">scp</span> <span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span> <span class="n">flaskuser</span><span class="mf">@206.189.132.233</span><span class="o">:</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
 
-<span class="n">flaskuser</span><span class="mf">@159.65.149.153</span><span class="err">&#39;</span><span class="n">s</span> <span class="nl">password</span><span class="p">:</span>
+<span class="n">flaskuser</span><span class="mf">@206.189.132.233</span><span class="err">&#39;</span><span class="n">s</span> <span class="nl">password</span><span class="p">:</span>
 <span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span>
 </pre></div>
 

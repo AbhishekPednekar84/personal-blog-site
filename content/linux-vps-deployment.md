@@ -33,7 +33,7 @@ To get started with DigitalOcean, we will first need to [sign up](https://www.di
 
 To connect to the droplet via **ssh**, I will be using the *Cmder* CLI tool and *Windows Subsystem for Linux* (WSL). Our initial login will be with the **root** user. Also, we will need to note down the public ip address of our server (which can be found in our project's control panel) as that will be used several times during the setup.
 
-`ssh root@159.65.149.153`
+`ssh root@206.189.132.233`
 
 Once we run the above command, we will need to accept the authentication warning and provide the one-time **root** password sent to the registered email. Since this is our first time logging in, we will be prompted to change the **root** password. Since **root** is an admin account with extended privileges, we will create an alternate user with slightly lesser privileges (than the **root** user) and use that for the remainder of our setup and deployment.
 
@@ -66,7 +66,7 @@ Running the above command will create the public (id_rsa.pub) and the private (i
 Prior to copying the key to the server, we will need to create a .ssh directory in *flaskuser*'s /home directory. So let's login with *flaskuser* and the password that we provided in the previous step and create the directory with the `mkdir .ssh` command.
 
 ```
-root@Flask-Demo-Server:~# ssh flaskuser@159.65.149.153
+root@Flask-Demo-Server:~# ssh flaskuser@206.189.132.233
 ```
 
 ```
@@ -79,9 +79,9 @@ Now, from our local machine, we will run the `scp` command. We need to ensure th
 abhi_ap@Abhi-Dell:/home$ cd ~
 abhi_ap@Abhi-Dell:~$ cd .ssh
 
-abhi_ap@Abhi-Dell:~/.ssh$ scp id_rsa.pub flaskuser@159.65.149.153:.ssh/authorized_keys
+abhi_ap@Abhi-Dell:~/.ssh$ scp id_rsa.pub flaskuser@206.189.132.233:.ssh/authorized_keys
 
-flaskuser@159.65.149.153's password:
+flaskuser@206.189.132.233's password:
 id_rsa.pub
 ```
 
