@@ -7,11 +7,11 @@ Authors: Abhishek Pednekar
 Summary: Deploying a Flask application on a Virtual Private (Linux) Server
 Cover: /static/images/black-gradient-article.jpg
 
-In the [part one](https://www.codedisciples.in/linux-vps-deployment1.html) of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy the actual application and get it up and running with **nginx** and **gunicorn**.
+In the [part one](https://www.codedisciples.in/linux-vps-deployment1.html) of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with **nginx** and **gunicorn**.
 
 The post assumes that the reader is familiar with the basics of Linux and Flask. 
 
-[Click here](https://github.com/AbhishekPednekar84/flask_demo_app) to download the source code of our Flask application. An important thing to note is that we will be using a `.env` file to configure our environment variables (see `.env.example` in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on [Google reCAPTCHA](ttps://www.google.com/recaptcha/) to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by [ElephantSQL](https://www.elephantsql.com/). The `DATABASE_URL` variable in the `.env` file will need to be modified depending on the database in use.
+[Click here](https://github.com/AbhishekPednekar84/flask_demo_app) to download the source code of the Flask application that will be deployed. An important thing to note is that we will be using a `.env` file to configure our environment variables (see `.env.example` in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on [Google reCAPTCHA](ttps://www.google.com/recaptcha/) to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by [ElephantSQL](https://www.elephantsql.com/). The `DATABASE_URL` variable in the `.env` file will need to be modified depending on the database in use.
 
 ```
 # Environment Variables
@@ -48,7 +48,7 @@ The current git repository contains some directories (like tests) and configurat
 └── wsgi.py
 ```
 
-The below `scp` command will be run on our local computer. The command will copy the folder named *flask_demo* from the local drive to the *flaskuser*'s home directory on the server. We will need to be in the directory containing *flask_demo* before running the command.
+The below `scp` command will be run on our local computer. The command will copy the folder named *flask_demo* from the local drive to the *flaskuser*'s home directory on the server. We will need to be in the local directory containing *flask_demo* before running the command.
 
 ```
 scp -r flask_demo flaskuser@206.189.132.233:~/
@@ -64,11 +64,11 @@ sudo apt install python3-pip
 sudo apt install python3-venv
 ```
 
-To create the virtual environment we will use `python3 -m venv flask_demo/venv` and to activate the virtual environment, we will `cd` into the *flask_demo* directory and run `source venv/bin/activate`.
+To create the virtual environment, we will use `python3 -m venv flask_demo/venv` and to activate the virtual environment, we will `cd` into the *flask_demo* directory and run `source venv/bin/activate`.
 
 Finally, we will install the packages specific to our application from the requirements file using `pip install -r requirements.txt`.
 
-With the virtual environment now set up, let's perform a quick test to see if our flask application runs without any errors. We will do this by first setting the `FLASK_APP` environment variable and then using `flask run` to run the application. To check if everything is working as expected, we can access the url [http://206.189.132.233:5000](http://206.189.132.233:5000). This should render the application in the browser. However, as mentioned above, this is simply a test. We will be disabling port 5000 in a later step.
+With the virtual environment now set up, let's perform a quick test to see if our flask application runs without any errors. We will do this by first setting the `FLASK_APP` environment variable and then using `flask run` to run the application. To check if everything is working as expected, we can access the url [http://206.189.132.233:5000](http://206.189.132.233:5000). This should render the application in the browser. However, as mentioned above, this is simply a test. We will be disabling port `5000` in a later step.
  
 ```
 (venv) flaskuser@Flask-Demo-Server:~/flask_demo$ export FLASK_APP=app.py
@@ -83,18 +83,18 @@ With the virtual environment now set up, let's perform a quick test to see if ou
 
 Testing the application this way assures us that we will not run into any code related issues later on. For instance, say we missed copying a file or did not configure an environment variable correctly, then this test will help us identify such issues.
 
-### Step 3 - Configuring NGINX
-To serve the static content (HTML, CSS, JavaScript) of our website, we will be using **NGINX** as our webserver.
+### Step 3 - Configuring nginx
+To serve the static content (HTML, CSS, JavaScript) of our website, we will be using **nginx** as our webserver.
 
-To install NGINX, we will run `sudo apt install nginx`.
+To install nginx, we will run `sudo apt install nginx`.
 
-To configure NGINX for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. First, we will delete the default NGINX configuration file that was created during the installation process.
+To configure nginx for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. First, we will delete the default nginx configuration file that was created during the installation process.
 
 ```
 (venv) flaskuser@Flask-Demo-Server:~$ sudo rm /etc/nginx/sites-enabled/default
 ```
 
-Next, we will use the *nano* text editor to create, update and save a new configuration file. Run the below command will open the file in edit mode.
+Next, we will use the *nano* text editor to create, update and save a new configuration file. Running the below command will open the file in edit mode.
 
 ```
 (venv) flaskuser@Flask-Demo-Server:~$ sudo nano /etc/nginx/sites-enabled/flask-demo
@@ -120,14 +120,13 @@ server {
 ```
 Once we add this code, we can hit `Ctrl + X`, `Y` and `Enter` to save and close the file.
 
-
-Let's go over this file -
-1. First, we are instructing NGINX to listen for our application traffic on http port 80 of our VPS
-2. Next, we are telling NGINX where to look for the static content of our Flask application by providing the path to the `static` directory as an alias
-3. With the static content taken care of, NGINX will pass any request processed at the root ([http://206.189.132.233](http://206.189.132.233)) of our application to the proxied server specified in the `proxy pass` directive. This proxied server in our case is `gunicorn` running on the default port 8000
+Let's go over the contents of this configuration file -
+1. First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS
+2. Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the `/static` directory as an alias
+3. With the static content taken care of, nginx will pass any request processed at the root ([http://206.189.132.233](http://206.189.132.233)) of our application to the proxied server specified in the `proxy pass` directive. This proxied server in our case is `gunicorn` running on the default port `8000`
 4. The `proxy_params` file specifies some standard parameters to be used by the proxied server and `proxy_redirect off` turns off any redirects
 
-Although we have set up NGINX to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run `sudo ufw allow http/tcp`.
+Although we have set up nginx to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run `sudo ufw allow http/tcp`.
 
 ```
 flaskuser@Flask-Demo-Server:~$ sudo ufw allow http/tcp
@@ -136,7 +135,7 @@ Rule added
 Rule added (v6)
 ```
 
-Next, we will no longer allow application traffic on port 5000 which we previously used for testing - `sudo ufw delete allow 5000`.
+Next, we will no longer allow application traffic on port 5000 which we previously used for testing by running `sudo ufw delete allow 5000`.
 
 ```
 flaskuser@Flask-Demo-Server:~$ sudo ufw delete allow 5000
@@ -169,16 +168,16 @@ To                         Action      From
 80/tcp (v6)                ALLOW       Anywhere (v6)
 ```
 
-We will now restart NGINX to make sure all the changes made in this section are saved and enabled.
+We will now restart nginx to make sure all the changes made in this section are saved and enabled.
 
 ```
 flaskuser@Flask-Demo-Server:~$ sudo systemctl restart nginx
 ```
 
 ### Step 4 - Configuring gunicorn
-While NGINX serves the static content of our application, `gunicorn` handles the Python code. To install `gunicorn`, we will run `pip install gunicorn` on the server with the virtual environment activated.
+While nginx serves the static content of our application, `gunicorn` handles the Python code. To install `gunicorn`, we will run `pip install gunicorn` on the server with the virtual environment activated.
 
-To run `gunicorn` we need to specify the exact module name where the Flask application is created. Our code uses the `create_app` factory method which returns the Flask application. Also included in our code is the `wsgi.py` module that calls the factory method and stores the application in a variable named `app`.
+To run `gunicorn` we need to specify the exact module name where the Flask application is created. Our code uses the `create_app` factory method which returns the Flask application. Also included in our code is the `wsgi.py` module that calls the factory method and stores the application instance in a variable named `app`.
 
 ```
 # wsgi.py 
@@ -202,7 +201,7 @@ The command `gunicorn -w 3 wsgi:app` will start `gunicorn` on our server. We nee
 [2019-12-11 09:20:43 +0000] [14105] [INFO] Booting worker with pid: 14105
 ```
 
-The `-w` parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula `(2 x number of CPU cores) + 1`.  The command `nproc --all` will give us the number of CPU cores.
+The `-w` parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula `(2 x number of CPU cores) + 1`.  The command `nproc --all` will give us the number of CPU cores on our server.
 
 At this point, we can access our application on [http://206.189.132.233](http://206.189.132.233).
 
@@ -238,7 +237,7 @@ The final steps in our deployment will be to create the log files that we config
 (venv) flaskuser@Flask-Demo-Server:/$ sudo touch /var/log/flask_demo/flask-demo.out.log
 ```
 
-To restart supervisor - `sudo supervisorctl reload`.
+To restart supervisor run `sudo supervisorctl reload`.
 
 ```
 (venv) flaskuser@Flask-Demo-Server:/$ sudo supervisorctl reload
@@ -247,4 +246,6 @@ Restarted supervisord
 
 We will now be able to access our website in spite of disconnecting from our terminal. 
 
-That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site by adding https. Those, however, are out of scope in this post. In a future post, we will see how to install and set up a PostgreSQL database on the server for our application rather than using ElephantSQL.
+That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site by adding https. Those, however, are out of scope for this series of posts. In a future post, we will see how to install and set up a PostgreSQL database on the server (for our application) rather than using ElephantSQL.
+
+Please be aware that the DigitalOcean droplet will be destroyed in the near future. So the URL [http://206.189.132.233](http://206.189.132.233) may not be available depending on when you are reading this post. 

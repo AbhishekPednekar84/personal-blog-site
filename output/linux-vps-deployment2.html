@@ -103,9 +103,9 @@
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In the <a href="https://www.codedisciples.in/linux-vps-deployment1.html">part one</a> of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy the actual application and get it up and running with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
+	<p>In the <a href="https://www.codedisciples.in/linux-vps-deployment1.html">part one</a> of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
 <p>The post assumes that the reader is familiar with the basics of Linux and Flask. </p>
-<p><a href="https://github.com/AbhishekPednekar84/flask_demo_app">Click here</a> to download the source code of our Flask application. An important thing to note is that we will be using a <code>.env</code> file to configure our environment variables (see <code>.env.example</code> in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on <a href="ttps://www.google.com/recaptcha/">Google reCAPTCHA</a> to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by <a href="https://www.elephantsql.com/">ElephantSQL</a>. The <code>DATABASE_URL</code> variable in the <code>.env</code> file will need to be modified depending on the database in use.</p>
+<p><a href="https://github.com/AbhishekPednekar84/flask_demo_app">Click here</a> to download the source code of the Flask application that will be deployed. An important thing to note is that we will be using a <code>.env</code> file to configure our environment variables (see <code>.env.example</code> in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on <a href="ttps://www.google.com/recaptcha/">Google reCAPTCHA</a> to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by <a href="https://www.elephantsql.com/">ElephantSQL</a>. The <code>DATABASE_URL</code> variable in the <code>.env</code> file will need to be modified depending on the database in use.</p>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Environment</span> <span class="n">Variables</span>
 
 <span class="n">SECRET_KEY</span><span class="o">=</span>
@@ -138,7 +138,7 @@
 </pre></div>
 
 
-<p>The below <code>scp</code> command will be run on our local computer. The command will copy the folder named <em>flask_demo</em> from the local drive to the <em>flaskuser</em>'s home directory on the server. We will need to be in the directory containing <em>flask_demo</em> before running the command.</p>
+<p>The below <code>scp</code> command will be run on our local computer. The command will copy the folder named <em>flask_demo</em> from the local drive to the <em>flaskuser</em>'s home directory on the server. We will need to be in the local directory containing <em>flask_demo</em> before running the command.</p>
 <div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="n">flask_demo</span> <span class="n">flaskuser</span><span class="mf">@206.189.132.233</span><span class="o">:~/</span>
 </pre></div>
 
@@ -151,9 +151,9 @@
 </pre></div>
 
 
-<p>To create the virtual environment we will use <code>python3 -m venv flask_demo/venv</code> and to activate the virtual environment, we will <code>cd</code> into the <em>flask_demo</em> directory and run <code>source venv/bin/activate</code>.</p>
+<p>To create the virtual environment, we will use <code>python3 -m venv flask_demo/venv</code> and to activate the virtual environment, we will <code>cd</code> into the <em>flask_demo</em> directory and run <code>source venv/bin/activate</code>.</p>
 <p>Finally, we will install the packages specific to our application from the requirements file using <code>pip install -r requirements.txt</code>.</p>
-<p>With the virtual environment now set up, let's perform a quick test to see if our flask application runs without any errors. We will do this by first setting the <code>FLASK_APP</code> environment variable and then using <code>flask run</code> to run the application. To check if everything is working as expected, we can access the url <a href="http://206.189.132.233:5000">http://206.189.132.233:5000</a>. This should render the application in the browser. However, as mentioned above, this is simply a test. We will be disabling port 5000 in a later step.</p>
+<p>With the virtual environment now set up, let's perform a quick test to see if our flask application runs without any errors. We will do this by first setting the <code>FLASK_APP</code> environment variable and then using <code>flask run</code> to run the application. To check if everything is working as expected, we can access the url <a href="http://206.189.132.233:5000">http://206.189.132.233:5000</a>. This should render the application in the browser. However, as mentioned above, this is simply a test. We will be disabling port <code>5000</code> in a later step.</p>
 <div class="highlight"><pre><span></span><span class="ss">(</span><span class="nv">venv</span><span class="ss">)</span> <span class="nv">flaskuser</span>@<span class="nv">Flask</span><span class="o">-</span><span class="nv">Demo</span><span class="o">-</span><span class="nv">Server</span>:<span class="o">~/</span><span class="nv">flask_demo</span>$ <span class="nv">export</span> <span class="nv">FLASK_APP</span><span class="o">=</span><span class="nv">app</span>.<span class="nv">py</span>
 <span class="ss">(</span><span class="nv">venv</span><span class="ss">)</span> <span class="nv">flaskuser</span>@<span class="nv">Flask</span><span class="o">-</span><span class="nv">Demo</span><span class="o">-</span><span class="nv">Server</span>:<span class="o">~/</span><span class="nv">flask_demo</span>$ <span class="nv">flask</span> <span class="nv">run</span> <span class="o">--</span><span class="nv">host</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">0</span>
  <span class="o">*</span> <span class="nv">Serving</span> <span class="nv">Flask</span> <span class="nv">app</span> <span class="s2">&quot;</span><span class="s">app.py</span><span class="s2">&quot;</span>
@@ -166,15 +166,15 @@
 
 
 <p>Testing the application this way assures us that we will not run into any code related issues later on. For instance, say we missed copying a file or did not configure an environment variable correctly, then this test will help us identify such issues.</p>
-<h3>Step 3 - Configuring NGINX</h3>
-<p>To serve the static content (HTML, CSS, JavaScript) of our website, we will be using <strong>NGINX</strong> as our webserver.</p>
-<p>To install NGINX, we will run <code>sudo apt install nginx</code>.</p>
-<p>To configure NGINX for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. First, we will delete the default NGINX configuration file that was created during the installation process.</p>
+<h3>Step 3 - Configuring nginx</h3>
+<p>To serve the static content (HTML, CSS, JavaScript) of our website, we will be using <strong>nginx</strong> as our webserver.</p>
+<p>To install nginx, we will run <code>sudo apt install nginx</code>.</p>
+<p>To configure nginx for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. First, we will delete the default nginx configuration file that was created during the installation process.</p>
 <div class="highlight"><pre><span></span><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">rm</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="k">default</span><span class="w"></span>
 </pre></div>
 
 
-<p>Next, we will use the <em>nano</em> text editor to create, update and save a new configuration file. Run the below command will open the file in edit mode.</p>
+<p>Next, we will use the <em>nano</em> text editor to create, update and save a new configuration file. Running the below command will open the file in edit mode.</p>
 <div class="highlight"><pre><span></span><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">flask</span><span class="o">-</span><span class="n">demo</span><span class="w"></span>
 </pre></div>
 
@@ -198,12 +198,12 @@
 
 
 <p>Once we add this code, we can hit <code>Ctrl + X</code>, <code>Y</code> and <code>Enter</code> to save and close the file.</p>
-<p>Let's go over this file -
-1. First, we are instructing NGINX to listen for our application traffic on http port 80 of our VPS
-2. Next, we are telling NGINX where to look for the static content of our Flask application by providing the path to the <code>static</code> directory as an alias
-3. With the static content taken care of, NGINX will pass any request processed at the root (<a href="http://206.189.132.233">http://206.189.132.233</a>) of our application to the proxied server specified in the <code>proxy pass</code> directive. This proxied server in our case is <code>gunicorn</code> running on the default port 8000
+<p>Let's go over the contents of this configuration file -
+1. First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS
+2. Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the <code>/static</code> directory as an alias
+3. With the static content taken care of, nginx will pass any request processed at the root (<a href="http://206.189.132.233">http://206.189.132.233</a>) of our application to the proxied server specified in the <code>proxy pass</code> directive. This proxied server in our case is <code>gunicorn</code> running on the default port <code>8000</code>
 4. The <code>proxy_params</code> file specifies some standard parameters to be used by the proxied server and <code>proxy_redirect off</code> turns off any redirects</p>
-<p>Although we have set up NGINX to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run <code>sudo ufw allow http/tcp</code>.</p>
+<p>Although we have set up nginx to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run <code>sudo ufw allow http/tcp</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">http</span><span class="o">/</span><span class="n">tcp</span><span class="w"></span>
 
 <span class="k">Rule</span><span class="w"> </span><span class="n">added</span><span class="w"></span>
@@ -211,7 +211,7 @@
 </pre></div>
 
 
-<p>Next, we will no longer allow application traffic on port 5000 which we previously used for testing - <code>sudo ufw delete allow 5000</code>.</p>
+<p>Next, we will no longer allow application traffic on port 5000 which we previously used for testing by running <code>sudo ufw delete allow 5000</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="mi">5000</span><span class="w"></span>
 
 <span class="k">Rule</span><span class="w"> </span><span class="n">deleted</span><span class="w"></span>
@@ -241,14 +241,14 @@
 </pre></div>
 
 
-<p>We will now restart NGINX to make sure all the changes made in this section are saved and enabled.</p>
+<p>We will now restart nginx to make sure all the changes made in this section are saved and enabled.</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">restart</span><span class="w"> </span><span class="n">nginx</span><span class="w"></span>
 </pre></div>
 
 
 <h3>Step 4 - Configuring gunicorn</h3>
-<p>While NGINX serves the static content of our application, <code>gunicorn</code> handles the Python code. To install <code>gunicorn</code>, we will run <code>pip install gunicorn</code> on the server with the virtual environment activated.</p>
-<p>To run <code>gunicorn</code> we need to specify the exact module name where the Flask application is created. Our code uses the <code>create_app</code> factory method which returns the Flask application. Also included in our code is the <code>wsgi.py</code> module that calls the factory method and stores the application in a variable named <code>app</code>.</p>
+<p>While nginx serves the static content of our application, <code>gunicorn</code> handles the Python code. To install <code>gunicorn</code>, we will run <code>pip install gunicorn</code> on the server with the virtual environment activated.</p>
+<p>To run <code>gunicorn</code> we need to specify the exact module name where the Flask application is created. Our code uses the <code>create_app</code> factory method which returns the Flask application. Also included in our code is the <code>wsgi.py</code> module that calls the factory method and stores the application instance in a variable named <code>app</code>.</p>
 <div class="highlight"><pre><span></span><span class="c1"># wsgi.py </span>
 
 <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span>
@@ -270,7 +270,7 @@
 </pre></div>
 
 
-<p>The <code>-w</code> parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula <code>(2 x number of CPU cores) + 1</code>.  The command <code>nproc --all</code> will give us the number of CPU cores.</p>
+<p>The <code>-w</code> parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula <code>(2 x number of CPU cores) + 1</code>.  The command <code>nproc --all</code> will give us the number of CPU cores on our server.</p>
 <p>At this point, we can access our application on <a href="http://206.189.132.233">http://206.189.132.233</a>.</p>
 <p><br />
 <img alt="site" src="https://codedisciples.in/images/index16/site.jpg"></p>
@@ -298,14 +298,15 @@
 </pre></div>
 
 
-<p>To restart supervisor - <code>sudo supervisorctl reload</code>.</p>
+<p>To restart supervisor run <code>sudo supervisorctl reload</code>.</p>
 <div class="highlight"><pre><span></span><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">supervisorctl</span><span class="w"> </span><span class="n">reload</span><span class="w"></span>
 <span class="n">Restarted</span><span class="w"> </span><span class="n">supervisord</span><span class="w"></span>
 </pre></div>
 
 
 <p>We will now be able to access our website in spite of disconnecting from our terminal. </p>
-<p>That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site by adding https. Those, however, are out of scope in this post. In a future post, we will see how to install and set up a PostgreSQL database on the server for our application rather than using ElephantSQL.</p>
+<p>That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site by adding https. Those, however, are out of scope for this series of posts. In a future post, we will see how to install and set up a PostgreSQL database on the server (for our application) rather than using ElephantSQL.</p>
+<p>Please be aware that the DigitalOcean droplet will be destroyed in the near future. So the URL <a href="http://206.189.132.233">http://206.189.132.233</a> may not be available depending on when you are reading this post. </p>
   </div>
   
   <br/>

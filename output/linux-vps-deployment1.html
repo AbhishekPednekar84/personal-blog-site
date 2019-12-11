@@ -103,25 +103,28 @@
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In my <a href="https://www.codedisciples.in/flask-heroku.html">previous</a> post, we deployed a Flask application on Heroku. In this post, we will deploy the <a href="https://github.com/AbhishekPednekar84/flask_demo_app">same application</a> on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. <a href="https://linode.com">Linode</a> and <a href="https://digitalocean.com">DigitalOcean</a> are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider. </p>
-<p>This is the part one of a two-post series. In this post, we will set up a bare-bones Linux server and prime it for deployment. In part two, we will deploy the Flask application with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
+	<p>In the <a href="https://www.codedisciples.in/flask-heroku.html">previous</a> post, we deployed a Flask application on Heroku. In this post, we will deploy the <a href="https://github.com/AbhishekPednekar84/flask_demo_app">same application</a> on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. <a href="https://linode.com">Linode</a> and <a href="https://digitalocean.com">DigitalOcean</a> are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider. </p>
+<p>This is the part one of a two-part series. In this post, we will set up a bare-bones Linux server and prime it for deployment. In part two, we will deploy the Flask application with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
 <p>The post assumes that the reader is familiar with the basics of Linux.</p>
 <h2>Getting started with DigitalOcean</h2>
 <p>At the time of posting this article, DigitalOcean is offering a <a href="https://try.digitalocean.com/python/?utm_medium=podcast&amp;utm_source=pythonbytes&amp;utm_campaign=DO_Dev_Signup_Cold_Python">$50 credit</a> as part of its sponsorship of the <a href="https://pythonbytes.fm">Python Bytes Podcast</a>. </p>
 <p>To get started with DigitalOcean, we will first need to <a href="https://www.digitalocean.com/">sign up</a> and create an account. Once logged in, we can create and configure a droplet (VPS). Below are the steps.</p>
 <ol>
 <li>Create a new project and provide an appropriate name (Ex: <em>Flask Demo App</em>)</li>
-<li>On the project's control panel, select <em>Get started with a Droplet</em> to create our VPS</li>
+<li>On the project's control panel, select <em>Get started with a Droplet</em> to create a VPS</li>
 <li>Choose an image. We will be using <em>Ubuntu 18.04.3</em> for our demo app. If choosing another Linux distribution, the commands in the subsequent section might vary.</li>
 <li>Choose a plan - the most inexpensive (Standard / $5 per month) plan will suffice</li>
-<li>Select a datacenter region. Since this is a demo app, I will be choosing the one closest to my current location</li>
+<li>Select a datacenter region. This would ideally be one closest to where a majority of our end users are located. In the present case, any region will do</li>
 <li>For the authentication process, we will select <em>One-time password</em> for now and set up an SSH key later on. The password will be sent to the email address provided at the time of registration</li>
 <li>Give an appropriate name (Ex: <em>Flask-Demo-Server</em>) for the server and click on <em>Create Droplet</em>  </li>
 </ol>
 <h2>Setting up our server</h2>
 <h3>Step 1 - Logging in with the <strong>root</strong> user</h3>
-<p>To connect to the droplet via <strong>ssh</strong>, I will be using the <em>Cmder</em> CLI tool and <em>Windows Subsystem for Linux</em> (WSL). Our initial login will be with the <strong>root</strong> user. Also, we will need to note down the public ip address of our server (which can be found in our project's control panel) as that will be used several times during the setup.</p>
-<p><code>ssh root@206.189.132.233</code></p>
+<p>To connect to the droplet via <strong>ssh</strong>, we will be using the <em>Cmder</em> CLI tool and <em>Windows Subsystem for Linux</em> (WSL). Our initial login will be with the <strong>root</strong> user. Also, we will need to note down the public ip address of our server (which can be found in our project's control panel) as that will be used several times during the setup.</p>
+<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">root</span><span class="mf">@206.189.132.233</span>
+</pre></div>
+
+
 <p>Once we run the above command, we will need to accept the authentication warning and provide the one-time <strong>root</strong> password sent to the registered email. Since this is our first time logging in, we will be prompted to change the <strong>root</strong> password. Since <strong>root</strong> is an admin account with extended privileges, we will create an alternate user with slightly lesser privileges (than the <strong>root</strong> user) and use that for the remainder of our setup and deployment.</p>
 <h3>Step 2 - Creating a new user</h3>
 <p>To create a new user, we will run the <code>adduser</code> command while logged in as the <strong>root</strong> user. We will be prompted to enter a password for the new user along with filling up some optional user-specific details.</p>
@@ -135,13 +138,13 @@
 
 
 <h3>Step 3 - Setting up key-based authentication</h3>
-<p>To enhance security, we will now setup an <strong>SSH key</strong> with a passphrase for <em>flaskuser</em>. There are several ways to do this. My preferred way is to create the SSH keys on my local machine and then run a secure copy (<code>scp</code>) command to copy the public key to the <em>authorized_keys</em> file on the server.</p>
-<p>As mentioned earlier, I will be using WSL to generate the key locally using the <code>ssh-keygen</code> command. When prompted, just hit enter to create the keys with their default names and set a <strong>passphrase</strong>. Although the passphrase is optional, it is recommended for added security.</p>
+<p>To enhance security, we will now setup an <strong>SSH key</strong> with a passphrase for <em>flaskuser</em>. There are several ways to do this. One way is to create the SSH keys on our local machine and then run a secure copy (<code>scp</code>) command to copy the public key to the <em>authorized_keys</em> file on the server.</p>
+<p>As mentioned earlier, we will be using WSL to generate the key locally using the <code>ssh-keygen</code> command. When prompted, just hit enter to create the keys with their default names and set a <strong>passphrase</strong>. Although the passphrase is optional, it is recommended for added security.</p>
 <div class="highlight"><pre><span></span><span class="n">abhi_ap</span><span class="nv">@Abhi</span><span class="o">-</span><span class="nl">Dell</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"></span>
 </pre></div>
 
 
-<p>Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the /home/<user>/.ssh directory on the local machine. </p>
+<p>Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the <code>/home/&lt;user&gt;/.ssh</code> directory on the local machine. </p>
 <p>Prior to copying the key to the server, we will need to create a .ssh directory in <em>flaskuser</em>'s /home directory. So let's login with <em>flaskuser</em> and the password that we provided in the previous step and create the directory with the <code>mkdir .ssh</code> command.</p>
 <div class="highlight"><pre><span></span><span class="n">root</span><span class="p">@</span><span class="n">Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">#</span> <span class="n">ssh</span> <span class="n">flaskuser</span><span class="mf">@206.189.132.233</span>
 </pre></div>
@@ -171,7 +174,7 @@
 
 <p>Note that using <code>sudo</code> will occasionally require us to enter the password that we set in step 2.</p>
 <h3>Step 4 - Disallow root login</h3>
-<p>Now that <em>flaskuser</em> has been set up and primed for usage during our deployment, we do not want anyone to login to our server with <strong>root</strong> credentials. To prevent <strong>root</strong> logins, we will modify some settings in the sshd_config file using a file editor. I will be using nano throughout this deployment.</p>
+<p>Now that <em>flaskuser</em> has been set up and primed for usage during our deployment, we do not want anyone to login to our server with <strong>root</strong> credentials. To prevent <strong>root</strong> logins, we will modify some settings in the sshd_config file using a file editor. We will be using nano throughout this deployment.</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">sshd_config</span><span class="w"></span>
 </pre></div>
 
@@ -201,7 +204,7 @@
 </pre></div>
 
 
-<p>Next, we will open port 5000 to test our Flask application after deployment</p>
+<p>Next, we will open port <code>5000</code> to test our Flask application after deployment</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="mi">5000</span><span class="w"></span>
 </pre></div>
 
