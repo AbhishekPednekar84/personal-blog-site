@@ -114,3 +114,9 @@ a:hover {
 hr {
     border: 1px solid darkgrey;
 }
+
+#vn-about-blog {
+    font-size: 16px;
+    line-height: 20px;
+    color: #216583;
+}
