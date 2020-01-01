@@ -121,6 +121,7 @@ server {
 Once we add this code, we can hit `Ctrl + X`, `Y` and `Enter` to save and close the file.
 
 Let's go over the contents of this configuration file -
+
 1. First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS
 2. Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the `/static` directory as an alias
 3. With the static content taken care of, nginx will pass any request processed at the root ([http://206.189.132.233](http://206.189.132.233)) of our application to the proxied server specified in the `proxy pass` directive. This proxied server in our case is `gunicorn` running on the default port `8000`

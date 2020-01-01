@@ -198,11 +198,13 @@
 
 
 <p>Once we add this code, we can hit <code>Ctrl + X</code>, <code>Y</code> and <code>Enter</code> to save and close the file.</p>
-<p>Let's go over the contents of this configuration file -
-1. First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS
-2. Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the <code>/static</code> directory as an alias
-3. With the static content taken care of, nginx will pass any request processed at the root (<a href="http://206.189.132.233">http://206.189.132.233</a>) of our application to the proxied server specified in the <code>proxy pass</code> directive. This proxied server in our case is <code>gunicorn</code> running on the default port <code>8000</code>
-4. The <code>proxy_params</code> file specifies some standard parameters to be used by the proxied server and <code>proxy_redirect off</code> turns off any redirects</p>
+<p>Let's go over the contents of this configuration file -</p>
+<ol>
+<li>First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS</li>
+<li>Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the <code>/static</code> directory as an alias</li>
+<li>With the static content taken care of, nginx will pass any request processed at the root (<a href="http://206.189.132.233">http://206.189.132.233</a>) of our application to the proxied server specified in the <code>proxy pass</code> directive. This proxied server in our case is <code>gunicorn</code> running on the default port <code>8000</code></li>
+<li>The <code>proxy_params</code> file specifies some standard parameters to be used by the proxied server and <code>proxy_redirect off</code> turns off any redirects</li>
+</ol>
 <p>Although we have set up nginx to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run <code>sudo ufw allow http/tcp</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">http</span><span class="o">/</span><span class="n">tcp</span><span class="w"></span>
 

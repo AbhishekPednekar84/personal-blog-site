@@ -94,11 +94,13 @@
 
 
 &lt;p&gt;Once we add this code, we can hit &lt;code&gt;Ctrl + X&lt;/code&gt;, &lt;code&gt;Y&lt;/code&gt; and &lt;code&gt;Enter&lt;/code&gt; to save and close the file.&lt;/p&gt;
-&lt;p&gt;Let's go over the contents of this configuration file -
-1. First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS
-2. Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the &lt;code&gt;/static&lt;/code&gt; directory as an alias
-3. With the static content taken care of, nginx will pass any request processed at the root (&lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;) of our application to the proxied server specified in the &lt;code&gt;proxy pass&lt;/code&gt; directive. This proxied server in our case is &lt;code&gt;gunicorn&lt;/code&gt; running on the default port &lt;code&gt;8000&lt;/code&gt;
-4. The &lt;code&gt;proxy_params&lt;/code&gt; file specifies some standard parameters to be used by the proxied server and &lt;code&gt;proxy_redirect off&lt;/code&gt; turns off any redirects&lt;/p&gt;
+&lt;p&gt;Let's go over the contents of this configuration file -&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS&lt;/li&gt;
+&lt;li&gt;Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the &lt;code&gt;/static&lt;/code&gt; directory as an alias&lt;/li&gt;
+&lt;li&gt;With the static content taken care of, nginx will pass any request processed at the root (&lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;) of our application to the proxied server specified in the &lt;code&gt;proxy pass&lt;/code&gt; directive. This proxied server in our case is &lt;code&gt;gunicorn&lt;/code&gt; running on the default port &lt;code&gt;8000&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;proxy_params&lt;/code&gt; file specifies some standard parameters to be used by the proxied server and &lt;code&gt;proxy_redirect off&lt;/code&gt; turns off any redirects&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;Although we have set up nginx to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run &lt;code&gt;sudo ufw allow http/tcp&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;flaskuser&lt;/span&gt;&lt;span class="nv"&gt;@Flask&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nl"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ufw&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
@@ -849,12 +851,12 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;image2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;image3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flask2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Running Celery on Windows 10</title><link href="https://codedisciples.in/celery-windows.html" rel="alternate"></link><published>2019-10-22T22:00:00+05:30</published><updated>2019-10-22T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-10-22:/celery-windows.html</id><summary type="html">&lt;p&gt;Running Celery (with Redis) on Windows 10 using Windows Subsystem for Linux&lt;/p&gt;</summary><content type="html">&lt;p&gt;Celery is an asynchronous task queue that is fairly easy to integrate with a Python application. It requires a messaging queue (also known as a broker) to send and receive messages. Popular brokers are Redis and RabbitMQ.&lt;/p&gt;
 &lt;p&gt;In this post, we will see how to install and run Celery using Windows Subsystem for Linux (WSL) on Windows 10. &lt;strong&gt;Redis&lt;/strong&gt; will be our broker in the example.  We will also be using the &lt;strong&gt;Remote-WSL&lt;/strong&gt; extension in VS Code to develop our Python application in a Linux environment. Finally, we will store the results of the tasks executed by Celery in a &lt;strong&gt;SQLite&lt;/strong&gt; database.&lt;/p&gt;
-&lt;p&gt;This post assumes that the reader already has WSL setup and has installed Python and pip on WSL. If not, please refer to the below resources before proceeding further -&lt;/p&gt;
+&lt;p&gt;This post assumes that the reader already has WSL setup and has installed Python and pip on WSL. If not, one can refer to the below resources before proceeding further -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=xzgwDbe7foQ&amp;amp;t=533s"&gt;Setting up WSL&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://medium.com/@rhdzmota/python-development-on-the-windows-subsystem-for-linux-wsl-17a0fa1839d"&gt;Python setup on WSL&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Now that we have Python installed with WSL, let's create a virtual environment and install the required dependencies. For this demo, we are using the &lt;a href="https://cmder.net/"&gt;cmder&lt;/a&gt; console application. The same commands can be run in Ubuntu or other Linux distros.&lt;/p&gt;
+&lt;p&gt;Now that we have Python installed with WSL, we will create a virtual environment and install the required dependencies. For this demo, we are using the &lt;a href="https://cmder.net/"&gt;cmder&lt;/a&gt; console application. The same commands can be run in Ubuntu or other Linux distros. In the current example, we will open a &lt;code&gt;WSL&lt;/code&gt; window in &lt;strong&gt;cmder&lt;/strong&gt; to run the commands. &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create the virtual environment in the project folder - &lt;code&gt;python3 -m venv venv&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Activate the virtual environment - &lt;code&gt;source venv/bin/activate&lt;/code&gt;&lt;/li&gt;
@@ -868,7 +870,7 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;p&gt;Once installed, we will have an option to reopen our (Windows) project folder in WSL.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="Windows-WSL" src="https://codedisciples.in/images/index11/windows-wsl.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;The final thing we need to do before writing our code is to install a Redis server instance locally. Running the following commands in WSL will install a Redis server on your computer.&lt;/p&gt;
+&lt;p&gt;The final thing we need to do before writing our code is to install a Redis server instance locally. Running the following commands in &lt;code&gt;WSL&lt;/code&gt; will install a &lt;code&gt;Redis server&lt;/code&gt; on your computer.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;redis&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
@@ -876,7 +878,7 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 
 
 &lt;p&gt;Once the installation is complete, we will restart the server using &lt;code&gt;sudo service redis-server restart&lt;/code&gt; to make sure that it is running.&lt;/p&gt;
-&lt;p&gt;Our simple code consists of a function that multiplies two numbers. However, rather than printing the result in a REPL, we will let Celery execute a task and store the result in a SQLite database.&lt;/p&gt;
+&lt;p&gt;Our simple code consists of a function that multiplies two numbers. However, rather than printing the result in a REPL, we will let &lt;code&gt;Celery&lt;/code&gt; execute a task and store the result in a &lt;code&gt;SQLite&lt;/code&gt; database.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# module name - celery_demo.py&lt;/span&gt;
 
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;celery&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Celery&lt;/span&gt;
@@ -894,20 +896,20 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;p&gt;Let's go over this line by line -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;First, we import the &lt;code&gt;Celery&lt;/code&gt; class from the &lt;code&gt;celery&lt;/code&gt; module&lt;/li&gt;
-&lt;li&gt;Next, we create an instance of the class (called app) and pass our module name which is celery_demo in our case, the url of our redis server (running on localhost on the default port 6379) and lastly the link to our SQLite database which will store the task results&lt;/li&gt;
+&lt;li&gt;Next, we create an instance of the class (called app) and pass our module name which is &lt;code&gt;celery_demo&lt;/code&gt; in our case, the url of our redis server (running on localhost on the default port 6379) and lastly the link to our &lt;code&gt;SQLite&lt;/code&gt; database which will store the task results&lt;/li&gt;
 &lt;li&gt;Finally, we have our function which multiplies two numbers that are passed to it as parameters and returns their product. Note that the function is decorated with &lt;code&gt;@app.task&lt;/code&gt; which will enable us to execute this function/task using our Celery worker&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Next, we will fire up our Celery worker process. Make sure that you are in the virtual environment when executing the below command. Note that we are passing our module name, the worker argument and setting the logging level which will enable us to see results in our console.&lt;/p&gt;
+&lt;p&gt;Next, we will fire up our &lt;code&gt;Celery&lt;/code&gt; worker process.We need to make sure that we are in the virtual environment when executing the below command. The command will be run in a &lt;code&gt;WSL&lt;/code&gt; window. Note that we are passing our module name, the &lt;code&gt;worker&lt;/code&gt; argument and setting the logging level with the &lt;code&gt;--loglevel&lt;/code&gt; argument which will enable us to see results in our console.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;celery -A celery_demo worker --loglevel=info&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="Celery" src="https://codedisciples.in/images/index11/celery.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;Now, we will call our task in a Python REPL using the &lt;code&gt;delay()&lt;/code&gt; method. Calling the task will return an &lt;em&gt;AsyncResult&lt;/em&gt; instance, each having a unique guid.&lt;/p&gt;
+&lt;p&gt;Now, we will call our task in a Python REPL using the &lt;code&gt;delay()&lt;/code&gt; method. Calling the task will return an &lt;em&gt;AsyncResult&lt;/em&gt; instance, each having a unique guid. Again, we will be using &lt;code&gt;WSL&lt;/code&gt; to run the REPL.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="Calling-Task" src="https://codedisciples.in/images/index11/calling-task.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;If the task is called successfully, we can see the result of the task as executed by our Celery worker.&lt;/p&gt;
+&lt;p&gt;If the task is called successfully, we can see the result of the task as executed by our &lt;code&gt;Celery&lt;/code&gt; worker.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="Celery-Result" src="https://codedisciples.in/images/index11/celery-result.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;At this point, our SQLite database is created.  The &lt;em&gt;celery-taskmeta&lt;/em&gt; table will store the results of all our tasks. The tasks can be identified based on the guid of the async result instance. The results will be stored in a binary (BLOB) format. &lt;/p&gt;
+&lt;p&gt;At this point, our &lt;code&gt;SQLite&lt;/code&gt; database is created.  The &lt;code&gt;celery-taskmeta&lt;/code&gt; table will store the results of all our tasks. The tasks can be identified based on the guid of the async result instance. The results will be stored in a binary (BLOB) format. &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="SQLite-Results" src="https://codedisciples.in/images/index11/sqlite-results.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Here is a readable version of our result BLOB.&lt;/p&gt;

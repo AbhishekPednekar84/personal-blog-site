@@ -94,11 +94,13 @@
 
 
 &lt;p&gt;Once we add this code, we can hit &lt;code&gt;Ctrl + X&lt;/code&gt;, &lt;code&gt;Y&lt;/code&gt; and &lt;code&gt;Enter&lt;/code&gt; to save and close the file.&lt;/p&gt;
-&lt;p&gt;Let's go over the contents of this configuration file -
-1. First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS
-2. Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the &lt;code&gt;/static&lt;/code&gt; directory as an alias
-3. With the static content taken care of, nginx will pass any request processed at the root (&lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;) of our application to the proxied server specified in the &lt;code&gt;proxy pass&lt;/code&gt; directive. This proxied server in our case is &lt;code&gt;gunicorn&lt;/code&gt; running on the default port &lt;code&gt;8000&lt;/code&gt;
-4. The &lt;code&gt;proxy_params&lt;/code&gt; file specifies some standard parameters to be used by the proxied server and &lt;code&gt;proxy_redirect off&lt;/code&gt; turns off any redirects&lt;/p&gt;
+&lt;p&gt;Let's go over the contents of this configuration file -&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS&lt;/li&gt;
+&lt;li&gt;Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the &lt;code&gt;/static&lt;/code&gt; directory as an alias&lt;/li&gt;
+&lt;li&gt;With the static content taken care of, nginx will pass any request processed at the root (&lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;) of our application to the proxied server specified in the &lt;code&gt;proxy pass&lt;/code&gt; directive. This proxied server in our case is &lt;code&gt;gunicorn&lt;/code&gt; running on the default port &lt;code&gt;8000&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;proxy_params&lt;/code&gt; file specifies some standard parameters to be used by the proxied server and &lt;code&gt;proxy_redirect off&lt;/code&gt; turns off any redirects&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;Although we have set up nginx to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run &lt;code&gt;sudo ufw allow http/tcp&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;flaskuser&lt;/span&gt;&lt;span class="nv"&gt;@Flask&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nl"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ufw&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
