@@ -108,9 +108,10 @@
 <p>At the end of this post, the reader will be able to install all the pre-requisite software and create presentation slides using Markdown.</p>
 <h2>Software Installation</h2>
 <p>As touched upon already, we will need to install some software before we start writing our Markdown code.</p>
-<h4>Pandoc</h4>
+<h3>Pandoc</h3>
 <p>Pandoc will allow us to convert files from one format to another. In our case, that will be Markdown to PDF. Pandoc can be installed from the <a href="https://pandoc.org/installing.html">official website</a>. Installers are available for different platforms. The installation process will add Pandoc to the system <code>PATH</code>. </p>
-<h4>LaTeX</h4>
+<p><br /></p>
+<h3>LaTeX</h3>
 <p>To install LaTeX, we will install <strong>MiKTeX</strong> which is a free distribution for LaTeX. Installing LaTeX will allow us to use the <code>beamer</code> class which is needed to create our slides and will also enable us to download the <code>PdfLaTeX</code> package, which we will use to convert our Markdown file to a PDF output.</p>
 <p>The MiKTeX installer can be downloaded from the <a href="https://miktex.org/download">official website</a>. If there are any issues with downloading the Windows installer, using the <code>wget</code> package on Windows Subsystem for Linux is a good alternative. Simply start a shell and run <code>wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe</code>.</p>
 <p>Once the installation is complete, we will have access to the MikTex console on our computer and the path to the binary file will be added to the system <code>PATH</code>. First, we will open the <code>Tasks</code> menu and click <code>Refresh file name database</code>.  Next, in the <code>Packages</code> section of the console, we will select the <code>beamer</code>, <code>pdftex</code> and <code>pdftexcmds</code> packages and install them.</p>

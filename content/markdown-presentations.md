@@ -17,10 +17,11 @@ At the end of this post, the reader will be able to install all the pre-requisit
 ## Software Installation
 As touched upon already, we will need to install some software before we start writing our Markdown code.
 
-#### Pandoc
+### Pandoc
 Pandoc will allow us to convert files from one format to another. In our case, that will be Markdown to PDF. Pandoc can be installed from the [official website](https://pandoc.org/installing.html). Installers are available for different platforms. The installation process will add Pandoc to the system `PATH`. 
 
-#### LaTeX
+<br />
+### LaTeX
 To install LaTeX, we will install **MiKTeX** which is a free distribution for LaTeX. Installing LaTeX will allow us to use the `beamer` class which is needed to create our slides and will also enable us to download the `PdfLaTeX` package, which we will use to convert our Markdown file to a PDF output.
 
 The MiKTeX installer can be downloaded from the [official website](https://miktex.org/download). If there are any issues with downloading the Windows installer, using the `wget` package on Windows Subsystem for Linux is a good alternative. Simply start a shell and run `wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe`.
