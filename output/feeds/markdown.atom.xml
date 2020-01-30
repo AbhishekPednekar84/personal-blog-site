@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Markdown</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/markdown.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-01-30T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Presentations with Markdown</title><link href="https://codedisciples.in/markdown-presentations.html" rel="alternate"></link><published>2020-01-30T12:00:00+05:30</published><updated>2020-01-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-01-30:/markdown-presentations.html</id><summary type="html">&lt;p&gt;Creating presentation slides with Markdown, Pandoc and LaTeX&lt;/p&gt;</summary><content type="html">&lt;p&gt;For several years, Microsoft Powerpoint has been the industry's goto software for creating presentation slides. While Powerpoint is great and comes with a lot of features out of the box, there is a bit of a learning curve for beginners. Today, however, several other options make creating slides a lot easier and therefore a lot less time-consuming. One of them is to use Markdown to create slide decks. In this post, we will be using simple Markdown syntax and convert it to a presentation with Pandoc and LaTeX.&lt;/p&gt;
+&lt;p&gt;The post assumes that the reader is familiar with basic Markdown syntax (if not, &lt;a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"&gt;this&lt;/a&gt; is a nice cheatsheet).&lt;/p&gt;
+&lt;p&gt;At the end of this post, the reader will be able to install all the pre-requisite software and create presentation slides using Markdown.&lt;/p&gt;
+&lt;h2&gt;Software Installation&lt;/h2&gt;
+&lt;p&gt;As touched upon already, we will need to install some software before we start writing our Markdown code.&lt;/p&gt;
+&lt;h4&gt;Pandoc&lt;/h4&gt;
+&lt;p&gt;Pandoc will allow us to convert files from one format to another. In our case, that will be Markdown to PDF. Pandoc can be installed from the &lt;a href="https://pandoc.org/installing.html"&gt;official website&lt;/a&gt;. Installers are available for different platforms. The installation process will add Pandoc to the system &lt;code&gt;PATH&lt;/code&gt;. &lt;/p&gt;
+&lt;h4&gt;LaTeX&lt;/h4&gt;
+&lt;p&gt;To install LaTeX, we will install &lt;strong&gt;MiKTeX&lt;/strong&gt; which is a free distribution for LaTeX. Installing LaTeX will allow us to use the &lt;code&gt;beamer&lt;/code&gt; class which is needed to create our slides and will also enable us to download the &lt;code&gt;PdfLaTeX&lt;/code&gt; package, which we will use to convert our Markdown file to a PDF output.&lt;/p&gt;
+&lt;p&gt;The MiKTeX installer can be downloaded from the &lt;a href="https://miktex.org/download"&gt;official website&lt;/a&gt;. If there are any issues with downloading the Windows installer, using the &lt;code&gt;wget&lt;/code&gt; package on Windows Subsystem for Linux is a good alternative. Simply start a shell and run &lt;code&gt;wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once the installation is complete, we will have access to the MikTex console on our computer and the path to the binary file will be added to the system &lt;code&gt;PATH&lt;/code&gt;. First, we will open the &lt;code&gt;Tasks&lt;/code&gt; menu and click &lt;code&gt;Refresh file name database&lt;/code&gt;.  Next, in the &lt;code&gt;Packages&lt;/code&gt; section of the console, we will select the &lt;code&gt;beamer&lt;/code&gt;, &lt;code&gt;pdftex&lt;/code&gt; and &lt;code&gt;pdftexcmds&lt;/code&gt; packages and install them.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="miktex" src="https://codedisciples.in/images/index17/miktex.jpg"&gt;&lt;/p&gt;
+&lt;h1&gt;Writing our Markdown&lt;/h1&gt;
+&lt;p&gt;With all our pre-requisite software now installed, we can write some Markdown. The following code is written in a file named &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;slides&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Abhishek&lt;/span&gt; &lt;span class="n"&gt;Pednekar&lt;/span&gt;
+&lt;span class="c1"&gt;---&lt;/span&gt;
+
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="nb"&gt;Text&lt;/span&gt;
+&lt;span class="o"&gt;###&lt;/span&gt; &lt;span class="n"&gt;Basic&lt;/span&gt; &lt;span class="nb"&gt;text&lt;/span&gt; &lt;span class="n"&gt;formatting&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt; &lt;span class="n"&gt;Syntax&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="k"&gt;Output&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="c1"&gt;---------------|--------- |&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;`**&lt;/span&gt;&lt;span class="n"&gt;Bold&lt;/span&gt;&lt;span class="o"&gt;**`&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;Bold&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;`*&lt;/span&gt;&lt;span class="n"&gt;Emphasis&lt;/span&gt;&lt;span class="o"&gt;*`&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Emphasis&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;`~~&lt;/span&gt;&lt;span class="n"&gt;Strikethrough&lt;/span&gt;&lt;span class="o"&gt;~~`&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;~~&lt;/span&gt;&lt;span class="n"&gt;Strikethrough&lt;/span&gt;&lt;span class="o"&gt;~~|&lt;/span&gt;
+
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Lists&lt;/span&gt;
+&lt;span class="o"&gt;###&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt; &lt;span class="n"&gt;syntax&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Item1&lt;/li&gt;
+&lt;li&gt;Item2&lt;/li&gt;
+&lt;li&gt;Item3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;###&lt;/span&gt; &lt;span class="k"&gt;Output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Item1&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Item2&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Item3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;The first section (enclosed within &lt;code&gt;---&lt;/code&gt;) is the introduction and will be the first slide in our deck. Here we can specify the topic, author, date etc..&lt;/li&gt;
+&lt;li&gt;Each section that starts with a Markdown heading (&lt;code&gt;#&lt;/code&gt; in this case) will correspond to a distinct slide in our deck. It is critical to note that the headings here follow a hierarchical structure. We have used the Markdown &lt;code&gt;#&lt;/code&gt; to specify the title of our first slide. Any smaller heading Markdown's like &lt;code&gt;##&lt;/code&gt; or &lt;code&gt;###&lt;/code&gt; on the slide will therefore just be sub-sections on the slide. Until the next &lt;code&gt;#&lt;/code&gt; is encountered, all the content will be on the first slide itself. Had we used &lt;code&gt;##&lt;/code&gt; to specify the title of the first slide, then &lt;code&gt;###&lt;/code&gt;, &lt;code&gt;####&lt;/code&gt; etc.. would have been subsections on the slide. Also, each section starting with &lt;code&gt;##&lt;/code&gt; would have then corresponded to a distinct slide in our deck.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The content of each slide is written in Markdown syntax. In the next section, we will convert our Markdown file into a PDF slide deck.&lt;/p&gt;
+&lt;h2&gt;Generating the slides&lt;/h2&gt;
+&lt;p&gt;To generate the slides, navigate to the folder containing the &lt;code&gt;demo.md&lt;/code&gt; file in the command prompt / terminal and run the command &lt;code&gt;pandoc demo.md -t beamer -o presentation.pdf&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;By running this command, we are telling &lt;code&gt;pandoc&lt;/code&gt; to (&lt;code&gt;-t&lt;/code&gt;) use the &lt;code&gt;beamer&lt;/code&gt; class and generate an output (&lt;code&gt;-o&lt;/code&gt;) file called &lt;code&gt;presentation.pdf&lt;/code&gt; using the contents of &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;That's it! We should now see a PDF file called &lt;code&gt;presentation.pdf&lt;/code&gt; in the same folder as &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="slide1" src="https://codedisciples.in/images/index17/slide1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide2" src="https://codedisciples.in/images/index17/slide2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide3" src="https://codedisciples.in/images/index17/slide3.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Adding themes&lt;/h2&gt;
+&lt;p&gt;While our presentation looks okay, it would be good to add a nice theme and make it look a lot better. Luckily for us, &lt;code&gt;beamer&lt;/code&gt; comes with some built-in themes and colors to choose from. The &lt;a href="http://deic.uab.es/~iblanes/beamer_gallery/"&gt;Beamer theme gallery&lt;/a&gt; website lists all the available themes and color schemes.&lt;/p&gt;
+&lt;p&gt;To specify a theme, we just need a small change to our introduction section.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;slides&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Abhishek&lt;/span&gt; &lt;span class="n"&gt;Pednekar&lt;/span&gt;
+&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Madrid&lt;/span&gt;
+&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here's how we can specify both, a theme and a color scheme.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;slides&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Abhishek&lt;/span&gt; &lt;span class="n"&gt;Pednekar&lt;/span&gt;
+&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Madrid&lt;/span&gt;
+&lt;span class="n"&gt;colortheme&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;lily&lt;/span&gt;
+&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To generate our new slide deck, we can again run &lt;code&gt;pandoc demo.md -t beamer -o presentation.pdf&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="theme1" src="https://codedisciples.in/images/index17/theme1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme2" src="https://codedisciples.in/images/index17/theme2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme3" src="https://codedisciples.in/images/index17/theme3.jpg"&gt;&lt;/p&gt;</content><category term="Markdown"></category></entry></feed>

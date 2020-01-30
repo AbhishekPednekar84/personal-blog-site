@@ -1,5 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all-en.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2019-12-10T23:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Deploying a Python application on a Linux server - Part II</title><link href="https://codedisciples.in/linux-vps-deployment2.html" rel="alternate"></link><published>2019-12-10T23:00:00+05:30</published><updated>2019-12-10T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-12-10:/linux-vps-deployment2.html</id><summary type="html">&lt;p&gt;Deploying a Flask application on a Virtual Private (Linux) Server&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;part one&lt;/a&gt; of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with &lt;strong&gt;nginx&lt;/strong&gt; and &lt;strong&gt;gunicorn&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all-en.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-01-30T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Presentations with Markdown</title><link href="https://codedisciples.in/markdown-presentations.html" rel="alternate"></link><published>2020-01-30T12:00:00+05:30</published><updated>2020-01-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-01-30:/markdown-presentations.html</id><summary type="html">&lt;p&gt;Creating presentation slides with Markdown, Pandoc and LaTeX&lt;/p&gt;</summary><content type="html">&lt;p&gt;For several years, Microsoft Powerpoint has been the industry's goto software for creating presentation slides. While Powerpoint is great and comes with a lot of features out of the box, there is a bit of a learning curve for beginners. Today, however, several other options make creating slides a lot easier and therefore a lot less time-consuming. One of them is to use Markdown to create slide decks. In this post, we will be using simple Markdown syntax and convert it to a presentation with Pandoc and LaTeX.&lt;/p&gt;
+&lt;p&gt;The post assumes that the reader is familiar with basic Markdown syntax (if not, &lt;a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"&gt;this&lt;/a&gt; is a nice cheatsheet).&lt;/p&gt;
+&lt;p&gt;At the end of this post, the reader will be able to install all the pre-requisite software and create presentation slides using Markdown.&lt;/p&gt;
+&lt;h2&gt;Software Installation&lt;/h2&gt;
+&lt;p&gt;As touched upon already, we will need to install some software before we start writing our Markdown code.&lt;/p&gt;
+&lt;h4&gt;Pandoc&lt;/h4&gt;
+&lt;p&gt;Pandoc will allow us to convert files from one format to another. In our case, that will be Markdown to PDF. Pandoc can be installed from the &lt;a href="https://pandoc.org/installing.html"&gt;official website&lt;/a&gt;. Installers are available for different platforms. The installation process will add Pandoc to the system &lt;code&gt;PATH&lt;/code&gt;. &lt;/p&gt;
+&lt;h4&gt;LaTeX&lt;/h4&gt;
+&lt;p&gt;To install LaTeX, we will install &lt;strong&gt;MiKTeX&lt;/strong&gt; which is a free distribution for LaTeX. Installing LaTeX will allow us to use the &lt;code&gt;beamer&lt;/code&gt; class which is needed to create our slides and will also enable us to download the &lt;code&gt;PdfLaTeX&lt;/code&gt; package, which we will use to convert our Markdown file to a PDF output.&lt;/p&gt;
+&lt;p&gt;The MiKTeX installer can be downloaded from the &lt;a href="https://miktex.org/download"&gt;official website&lt;/a&gt;. If there are any issues with downloading the Windows installer, using the &lt;code&gt;wget&lt;/code&gt; package on Windows Subsystem for Linux is a good alternative. Simply start a shell and run &lt;code&gt;wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once the installation is complete, we will have access to the MikTex console on our computer and the path to the binary file will be added to the system &lt;code&gt;PATH&lt;/code&gt;. First, we will open the &lt;code&gt;Tasks&lt;/code&gt; menu and click &lt;code&gt;Refresh file name database&lt;/code&gt;.  Next, in the &lt;code&gt;Packages&lt;/code&gt; section of the console, we will select the &lt;code&gt;beamer&lt;/code&gt;, &lt;code&gt;pdftex&lt;/code&gt; and &lt;code&gt;pdftexcmds&lt;/code&gt; packages and install them.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="miktex" src="https://codedisciples.in/images/index17/miktex.jpg"&gt;&lt;/p&gt;
+&lt;h1&gt;Writing our Markdown&lt;/h1&gt;
+&lt;p&gt;With all our pre-requisite software now installed, we can write some Markdown. The following code is written in a file named &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;slides&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Abhishek&lt;/span&gt; &lt;span class="n"&gt;Pednekar&lt;/span&gt;
+&lt;span class="c1"&gt;---&lt;/span&gt;
+
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="nb"&gt;Text&lt;/span&gt;
+&lt;span class="o"&gt;###&lt;/span&gt; &lt;span class="n"&gt;Basic&lt;/span&gt; &lt;span class="nb"&gt;text&lt;/span&gt; &lt;span class="n"&gt;formatting&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt; &lt;span class="n"&gt;Syntax&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="k"&gt;Output&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="c1"&gt;---------------|--------- |&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;`**&lt;/span&gt;&lt;span class="n"&gt;Bold&lt;/span&gt;&lt;span class="o"&gt;**`&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;Bold&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;`*&lt;/span&gt;&lt;span class="n"&gt;Emphasis&lt;/span&gt;&lt;span class="o"&gt;*`&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Emphasis&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;`~~&lt;/span&gt;&lt;span class="n"&gt;Strikethrough&lt;/span&gt;&lt;span class="o"&gt;~~`&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;~~&lt;/span&gt;&lt;span class="n"&gt;Strikethrough&lt;/span&gt;&lt;span class="o"&gt;~~|&lt;/span&gt;
+
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Lists&lt;/span&gt;
+&lt;span class="o"&gt;###&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt; &lt;span class="n"&gt;syntax&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Item1&lt;/li&gt;
+&lt;li&gt;Item2&lt;/li&gt;
+&lt;li&gt;Item3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;###&lt;/span&gt; &lt;span class="k"&gt;Output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Item1&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Item2&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Item3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;The first section (enclosed within &lt;code&gt;---&lt;/code&gt;) is the introduction and will be the first slide in our deck. Here we can specify the topic, author, date etc..&lt;/li&gt;
+&lt;li&gt;Each section that starts with a Markdown heading (&lt;code&gt;#&lt;/code&gt; in this case) will correspond to a distinct slide in our deck. It is critical to note that the headings here follow a hierarchical structure. We have used the Markdown &lt;code&gt;#&lt;/code&gt; to specify the title of our first slide. Any smaller heading Markdown's like &lt;code&gt;##&lt;/code&gt; or &lt;code&gt;###&lt;/code&gt; on the slide will therefore just be sub-sections on the slide. Until the next &lt;code&gt;#&lt;/code&gt; is encountered, all the content will be on the first slide itself. Had we used &lt;code&gt;##&lt;/code&gt; to specify the title of the first slide, then &lt;code&gt;###&lt;/code&gt;, &lt;code&gt;####&lt;/code&gt; etc.. would have been subsections on the slide. Also, each section starting with &lt;code&gt;##&lt;/code&gt; would have then corresponded to a distinct slide in our deck.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The content of each slide is written in Markdown syntax. In the next section, we will convert our Markdown file into a PDF slide deck.&lt;/p&gt;
+&lt;h2&gt;Generating the slides&lt;/h2&gt;
+&lt;p&gt;To generate the slides, navigate to the folder containing the &lt;code&gt;demo.md&lt;/code&gt; file in the command prompt / terminal and run the command &lt;code&gt;pandoc demo.md -t beamer -o presentation.pdf&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;By running this command, we are telling &lt;code&gt;pandoc&lt;/code&gt; to (&lt;code&gt;-t&lt;/code&gt;) use the &lt;code&gt;beamer&lt;/code&gt; class and generate an output (&lt;code&gt;-o&lt;/code&gt;) file called &lt;code&gt;presentation.pdf&lt;/code&gt; using the contents of &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;That's it! We should now see a PDF file called &lt;code&gt;presentation.pdf&lt;/code&gt; in the same folder as &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="slide1" src="https://codedisciples.in/images/index17/slide1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide2" src="https://codedisciples.in/images/index17/slide2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide3" src="https://codedisciples.in/images/index17/slide3.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Adding themes&lt;/h2&gt;
+&lt;p&gt;While our presentation looks okay, it would be good to add a nice theme and make it look a lot better. Luckily for us, &lt;code&gt;beamer&lt;/code&gt; comes with some built-in themes and colors to choose from. The &lt;a href="http://deic.uab.es/~iblanes/beamer_gallery/"&gt;Beamer theme gallery&lt;/a&gt; website lists all the available themes and color schemes.&lt;/p&gt;
+&lt;p&gt;To specify a theme, we just need a small change to our introduction section.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;slides&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Abhishek&lt;/span&gt; &lt;span class="n"&gt;Pednekar&lt;/span&gt;
+&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Madrid&lt;/span&gt;
+&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here's how we can specify both, a theme and a color scheme.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;slides&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Abhishek&lt;/span&gt; &lt;span class="n"&gt;Pednekar&lt;/span&gt;
+&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Madrid&lt;/span&gt;
+&lt;span class="n"&gt;colortheme&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;lily&lt;/span&gt;
+&lt;span class="c1"&gt;---&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To generate our new slide deck, we can again run &lt;code&gt;pandoc demo.md -t beamer -o presentation.pdf&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="theme1" src="https://codedisciples.in/images/index17/theme1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme2" src="https://codedisciples.in/images/index17/theme2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme3" src="https://codedisciples.in/images/index17/theme3.jpg"&gt;&lt;/p&gt;</content><category term="Markdown"></category></entry><entry><title>Deploying a Python application on a Linux server - Part II</title><link href="https://codedisciples.in/linux-vps-deployment2.html" rel="alternate"></link><published>2019-12-10T23:00:00+05:30</published><updated>2019-12-10T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-12-10:/linux-vps-deployment2.html</id><summary type="html">&lt;p&gt;Deploying a Flask application on a Virtual Private (Linux) Server&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;part one&lt;/a&gt; of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with &lt;strong&gt;nginx&lt;/strong&gt; and &lt;strong&gt;gunicorn&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with the basics of Linux and Flask. &lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;Click here&lt;/a&gt; to download the source code of the Flask application that will be deployed. An important thing to note is that we will be using a &lt;code&gt;.env&lt;/code&gt; file to configure our environment variables (see &lt;code&gt;.env.example&lt;/code&gt; in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on &lt;a href="ttps://www.google.com/recaptcha/"&gt;Google reCAPTCHA&lt;/a&gt; to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by &lt;a href="https://www.elephantsql.com/"&gt;ElephantSQL&lt;/a&gt;. The &lt;code&gt;DATABASE_URL&lt;/code&gt; variable in the &lt;code&gt;.env&lt;/code&gt; file will need to be modified depending on the database in use.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Environment&lt;/span&gt; &lt;span class="n"&gt;Variables&lt;/span&gt;
@@ -1288,7 +1382,7 @@ To fix the message, we simply run &lt;code&gt;git commit --amend -m "Updated cal
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="amend2" src="https://codedisciples.in/images/index6/amend2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-Few &lt;strong&gt;important&lt;/strong&gt; things to note - running a &lt;code&gt;git log&lt;/code&gt; essentially shows us the &lt;em&gt;history&lt;/em&gt; of commits that were made thus far. It also shows us the value of the unique hash associated with our commits. Notice that when we ran the "--amend" to fix our commit message, we did not add a new commit. Instead, we replaced the commit with the "bad" message, with our new commit. This is evident from the value of the hash associated with the two commits. They are not the same. What does this mean? Well, we just modified the git history by running the "--amend" command. This is fine as long as we are the only ones with access to the code base/repository in question or if no one else has pulled our commits before we modified the history. When working in a team wherein multiple developers are accessing the same repository, modifying the git history is risky as it could cause problems with the local repositories of other developers when they pull in our changes. Later in the post, we will look at ways to make corrections without modifying the git history.&lt;/p&gt;
+Few important things to note - running a &lt;code&gt;git log&lt;/code&gt; essentially shows us the &lt;em&gt;history&lt;/em&gt; of commits that were made thus far. It also shows us the value of the unique hash associated with our commits. Notice that when we ran the &lt;code&gt;--amend&lt;/code&gt; to fix our commit message, we did not add a new commit. Instead, we replaced the commit with the "bad" message, with our new commit. This is evident from the value of the hash associated with the two commits. They are not the same. What does this mean? Well, we just modified the git history by running the &lt;code&gt;--amend&lt;/code&gt; command. This is fine as long as we are the only ones with access to the code base/repository in question or if no one else has pulled our commits before we modified the history. When working in a team wherein multiple developers are accessing the same repository, modifying the git history is risky as it could cause problems with the local repositories of other developers when they pull in our changes. Later in the post, we will look at ways to make corrections without modifying the git history.&lt;/p&gt;
 &lt;p&gt;In the previous example, we fixed a "bad" commit message. Now, what if we forgot to include an entire file before running our &lt;code&gt;git commit&lt;/code&gt;? Let's say, we now create a .gitignore file in our repository and would like to include it with the &lt;strong&gt;last&lt;/strong&gt; commit that we made. We can add the .gitignore file to staging and run &lt;code&gt;git commit --amend&lt;/code&gt;. Running this command will open an interactive window that shows us the changes that will be added to the last commit. The commit message can also be modified (in the window) if needed. Since we are not making any further changes, we can use &lt;code&gt;:wq&lt;/code&gt; to exit. Following this, our .gitignore file will be added to the last commit.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;img alt="amend3" src="https://codedisciples.in/images/index6/amend3.jpg"&gt;&lt;/p&gt;
