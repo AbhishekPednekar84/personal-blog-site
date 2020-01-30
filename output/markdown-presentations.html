@@ -110,7 +110,6 @@
 <p>As touched upon already, we will need to install some software before we start writing our Markdown code.</p>
 <h3>Pandoc</h3>
 <p>Pandoc will allow us to convert files from one format to another. In our case, that will be Markdown to PDF. Pandoc can be installed from the <a href="https://pandoc.org/installing.html">official website</a>. Installers are available for different platforms. The installation process will add Pandoc to the system <code>PATH</code>. </p>
-<p><br /></p>
 <h3>LaTeX</h3>
 <p>To install LaTeX, we will install <strong>MiKTeX</strong> which is a free distribution for LaTeX. Installing LaTeX will allow us to use the <code>beamer</code> class which is needed to create our slides and will also enable us to download the <code>PdfLaTeX</code> package, which we will use to convert our Markdown file to a PDF output.</p>
 <p>The MiKTeX installer can be downloaded from the <a href="https://miktex.org/download">official website</a>. If there are any issues with downloading the Windows installer, using the <code>wget</code> package on Windows Subsystem for Linux is a good alternative. Simply start a shell and run <code>wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe</code>.</p>
@@ -119,37 +118,35 @@
 <img alt="miktex" src="https://codedisciples.in/images/index17/miktex.jpg"></p>
 <h1>Writing our Markdown</h1>
 <p>With all our pre-requisite software now installed, we can write some Markdown. The following code is written in a file named <code>demo.md</code>.</p>
-<div class="highlight"><pre><span></span><span class="c1">---</span>
-<span class="n">title</span><span class="p">:</span> 
-<span class="o">-</span> <span class="k">Create</span> <span class="n">slides</span> <span class="k">in</span> <span class="n">Markdown</span>
-<span class="n">author</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">Abhishek</span> <span class="n">Pednekar</span>
-<span class="c1">---</span>
+<div class="highlight"><pre><span></span>---
+title: 
+- Create slides in Markdown
+author:
+- Abhishek Pednekar
+---
 
 
-<span class="o">#</span> <span class="nb">Text</span>
-<span class="o">###</span> <span class="n">Basic</span> <span class="nb">text</span> <span class="n">formatting</span>
-<span class="o">|</span> <span class="n">Markdown</span> <span class="n">Syntax</span> <span class="o">|</span> <span class="k">Output</span> <span class="o">|</span>
-<span class="o">|</span> <span class="c1">---------------|--------- |</span>
-<span class="o">|</span> <span class="o">`**</span><span class="n">Bold</span><span class="o">**`</span> <span class="o">|</span> <span class="o">**</span><span class="n">Bold</span><span class="o">**</span> <span class="o">|</span>
-<span class="o">|</span> <span class="o">`*</span><span class="n">Emphasis</span><span class="o">*`</span> <span class="o">|</span> <span class="o">*</span><span class="n">Emphasis</span><span class="o">*</span> <span class="o">|</span>
-<span class="o">|</span> <span class="o">`~~</span><span class="n">Strikethrough</span><span class="o">~~`</span> <span class="o">|</span> <span class="o">~~</span><span class="n">Strikethrough</span><span class="o">~~|</span>
+# Text
+### Basic text formatting
+| Markdown Syntax | Output |
+| ---------------|--------- |
+| `**Bold**` | **Bold** |
+| `*Emphasis*` | *Emphasis* |
+| `~~Strikethrough~~` | ~~Strikethrough~~|
 
 
-<span class="o">#</span> <span class="n">Lists</span>
-<span class="o">###</span> <span class="n">Markdown</span> <span class="n">syntax</span><span class="p">:</span>
-</pre></div>
+# Lists
+### Markdown syntax:
+<span class="nt">&lt;pre&gt;</span>
++ Item1
++ Item2
++ Item3
+<span class="nt">&lt;/pre&gt;</span>
 
-
-<ul>
-<li>Item1</li>
-<li>Item2</li>
-<li>Item3</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="o">###</span> <span class="k">Output</span><span class="p">:</span>
-<span class="o">+</span> <span class="n">Item1</span>
-<span class="o">+</span> <span class="n">Item2</span>
-<span class="o">+</span> <span class="n">Item3</span>
+### Output:
++ Item1
++ Item2
++ Item3
 </pre></div>
 
 

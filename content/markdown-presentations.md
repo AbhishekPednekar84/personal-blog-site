@@ -20,7 +20,6 @@ As touched upon already, we will need to install some software before we start w
 ### Pandoc
 Pandoc will allow us to convert files from one format to another. In our case, that will be Markdown to PDF. Pandoc can be installed from the [official website](https://pandoc.org/installing.html). Installers are available for different platforms. The installation process will add Pandoc to the system `PATH`. 
 
-<br />
 ### LaTeX
 To install LaTeX, we will install **MiKTeX** which is a free distribution for LaTeX. Installing LaTeX will allow us to use the `beamer` class which is needed to create our slides and will also enable us to download the `PdfLaTeX` package, which we will use to convert our Markdown file to a PDF output.
 
@@ -54,11 +53,12 @@ author:
 
 # Lists
 ### Markdown syntax:
-```
+<pre>
 + Item1
 + Item2
 + Item3
-```
+</pre>
+
 ### Output:
 + Item1
 + Item2
