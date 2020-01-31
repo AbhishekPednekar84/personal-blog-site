@@ -23,14 +23,14 @@ Pandoc will allow us to convert files from one format to another. In our case, t
 ### LaTeX
 To install LaTeX, we will install **MiKTeX** which is a free distribution for LaTeX. Installing LaTeX will allow us to use the `beamer` class which is needed to create our slides and will also enable us to download the `PdfLaTeX` package, which we will use to convert our Markdown file to a PDF output.
 
-The MiKTeX installer can be downloaded from the [official website](https://miktex.org/download). If there are any issues with downloading the Windows installer, using the `wget` package on Windows Subsystem for Linux is a good alternative. Simply start a shell and run `wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe`.
+The MiKTeX installer can be downloaded from the [official website](https://miktex.org/download). If there are any issues with downloading the Windows installer, using the `wget` package on Windows Subsystem for Linux is a good alternative. [Here](https://www.youtube.com/watch?v=xzgwDbe7foQ) is a nice tutorial on setting up WSL. Once the Linux shell is up and running, execute the command `apt install wget` to install the `wget` package. Once installed, run `wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe` to download the MiKTeX installer.
 
 Once the installation is complete, we will have access to the MikTex console on our computer and the path to the binary file will be added to the system `PATH`. First, we will open the `Tasks` menu and click `Refresh file name database`.  Next, in the `Packages` section of the console, we will select the `beamer`, `pdftex` and `pdftexcmds` packages and install them.
 
 <br />
 ![miktex]({static}/images/index17/miktex.jpg)
 
-# Writing our Markdown
+## Writing our Markdown
 With all our pre-requisite software now installed, we can write some Markdown. The following code is written in a file named `demo.md`.
 
 ```
