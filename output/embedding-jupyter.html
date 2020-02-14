@@ -103,29 +103,28 @@
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In this post, we will learn how to embed <strong>Jupyter Notebooks</strong> in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like <strong><a href="https://codedesiples.in">Code Disciples</a></strong>) since the content can be added directly to the <strong>Markdown</strong>. Readers do not need to navigate to a notebook server or a repository to explicitly view the notebook.</p>
-<p>To start off, we will create a <strong><a href="https://gist.github.com/">Github Gist</a></strong> by uploading a <strong>Jupyter Notebook (.ipynb file)</strong>. To keep it simple, we will be using a notebook containing some Math formulae in <strong>Markdown</strong>. We can use a repository instead of a Gist. However, since we are dealing with just a few lines of Markdown, a Gist seems more appropriate. </p>
-<p>Once our gist is in place, we will be using a tool called <em>NBInteract</em> to generate an <strong>html</strong> file corresponding to our notebook. After a few modifications to the html file, we will embed the content to this blog post using an <strong>iframe</strong>. </p>
-<p>Now, while I agree that there might be other ways to achieve the same results, this is what I have found to best suit my needs. So let's get started.</p>
-<h2>Creating the Gist</h2>
-<p>To create a gist, one needs to have a <a href="https://github.com/">Github</a> account. Assuming you already have one, click on the <em>New Gist</em> option on the top right of the page. </p>
+	<p>In this post, we will learn how to embed a <code>Jupyter Notebook</code> in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like <strong><a href="https://codedesiples.in">Code Disciples</a></strong>) since the content can be added directly to the <code>markdown</code>. Readers therefore do not need to navigate to a notebook server or a repository to explicitly view the notebook.</p>
+<p>This post assumes that the reader has some experience of working with <code>Github</code> and is familiar with <code>python</code> and <code>pip</code>.</p>
+<p>To start, we will create a <strong><a href="https://gist.github.com/">Github Gist</a></strong> by uploading a <code>Jupyter Notebook</code> (a file with extension <code>.ipynb</code>). To keep it simple, we will be using a notebook containing some Math formulae written in <code>markdown</code>. We can use a repository instead of a <code>gist</code>. However, since we are dealing with just a few lines of code, a <code>gist</code> seems more appropriate. </p>
+<p>Once our <code>gist</code> is in place, we will be using a tool called <code>NBInteract</code> to generate an <code>html</code> file corresponding to our notebook. After a few modifications to the <code>html</code> file, we will embed the content in this blog post using an <code>iframe</code> tag. Agreed, that there might be other and no doubt better ways to achieve the same results. However, this is one of the simplest methods to achieve our result.</p>
+<p>At the end of the post, the reader will be aware of how one can add a <code>Jupyter Notebook</code> to a website using an <code>iframe</code>.</p>
+<h2>Creating the <code>gist</code></h2>
+<p>To create a <code>gist</code>, one needs to have a <a href="https://github.com/">Github</a> account. Assuming we already have one, we can create a new <code>gist</code> by navigating to <a href="https://gist.github.com/&lt;Your github username&gt;">https://gist.github.com/<Your github username></a> and clicking on the <code>+</code> icon on the top right.</p>
 <p>Before we proceed, we will need a Jupyter Notebook to work with. The one used for this blog is available in this <em><a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_2-embed-jupyter">Github repository</a></em>. </p>
-<p>On the gist creation page, we will need to add a description and the notebook filename with the extension (.ipynb). To add the contents, we can simply drag and drop our notebook to the page. If there are any dependencies (third-party packages) that are needed in order for the code in our notebook to run, we will need to add those as well. Dependencies if any, will need to be added to either <em>requirements.txt</em> (pypi) or <em>environment.yml</em> (Conda / pypi) files. These files will also need to be added to the gist by clicking on the <strong>Add file</strong> button. Finally, to create the gist click either of the <strong>Create gist</strong> buttons. I will be creating a public gist.</p>
+<p>With our notebook now in place, we can simply drag and drop it on the page to create a new <code>gist</code>. If there are any dependencies (third-party packages) that are needed in order for the code in our notebook to run, we will need to add those as well. Dependencies if any, will need to be added to either a <code>requirements.txt</code> file (for pypi) or an <code>environment.yml</code> file (for Conda / pypi). These files will also need to be added to the <code>gist</code>. Finally, to create the gist click either of the <code>Create gist</code> buttons. Our <code>gist</code> will be public in this case.</p>
 <p><br/>
 <img alt="Gist" src="https://codedisciples.in/images/index2/gist.jpg"></p>
 <h2>Creating the iframe</h2>
-<p>To create our iframe that will eventually be embedded into the blog, we will first convert our Jupyter Notebook into an html file. This will be achieved via a third-party package called <em><a href="https://www.nbinteract.com/">nbinteract</a></em>. So let's first create a <em><a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a></em> in the directory containing our notebook. </p>
-<p>Once the virtual environment is activated, let us run the <code>pip install nbinteract</code> command to install the library.</p>
-<p>nbinteract is a command-line application (CLI). In order to use it, first navigate to the directory containing the .ipynb file and then run the below command.</p>
+<p>As mentioned earlier, we will be using the <code>iframe</code> tag in <code>html</code> to embed our notebook. Before we can do that, our notebook will need to be converted to an <code>html</code> file. This will be achieved via a third-party package called <em><a href="https://www.nbinteract.com/">nbinteract</a></em>. So let's first create a <em><a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a></em> in the directory containing our notebook. Creating a virtual environment is optional but is a good practice as it isolates all our project dependencies. </p>
+<p>Once the virtual environment is activated, we will run the <code>pip install nbinteract</code> command to install the library. <code>nbinteract</code> is a command-line application (CLI). To use it, we will first navigate to the directory containing the <code>.ipynb</code> file and then run the below command.</p>
 <div class="highlight"><pre><span></span><span class="n">nbinteract</span> <span class="o">&lt;</span><span class="n">notebook_filename</span><span class="o">&gt;</span><span class="p">.</span><span class="n">ipynb</span> <span class="o">-</span><span class="n">s</span> <span class="o">&lt;</span><span class="n">GitHub_Username</span><span class="o">&gt;/&lt;</span><span class="n">Gist_ID</span><span class="o">&gt;</span>
 </pre></div>
 
 
 <p><br/>
 <img alt="NBInteract" src="https://codedisciples.in/images/index2/nbinteract.jpg"></p>
-<p><br/>
-This will create an html file with the same name as your Jupyter Notebook. Now before creating the iframe, we will need to make a couple of changes to the <strong>html</strong> file.</p>
-<p>In the embedded JavaScript at the end of the file, change the provider from <em>gh</em> to <em>gist</em>. No change will be needed if you are using a GitHub Repository.</p>
+<p>This will create an <code>html</code> file with the same name as our Jupyter Notebook. Now before creating the <code>iframe</code>, we will need to make a couple of changes to the <code>html</code> file.</p>
+<p>In the embedded <code>JavaScript</code> at the end of the file, we will change the provider from <code>gh</code> to <code>gist</code>. Had we used a Github repository instead of a <code>gist</code>, no change was needed.</p>
 <div class="highlight"><pre><span></span>  <span class="o">&lt;!--</span> <span class="nv">Loads</span> <span class="nv">nbinteract</span> <span class="nv">package</span> <span class="o">--&gt;</span>
   <span class="o">&lt;</span><span class="nv">script</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">https://unpkg.com/nbinteract-core</span><span class="s2">&quot;</span> <span class="nv">async</span><span class="o">&gt;&lt;/</span><span class="nv">script</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="nv">script</span><span class="o">&gt;</span>
@@ -150,25 +149,23 @@ This will create an html file with the same name as your Jupyter Notebook. Now b
 </pre></div>
 
 
-<p>Also, nbinteract inserts a whole bunch of <strong>Bootstrap</strong> and <strong>Font Awesome CSS</strong> in the file. So keep as much or as little of it as you need. Finally, if you would like only a subset of your notebook to be visible on the website, you can delete the unwanted cells by removing the corresponding div tags form the html file.</p>
+<p>Also, <code>nbinteract</code> inserts a whole bunch of <code>Bootstrap</code> and <code>Font-Awesome CSS</code> in the file. So we can keep as much or as little of it. Finally, some sections of the notebook can be excluded if needed by simply removing the corresponding <code>div</code> tags.</p>
 <p>For example, to exclude this cell,</p>
 <p><br/>
 <img alt="delete-nb" src="https://codedisciples.in/images/index2/delete-nb.jpg"></p>
-<p><br/>
-remove this block from the html file</p>
+<p>we can remove this block from the html file</p>
 <p><br/>
 <img alt="delete-html" src="https://codedisciples.in/images/index2/delete-html.jpg"></p>
-<p><br/>
-Now, let's embed an iframe tag in our blog, linking to the html file. I will be adding the below iframe tag directly to the Markdown corresponding to this blog. </p>
+<p>Now, let's embed an <code>iframe</code> tag in our blog that links to the <code>html</code> file created by <code>nbinteract</code>. we will be adding the below iframe tag directly to the <code>markdown</code> of this blog post. </p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;https://codedisciples.in/Index_2-Embed_Jupyter.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
 </pre></div>
 
 
-<p>Just like in a Jupyter notebook, you can view the underlying code (Markdown in our case) by right-clicking on any of the formulae and viewing the plain text source. </p>
+<p>Just like in a <code>Jupyter notebook</code>, we can view the underlying code (<code>markdown</code> in our case) by right-clicking on any of the formulae and viewing the plain text source. </p>
 <p><br/>
 <iframe style="height: 500px" src="https://codedisciples.in/Index_2-Embed_Jupyter.html"></iframe></p>
 <p><br/>
-In conclusion, I would like to say that the best use case for embedding a notebook is interactive content. If your notebook contains plots which have interactive IPython widgets, those can be embedded into your blog. Users can then interact with the plot on the website using the widgets. Some great examples have been provided in the NBInteract documentation. </p>
+In conclusion, one of the best use cases for embedding a notebook is interactive content. If a notebook contains plots which have interactive <code>IPython widgets</code>, then those can be embedded into a website. Users can then interact with the plot on the website using the widgets. Some great examples have been provided in the <a href="https://www.nbinteract.com/examples/examples_intro.html">NBInteract documentation</a>. </p>
   </div>
   
   <br/>
