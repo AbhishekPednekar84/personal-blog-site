@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="44512ccc-31a4-4157-ba49-6e7939b5fc18" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/output/advanced-git.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/advanced-git.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/archives.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/archives.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/author/abhishek-pednekar.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/author/abhishek-pednekar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/author/abhishek-pednekar2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/author/abhishek-pednekar2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/author/abhishek-pednekar3.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/author/abhishek-pednekar3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/author/abhishek-pednekar4.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/author/abhishek-pednekar4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/authors.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/authors.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/categories.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/docker.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/docker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/flask.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/flask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/git.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/git.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/linux.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/linux.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/markdown.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/markdown.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/python.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/python.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/category/python2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/category/python2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/celery-windows.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/celery-windows.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/docker-bind-mounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/docker-bind-mounts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/docker-postgres.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/docker-postgres.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/embedding-jupyter.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/embedding-jupyter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/abhishek-pednekar.rss.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/all-en.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/all-en.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/all.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/all.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/docker.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/docker.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/flask.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/flask.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/git.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/git.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/linux.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/linux.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/markdown.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/markdown.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/feeds/python.atom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output/feeds/python.atom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flask-commands.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/flask-commands.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flask-heroku.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/flask-heroku.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flask-sqlalchemy-queries.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/flask-sqlalchemy-queries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/git-rebase.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/git-rebase.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/google-map-plots.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/google-map-plots.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/index2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/index3.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/index3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/index4.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/index4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/linux-vps-deployment1.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/linux-vps-deployment1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/linux-vps-deployment2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/linux-vps-deployment2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/markdown-presentations.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/markdown-presentations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/named-tuples.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/named-tuples.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/pre-commit.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/pre-commit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/pythonic-dictionaries.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/pythonic-dictionaries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/reminders.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/reminders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/aws.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/aws.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/celery.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/celery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/docker.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/docker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/flask.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/flask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/git.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/git.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/google-maps.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/google-maps.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/heroku.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/heroku.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/jupyter.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/jupyter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/linux.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/linux.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/markdown.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/markdown.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/postgres.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/postgres.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/python.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/python.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/python2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/python2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tag/python3.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tag/python3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/tags.html" beforeDir="false" afterPath="$PROJECT_DIR$/output/tags.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pelicanconf.py" beforeDir="false" afterPath="$PROJECT_DIR$/pelicanconf.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pelicanconf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/content/toggle-switch.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="580">
+                <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/content/embedding-jupyter.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="-1245" />
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>repo</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/pelicanconf.py" />
+        <option value="$PROJECT_DIR$/content/toggle-switch.md" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="personal-blog-site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="personal-blog-site" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="personal-blog-site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="personal-blog-site" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="44512ccc-31a4-4157-ba49-6e7939b5fc18" name="Default Changelist" comment="" />
+      <created>1578204325923</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578204325923</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20789288" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/content/linux-vps-deployment2.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="235">
+            <caret line="13" column="279" selection-start-line="13" selection-start-column="275" selection-end-line="13" selection-end-column="279" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/linux-vps-deployment.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-1753">
+            <caret line="49" column="137" selection-start-line="49" selection-start-column="137" selection-end-line="49" selection-end-column="137" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="89" column="11" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
+          <folding>
+            <element signature="e#25#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/flask-commands.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="909">
+            <caret line="107" column="28" selection-start-line="107" selection-start-column="28" selection-end-line="107" selection-end-column="28" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/flask-sqlalchemy-queries.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/flask-heroku.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="2200">
+            <caret line="110" selection-start-line="110" selection-end-line="110" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/named-tuples.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="600">
+            <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/reminders.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/markdown-presentations.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-48">
+            <caret selection-end-line="7" selection-end-column="48" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pelicanconf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/embedding-jupyter.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-1245" />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/toggle-switch.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="580">
+            <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

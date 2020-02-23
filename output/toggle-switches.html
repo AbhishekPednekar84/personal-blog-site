@@ -8,7 +8,7 @@
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Embedding Jupyter Notebooks in a website - Code Disciples</title>
+    <title>Toggle Switches - Code Disciples</title>
 
    
         <link rel="stylesheet"
@@ -87,85 +87,123 @@
 <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
 <abbr class="article-header-date">
-  Mon 19 August 2019
+  Sun 23 February 2020
 </abbr> <h1>
-  <a href="http://localhost:8000/embedding-jupyter.html" rel="bookmark"
-     title="Permalink to Embedding Jupyter Notebooks in a website">
-    Embedding Jupyter Notebooks in a website
+  <a href="http://localhost:8000/toggle-switches.html" rel="bookmark"
+     title="Permalink to Toggle Switches">
+    Toggle Switches
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="http://localhost:8000/author/abhishek-pednekar.html">Abhishek Pednekar</a>
     in 
-    <a href="http://localhost:8000/category/python.html">
-      Python</a>
+    <a href="http://localhost:8000/category/css.html">
+      CSS</a>
     &nbsp;&nbsp;
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In this post, we will learn how to embed a <code>Jupyter Notebook</code> in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like <strong><a href="https://codedesiples.in">Code Disciples</a></strong>) since the content can be added directly to the <code>markdown</code>. Readers therefore do not need to navigate to a notebook server or a repository to explicitly view the notebook.</p>
-<p>This post assumes that the reader has some experience of working with <code>Github</code> and is familiar with <code>python</code> and <code>pip</code>.</p>
-<p>To start, we will create a <strong><a href="https://gist.github.com/">Github Gist</a></strong> by uploading a <code>Jupyter Notebook</code> (a file with extension <code>.ipynb</code>). To keep it simple, we will be using a notebook containing some Math formulae written in <code>markdown</code>. We can use a repository instead of a <code>gist</code>. However, since we are dealing with just a few lines of code, a <code>gist</code> seems more appropriate. </p>
-<p>Once our <code>gist</code> is in place, we will be using a tool called <code>NBInteract</code> to generate an <code>html</code> file corresponding to our notebook. After a few modifications to the <code>html</code> file, we will embed the content in this blog post using an <code>iframe</code> tag. Agreed, that there might be other and no doubt better ways to achieve the same results. However, this is one of the simplest methods to achieve our result.</p>
-<p>At the end of the post, the reader will be aware of how one can add a <code>Jupyter Notebook</code> to a website using an <code>iframe</code>.</p>
-<h2>Creating the <code>gist</code></h2>
-<p>To create a <code>gist</code>, one needs to have a <a href="https://github.com/">Github</a> account. Assuming we already have one, we can create a new <code>gist</code> by navigating to <a href="https://gist.github.com/&lt;Your github username&gt;">https://gist.github.com/<Your github username></a> and clicking on the <code>+</code> icon on the top right.</p>
-<p>Before we proceed, we will need a Jupyter Notebook to work with. The one used for this blog is available in this <em><a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_2-embed-jupyter">Github repository</a></em>. </p>
-<p>With our notebook now in place, we can simply drag and drop it on the page to create a new <code>gist</code>. If there are any dependencies (third-party packages) that are needed in order for the code in our notebook to run, we will need to add those as well. Dependencies if any, will need to be added to either a <code>requirements.txt</code> file (for pypi) or an <code>environment.yml</code> file (for Conda / pypi). These files will also need to be added to the <code>gist</code>. Finally, to create the gist click either of the <code>Create gist</code> buttons. Our <code>gist</code> will be public in this case.</p>
-<p><br/>
-<img alt="Gist" src="http://localhost:8000/images/index2/gist.jpg"></p>
-<h2>Creating the iframe</h2>
-<p>As mentioned earlier, we will be using the <code>iframe</code> tag in <code>html</code> to embed our notebook. Before we can do that, our notebook will need to be converted to an <code>html</code> file. This will be achieved via a third-party package called <em><a href="https://www.nbinteract.com/">nbinteract</a></em>. So let's first create a <em><a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a></em> in the directory containing our notebook. Creating a virtual environment is optional but is a good practice as it isolates all our project dependencies. </p>
-<p>Once the virtual environment is activated, we will run the <code>pip install nbinteract</code> command to install the library. <code>nbinteract</code> is a command-line application (CLI). To use it, we will first navigate to the directory containing the <code>.ipynb</code> file and then run the below command.</p>
-<div class="highlight"><pre><span></span><span class="n">nbinteract</span> <span class="o">&lt;</span><span class="n">notebook_filename</span><span class="o">&gt;</span><span class="p">.</span><span class="n">ipynb</span> <span class="o">-</span><span class="n">s</span> <span class="o">&lt;</span><span class="n">GitHub_Username</span><span class="o">&gt;/&lt;</span><span class="n">Gist_ID</span><span class="o">&gt;</span>
+	<p>Modern websites no longer use vanilla checkboxes. Toggle switches built on top of checkboxes give any UI a cleaner and professional look and feel.</p>
+<p>In this post, we will learn how to create toggle switches using <code>HTML</code> and <code>CSS</code>.</p>
+<p>This post assumes that the reader is familiar with basic <code>HTML</code> and <code>CSS</code>. </p>
+<h2>HTML</h2>
+<p>The HTML for our toggle switch consists of just three tags - <code>&lt;label&gt;</code>, <code>&lt;input&gt;</code> and <code>&lt;span&gt;</code>. The <code>&lt;label&gt;</code> will be a container and 
+will constitute the switch while the <code>&lt;span&gt;</code> will constitute the slider that moves from left to right and vice versa. The <code>checkbox</code> 
+element is what our toggle switch will be built upon. In other words, checking the box will move our slider to the <code>on</code> position 
+and un-checking it will move the slider to the <code>off</code> position.</p>
+<div class="highlight"><pre><span></span>  <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">&quot;switch&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;slider&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/label&gt;</span>
 </pre></div>
 
 
-<p><br/>
-<img alt="NBInteract" src="http://localhost:8000/images/index2/nbinteract.jpg"></p>
-<p>This will create an <code>html</code> file with the same name as our Jupyter Notebook. Now before creating the <code>iframe</code>, we will need to make a couple of changes to the <code>html</code> file.</p>
-<p>In the embedded <code>JavaScript</code> at the end of the file, we will change the provider from <code>gh</code> to <code>gist</code>. Had we used a Github repository instead of a <code>gist</code>, no change was needed.</p>
-<div class="highlight"><pre><span></span>  <span class="o">&lt;!--</span> <span class="nv">Loads</span> <span class="nv">nbinteract</span> <span class="nv">package</span> <span class="o">--&gt;</span>
-  <span class="o">&lt;</span><span class="nv">script</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">https://unpkg.com/nbinteract-core</span><span class="s2">&quot;</span> <span class="nv">async</span><span class="o">&gt;&lt;/</span><span class="nv">script</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="nv">script</span><span class="o">&gt;</span>
-    <span class="ss">(</span><span class="nv">function</span> <span class="nv">setupNbinteract</span><span class="ss">()</span> {
-      <span class="o">//</span> <span class="k">If</span> <span class="nv">NbInteract</span> <span class="nv">hasn</span><span class="s1">&#39;</span><span class="s">t loaded, wait one second and try again</span>
-      <span class="k">if</span> <span class="ss">(</span><span class="nv">window</span>.<span class="nv">NbInteract</span> <span class="o">===</span> <span class="nv">undefined</span><span class="ss">)</span> {
-        <span class="nv">setTimeout</span><span class="ss">(</span><span class="nv">setupNbinteract</span>, <span class="mi">1000</span><span class="ss">)</span>
-        <span class="k">return</span>
-      }
+<h2>CSS</h2>
+<p>The <code>CSS</code> is what will render our simple <code>checkbox</code> into a nice looking toggle switch.</p>
+<p>The <code>switch</code> class will have a <code>relative</code> positioning so that the position of the <code>slider</code> can be set to <code>absolute</code>. The other properties will
+set the <code>width</code> and <code>height</code> of the switch. We will also set the <code>opacity</code> of the <code>checkbox</code> to <code>0</code>, so that the original <code>checkbox</code> 
+element is not visible (especially for rounded toggle switches).</p>
+<div class="highlight"><pre><span></span><span class="na">.switch</span> <span class="err">{</span>
+  <span class="nl">position:</span> <span class="nf">relative</span><span class="c">;</span>
+  <span class="nl">display:</span> <span class="nf">block</span><span class="c">;</span>
+  <span class="nl">width:</span> <span class="err">60</span><span class="nf">px</span><span class="c">;</span>
+  <span class="nl">height:</span> <span class="err">34</span><span class="nf">px</span><span class="c">;</span>
+<span class="err">}</span>
 
-      <span class="nv">var</span> <span class="nv">interact</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">window</span>.<span class="nv">NbInteract</span><span class="ss">(</span>{
-        <span class="nv">spec</span>: <span class="s1">&#39;</span><span class="s">&lt;GitHub_Username&gt;/&lt;Gist_ID&gt;/master</span><span class="s1">&#39;</span>,
-        <span class="nv">baseUrl</span>: <span class="s1">&#39;</span><span class="s">https://mybinder.org</span><span class="s1">&#39;</span>,
-        <span class="o">//</span> <span class="nv">provider</span>: <span class="s1">&#39;</span><span class="s">gh</span><span class="s1">&#39;</span>,
-        <span class="nv">provider</span>: <span class="s1">&#39;</span><span class="s">gist</span><span class="s1">&#39;</span>,
-      }<span class="ss">)</span>
-      <span class="nv">interact</span>.<span class="nv">prepare</span><span class="ss">()</span>
-
-      <span class="nv">window</span>.<span class="nv">interact</span> <span class="o">=</span> <span class="nv">interact</span>
-    }<span class="ss">)()</span>
-  <span class="o">&lt;/</span><span class="nv">script</span><span class="o">&gt;</span>
+<span class="na">.switch</span> <span class="no">input</span> <span class="err">{</span>
+  <span class="nl">opacity:</span> <span class="err">0</span><span class="c">;</span>
+<span class="err">}</span>
 </pre></div>
 
 
-<p>Also, <code>nbinteract</code> inserts a whole bunch of <code>Bootstrap</code> and <code>Font-Awesome CSS</code> in the file. So we can keep as much or as little of it. Finally, some sections of the notebook can be excluded if needed by simply removing the corresponding <code>div</code> tags.</p>
-<p>For example, to exclude this cell,</p>
-<p><br/>
-<img alt="delete-nb" src="http://localhost:8000/images/index2/delete-nb.jpg"></p>
-<p>we can remove this block from the html file</p>
-<p><br/>
-<img alt="delete-html" src="http://localhost:8000/images/index2/delete-html.jpg"></p>
-<p>Now, let's embed an <code>iframe</code> tag in our blog that links to the <code>html</code> file created by <code>nbinteract</code>. we will be adding the below iframe tag directly to the <code>markdown</code> of this blog post. </p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;https://codedisciples.in/Index_2-Embed_Jupyter.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
+<p>Next, we will style the slider. As mentioned above, the slider will have its position property set to <code>absolute</code>. Using the <code>before</code> 
+selector, we are ensuing that the slider starts on the left side of the switch, which is the <code>off</code> position. For the rectangular switch, 
+the slider will be a square having a <code>width</code> and <code>height</code> of <code>26px</code> with a <code>white</code> background. We will change this for the rounded switch. 
+The <code>transition</code> property gives a nice sliding effect as the slider moves between the <code>on</code> and <code>off</code> states of the switch.</p>
+<p><strong>Note</strong>: For additional reading, the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before">MDN documentation</a> does a good job of explaining the 
+<code>before</code> CSS selector.</p>
+<div class="highlight"><pre><span></span><span class="nl">.slider:</span><span class="err">:</span><span class="nf">before</span> <span class="err">{</span>
+  <span class="nl">position:</span> <span class="nf">absolute</span><span class="c">;</span>
+  <span class="nl">content:</span> <span class="err">&quot;&quot;</span><span class="c">;</span>
+  <span class="nl">height:</span> <span class="err">26</span><span class="nf">px</span><span class="c">;</span>
+  <span class="nl">width:</span> <span class="err">26</span><span class="nf">px</span><span class="c">;</span>
+  <span class="nl">background-color:</span> <span class="c">#fff;</span>
+  <span class="nl">left:</span> <span class="err">4</span><span class="nf">px</span><span class="c">;</span>
+  <span class="nl">top:</span> <span class="err">4</span><span class="nf">px</span><span class="c">;</span>
+  <span class="nl">transition:</span> <span class="err">0</span><span class="nf">.3s</span><span class="c">;</span>
+<span class="err">}</span>
 </pre></div>
 
 
-<p>Just like in a <code>Jupyter notebook</code>, we can view the underlying code (<code>markdown</code> in our case) by right-clicking on any of the formulae and viewing the plain text source. </p>
-<p><br/>
-<iframe style="height: 500px" src="https://codedisciples.in/Index_2-Embed_Jupyter.html"></iframe></p>
-<p><br/>
-In conclusion, one of the best use cases for embedding a notebook is interactive content. If a notebook contains plots which have interactive <code>IPython widgets</code>, then those can be embedded into a website. Users can then interact with the plot on the website using the widgets. Some great examples have been provided in the <a href="https://www.nbinteract.com/examples/examples_intro.html">NBInteract documentation</a>. </p>
+<p>The <code>slider</code> class below sets the background of our <code>&lt;span&gt;</code> to a dark-gray color which in our case indicates that the 
+switch is in an <code>off</code> state. We also set the <code>top</code>, <code>bottom</code>, <code>left</code> and <code>right</code> properties to <code>0</code> to eliminate spaces 
+around all the edges between the <code>&lt;span&gt;</code> and its parent <code>&lt;label&gt;</code> container.</p>
+<div class="highlight"><pre><span></span><span class="na">.slider</span> <span class="err">{</span>
+  <span class="nl">position:</span> <span class="nf">absolute</span><span class="c">;</span>
+  <span class="nl">cursor:</span> <span class="nf">pointer</span><span class="c">;</span>
+  <span class="nl">top:</span> <span class="err">0</span><span class="c">;</span>
+  <span class="nl">bottom:</span> <span class="err">0</span><span class="c">;</span>
+  <span class="nl">left:</span> <span class="err">0</span><span class="c">;</span>
+  <span class="nl">right:</span> <span class="err">0</span><span class="c">;</span>
+  <span class="nl">background-color:</span> <span class="c">#758184;</span>
+  <span class="nl">transition:</span> <span class="err">0</span><span class="nf">.3s</span><span class="c">;</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>When the <code>checkbox</code> is checked, we will change the <code>background-color</code> of the <code>&lt;span&gt;</code> from dark gray to a light green shade
+indicating that the switch is <code>on</code>. Also, using <code>transform: translateX(26px)</code> we will move the slider by <code>26px</code> along the 
+positive X axis or to put it simply, from left to right. </p>
+<div class="highlight"><pre><span></span><span class="n">input</span><span class="o">:</span><span class="n">checked</span> <span class="o">+</span> <span class="o">.</span><span class="na">slider</span> <span class="o">{</span>
+  <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="o">:</span> <span class="err">#</span><span class="mi">32</span><span class="n">ff6a</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="n">input</span><span class="o">:</span><span class="n">checked</span> <span class="o">+</span> <span class="o">.</span><span class="na">slider</span><span class="o">::</span><span class="n">before</span> <span class="o">{</span>
+  <span class="n">transform</span><span class="o">:</span> <span class="n">translateX</span><span class="o">(</span><span class="mi">26</span><span class="n">px</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>That's it! The switch can now be toggled between the <code>on</code> and <code>off</code> states.</p>
+<h2>A Rounded Toggle Switch</h2>
+<p>To create a rounded switch, we will add an additional <code>round</code> class to the <code>&lt;span&gt;</code> tag. </p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;slider round&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</pre></div>
+
+
+<p>Setting the appropriate values for the <code>border-radius</code> property will give the slider and the switch a rounded look.</p>
+<div class="highlight"><pre><span></span><span class="na">.slider.round</span> <span class="err">{</span>
+  <span class="nl">border-radius:</span> <span class="err">34</span><span class="nf">px</span><span class="c">;</span>
+<span class="err">}</span>
+
+<span class="nl">.slider.round:</span><span class="err">:</span><span class="nf">before</span> <span class="err">{</span>
+  <span class="nl">border-radius:</span> <span class="err">50</span><span class="nf">px</span><span class="c">;</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>Here is the complete code:</p>
+<iframe src="https://codepen.io/abhishekpednekar84/pen/bGdwRGY" style="width: 846px; height: 700px"></iframe>
   </div>
   
   <br/>

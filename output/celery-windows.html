@@ -21,16 +21,16 @@
             crossorigin="anonymous">
 
 
-      <link rel="stylesheet" href="https://codedisciples.in/theme/css/blog.css" />
-      <link rel="stylesheet" href="https://codedisciples.in/theme/css/tomorrow_night.css" />
+      <link rel="stylesheet" href="http://localhost:8000/theme/css/blog.css" />
+      <link rel="stylesheet" href="http://localhost:8000/theme/css/tomorrow_night.css" />
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="https://codedisciples.in/static/images/favicon.ico" />
-        <link href="https://codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
+    <link rel="shortcut icon" href="http://localhost:8000/static/images/favicon.ico" />
+        <link href="http://localhost:8000/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -55,7 +55,7 @@
 		  <span class="icon-bar"></span>
 		  <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="https://codedisciples.in/" rel="home">
+		<a class="navbar-brand" href="http://localhost:8000/" rel="home">
           <i class="fas fa-home fa-fw fa-lg"> </i> </a>
        </div>
 
@@ -63,10 +63,10 @@
         <ul class="nav navbar-nav">
             <li class="divider"></li>
             <li class="">
-              <a href="https://codedisciples.in/archives.html">Archives</a>
+              <a href="http://localhost:8000/archives.html">Archives</a>
             </li>
           <li class="divider"></li>
-            <li><a href="https://codedisciples.in/feeds/all.atom.xml" 
+            <li><a href="http://localhost:8000/feeds/all.atom.xml" 
                    type="application/atom+xml" rel="alternate">
                 <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
         </ul> <!-- /nav -->
@@ -89,15 +89,15 @@
 <abbr class="article-header-date">
   Tue 22 October 2019
 </abbr> <h1>
-  <a href="https://codedisciples.in/celery-windows.html" rel="bookmark"
+  <a href="http://localhost:8000/celery-windows.html" rel="bookmark"
      title="Permalink to Running Celery on Windows 10">
     Running Celery on Windows 10
   </a>
 </h1><div class="article-header-info">
   <p>
-      Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
+      Posted by <a href="http://localhost:8000/author/abhishek-pednekar.html">Abhishek Pednekar</a>
     in 
-    <a href="https://codedisciples.in/category/python.html">
+    <a href="http://localhost:8000/category/python.html">
       Python</a>
     &nbsp;&nbsp;
   </p>
@@ -120,10 +120,10 @@
 </ol>
 <p>As mentioned earlier, we will be using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote-WSL</a> extension to run our code in a Linux based environment. This plugin can be installed from the VS Code marketplace.</p>
 <p><br/>
-<img alt="Remote-WSL" src="https://codedisciples.in/images/index11/remote-wsl.jpg"></p>
+<img alt="Remote-WSL" src="http://localhost:8000/images/index11/remote-wsl.jpg"></p>
 <p>Once installed, we will have an option to reopen our (Windows) project folder in WSL.</p>
 <p><br/>
-<img alt="Windows-WSL" src="https://codedisciples.in/images/index11/windows-wsl.jpg"></p>
+<img alt="Windows-WSL" src="http://localhost:8000/images/index11/windows-wsl.jpg"></p>
 <p>The final thing we need to do before writing our code is to install a Redis server instance locally. Running the following commands in <code>WSL</code> will install a <code>Redis server</code> on your computer.</p>
 <div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="k">update</span>
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">upgrade</span>
@@ -156,16 +156,16 @@
 <p>Next, we will fire up our <code>Celery</code> worker process.We need to make sure that we are in the virtual environment when executing the below command. The command will be run in a <code>WSL</code> window. Note that we are passing our module name, the <code>worker</code> argument and setting the logging level with the <code>--loglevel</code> argument which will enable us to see results in our console.</p>
 <p><code>celery -A celery_demo worker --loglevel=info</code></p>
 <p><br/>
-<img alt="Celery" src="https://codedisciples.in/images/index11/celery.jpg"></p>
+<img alt="Celery" src="http://localhost:8000/images/index11/celery.jpg"></p>
 <p>Now, we will call our task in a Python REPL using the <code>delay()</code> method. Calling the task will return an <em>AsyncResult</em> instance, each having a unique guid. Again, we will be using <code>WSL</code> to run the REPL.</p>
 <p><br/>
-<img alt="Calling-Task" src="https://codedisciples.in/images/index11/calling-task.jpg"></p>
+<img alt="Calling-Task" src="http://localhost:8000/images/index11/calling-task.jpg"></p>
 <p>If the task is called successfully, we can see the result of the task as executed by our <code>Celery</code> worker.</p>
 <p><br/>
-<img alt="Celery-Result" src="https://codedisciples.in/images/index11/celery-result.jpg"></p>
+<img alt="Celery-Result" src="http://localhost:8000/images/index11/celery-result.jpg"></p>
 <p>At this point, our <code>SQLite</code> database is created.  The <code>celery-taskmeta</code> table will store the results of all our tasks. The tasks can be identified based on the guid of the async result instance. The results will be stored in a binary (BLOB) format. </p>
 <p><br/>
-<img alt="SQLite-Results" src="https://codedisciples.in/images/index11/sqlite-results.jpg"></p>
+<img alt="SQLite-Results" src="http://localhost:8000/images/index11/sqlite-results.jpg"></p>
 <p>Here is a readable version of our result BLOB.</p>
 <div class="highlight"><pre><span></span><span class="err">{</span>
   <span class="ss">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -253,17 +253,19 @@
   <div class="col-xs-6 col-md-12">
     <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
     <ul class="list-unstyled category-links">
-      <li><a href="https://codedisciples.in/category/docker.html">
+      <li><a href="http://localhost:8000/category/css.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> CSS</a></li>
+      <li><a href="http://localhost:8000/category/docker.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
-      <li><a href="https://codedisciples.in/category/flask.html">
+      <li><a href="http://localhost:8000/category/flask.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Flask</a></li>
-      <li><a href="https://codedisciples.in/category/git.html">
+      <li><a href="http://localhost:8000/category/git.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
-      <li><a href="https://codedisciples.in/category/linux.html">
+      <li><a href="http://localhost:8000/category/linux.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
-      <li><a href="https://codedisciples.in/category/markdown.html">
+      <li><a href="http://localhost:8000/category/markdown.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Markdown</a></li>
-      <li><a href="https://codedisciples.in/category/python.html">
+      <li><a href="http://localhost:8000/category/python.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
     </ul>
   </div>
@@ -272,40 +274,46 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-      <a href="https://codedisciples.in/tag/markdown.html">
+      <a href="http://localhost:8000/tag/html.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>HTML
+      </a>
+      <a href="http://localhost:8000/tag/css.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>CSS
+      </a>
+      <a href="http://localhost:8000/tag/markdown.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Markdown
       </a>
-      <a href="https://codedisciples.in/tag/python.html">
+      <a href="http://localhost:8000/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
-      <a href="https://codedisciples.in/tag/linux.html">
+      <a href="http://localhost:8000/tag/linux.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Linux
       </a>
-      <a href="https://codedisciples.in/tag/flask.html">
+      <a href="http://localhost:8000/tag/flask.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Flask
       </a>
-      <a href="https://codedisciples.in/tag/heroku.html">
+      <a href="http://localhost:8000/tag/heroku.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Heroku
       </a>
-      <a href="https://codedisciples.in/tag/celery.html">
+      <a href="http://localhost:8000/tag/celery.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Celery
       </a>
-      <a href="https://codedisciples.in/tag/git.html">
+      <a href="http://localhost:8000/tag/git.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Git
       </a>
-      <a href="https://codedisciples.in/tag/docker.html">
+      <a href="http://localhost:8000/tag/docker.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Docker
       </a>
-      <a href="https://codedisciples.in/tag/postgres.html">
+      <a href="http://localhost:8000/tag/postgres.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
       </a>
-      <a href="https://codedisciples.in/tag/google-maps.html">
+      <a href="http://localhost:8000/tag/google-maps.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps
       </a>
-      <a href="https://codedisciples.in/tag/aws.html">
+      <a href="http://localhost:8000/tag/aws.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>AWS
       </a>
-      <a href="https://codedisciples.in/tag/jupyter.html">
+      <a href="http://localhost:8000/tag/jupyter.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Jupyter
       </a>
 </p>
