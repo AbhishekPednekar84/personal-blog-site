@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-02-23T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Toggle Switches</title><link href="https://codedisciples.in/toggle-switches.html" rel="alternate"></link><published>2020-02-23T12:00:00+05:30</published><updated>2020-02-23T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-23:/toggle-switches.html</id><summary type="html">&lt;p&gt;Creating toggle switches with HTML and CSS&lt;/p&gt;</summary><content type="html">&lt;p&gt;Modern websites no longer use vanilla checkboxes. Toggle switches built on top of checkboxes give any UI a cleaner and professional look and feel.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-02-23T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Toggle Switches</title><link href="https://codedisciples.in/toggle-switches.html" rel="alternate"></link><published>2020-02-23T12:00:00+05:30</published><updated>2020-02-23T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-23:/toggle-switches.html</id><summary type="html">&lt;p&gt;Creating toggle switches with HTML and CSS&lt;/p&gt;</summary><content type="html">&lt;p&gt;Modern websites no longer use vanilla checkboxes. Toggle switches built on top of checkboxes give any UI a cleaner and professional look and feel. &lt;/p&gt;
 &lt;p&gt;In this post, we will learn how to create toggle switches using &lt;code&gt;HTML&lt;/code&gt; and &lt;code&gt;CSS&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This post assumes that the reader is familiar with basic &lt;code&gt;HTML&lt;/code&gt; and &lt;code&gt;CSS&lt;/code&gt;. &lt;/p&gt;
 &lt;h2&gt;HTML&lt;/h2&gt;
-&lt;p&gt;The HTML for our toggle switch consists of just three tags - &lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt;. The &lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt; will be a container and 
-will constitute the switch while the &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; will constitute the slider that moves from left to right and vice versa. The &lt;code&gt;checkbox&lt;/code&gt; 
-element is what our toggle switch will be built upon. In other words, checking the box will move our slider to the &lt;code&gt;on&lt;/code&gt; position 
-and un-checking it will move the slider to the &lt;code&gt;off&lt;/code&gt; position.&lt;/p&gt;
+&lt;p&gt;The HTML for our toggle switch consists of just three tags - &lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt;. The &lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt; will be a container and will constitute the switch while the &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; will constitute the slider that moves from left to right and vice versa. The &lt;code&gt;checkbox&lt;/code&gt; element is what our toggle switch will be built upon. In other words, checking the box will move our slider to the &lt;code&gt;on&lt;/code&gt; position and un-checking it will move the slider to the &lt;code&gt;off&lt;/code&gt; position.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="nt"&gt;&amp;lt;label&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;switch&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;checkbox&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;slider&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
@@ -16,9 +13,7 @@ and un-checking it will move the slider to the &lt;code&gt;off&lt;/code&gt; posi
 
 &lt;h2&gt;CSS&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;CSS&lt;/code&gt; is what will render our simple &lt;code&gt;checkbox&lt;/code&gt; into a nice looking toggle switch.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;switch&lt;/code&gt; class will have a &lt;code&gt;relative&lt;/code&gt; positioning so that the position of the &lt;code&gt;slider&lt;/code&gt; can be set to &lt;code&gt;absolute&lt;/code&gt;. The other properties will
-set the &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; of the switch. We will also set the &lt;code&gt;opacity&lt;/code&gt; of the &lt;code&gt;checkbox&lt;/code&gt; to &lt;code&gt;0&lt;/code&gt;, so that the original &lt;code&gt;checkbox&lt;/code&gt; 
-element is not visible (especially for rounded toggle switches).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;switch&lt;/code&gt; class will have a &lt;code&gt;relative&lt;/code&gt; positioning so that the position of the &lt;code&gt;slider&lt;/code&gt; can be set to &lt;code&gt;absolute&lt;/code&gt;. The other properties will set the &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; of the switch. We will also set the &lt;code&gt;opacity&lt;/code&gt; of the checkbox&lt;code&gt;to&lt;/code&gt;0&lt;code&gt;, so that the original&lt;/code&gt;checkbox` element is not visible (especially for rounded toggle switches).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="na"&gt;.switch&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
   &lt;span class="nl"&gt;position:&lt;/span&gt; &lt;span class="nf"&gt;relative&lt;/span&gt;&lt;span class="c"&gt;;&lt;/span&gt;
   &lt;span class="nl"&gt;display:&lt;/span&gt; &lt;span class="nf"&gt;block&lt;/span&gt;&lt;span class="c"&gt;;&lt;/span&gt;
@@ -32,10 +27,7 @@ element is not visible (especially for rounded toggle switches).&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Next, we will style the slider. As mentioned above, the slider will have its position property set to &lt;code&gt;absolute&lt;/code&gt;. Using the &lt;code&gt;before&lt;/code&gt; 
-selector, we are ensuing that the slider starts on the left side of the switch, which is the &lt;code&gt;off&lt;/code&gt; position. For the rectangular switch, 
-the slider will be a square having a &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; of &lt;code&gt;26px&lt;/code&gt; with a &lt;code&gt;white&lt;/code&gt; background. We will change this for the rounded switch. 
-The &lt;code&gt;transition&lt;/code&gt; property gives a nice sliding effect as the slider moves between the &lt;code&gt;on&lt;/code&gt; and &lt;code&gt;off&lt;/code&gt; states of the switch.&lt;/p&gt;
+&lt;p&gt;Next, we will style the slider. As mentioned above, the slider will have its position property set to &lt;code&gt;absolute&lt;/code&gt;. Using the &lt;code&gt;before&lt;/code&gt; selector, we are ensuring that the slider starts on the left side of the switch, which is the &lt;code&gt;off&lt;/code&gt; position. For the rectangular switch, the slider will be a square having a &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; of &lt;code&gt;26px&lt;/code&gt; with a &lt;code&gt;white&lt;/code&gt; background. We will change this for the rounded switch. The &lt;code&gt;transition&lt;/code&gt; property gives a nice sliding effect as the slider moves between the &lt;code&gt;on&lt;/code&gt; and &lt;code&gt;off&lt;/code&gt; states of the switch.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: For additional reading, the &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before"&gt;MDN documentation&lt;/a&gt; does a good job of explaining the 
 &lt;code&gt;before&lt;/code&gt; CSS selector.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nl"&gt;.slider:&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="nf"&gt;before&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
@@ -51,9 +43,7 @@ The &lt;code&gt;transition&lt;/code&gt; property gives a nice sliding effect as 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The &lt;code&gt;slider&lt;/code&gt; class below sets the background of our &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; to a dark-gray color which in our case indicates that the 
-switch is in an &lt;code&gt;off&lt;/code&gt; state. We also set the &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt;, &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; properties to &lt;code&gt;0&lt;/code&gt; to eliminate spaces 
-around all the edges between the &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; and its parent &lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt; container.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;slider&lt;/code&gt; class below sets the background of our &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; to a dark-gray color which in our case indicates that the switch is in an &lt;code&gt;off&lt;/code&gt; state. We also set the &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt;, &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; properties to &lt;code&gt;0&lt;/code&gt; to eliminate spaces around all the edges between the &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; and its parent &lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt; container.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="na"&gt;.slider&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
   &lt;span class="nl"&gt;position:&lt;/span&gt; &lt;span class="nf"&gt;absolute&lt;/span&gt;&lt;span class="c"&gt;;&lt;/span&gt;
   &lt;span class="nl"&gt;cursor:&lt;/span&gt; &lt;span class="nf"&gt;pointer&lt;/span&gt;&lt;span class="c"&gt;;&lt;/span&gt;
@@ -67,9 +57,7 @@ around all the edges between the &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; a
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;When the &lt;code&gt;checkbox&lt;/code&gt; is checked, we will change the &lt;code&gt;background-color&lt;/code&gt; of the &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; from dark gray to a light green shade
-indicating that the switch is &lt;code&gt;on&lt;/code&gt;. Also, using &lt;code&gt;transform: translateX(26px)&lt;/code&gt; we will move the slider by &lt;code&gt;26px&lt;/code&gt; along the 
-positive X axis or to put it simply, from left to right. &lt;/p&gt;
+&lt;p&gt;When the &lt;code&gt;checkbox&lt;/code&gt; is checked, we will change the &lt;code&gt;background-color&lt;/code&gt; of the &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; from dark gray to a light green shade indicating that the switch is &lt;code&gt;on&lt;/code&gt;. Also, using &lt;code&gt;transform: translateX(26px)&lt;/code&gt; we will move the slider by &lt;code&gt;26px&lt;/code&gt; along the positive X axis or to put it simply, from left to right. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;checked&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;slider&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="n"&gt;background&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="n"&gt;ff6a&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
