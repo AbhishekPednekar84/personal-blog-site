@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Abhishek Pednekar" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Iterools - Code Disciples</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/blog.css" />
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/tomorrow_night.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://codedisciples.in/static/images/favicon.ico" />
+        <link href="https://codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-145611420-1', '');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://codedisciples.in/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://codedisciples.in/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://codedisciples.in/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1>Code Disciples</h1>
+		<p class="lead">A blog for all things code</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Fri 28 February 2020
+</abbr> <h1>
+  <a href="https://codedisciples.in/itertools.html" rel="bookmark"
+     title="Permalink to Iterools">
+    Iterools
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
+    in 
+    <a href="https://codedisciples.in/category/python.html">
+      Python</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>In this post, we will dive into the <code>itertools</code> module in Python. The <code>itertools</code> module contains a truckload of functions to operate on Python iterators. Depending on the use case, these functions can make our code cleaner and more efficient.</p>
+<p>The post assumes that the reader is familiar with the concept of iterators and iterables in Python. At the end of this post, the reader will be familiar with the usage of some common functions from the <code>itertools</code> module.</p>
+<p>The <code>itertools</code> module is built into the Python standard library and therefore does not need to be installed separately. The <code>import itertools</code> statement will give us access to all the functions contained in the module. On that note, we will be skipping the  <code>import</code> statement in all but the first code snippet to avoid redundancy and keep the examples concise. </p>
+<p>Here is the list of functions that will be discussed in this post -</p>
+<ol>
+<li><a href="#count">count</a></li>
+<li><a href="#cycle">cycle</a></li>
+<li><a href="#zip_longest">zip_longest</a></li>
+<li><a href="#repeat">repeat</a></li>
+<li><a href="#starmap">starmap</a></li>
+<li><a href="#permutations">permutations</a></li>
+<li><a href="#combinations">combinations</a></li>
+<li><a href="#combinations_with_replacement">combinations_with_replacement</a></li>
+<li><a href="#product">product</a></li>
+<li><a href="#chain">chain</a></li>
+<li><a href="#islice">islice</a></li>
+<li><a href="#dropwhile">dropwhile</a></li>
+<li><a href="#takewhile">takewhile</a></li>
+<li><a href="#compress">compress</a></li>
+<li><a href="#accumulate">accumulate</a></li>
+<li><a href="#groupby">groupby</a></li>
+<li><a href="#tee">tee</a>
+<br /></li>
+</ol>
+<h2><a name="count"></a><code>count</code></h2>
+<p>The <code>itertools.count()</code> function returns an iterator that can be used as a counter. It takes optional <code>start</code> and <code>step</code> arguments.</p>
+<p><code>counter = itertools.count()</code> returns an iterator called <code>counter</code>. Looping over this <code>counter</code> will result in an infinite loop. However, we can use the <code>next()</code> method to iterate over the values of our counter.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">itertools</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+<span class="mi">3</span>
+</pre></div>
+
+
+<p>Note that the counter starts from <code>0</code> by default. To start it from something other than <code>0</code>, we can specify a value for the <code>start</code> keyword argument.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nv">counter</span> <span class="o">=</span> <span class="nv">itertools</span>.<span class="nv">count</span><span class="ss">(</span><span class="nv">start</span><span class="o">=</span><span class="mi">8</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nv">counter</span><span class="ss">))</span>
+<span class="mi">8</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nv">counter</span><span class="ss">))</span>
+<span class="mi">9</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nv">counter</span><span class="ss">))</span>
+<span class="mi">10</span>
+</pre></div>
+
+
+<p>To increment in steps greater than or less than <code>1</code>, we can pass the <code>step</code> keyword argument.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nv">counter</span> <span class="o">=</span> <span class="nv">itertools</span>.<span class="nv">count</span><span class="ss">(</span><span class="nv">start</span><span class="o">=</span><span class="mi">7</span>, <span class="nv">step</span><span class="o">=-</span><span class="mi">2</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nv">counter</span><span class="ss">))</span>
+<span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nv">counter</span><span class="ss">))</span>
+<span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nv">counter</span><span class="ss">))</span>
+<span class="mi">3</span>
+</pre></div>
+
+
+<h2><a name="cycle"></a><code>cycle</code></h2>
+<p>The <code>itertools.cycle()</code> function can be used to iterate continuously over a collection. For instance, if we use <code>cycle()</code> to iterate over a list containing two values, the function will <strong>not</strong> terminate the iteration once we have reached the end of the list. It will instead go back to the start of the list and resume a new round of iteration. </p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nv">frameworks</span> <span class="o">=</span> [<span class="s2">&quot;</span><span class="s">flask</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">django</span><span class="s2">&quot;</span>]
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">result</span> <span class="o">=</span> <span class="nv">itertools</span>.<span class="nv">cycle</span><span class="ss">(</span><span class="nv">frameworks</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="nv">flask</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="nv">django</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="nv">flask</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="nv">django</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="nv">flask</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="nv">django</span>
+</pre></div>
+
+
+<h2><a name="zip_longest"></a><code>zip_longest</code></h2>
+<p>Before we look at the <code>itertools.zip_longest()</code> function, let's quickly go over Python's <code>zip()</code> function. Let's say we have two lists of varying lengths. The <code>zip()</code> function will let us combine the two lists by grouping elements based on their positions. In other words, element 0 of the first list will be grouped with element 0 of the second list and so on. The key point in the below example is that the <code>zip()</code> function grouped the elements based on the smaller <code>alphabets</code> list. Once we reached the end of the <code>alphabets</code> list, <code>zip()</code> did not attempt to group the last element of the <code>numbers</code> list. Our result, therefore, does not include the value <code>4</code> from <code>numbers</code>.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">alphabets</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;A&quot;</span><span class="p">,</span> <span class="ss">&quot;B&quot;</span><span class="p">,</span> <span class="ss">&quot;C&quot;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">result</span> <span class="o">=</span> <span class="n">zip</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">alphabets</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="k">result</span><span class="p">)</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<p><code>itertools.zip_longest()</code> reverses this behavior. Instead of grouping based on the smaller list, the function uses the larger list. Note that in this case, <code>4</code> is grouped with <code>None</code> as <code>alphabets</code> does not contain any element at its third index.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">result</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">alphabets</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="k">result</span><span class="p">)</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="k">None</span><span class="p">)]</span>
+</pre></div>
+
+
+<h2><a name="repeat"></a><code>repeat</code></h2>
+<p>The <code>itertools.repeat()</code> function takes an input and repeats it indefinately.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">result</span> <span class="o">=</span> <span class="nv">itertools</span>.<span class="nv">repeat</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">print</span><span class="ss">(</span><span class="k">next</span><span class="ss">(</span><span class="nb">result</span><span class="ss">))</span>
+<span class="mi">5</span>
+</pre></div>
+
+
+<p>One example is to use <code>repeat()</code> with Python's <code>map()</code> function. In the example below, we are computing the squares of numbers in a list using the <code>pow()</code> function. Here, <code>map()</code> takes the value of each element in the first iterable (<code>[0, 1, 2, 3, 4]</code>) and applies the <code>pow()</code> function by raising each element to the power of <code>2</code> as specified in the <code>repeat()</code> function.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">squares</span> <span class="o">=</span> <span class="k">map</span><span class="p">(</span><span class="n">pow</span><span class="p">,</span> <span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">itertools</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+</pre></div>
+
+
+<h2><a name="starmap"></a><code>starmap</code></h2>
+<p>The <code>itertools.starmap()</code> function accepts a function and computes it using the arguments specified in the iterable. For instance the previous example can be re-written using <code>starmap()</code> as follows. Here, the iterable is a list of tuples. <code>starmap()</code> takes the <code>pow()</code> function as input and raises the first element of the tuple to the power of the second element.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">squares</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">pow</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,)])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Below is a similar example which multiples the elements of each tuple.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">operator</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">product</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="p">)])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">56</span><span class="p">]</span>
+</pre></div>
+
+
+<h2><a name="permutations"></a><code>permutations</code></h2>
+<p>The <code>itertools.permutations()</code> function takes an iterable and a length value as input and returns tuples of the specified length using the elements of the iterable.</p>
+<p>For instance passing a string <code>"AB"</code> to the <code>permutations()</code> function will return the permutations <code>("A", "B")</code> and <code>("B", "A")</code>. Note that the function does not allow repeated values in the result. Hence we do not see <code>("A", "A")</code> and <code>("B", "B")</code>. </p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">perm</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">permutations</span><span class="p">(</span><span class="ss">&quot;AB&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span>
+<span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>The length of each resulting permutation will need to be specified by passing an integer length as an argument.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;A&quot;</span><span class="p">,</span> <span class="ss">&quot;B&quot;</span><span class="p">,</span> <span class="ss">&quot;C&quot;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">letter_perm</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">permutations</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">letter_perm</span><span class="p">)</span>
+<span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<h2><a name="combinations"></a><code>combinations</code></h2>
+<p>The <code>itertools.combinations()</code> function is similar to <code>permutations()</code>. However, there will be no repeat values in the result.</p>
+<p>So, passing the string <code>"AB"</code> to the <code>combinations()</code> function will only result in <code>("A", "B")</code> as it considers both <code>("A", "B")</code> and <code>("B", "A")</code> to be the same. Also, note that <code>combinations()</code> does not allow repeated values in the result. Hence we do not see <code>("A", "A")</code> and <code>("B", "B")</code> here either. </p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">combination</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">combinations</span><span class="p">(</span><span class="ss">&quot;AB&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span>
+<span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>Like <code>permutations()</code>, we will need to specify a length as an argument.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;A&quot;</span><span class="p">,</span> <span class="ss">&quot;B&quot;</span><span class="p">,</span> <span class="ss">&quot;C&quot;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">letter_combination</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">letter_combination</span><span class="p">)</span>
+<span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<h2><a name="combinations_with_replacement"></a><code>combinations_with_replacement</code></h2>
+<p>The <code>itertools.combinations_with_replacement()</code> function allows repeated values in the result.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">letter_combinations</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">combinations_with_replacement</span><span class="p">(</span><span class="ss">&quot;AB&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">letter_combinations</span><span class="p">)</span>
+<span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<h2><a name="product"></a><code>product</code></h2>
+<p>The <code>itertools.product()</code> function returns a Cartesian Product of the input iterables.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">product</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="ss">&quot;ABC&quot;</span><span class="p">,</span> <span class="ss">&quot;xy&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+<span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>The function also takes an optional <code>repeat</code> keyword argument which specifies the length of each resulting tuple.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">product</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="ss">&quot;AB&quot;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+<span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">)]</span>
+</pre></div>
+
+
+<h2><a name="chain"></a><code>chain</code></h2>
+<p>The <code>itertools.chain()</code> function is used to chain iterables together and iterate over them simultaneously.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;India&quot;</span><span class="p">,</span> <span class="ss">&quot;Italy&quot;</span><span class="p">,</span> <span class="ss">&quot;Ireland&quot;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">more_countries</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;United States&quot;</span><span class="p">,</span> <span class="ss">&quot;United Kingdom&quot;</span><span class="p">,</span> <span class="ss">&quot;Uruguay&quot;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">countries_list</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="k">chain</span><span class="p">(</span><span class="n">countries</span><span class="p">,</span> <span class="n">more_countries</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">countries_list</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;India&#39;</span><span class="p">,</span> <span class="s1">&#39;Italy&#39;</span><span class="p">,</span> <span class="s1">&#39;Ireland&#39;</span><span class="p">,</span> <span class="s1">&#39;United States&#39;</span><span class="p">,</span> <span class="s1">&#39;United Kingdom&#39;</span><span class="p">,</span> <span class="s1">&#39;Uruguay&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<h2><a name="islice"></a><code>islice</code></h2>
+<p>The <code>itertools.islice()</code> function is used to slice an iterable and return only the selected values. <code>islice()</code> takes optional <code>start</code>, <code>stop</code> and <code>step</code> arguments.</p>
+<p>In the below example, we are slicing the iterable defined by the <code>range(10)</code> function to return only the first 5 elements.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">sliced_results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">islice</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">sliced_results</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+
+
+<p>We can also pass a starting value to the function as indicated below.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">sliced_results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">islice</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">sliced_results</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+
+<span class="o">#</span> <span class="n">Incrementing</span> <span class="k">in</span> <span class="n">steps</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sliced_results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">islice</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">sliced_results</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Note that <code>islice()</code> does not support negative values for <code>start</code>, <code>stop</code> and <code>step</code>.</p>
+<h2><a name="dropwhile"></a><code>dropwhile</code></h2>
+<p>The <code>itertools.dropwhile()</code> function will drop values from an iterable as long as a pre-defined condition is met. Once the condition fails, it returns <strong>all</strong> the remaining elements of the iterable.</p>
+<p>In the following example, <code>dropwhile()</code> will <strong>drop</strong> elements from the iterable as long as the <code>x &lt; 2</code> condition is met. As a result, the first three elements of the list are dropped. Once the condition fails on the fourth element (<code>2</code>), all the elements starting from the fourth element are returned irrespective of whether they meet the condition or not.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">dropwhile</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+
+<h2><a name="takewhile"></a><code>takewhile</code></h2>
+<p>The <code>itertools.takewhile()</code> function will <strong>return</strong> elements from an iterable as long as they satisfy a pre-defined condition. Once the condition fails, all remaining elements are dropped.</p>
+<p>In the below case, <code>takewhile()</code> will return elements from the list as long as the <code>x &lt; 2</code> condition is met. Once the condition fails on the fourth element, all elements starting from the fourth element are dropped irrespective of whether they meet the condition or not.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">takewhile</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+
+<h2><a name="compress"></a><code>compress</code></h2>
+<p>The <code>itertools.compress()</code> function takes two arguments - <code>data</code> and <code>selectors</code>. The function returns those elements from <code>data</code> that have a corresponding elements in <code>selectors</code> that evaluate to <code>True</code>.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">filtered_results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">compress</span><span class="p">(</span><span class="ss">&quot;ABCD&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">filtered_results</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">filtered_results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">compress</span><span class="p">(</span><span class="ss">&quot;ABCD&quot;</span><span class="p">,</span> <span class="p">[</span><span class="k">True</span><span class="p">,</span> <span class="k">True</span><span class="p">,</span> <span class="k">False</span><span class="p">,</span> <span class="k">False</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">filtered_results</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<h2><a name="accumulate"></a><code>accumulate</code></h2>
+<p>The <code>itertools.accumulate()</code> function returns accumulated results. These could be accumulated sums (default behaviour) or accumulated results of other operations. The function takes optional <code>func</code> and <code>initial</code> arguments. If we are trying to generate accumulated results of operations other than addition, then we will need to specify a value for the <code>func</code> argument.</p>
+<p>In the example below, we are adding numbers from 1 through 10 specified in the list input. <code>accumulate()</code> returns a running total.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">running_sum</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list</span><span class="p">(</span><span class="n">running_sum</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
+</pre></div>
+
+
+<p>If we would instead like to find the running product, we can pass <code>operator.mul</code> as the value of the <code>func</code> argument.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">operator</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">running_product</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">running_product</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">720</span><span class="p">,</span> <span class="mi">5040</span><span class="p">,</span> <span class="mi">40320</span><span class="p">,</span> <span class="mi">362880</span><span class="p">,</span> <span class="mi">3628800</span><span class="p">]</span>
+</pre></div>
+
+
+<h2><a name="groupby"></a><code>groupby</code></h2>
+<p>The <code>itertools.groupby()</code> function groups values based on a key. The function returns tuples of two elements.</p>
+<ol>
+<li>The first element will be the <code>key</code></li>
+<li>The second will be an iterator that consists of all the items grouped by the <code>key</code></li>
+</ol>
+<p>To explain this clearly, we will use a list of dictionaries called <code>teams</code> containing the names of teams and countries that they are from. We will then use <code>groupby()</code> to group teams based on countries. Note that <code>groupby()</code> requires the list to be sorted. We, therefore, have the English teams listed first followed by the Spanish teams.</p>
+<div class="highlight"><pre><span></span><span class="n">teams</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="err">{</span>
+        <span class="ss">&quot;team&quot;</span><span class="p">:</span> <span class="ss">&quot;Manchester United&quot;</span><span class="p">,</span>
+        <span class="ss">&quot;country&quot;</span><span class="p">:</span> <span class="ss">&quot;England&quot;</span>
+    <span class="err">}</span><span class="p">,</span>
+    <span class="err">{</span>
+        <span class="ss">&quot;team&quot;</span><span class="p">:</span> <span class="ss">&quot;York&quot;</span><span class="p">,</span>
+        <span class="ss">&quot;country&quot;</span><span class="p">:</span> <span class="ss">&quot;England&quot;</span>
+    <span class="err">}</span><span class="p">,</span>
+    <span class="err">{</span>
+        <span class="ss">&quot;team&quot;</span><span class="p">:</span> <span class="ss">&quot;Alaves&quot;</span><span class="p">,</span>
+        <span class="ss">&quot;country&quot;</span><span class="p">:</span> <span class="ss">&quot;Spain&quot;</span>
+    <span class="err">}</span><span class="p">,</span>
+    <span class="err">{</span>
+        <span class="ss">&quot;team&quot;</span><span class="p">:</span> <span class="ss">&quot;Racing Santander&quot;</span><span class="p">,</span>
+        <span class="ss">&quot;country&quot;</span><span class="p">:</span> <span class="ss">&quot;Spain&quot;</span>
+    <span class="err">}</span>
+<span class="p">]</span>
+</pre></div>
+
+
+<p>Next, we will write a custom function that accepts our list as a parameter and returns the value of <code>country</code> which will be our <code>key</code> value.</p>
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">get_country</span><span class="ss">(</span><span class="nv">team</span><span class="ss">)</span>:
+    <span class="k">return</span> <span class="nv">team</span>[<span class="s2">&quot;</span><span class="s">country</span><span class="s2">&quot;</span>]
+</pre></div>
+
+
+<p>Finally, we will use <code>groupby()</code> on our list and pass our custom function as the key. By looping over the resulting iterator, we see that the results are tuples containing the <code>key</code> (<code>country</code>) and an iterator.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nv">results</span> <span class="o">=</span> <span class="nv">itertools</span>.<span class="nv">groupby</span><span class="ss">(</span><span class="nv">teams</span>, <span class="nv">get_country</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nb">result</span> <span class="nv">in</span> <span class="nv">results</span>:
+    <span class="nv">print</span><span class="ss">(</span><span class="nb">result</span><span class="ss">)</span>
+
+
+<span class="ss">(</span><span class="s1">&#39;</span><span class="s">England</span><span class="s1">&#39;</span>, <span class="o">&lt;</span><span class="nv">itertools</span>.<span class="nv">_grouper</span> <span class="nv">object</span> <span class="nv">at</span> <span class="mi">0</span><span class="nv">x032B0F30</span><span class="o">&gt;</span><span class="ss">)</span>
+<span class="ss">(</span><span class="s1">&#39;</span><span class="s">Spain</span><span class="s1">&#39;</span>, <span class="o">&lt;</span><span class="nv">itertools</span>.<span class="nv">_grouper</span> <span class="nv">object</span> <span class="nv">at</span> <span class="mi">0</span><span class="nv">x00A49D30</span><span class="o">&gt;</span><span class="ss">)</span>
+</pre></div>
+
+
+<p>We can loop over the resulting iterator using a nested <code>for - in</code> loop to return the items contained within it.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">key</span>, <span class="nv">group</span> <span class="nv">in</span> <span class="nv">results</span>:
+    <span class="nv">print</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span>
+    <span class="k">for</span> <span class="nv">team</span> <span class="nv">in</span> <span class="nv">group</span>:
+        <span class="nv">print</span><span class="ss">(</span><span class="nv">team</span><span class="ss">)</span>
+    <span class="nv">print</span><span class="ss">()</span>
+
+
+<span class="nv">England</span>
+{<span class="s1">&#39;</span><span class="s">team</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">Manchester United</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">country</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">England</span><span class="s1">&#39;</span>}
+{<span class="s1">&#39;</span><span class="s">team</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">York</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">country</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">England</span><span class="s1">&#39;</span>}
+
+<span class="nv">Spain</span>
+{<span class="s1">&#39;</span><span class="s">team</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">Alaves</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">country</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">Spain</span><span class="s1">&#39;</span>}
+{<span class="s1">&#39;</span><span class="s">team</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">Racing Santander</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">country</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">Spain</span><span class="s1">&#39;</span>}
+</pre></div>
+
+
+<h2><a name="tee"></a><code>tee</code></h2>
+<p>The <code>itertools.tee()</code> function is used to replicate iterators. In other words, create copies of an existing iterator. The key thing to note is that once we create a copy, we should no longer use the original iterator as it could result in the iterable getting advanced without the copies getting notified.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">teams</span><span class="p">,</span> <span class="n">get_country</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">copy_of_results</span> <span class="o">=</span> <span class="n">itertools</span><span class="p">.</span><span class="n">tee</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+  </div>
+  
+  <br/>
+  <div class="comments">
+  <h2>Share</h2>
+  <br/>
+  <!-- AddToAny BEGIN -->
+    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+      <a class="a2a_button_blogger"></a>
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_flipboard"></a>
+      <a class="a2a_button_google_gmail"></a>
+      <a class="a2a_button_hacker_news"></a>
+      <a class="a2a_button_linkedin"></a> 
+      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_wordpress"></a>
+    </div>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+  </div>
+  <br/>
+  <div class="comments">
+	<h2>Comments</h2>
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+				   (function() {
+						var dsq = document.createElement('script');
+						dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = '//code-disciples.disqus.com/embed.js';
+						(document.getElementsByTagName('head')[0] ||
+						 document.getElementsByTagName('body')[0]).appendChild(dsq);
+				  })();
+	</script>
+  </div>
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+  <div class="col-xs-6 col-md-12" itemscope itemtype="http://schema.org/Person">
+    <h4><i class="fa fa-user fa-fw fa-lg"></i>Abhishek Pednekar</h4>
+    <p id="vn-about-blog">
+      I'm a software programmer from
+      <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <span itemprop="addressLocality">Bangalore</span>,
+        <span itemprop="addressCountry">India</span>
+      </span>
+      and have worn many hats over a 12 year IT career. This coding blog was started as a means to
+      document topics that I took a while to wrap my head around or to just write about something cool that I came
+      across.
+      Outside of blogging and work, I enjoy watching football and motorsports, love listening to podcasts and "try" to
+      maintain a regular workout routine.
+      <strong><a target="_blank" href="https://www.abhishekpednekar.com">More about me.</a></strong>
+    </p>
+  </div>
+
+
+  <div class="col-xs-6 col-md-12">
+    <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+    <ul class="list-unstyled category-links">
+      <li><a href="https://codedisciples.in/category/css.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> CSS</a></li>
+      <li><a href="https://codedisciples.in/category/docker.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
+      <li><a href="https://codedisciples.in/category/flask.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> Flask</a></li>
+      <li><a href="https://codedisciples.in/category/git.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
+      <li><a href="https://codedisciples.in/category/linux.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+      <li><a href="https://codedisciples.in/category/markdown.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> Markdown</a></li>
+      <li><a href="https://codedisciples.in/category/python.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
+    </ul>
+  </div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Python
+      </a>
+      <a href="https://codedisciples.in/tag/html.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>HTML
+      </a>
+      <a href="https://codedisciples.in/tag/css.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>CSS
+      </a>
+      <a href="https://codedisciples.in/tag/markdown.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Markdown
+      </a>
+      <a href="https://codedisciples.in/tag/linux.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Linux
+      </a>
+      <a href="https://codedisciples.in/tag/flask.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Flask
+      </a>
+      <a href="https://codedisciples.in/tag/heroku.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Heroku
+      </a>
+      <a href="https://codedisciples.in/tag/celery.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Celery
+      </a>
+      <a href="https://codedisciples.in/tag/git.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Git
+      </a>
+      <a href="https://codedisciples.in/tag/docker.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Docker
+      </a>
+      <a href="https://codedisciples.in/tag/postgres.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
+      </a>
+      <a href="https://codedisciples.in/tag/google-maps.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps
+      </a>
+      <a href="https://codedisciples.in/tag/aws.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>AWS
+      </a>
+      <a href="https://codedisciples.in/tag/jupyter.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Jupyter
+      </a>
+</p>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+    <br>
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Built with <img id="footer-image" src="/static/images/love.ico"> in Bangalore&nbsp;&bull;&nbsp; Powered by <a href="http://getpelican.com/" target="_blank">Pelican</a> and <a href="https://www.netlify.com"
+           target="_blank">Netlify</a>
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+<!-- DISQUS script for displaying comment count -->
+<script type="text/javascript">
+    var disqus_shortname = 'code-disciples';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
