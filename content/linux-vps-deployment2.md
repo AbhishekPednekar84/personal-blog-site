@@ -1,4 +1,4 @@
-Title: Deploying a Python application on a Linux server - Part II
+Title: Deploying a Flask application on a Linux server - Part II
 Date: 2019-12-10 23:00
 Category: Linux
 Tags: Python, Linux

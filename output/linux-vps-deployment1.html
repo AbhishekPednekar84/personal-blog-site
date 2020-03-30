@@ -8,7 +8,7 @@
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Deploying a Python application on a Linux server - Part I - Code Disciples</title>
+    <title>Deploying a Flask application on a Linux server - Part I - Code Disciples</title>
 
    
         <link rel="stylesheet"
@@ -90,8 +90,8 @@
   Wed 20 November 2019
 </abbr> <h1>
   <a href="https://codedisciples.in/linux-vps-deployment1.html" rel="bookmark"
-     title="Permalink to Deploying a Python application on a Linux server - Part I">
-    Deploying a Python application on a Linux server - Part I
+     title="Permalink to Deploying a Flask application on a Linux server - Part I">
+    Deploying a Flask application on a Linux server - Part I
   </a>
 </h1><div class="article-header-info">
   <p>
@@ -168,7 +168,7 @@
 <p>Hopefully, that wasn't too confusing. To complete this part of the setup, we will use the <code>chmod</code> command to change the permissions of the .ssh directory and it's contents. For those unfamiliar with <code>chmod</code>, <a href="https://opensource.com/article/19/8/linux-chmod-command">here's a great article</a>.</p>
 <p>By default, the .ssh directory has 775 permissions whereas the authorized_keys file has 644 permissions. We will be changing these to 700 and 600 respectively.</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">chmod</span><span class="w"> </span><span class="mi">700</span><span class="w"> </span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="w"></span>
-<span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">chmod</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="w"></span>
+<span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">chmod</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="cm">/*</span>
 </pre></div>
 
 
@@ -231,7 +231,7 @@
 </pre></div>
 
 
-<p>That's it! Our set up is complete. In the next post, we will deploy our Flask application.</p>
+<p>That's it! Our set up is complete. In the <a href="https://www.codedisciples.in/linux-vps-deployment2.html">next</a> post, we will deploy our Flask application.</p>
   </div>
   
   <br/>

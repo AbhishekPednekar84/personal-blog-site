@@ -1,4 +1,4 @@
-Title: Deploying a Python application on a Linux server - Part I
+Title: Deploying a Flask application on a Linux server - Part I
 Date: 2019-11-20 23:00
 Category: Linux
 Tags: Python, Linux
@@ -93,7 +93,7 @@ By default, the .ssh directory has 775 permissions whereas the authorized_keys f
 
 ```
 flaskuser@Flask-Demo-Server:~$ sudo chmod 700 ~/.ssh/
-flaskuser@Flask-Demo-Server:~$ sudo chmod 600 ~/.ssh/
+flaskuser@Flask-Demo-Server:~$ sudo chmod 600 ~/.ssh/*
 ```
 
 Note that using `sudo` will occasionally require us to enter the password that we set in step 2.
@@ -164,4 +164,4 @@ To                         Action      From
 5000 (v6)                  ALLOW       Anywhere (v6)
 ```
 
-That's it! Our set up is complete. In the next post, we will deploy our Flask application.
+That's it! Our set up is complete. In the [next](https://www.codedisciples.in/linux-vps-deployment2.html) post, we will deploy our Flask application.
