@@ -103,20 +103,20 @@
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In the <a href="https://www.codedisciples.in/flask-heroku.html">previous</a> post, we deployed a Flask application on Heroku. In this post, we will deploy the <a href="https://github.com/AbhishekPednekar84/flask_demo_app">same application</a> on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. <a href="https://linode.com">Linode</a> and <a href="https://digitalocean.com">DigitalOcean</a> are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider. </p>
+	<p>In the <a href="https://www.codedisciples.in/flask-heroku.html">previous</a> post, we deployed a Flask application on Heroku. In this post, we will deploy the <a href="https://github.com/AbhishekPednekar84/flask_demo_app">same application</a> on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. <a href="https://linode.com">Linode</a> and <a href="https://digitalocean.com">DigitalOcean</a> are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider.</p>
 <p>This is the part one of a two-part series. In this post, we will set up a bare-bones Linux server and prime it for deployment. In part two, we will deploy the Flask application with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
 <p>The post assumes that the reader is familiar with the basics of Linux.</p>
 <h2>Getting started with DigitalOcean</h2>
-<p>At the time of posting this article, DigitalOcean is offering a <a href="https://try.digitalocean.com/python/?utm_medium=podcast&amp;utm_source=pythonbytes&amp;utm_campaign=DO_Dev_Signup_Cold_Python">$50 credit</a> as part of its sponsorship of the <a href="https://pythonbytes.fm">Python Bytes Podcast</a>. </p>
+<p>At the time of posting this article, DigitalOcean is offering a <a href="https://try.digitalocean.com/python/?utm_medium=podcast&amp;utm_source=pythonbytes&amp;utm_campaign=DO_Dev_Signup_Cold_Python">\$50 credit</a> as part of its sponsorship of the <a href="https://pythonbytes.fm">Python Bytes Podcast</a>.</p>
 <p>To get started with DigitalOcean, we will first need to <a href="https://www.digitalocean.com/">sign up</a> and create an account. Once logged in, we can create and configure a droplet (VPS). Below are the steps.</p>
 <ol>
 <li>Create a new project and provide an appropriate name (Ex: <em>Flask Demo App</em>)</li>
 <li>On the project's control panel, select <em>Get started with a Droplet</em> to create a VPS</li>
 <li>Choose an image. We will be using <em>Ubuntu 18.04.3</em> for our demo app. If choosing another Linux distribution, the commands in the subsequent section might vary.</li>
-<li>Choose a plan - the most inexpensive (Standard / $5 per month) plan will suffice</li>
+<li>Choose a plan - the most inexpensive (Standard / \$5 per month) plan will suffice</li>
 <li>Select a datacenter region. This would ideally be one closest to where a majority of our end users are located. In the present case, any region will do</li>
 <li>For the authentication process, we will select <em>One-time password</em> for now and set up an SSH key later on. The password will be sent to the email address provided at the time of registration</li>
-<li>Give an appropriate name (Ex: <em>Flask-Demo-Server</em>) for the server and click on <em>Create Droplet</em>  </li>
+<li>Give an appropriate name (Ex: <em>Flask-Demo-Server</em>) for the server and click on <em>Create Droplet</em></li>
 </ol>
 <h2>Setting up our server</h2>
 <h3>Step 1 - Logging in with the <strong>root</strong> user</h3>
@@ -144,7 +144,7 @@
 </pre></div>
 
 
-<p>Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the <code>/home/&lt;user&gt;/.ssh</code> directory on the local machine. </p>
+<p>Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the <code>/home/&lt;user&gt;/.ssh</code> directory on the local machine.</p>
 <p>Prior to copying the key to the server, we will need to create a .ssh directory in <em>flaskuser</em>'s /home directory. So let's login with <em>flaskuser</em> and the password that we provided in the previous step and create the directory with the <code>mkdir .ssh</code> command.</p>
 <div class="highlight"><pre><span></span><span class="n">root</span><span class="p">@</span><span class="n">Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">#</span> <span class="n">ssh</span> <span class="n">flaskuser</span><span class="mf">@206.189.132.233</span>
 </pre></div>
@@ -298,6 +298,8 @@
   <div class="col-xs-6 col-md-12">
     <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
     <ul class="list-unstyled category-links">
+      <li><a href="https://codedisciples.in/category/ci.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> CI</a></li>
       <li><a href="https://codedisciples.in/category/css.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> CSS</a></li>
       <li><a href="https://codedisciples.in/category/docker.html">
@@ -319,6 +321,12 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/postgres.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
+      </a>
+      <a href="https://codedisciples.in/tag/ci.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>CI
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
@@ -348,9 +356,6 @@
       </a>
       <a href="https://codedisciples.in/tag/docker.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Docker
-      </a>
-      <a href="https://codedisciples.in/tag/postgres.html">
-        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
       </a>
       <a href="https://codedisciples.in/tag/google-maps.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps

@@ -104,7 +104,7 @@
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
 	<p>In the <a href="https://www.codedisciples.in/linux-vps-deployment1.html">part one</a> of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
-<p>The post assumes that the reader is familiar with the basics of Linux and Flask. </p>
+<p>The post assumes that the reader is familiar with the basics of Linux and Flask.</p>
 <p><a href="https://github.com/AbhishekPednekar84/flask_demo_app">Click here</a> to download the source code of the Flask application that will be deployed. An important thing to note is that we will be using a <code>.env</code> file to configure our environment variables (see <code>.env.example</code> in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on <a href="ttps://www.google.com/recaptcha/">Google reCAPTCHA</a> to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by <a href="https://www.elephantsql.com/">ElephantSQL</a>. The <code>DATABASE_URL</code> variable in the <code>.env</code> file will need to be modified depending on the database in use.</p>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Environment</span> <span class="n">Variables</span>
 
@@ -127,13 +127,13 @@
 <span class="err">├──</span> <span class="n">commands</span><span class="p">.</span><span class="n">py</span>
 <span class="err">├──</span> <span class="n">config</span><span class="p">.</span><span class="n">py</span>
 <span class="err">├──</span> <span class="n">db</span><span class="p">.</span><span class="n">py</span>
-<span class="err">├──</span> <span class="n">forms</span>
+<span class="err">├──</span> <span class="n">forms</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
 <span class="err">├──</span> <span class="n">lm</span><span class="p">.</span><span class="n">py</span>
-<span class="err">├──</span> <span class="n">models</span>
+<span class="err">├──</span> <span class="n">models</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
 <span class="err">├──</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
-<span class="err">├──</span> <span class="k">static</span>
-<span class="err">├──</span> <span class="n">templates</span>
-<span class="err">├──</span> <span class="n">views</span>
+<span class="err">├──</span> <span class="k">static</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="err">├──</span> <span class="n">templates</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="err">├──</span> <span class="n">views</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
 <span class="err">└──</span> <span class="n">wsgi</span><span class="p">.</span><span class="n">py</span>
 </pre></div>
 
@@ -169,17 +169,18 @@
 <h3>Step 3 - Configuring nginx</h3>
 <p>To serve the static content (HTML, CSS, JavaScript) of our website, we will be using <strong>nginx</strong> as our webserver.</p>
 <p>To install nginx, we will run <code>sudo apt install nginx</code>.</p>
-<p>To configure nginx for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. First, we will delete the default nginx configuration file that was created during the installation process.</p>
+<p>To configure nginx for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. Depending on the version of nginx that was installed, nginx could be looking for an application configuration file in different locations. To ensure that nginx will look for the configuration file in the location that we expect, <code>cat</code> the <code>nginx.conf</code> file located in <code>/etc/nginx/</code> and verify if it contains the line <code>include /etc/nginx/sites-enabled/*;</code>. If not, open the file using <code>sudo nano nginx.conf</code> and add the line. This way nginx will look for our config in the <code>sites-enabled</code> directory.</p>
+<p>Now, we will delete the default nginx configuration file that was created in the <code>sites-enabled</code> directory during the installation process.</p>
 <div class="highlight"><pre><span></span><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">rm</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="k">default</span><span class="w"></span>
 </pre></div>
 
 
-<p>Next, we will use the <em>nano</em> text editor to create, update and save a new configuration file. Running the below command will open the file in edit mode.</p>
+<p>Next, we will use the <em>nano</em> text editor to create and save a new application configuration file.</p>
 <div class="highlight"><pre><span></span><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">flask</span><span class="o">-</span><span class="n">demo</span><span class="w"></span>
 </pre></div>
 
 
-<p>We will now add the below code to the configurtion file.</p>
+<p>We can now add the below code to the configuration file.</p>
 <div class="highlight"><pre><span></span><span class="nv">server</span> {
         <span class="nv">listen</span> <span class="mi">80</span><span class="c1">;</span>
         <span class="nv">server_name</span> <span class="mi">206</span>.<span class="mi">189</span>.<span class="mi">132</span>.<span class="mi">233</span><span class="c1">;</span>
@@ -202,8 +203,7 @@
 <ol>
 <li>First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS</li>
 <li>Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the <code>/static</code> directory as an alias</li>
-<li>With the static content taken care of, nginx will pass any request processed at the root (<a href="http://206.189.132.233">http://206.189.132.233</a>) of our application to the proxied server specified in the <code>proxy pass</code> directive. This proxied server in our case is <code>gunicorn</code> running on the default port <code>8000</code></li>
-<li>The <code>proxy_params</code> file specifies some standard parameters to be used by the proxied server and <code>proxy_redirect off</code> turns off any redirects</li>
+<li>With the static content taken care of, nginx will act as a reverse proxy and pass any request processed at the root (<a href="http://206.189.132.233">http://206.189.132.233</a>) of our application to the location specified in the <code>proxy pass</code> directive. This in our case is <code>gunicorn</code> which is running on the default port <code>8000</code></li>
 </ol>
 <p>Although we have set up nginx to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run <code>sudo ufw allow http/tcp</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">~</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">ufw</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">http</span><span class="o">/</span><span class="n">tcp</span><span class="w"></span>
@@ -251,7 +251,7 @@
 <h3>Step 4 - Configuring gunicorn</h3>
 <p>While nginx serves the static content of our application, <code>gunicorn</code> handles the Python code. To install <code>gunicorn</code>, we will run <code>pip install gunicorn</code> on the server with the virtual environment activated.</p>
 <p>To run <code>gunicorn</code> we need to specify the exact module name where the Flask application is created. Our code uses the <code>create_app</code> factory method which returns the Flask application. Also included in our code is the <code>wsgi.py</code> module that calls the factory method and stores the application instance in a variable named <code>app</code>.</p>
-<div class="highlight"><pre><span></span><span class="c1"># wsgi.py </span>
+<div class="highlight"><pre><span></span><span class="c1"># wsgi.py</span>
 
 <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span>
 <span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">Config</span>
@@ -272,7 +272,7 @@
 </pre></div>
 
 
-<p>The <code>-w</code> parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula <code>(2 x number of CPU cores) + 1</code>.  The command <code>nproc --all</code> will give us the number of CPU cores on our server.</p>
+<p>The <code>-w</code> parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula <code>(2 x number of CPU cores) + 1</code>. The command <code>nproc --all</code> will give us the number of CPU cores on our server.</p>
 <p>At this point, we can access our application on <a href="http://206.189.132.233">http://206.189.132.233</a>.</p>
 <p><br />
 <img alt="site" src="https://codedisciples.in/images/index16/site.jpg"></p>
@@ -306,9 +306,9 @@
 </pre></div>
 
 
-<p>We will now be able to access our website in spite of disconnecting from our terminal. </p>
-<p>That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site by adding https. Those, however, are out of scope for this series of posts. In a future post, we will see how to install and set up a PostgreSQL database on the server (for our application) rather than using ElephantSQL.</p>
-<p>Please be aware that the DigitalOcean droplet will be destroyed in the near future. So the URL <a href="http://206.189.132.233">http://206.189.132.233</a> may not be available depending on when you are reading this post. </p>
+<p>We will now be able to access our website in spite of disconnecting from our terminal.</p>
+<p>That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site with <code>https</code>. Those, however, are out of scope for this series of posts.</p>
+<p>Please be aware that the DigitalOcean droplet used in this post will be destroyed in the near future. So the URL <a href="http://206.189.132.233">http://206.189.132.233</a> may not be accessible depending on when you are reading this post.</p>
   </div>
   
   <br/>
@@ -375,6 +375,8 @@
   <div class="col-xs-6 col-md-12">
     <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
     <ul class="list-unstyled category-links">
+      <li><a href="https://codedisciples.in/category/ci.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> CI</a></li>
       <li><a href="https://codedisciples.in/category/css.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> CSS</a></li>
       <li><a href="https://codedisciples.in/category/docker.html">
@@ -396,6 +398,12 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/postgres.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
+      </a>
+      <a href="https://codedisciples.in/tag/ci.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>CI
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
@@ -425,9 +433,6 @@
       </a>
       <a href="https://codedisciples.in/tag/docker.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Docker
-      </a>
-      <a href="https://codedisciples.in/tag/postgres.html">
-        <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
       </a>
       <a href="https://codedisciples.in/tag/google-maps.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps

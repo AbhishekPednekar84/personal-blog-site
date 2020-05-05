@@ -8,7 +8,7 @@
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Running Celery on Windows 10 - Code Disciples</title>
+    <title>Using a PostgreSQL database with Travis CI - Code Disciples</title>
 
    
         <link rel="stylesheet"
@@ -87,105 +87,93 @@
 <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
 <abbr class="article-header-date">
-  Tue 22 October 2019
+  Tue 05 May 2020
 </abbr> <h1>
-  <a href="https://codedisciples.in/celery-windows.html" rel="bookmark"
-     title="Permalink to Running Celery on Windows 10">
-    Running Celery on Windows 10
+  <a href="https://codedisciples.in/travis-postgres.html" rel="bookmark"
+     title="Permalink to Using a PostgreSQL database with Travis CI">
+    Using a PostgreSQL database with Travis CI
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
     in 
-    <a href="https://codedisciples.in/category/python.html">
-      Python</a>
+    <a href="https://codedisciples.in/category/ci.html">
+      CI</a>
     &nbsp;&nbsp;
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>Celery is an asynchronous task queue that is fairly easy to integrate with a Python application. It requires a messaging queue (also known as a broker) to send and receive messages. Popular brokers are Redis and RabbitMQ.</p>
-<p>In this post, we will see how to install and run Celery using Windows Subsystem for Linux (WSL) on Windows 10. <strong>Redis</strong> will be our broker in the example.  We will also be using the <strong>Remote-WSL</strong> extension in VS Code to develop our Python application in a Linux environment. Finally, we will store the results of the tasks executed by Celery in a <strong>SQLite</strong> database.</p>
-<p>This post assumes that the reader already has WSL setup and has installed Python and pip on WSL. If not, one can refer to the below resources before proceeding further -</p>
-<ol>
-<li><a href="https://www.youtube.com/watch?v=xzgwDbe7foQ&amp;t=533s">Setting up WSL</a></li>
-<li><a href="https://medium.com/@rhdzmota/python-development-on-the-windows-subsystem-for-linux-wsl-17a0fa1839d">Python setup on WSL</a></li>
-</ol>
-<p>Now that we have Python installed with WSL, we will create a virtual environment and install the required dependencies. For this demo, we are using the <a href="https://cmder.net/">cmder</a> console application. The same commands can be run in Ubuntu or other Linux distros. In the current example, we will open a <code>WSL</code> window in <strong>cmder</strong> to run the commands. </p>
-<ol>
-<li>Create the virtual environment in the project folder - <code>python3 -m venv venv</code></li>
-<li>Activate the virtual environment - <code>source venv/bin/activate</code></li>
-<li>Install the celery - redis and sqlalchemy libraries - <code>pip3 install celery[redis] sqlalchemy</code> </li>
-<li>Create the requirements file - <code>pip3 freeze &gt; requirements.txt</code></li>
-<li>Open the project folder in VS Code via explorer or by running <code>code .</code> in the console</li>
-</ol>
-<p>As mentioned earlier, we will be using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote-WSL</a> extension to run our code in a Linux based environment. This plugin can be installed from the VS Code marketplace.</p>
-<p><br/>
-<img alt="Remote-WSL" src="https://codedisciples.in/images/index11/remote-wsl.jpg"></p>
-<p>Once installed, we will have an option to reopen our (Windows) project folder in WSL.</p>
-<p><br/>
-<img alt="Windows-WSL" src="https://codedisciples.in/images/index11/windows-wsl.jpg"></p>
-<p>The final thing we need to do before writing our code is to install a Redis server instance locally. Running the following commands in <code>WSL</code> will install a <code>Redis server</code> on your computer.</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="k">update</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">upgrade</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">redis</span><span class="o">-</span><span class="n">server</span>
+	<p>In this post, we will see how one can use a PostgreSQL database to support automated tests during continuous integration (CI) with Travis CI.</p>
+<p>Travis CI is a distributed CI service that can be integrated with a source control system like Github to automatically build a project and run tests whenever code is pushed to a remote repository.</p>
+<p>We will be using a sample Django project as an example. The primary focus of the article will be Travis CI and PostgreSQL. Therefore, no prior knowledge of Django is needed. However, basic knowledge about PostgreSQL and Travis CI (particularly the usage of the <code>.travis.yml</code> file) is assumed.</p>
+<h2>Updating the <code>.travis.yml</code> file</h2>
+<p>To use a PostgreSQL database during our Travis build, we will need to specify <code>postgres</code> under the <code>services</code> directive of our <code>.travis.yml</code> file.</p>
+<div class="highlight"><pre><span></span><span class="n">services</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">postgresql</span>
 </pre></div>
 
 
-<p>Once the installation is complete, we will restart the server using <code>sudo service redis-server restart</code> to make sure that it is running.</p>
-<p>Our simple code consists of a function that multiplies two numbers. However, rather than printing the result in a REPL, we will let <code>Celery</code> execute a task and store the result in a <code>SQLite</code> database.</p>
-<div class="highlight"><pre><span></span><span class="c1"># module name - celery_demo.py</span>
-
-<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s2">&quot;celery_demo&quot;</span><span class="p">,</span> 
-             <span class="n">broker</span><span class="o">=</span><span class="s2">&quot;redis://localhost:6379&quot;</span><span class="p">,</span>
-             <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;db+sqlite:///results.db&quot;</span><span class="p">)</span>
-
-<span class="nd">@app.task</span>
-<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">num1</span> <span class="o">*</span> <span class="n">num2</span>
+<p>Next, we will need to tell Travis to create a test database during the build. We can specify this as part of the <code>before_script</code> directive. Here, we are creating a test database called <code>test_postgres_db</code>. The database will be created by the default user (<code>-U</code>), <code>postgres</code>. The password field for this user will be empty.</p>
+<div class="highlight"><pre><span></span><span class="n">before_script</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">psql</span> <span class="o">-</span><span class="k">c</span> <span class="s1">&#39;create database test_postgres_db;&#39;</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span>
 </pre></div>
 
 
-<p>Let's go over this line by line -</p>
-<ol>
-<li>First, we import the <code>Celery</code> class from the <code>celery</code> module</li>
-<li>Next, we create an instance of the class (called app) and pass our module name which is <code>celery_demo</code> in our case, the url of our redis server (running on localhost on the default port 6379) and lastly the link to our <code>SQLite</code> database which will store the task results</li>
-<li>Finally, we have our function which multiplies two numbers that are passed to it as parameters and returns their product. Note that the function is decorated with <code>@app.task</code> which will enable us to execute this function/task using our Celery worker</li>
-</ol>
-<p>Next, we will fire up our <code>Celery</code> worker process.We need to make sure that we are in the virtual environment when executing the below command. The command will be run in a <code>WSL</code> window. Note that we are passing our module name, the <code>worker</code> argument and setting the logging level with the <code>--loglevel</code> argument which will enable us to see results in our console.</p>
-<p><code>celery -A celery_demo worker --loglevel=info</code></p>
-<p><br/>
-<img alt="Celery" src="https://codedisciples.in/images/index11/celery.jpg"></p>
-<p>Now, we will call our task in a Python REPL using the <code>delay()</code> method. Calling the task will return an <em>AsyncResult</em> instance, each having a unique guid. Again, we will be using <code>WSL</code> to run the REPL.</p>
-<p><br/>
-<img alt="Calling-Task" src="https://codedisciples.in/images/index11/calling-task.jpg"></p>
-<p>If the task is called successfully, we can see the result of the task as executed by our <code>Celery</code> worker.</p>
-<p><br/>
-<img alt="Celery-Result" src="https://codedisciples.in/images/index11/celery-result.jpg"></p>
-<p>At this point, our <code>SQLite</code> database is created.  The <code>celery-taskmeta</code> table will store the results of all our tasks. The tasks can be identified based on the guid of the async result instance. The results will be stored in a binary (BLOB) format. </p>
-<p><br/>
-<img alt="SQLite-Results" src="https://codedisciples.in/images/index11/sqlite-results.jpg"></p>
-<p>Here is a readable version of our result BLOB.</p>
-<div class="highlight"><pre><span></span><span class="err">{</span>
-  <span class="ss">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="mi">128</span><span class="p">,</span>
-    <span class="mi">4</span><span class="p">,</span>
-    <span class="mi">149</span><span class="p">,</span>
-    <span class="mi">3</span><span class="p">,</span>
-    <span class="mi">0</span><span class="p">,</span>
-    <span class="mi">0</span><span class="p">,</span>
-    <span class="mi">0</span><span class="p">,</span>
-    <span class="mi">0</span><span class="p">,</span>
-    <span class="mi">0</span><span class="p">,</span>
-    <span class="mi">0</span><span class="p">,</span>
-    <span class="mi">0</span><span class="p">,</span>
-    <span class="mi">75</span><span class="p">,</span>
-    <span class="mi">10</span><span class="p">,</span>
-    <span class="mi">46</span>
-  <span class="p">],</span>
-  <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;Buffer&quot;</span>
-<span class="err">}</span>
+<h2>Environment variables and the database</h2>
+<p>Typically, all database connection details like the username, the password and the hostname are stored securely as environment variables which are maintained in <code>.env</code> files or directly added to the hosting server. Our Django application is also reading the PostgreSQL connection details from a <code>.env</code> file.</p>
+<div class="highlight"><pre><span></span><span class="c1"># settings.py</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;POSTGRES_DB&quot;</span><span class="p">),</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;POSTGRES_USER&quot;</span><span class="p">),</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;POSTGRES_PASSWORD&quot;</span><span class="p">),</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;POSTGRES_HOST&quot;</span><span class="p">),</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;5432   &#39;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This is what our <code>.env</code> file looks like.</p>
+<div class="highlight"><pre><span></span><span class="n">POSTGRES_USER</span><span class="o">=</span><span class="n">postgres</span><span class="o">-</span><span class="k">user</span>
+<span class="n">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">supersecurepassword</span>
+<span class="n">POSTGRES_DB</span><span class="o">=</span><span class="n">somedbname</span>
+<span class="n">POSTGRES_HOST</span><span class="o">=</span><span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
+</pre></div>
+
+
+<p>Now, since a <code>.env</code> file is never added to source control, our Travis build in this case will fail since it will be unable to find any database specific credentials in the remote repository. Fortunately, Travis CI lets us add environment variables as part of the build settings. Always remember that during a build, Travis CI creates a virtual machine to run our tests and then destroys it after the build is completed. We must, therefore, make use of temporary credentials and not specify production passwords or keys in the build settings.</p>
+<h2>Adding environment variables in Travis CI</h2>
+<p>Once we provide Travis CI access to our remote repository, we will have access to the build settings page containing an <strong>Environment Variables</strong> section. It is here that we will add details of the test database that we specified in the <code>.travis.yml</code> file earlier.</p>
+<p>The username, the database name and the host will be added as separate environment variables. Remember that the default password for the <code>postgres</code> user is blank/empty. Therefore, we do not need an environment variable for the password.</p>
+<div class="highlight"><pre><span></span><span class="n">POSTGRES_DB</span><span class="o">=</span><span class="n">test_postgres_db</span>
+<span class="n">POSTGRES_HOST</span><span class="o">=</span><span class="n">localhost</span>
+<span class="n">POSTGRES_USER</span><span class="o">=</span><span class="n">postgres</span>
+</pre></div>
+
+
+<p><img alt="env_vars" src="https://codedisciples.in/images/index20/env_vars.jpg"></p>
+<p>That's it! Travis CI will now provide us with a temporary PostgreSQL database whenever we run our tests during CI.</p>
+<p>The full <code>.travis.yml</code> file:</p>
+<div class="highlight"><pre><span></span><span class="n">language</span><span class="o">:</span> <span class="n">python</span>
+<span class="n">python</span><span class="o">:</span>
+<span class="o">-</span> <span class="s1">&#39;3.7&#39;</span>
+<span class="n">install</span><span class="o">:</span>
+<span class="o">-</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="na">txt</span>
+<span class="n">services</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">postgresql</span>
+<span class="n">before_script</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">psql</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;create database test_db;&#39;</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span>
+<span class="n">script</span><span class="o">:</span>
+<span class="o">-</span> <span class="n">pytest</span> <span class="n">django_app</span>
+<span class="n">notifications</span><span class="o">:</span>
+  <span class="n">slack</span><span class="o">:</span>
+    <span class="n">rooms</span><span class="o">:</span>
+      <span class="o">-</span> <span class="n">secure</span><span class="o">:</span> <span class="n">xxxxxxx</span>
 </pre></div>
   </div>
   

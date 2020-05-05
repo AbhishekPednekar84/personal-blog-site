@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all-en.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-02-28T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Iterools</title><link href="https://codedisciples.in/itertools.html" rel="alternate"></link><published>2020-02-28T12:00:00+05:30</published><updated>2020-02-28T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-28:/itertools.html</id><summary type="html">&lt;p&gt;A look at the &lt;code&gt;itertools&lt;/code&gt; module in Python 3&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will dive into the &lt;code&gt;itertools&lt;/code&gt; module in Python. The &lt;code&gt;itertools&lt;/code&gt; module contains a truckload of functions to operate on Python iterators. Depending on the use case, these functions can make our code cleaner and more efficient.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all-en.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-05-05T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Using a PostgreSQL database with Travis CI</title><link href="https://codedisciples.in/travis-postgres.html" rel="alternate"></link><published>2020-05-05T21:00:00+05:30</published><updated>2020-05-05T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-05:/travis-postgres.html</id><summary type="html">&lt;p&gt;Adding a PostgreSQL test database as part of continuous integration with Travis CI&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will see how one can use a PostgreSQL database to support automated tests during continuous integration (CI) with Travis CI.&lt;/p&gt;
+&lt;p&gt;Travis CI is a distributed CI service that can be integrated with a source control system like Github to automatically build a project and run tests whenever code is pushed to a remote repository.&lt;/p&gt;
+&lt;p&gt;We will be using a sample Django project as an example. The primary focus of the article will be Travis CI and PostgreSQL. Therefore, no prior knowledge of Django is needed. However, basic knowledge about PostgreSQL and Travis CI (particularly the usage of the &lt;code&gt;.travis.yml&lt;/code&gt; file) is assumed.&lt;/p&gt;
+&lt;h2&gt;Updating the &lt;code&gt;.travis.yml&lt;/code&gt; file&lt;/h2&gt;
+&lt;p&gt;To use a PostgreSQL database during our Travis build, we will need to specify &lt;code&gt;postgres&lt;/code&gt; under the &lt;code&gt;services&lt;/code&gt; directive of our &lt;code&gt;.travis.yml&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, we will need to tell Travis to create a test database during the build. We can specify this as part of the &lt;code&gt;before_script&lt;/code&gt; directive. Here, we are creating a test database called &lt;code&gt;test_postgres_db&lt;/code&gt;. The database will be created by the default user (&lt;code&gt;-U&lt;/code&gt;), &lt;code&gt;postgres&lt;/code&gt;. The password field for this user will be empty.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;before_script&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;create database test_postgres_db;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Environment variables and the database&lt;/h2&gt;
+&lt;p&gt;Typically, all database connection details like the username, the password and the hostname are stored securely as environment variables which are maintained in &lt;code&gt;.env&lt;/code&gt; files or directly added to the hosting server. Our Django application is also reading the PostgreSQL connection details from a &lt;code&gt;.env&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# settings.py&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="n"&gt;DATABASES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;ENGINE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;django.db.backends.postgresql&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;NAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getenv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSTGRES_DB&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;USER&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getenv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSTGRES_USER&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;PASSWORD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getenv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSTGRES_PASSWORD&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;HOST&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getenv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSTGRES_HOST&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;PORT&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;5432   &amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is what our &lt;code&gt;.env&lt;/code&gt; file looks like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;POSTGRES_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;
+&lt;span class="n"&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;supersecurepassword&lt;/span&gt;
+&lt;span class="n"&gt;POSTGRES_DB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;somedbname&lt;/span&gt;
+&lt;span class="n"&gt;POSTGRES_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, since a &lt;code&gt;.env&lt;/code&gt; file is never added to source control, our Travis build in this case will fail since it will be unable to find any database specific credentials in the remote repository. Fortunately, Travis CI lets us add environment variables as part of the build settings. Always remember that during a build, Travis CI creates a virtual machine to run our tests and then destroys it after the build is completed. We must, therefore, make use of temporary credentials and not specify production passwords or keys in the build settings.&lt;/p&gt;
+&lt;h2&gt;Adding environment variables in Travis CI&lt;/h2&gt;
+&lt;p&gt;Once we provide Travis CI access to our remote repository, we will have access to the build settings page containing an &lt;strong&gt;Environment Variables&lt;/strong&gt; section. It is here that we will add details of the test database that we specified in the &lt;code&gt;.travis.yml&lt;/code&gt; file earlier.&lt;/p&gt;
+&lt;p&gt;The username, the database name and the host will be added as separate environment variables. Remember that the default password for the &lt;code&gt;postgres&lt;/code&gt; user is blank/empty. Therefore, we do not need an environment variable for the password.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;POSTGRES_DB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;test_postgres_db&lt;/span&gt;
+&lt;span class="n"&gt;POSTGRES_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;localhost&lt;/span&gt;
+&lt;span class="n"&gt;POSTGRES_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="env_vars" src="https://codedisciples.in/images/index20/env_vars.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;That's it! Travis CI will now provide us with a temporary PostgreSQL database whenever we run our tests during CI.&lt;/p&gt;
+&lt;p&gt;The full &lt;code&gt;.travis.yml&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;
+&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;3.7&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;txt&lt;/span&gt;
+&lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt;
+&lt;span class="n"&gt;before_script&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;create database test_db;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt;
+&lt;span class="n"&gt;script&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;pytest&lt;/span&gt; &lt;span class="n"&gt;django_app&lt;/span&gt;
+&lt;span class="n"&gt;notifications&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;slack&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;rooms&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+      &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;secure&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;xxxxxxx&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Postgres"></category><category term="CI"></category></entry><entry><title>Iterools</title><link href="https://codedisciples.in/itertools.html" rel="alternate"></link><published>2020-02-28T12:00:00+05:30</published><updated>2020-02-28T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-28:/itertools.html</id><summary type="html">&lt;p&gt;A look at the &lt;code&gt;itertools&lt;/code&gt; module in Python 3&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will dive into the &lt;code&gt;itertools&lt;/code&gt; module in Python. The &lt;code&gt;itertools&lt;/code&gt; module contains a truckload of functions to operate on Python iterators. Depending on the use case, these functions can make our code cleaner and more efficient.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with the concept of iterators and iterables in Python. At the end of this post, the reader will be familiar with the usage of some common functions from the &lt;code&gt;itertools&lt;/code&gt; module.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;itertools&lt;/code&gt; module is built into the Python standard library and therefore does not need to be installed separately. The &lt;code&gt;import itertools&lt;/code&gt; statement will give us access to all the functions contained in the module. On that note, we will be skipping the  &lt;code&gt;import&lt;/code&gt; statement in all but the first code snippet to avoid redundancy and keep the examples concise. &lt;/p&gt;
 &lt;p&gt;Here is the list of functions that will be discussed in this post -&lt;/p&gt;
@@ -523,7 +594,7 @@ author:
 &lt;img alt="theme1" src="https://codedisciples.in/images/index17/theme1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="theme2" src="https://codedisciples.in/images/index17/theme2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="theme3" src="https://codedisciples.in/images/index17/theme3.jpg"&gt;&lt;/p&gt;</content><category term="Markdown"></category></entry><entry><title>Deploying a Flask application on a Linux server - Part II</title><link href="https://codedisciples.in/linux-vps-deployment2.html" rel="alternate"></link><published>2019-12-10T23:00:00+05:30</published><updated>2019-12-10T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-12-10:/linux-vps-deployment2.html</id><summary type="html">&lt;p&gt;Deploying a Flask application on a Virtual Private (Linux) Server&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;part one&lt;/a&gt; of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with &lt;strong&gt;nginx&lt;/strong&gt; and &lt;strong&gt;gunicorn&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The post assumes that the reader is familiar with the basics of Linux and Flask. &lt;/p&gt;
+&lt;p&gt;The post assumes that the reader is familiar with the basics of Linux and Flask.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;Click here&lt;/a&gt; to download the source code of the Flask application that will be deployed. An important thing to note is that we will be using a &lt;code&gt;.env&lt;/code&gt; file to configure our environment variables (see &lt;code&gt;.env.example&lt;/code&gt; in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on &lt;a href="ttps://www.google.com/recaptcha/"&gt;Google reCAPTCHA&lt;/a&gt; to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by &lt;a href="https://www.elephantsql.com/"&gt;ElephantSQL&lt;/a&gt;. The &lt;code&gt;DATABASE_URL&lt;/code&gt; variable in the &lt;code&gt;.env&lt;/code&gt; file will need to be modified depending on the database in use.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Environment&lt;/span&gt; &lt;span class="n"&gt;Variables&lt;/span&gt;
 
@@ -546,13 +617,13 @@ author:
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;commands&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;lm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;templates&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;views&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;templates&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;views&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;wsgi&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -588,17 +659,18 @@ author:
 &lt;h3&gt;Step 3 - Configuring nginx&lt;/h3&gt;
 &lt;p&gt;To serve the static content (HTML, CSS, JavaScript) of our website, we will be using &lt;strong&gt;nginx&lt;/strong&gt; as our webserver.&lt;/p&gt;
 &lt;p&gt;To install nginx, we will run &lt;code&gt;sudo apt install nginx&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;To configure nginx for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. First, we will delete the default nginx configuration file that was created during the installation process.&lt;/p&gt;
+&lt;p&gt;To configure nginx for our application, we will need to create a configuration file which will allow the web server and our application to talk to each other. Depending on the version of nginx that was installed, nginx could be looking for an application configuration file in different locations. To ensure that nginx will look for the configuration file in the location that we expect, &lt;code&gt;cat&lt;/code&gt; the &lt;code&gt;nginx.conf&lt;/code&gt; file located in &lt;code&gt;/etc/nginx/&lt;/code&gt; and verify if it contains the line &lt;code&gt;include /etc/nginx/sites-enabled/*;&lt;/code&gt;. If not, open the file using &lt;code&gt;sudo nano nginx.conf&lt;/code&gt; and add the line. This way nginx will look for our config in the &lt;code&gt;sites-enabled&lt;/code&gt; directory.&lt;/p&gt;
+&lt;p&gt;Now, we will delete the default nginx configuration file that was created in the &lt;code&gt;sites-enabled&lt;/code&gt; directory during the installation process.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;flaskuser&lt;/span&gt;&lt;span class="nv"&gt;@Flask&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nl"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sites&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Next, we will use the &lt;em&gt;nano&lt;/em&gt; text editor to create, update and save a new configuration file. Running the below command will open the file in edit mode.&lt;/p&gt;
+&lt;p&gt;Next, we will use the &lt;em&gt;nano&lt;/em&gt; text editor to create and save a new application configuration file.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;flaskuser&lt;/span&gt;&lt;span class="nv"&gt;@Flask&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nl"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;nano&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sites&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;flask&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We will now add the below code to the configurtion file.&lt;/p&gt;
+&lt;p&gt;We can now add the below code to the configuration file.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt; {
         &lt;span class="nv"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
         &lt;span class="nv"&gt;server_name&lt;/span&gt; &lt;span class="mi"&gt;206&lt;/span&gt;.&lt;span class="mi"&gt;189&lt;/span&gt;.&lt;span class="mi"&gt;132&lt;/span&gt;.&lt;span class="mi"&gt;233&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
@@ -621,8 +693,7 @@ author:
 &lt;ol&gt;
 &lt;li&gt;First, we are instructing nginx to listen for our application traffic on http port 80 of our VPS&lt;/li&gt;
 &lt;li&gt;Next, we are telling nginx where to look for the static content of our Flask application by providing the path to the &lt;code&gt;/static&lt;/code&gt; directory as an alias&lt;/li&gt;
-&lt;li&gt;With the static content taken care of, nginx will pass any request processed at the root (&lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;) of our application to the proxied server specified in the &lt;code&gt;proxy pass&lt;/code&gt; directive. This proxied server in our case is &lt;code&gt;gunicorn&lt;/code&gt; running on the default port &lt;code&gt;8000&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;proxy_params&lt;/code&gt; file specifies some standard parameters to be used by the proxied server and &lt;code&gt;proxy_redirect off&lt;/code&gt; turns off any redirects&lt;/li&gt;
+&lt;li&gt;With the static content taken care of, nginx will act as a reverse proxy and pass any request processed at the root (&lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;) of our application to the location specified in the &lt;code&gt;proxy pass&lt;/code&gt; directive. This in our case is &lt;code&gt;gunicorn&lt;/code&gt; which is running on the default port &lt;code&gt;8000&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Although we have set up nginx to listen on port 80, our firewall has not been opened for that port. To allow traffic on port 80, we will run &lt;code&gt;sudo ufw allow http/tcp&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;flaskuser&lt;/span&gt;&lt;span class="nv"&gt;@Flask&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nl"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ufw&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -670,7 +741,7 @@ author:
 &lt;h3&gt;Step 4 - Configuring gunicorn&lt;/h3&gt;
 &lt;p&gt;While nginx serves the static content of our application, &lt;code&gt;gunicorn&lt;/code&gt; handles the Python code. To install &lt;code&gt;gunicorn&lt;/code&gt;, we will run &lt;code&gt;pip install gunicorn&lt;/code&gt; on the server with the virtual environment activated.&lt;/p&gt;
 &lt;p&gt;To run &lt;code&gt;gunicorn&lt;/code&gt; we need to specify the exact module name where the Flask application is created. Our code uses the &lt;code&gt;create_app&lt;/code&gt; factory method which returns the Flask application. Also included in our code is the &lt;code&gt;wsgi.py&lt;/code&gt; module that calls the factory method and stores the application instance in a variable named &lt;code&gt;app&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# wsgi.py &lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# wsgi.py&lt;/span&gt;
 
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_app&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;config&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;
@@ -691,7 +762,7 @@ author:
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The &lt;code&gt;-w&lt;/code&gt; parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula &lt;code&gt;(2 x number of CPU cores) + 1&lt;/code&gt;.  The command &lt;code&gt;nproc --all&lt;/code&gt; will give us the number of CPU cores on our server.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;-w&lt;/code&gt; parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula &lt;code&gt;(2 x number of CPU cores) + 1&lt;/code&gt;. The command &lt;code&gt;nproc --all&lt;/code&gt; will give us the number of CPU cores on our server.&lt;/p&gt;
 &lt;p&gt;At this point, we can access our application on &lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
 &lt;img alt="site" src="https://codedisciples.in/images/index16/site.jpg"&gt;&lt;/p&gt;
@@ -725,22 +796,22 @@ author:
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We will now be able to access our website in spite of disconnecting from our terminal. &lt;/p&gt;
-&lt;p&gt;That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site by adding https. Those, however, are out of scope for this series of posts. In a future post, we will see how to install and set up a PostgreSQL database on the server (for our application) rather than using ElephantSQL.&lt;/p&gt;
-&lt;p&gt;Please be aware that the DigitalOcean droplet will be destroyed in the near future. So the URL &lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt; may not be available depending on when you are reading this post. &lt;/p&gt;</content><category term="Python"></category><category term="Linux"></category></entry><entry><title>Deploying a Flask application on a Linux server - Part I</title><link href="https://codedisciples.in/linux-vps-deployment1.html" rel="alternate"></link><published>2019-11-20T23:00:00+05:30</published><updated>2019-11-20T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-20:/linux-vps-deployment1.html</id><summary type="html">&lt;p&gt;Set up a bare-bones Virtual Private (Linux) Server from scratch&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/flask-heroku.html"&gt;previous&lt;/a&gt; post, we deployed a Flask application on Heroku. In this post, we will deploy the &lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;same application&lt;/a&gt; on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. &lt;a href="https://linode.com"&gt;Linode&lt;/a&gt; and &lt;a href="https://digitalocean.com"&gt;DigitalOcean&lt;/a&gt; are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider. &lt;/p&gt;
+&lt;p&gt;We will now be able to access our website in spite of disconnecting from our terminal.&lt;/p&gt;
+&lt;p&gt;That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site with &lt;code&gt;https&lt;/code&gt;. Those, however, are out of scope for this series of posts.&lt;/p&gt;
+&lt;p&gt;Please be aware that the DigitalOcean droplet used in this post will be destroyed in the near future. So the URL &lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt; may not be accessible depending on when you are reading this post.&lt;/p&gt;</content><category term="Python"></category><category term="Linux"></category></entry><entry><title>Deploying a Flask application on a Linux server - Part I</title><link href="https://codedisciples.in/linux-vps-deployment1.html" rel="alternate"></link><published>2019-11-20T23:00:00+05:30</published><updated>2019-11-20T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-20:/linux-vps-deployment1.html</id><summary type="html">&lt;p&gt;Set up a bare-bones Virtual Private (Linux) Server from scratch&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/flask-heroku.html"&gt;previous&lt;/a&gt; post, we deployed a Flask application on Heroku. In this post, we will deploy the &lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;same application&lt;/a&gt; on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. &lt;a href="https://linode.com"&gt;Linode&lt;/a&gt; and &lt;a href="https://digitalocean.com"&gt;DigitalOcean&lt;/a&gt; are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider.&lt;/p&gt;
 &lt;p&gt;This is the part one of a two-part series. In this post, we will set up a bare-bones Linux server and prime it for deployment. In part two, we will deploy the Flask application with &lt;strong&gt;nginx&lt;/strong&gt; and &lt;strong&gt;gunicorn&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with the basics of Linux.&lt;/p&gt;
 &lt;h2&gt;Getting started with DigitalOcean&lt;/h2&gt;
-&lt;p&gt;At the time of posting this article, DigitalOcean is offering a &lt;a href="https://try.digitalocean.com/python/?utm_medium=podcast&amp;amp;utm_source=pythonbytes&amp;amp;utm_campaign=DO_Dev_Signup_Cold_Python"&gt;$50 credit&lt;/a&gt; as part of its sponsorship of the &lt;a href="https://pythonbytes.fm"&gt;Python Bytes Podcast&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;At the time of posting this article, DigitalOcean is offering a &lt;a href="https://try.digitalocean.com/python/?utm_medium=podcast&amp;amp;utm_source=pythonbytes&amp;amp;utm_campaign=DO_Dev_Signup_Cold_Python"&gt;\$50 credit&lt;/a&gt; as part of its sponsorship of the &lt;a href="https://pythonbytes.fm"&gt;Python Bytes Podcast&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To get started with DigitalOcean, we will first need to &lt;a href="https://www.digitalocean.com/"&gt;sign up&lt;/a&gt; and create an account. Once logged in, we can create and configure a droplet (VPS). Below are the steps.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create a new project and provide an appropriate name (Ex: &lt;em&gt;Flask Demo App&lt;/em&gt;)&lt;/li&gt;
 &lt;li&gt;On the project's control panel, select &lt;em&gt;Get started with a Droplet&lt;/em&gt; to create a VPS&lt;/li&gt;
 &lt;li&gt;Choose an image. We will be using &lt;em&gt;Ubuntu 18.04.3&lt;/em&gt; for our demo app. If choosing another Linux distribution, the commands in the subsequent section might vary.&lt;/li&gt;
-&lt;li&gt;Choose a plan - the most inexpensive (Standard / $5 per month) plan will suffice&lt;/li&gt;
+&lt;li&gt;Choose a plan - the most inexpensive (Standard / \$5 per month) plan will suffice&lt;/li&gt;
 &lt;li&gt;Select a datacenter region. This would ideally be one closest to where a majority of our end users are located. In the present case, any region will do&lt;/li&gt;
 &lt;li&gt;For the authentication process, we will select &lt;em&gt;One-time password&lt;/em&gt; for now and set up an SSH key later on. The password will be sent to the email address provided at the time of registration&lt;/li&gt;
-&lt;li&gt;Give an appropriate name (Ex: &lt;em&gt;Flask-Demo-Server&lt;/em&gt;) for the server and click on &lt;em&gt;Create Droplet&lt;/em&gt;  &lt;/li&gt;
+&lt;li&gt;Give an appropriate name (Ex: &lt;em&gt;Flask-Demo-Server&lt;/em&gt;) for the server and click on &lt;em&gt;Create Droplet&lt;/em&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Setting up our server&lt;/h2&gt;
 &lt;h3&gt;Step 1 - Logging in with the &lt;strong&gt;root&lt;/strong&gt; user&lt;/h3&gt;
@@ -768,7 +839,7 @@ author:
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the &lt;code&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/code&gt; directory on the local machine. &lt;/p&gt;
+&lt;p&gt;Running the above command will create the public (id_rsa.pub) and the private (id_rsa) keys in the &lt;code&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/code&gt; directory on the local machine.&lt;/p&gt;
 &lt;p&gt;Prior to copying the key to the server, we will need to create a .ssh directory in &lt;em&gt;flaskuser&lt;/em&gt;'s /home directory. So let's login with &lt;em&gt;flaskuser&lt;/em&gt; and the password that we provided in the previous step and create the directory with the &lt;code&gt;mkdir .ssh&lt;/code&gt; command.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nl"&gt;Server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;flaskuser&lt;/span&gt;&lt;span class="mf"&gt;@206.189.132.233&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;

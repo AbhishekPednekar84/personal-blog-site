@@ -254,6 +254,6 @@ Restarted supervisord
 
 We will now be able to access our website in spite of disconnecting from our terminal.
 
-That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site by adding https. Those, however, are out of scope for this series of posts. In a future post, we will see how to install and set up a PostgreSQL database on the server (for our application) rather than using ElephantSQL.
+That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site with `https`. Those, however, are out of scope for this series of posts.
 
-Please be aware that the DigitalOcean droplet will be destroyed in the near future. So the URL [http://206.189.132.233](http://206.189.132.233) may not be available depending on when you are reading this post.
+Please be aware that the DigitalOcean droplet used in this post will be destroyed in the near future. So the URL [http://206.189.132.233](http://206.189.132.233) may not be accessible depending on when you are reading this post.
