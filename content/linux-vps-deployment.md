@@ -1,7 +1,7 @@
 Title: Deploying a Flask application on a Linux server - Part I
 Date: 2019-11-20 23:00
 Category: Linux
-Tags: Python, Linux
+Tags: Python, Linux, Deployment
 Slug: linux-vps-deployment1
 Authors: Abhishek Pednekar
 Summary: Set up a bare-bones Virtual Private (Linux) Server from scratch
@@ -15,7 +15,7 @@ The post assumes that the reader is familiar with the basics of Linux.
 
 ## Getting started with DigitalOcean
 
-At the time of posting this article, DigitalOcean is offering a [\$50 credit](https://try.digitalocean.com/python/?utm_medium=podcast&utm_source=pythonbytes&utm_campaign=DO_Dev_Signup_Cold_Python) as part of its sponsorship of the [Python Bytes Podcast](https://pythonbytes.fm).
+At the time of posting this article, DigitalOcean is offering a [\$100 credit](https://try.digitalocean.com/python/?utm_medium=podcast&utm_source=pythonbytes&utm_campaign=DO_Dev_Signup_Cold_Python) as part of its sponsorship of the [Python Bytes Podcast](https://pythonbytes.fm).
 
 To get started with DigitalOcean, we will first need to [sign up](https://www.digitalocean.com/) and create an account. Once logged in, we can create and configure a droplet (VPS). Below are the steps.
 

@@ -1,7 +1,7 @@
 Title: Deploying a Flask application on a Linux server - Part II
 Date: 2019-12-10 23:00
 Category: Linux
-Tags: Python, Linux
+Tags: Python, Linux, Deployment
 Slug: linux-vps-deployment2
 Authors: Abhishek Pednekar
 Summary: Deploying a Flask application on a Virtual Private (Linux) Server

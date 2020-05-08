@@ -64,59 +64,60 @@ h2 {
 
 /* Custom CSS for Voidy Bootstrap */
 p {
-    font-size: 17px;
+  font-size: 17px;
 }
 
 img {
-    width: 100%;
-    border: 1px solid #000;
+  width: 100%;
+  border: 1px solid #000;
 }
 
 #sidebar a {
-    color: #366ed8;
+  color: #366ed8;
 }
 
 a {
-    color: #216583;
-    text-decoration: none;
+  color: #216583;
+  text-decoration: none;
 }
 
 a:hover {
-    color: #6384b3;
+  color: #6384b3;
 }
 
 .navbar-default .navbar-toggle {
-    border-color: #95bb8f;
+  border-color: #95bb8f;
 }
 
-.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-    color: #216583;
-    text-shadow: 2px 2px 3px #9c8fbb;
-    letter-spacing: 1px;
-    font-weight: 700;
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  color: #216583;
+  text-shadow: 2px 2px 3px #9c8fbb;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 
 #footer-image {
-    height: 16px;
-    width: 16px;
-    border: none;
+  height: 16px;
+  width: 16px;
+  border: none;
 }
 
 .jumbotron {
-    background-image: url('/static/images/black-gradient-home.jpg');
-    color: #fff;
+  background-image: url("/static/images/gradient-texture-cubes.jpg");
+  color: #fff;
 }
 
-.jumbotron>a {
-    color: #fff;
+.jumbotron > a {
+  color: #fff;
 }
 
 hr {
-    border: 1px solid darkgrey;
+  border: 1px solid darkgrey;
 }
 
 #vn-about-blog {
-    font-size: 16px;
-    line-height: 20px;
-    color: #216583;
+  font-size: 16px;
+  line-height: 20px;
+  color: #216583;
 }
