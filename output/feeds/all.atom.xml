@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-05-08T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Deploying a React application on a Linux server</title><link href="https://codedisciples.in/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article, we will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. This article assumes that the reader has a basic understanding of Node.js and the React framework. We will therefore not be looking into any of the application-specific code. The focus will be on the steps to deploy the application on a virtual private (Linux) server (VPS). For this demo, we will be using a virtual server provisioned by &lt;strong&gt;DigitalOcean&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-05-08T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Deploying a React application on a Linux server</title><link href="https://codedisciples.in/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. Unlike a React application that is built from scratch, &lt;code&gt;create-react-app&lt;/code&gt; does not require us to install packages like &lt;code&gt;babel&lt;/code&gt; or &lt;code&gt;webpack&lt;/code&gt;. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.&lt;/p&gt;
+&lt;p&gt;Web deployments on a bare-bones server can sometimes be tricky. This post will go over all the steps that need to be followed to deploy a React application on a virtual private server. The server will be a &lt;strong&gt;DigitalOcean&lt;/strong&gt; droplet. The same steps can be followed on servers provisioned by other providers (like Linode). At the end of this article, you will be familiar with the pre-deployment and deployment tasks for a React application.&lt;/p&gt;
 &lt;h2&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;A Linux server with &lt;code&gt;root&lt;/code&gt; / &lt;code&gt;sudo&lt;/code&gt; access&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://Node.js.org/en/"&gt;Node.js&lt;/a&gt; to test locally&lt;/li&gt;
+&lt;li&gt;A local &lt;code&gt;git&lt;/code&gt; installation (if you are planning to use the same application as this post)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://Node.js.org/en/"&gt;Node.js&lt;/a&gt; to test the application locally&lt;/li&gt;
+&lt;li&gt;A &lt;a href="https://www.digitalocean.com/"&gt;DigitalOcean&lt;/a&gt; account or an account with any IAAS provider&lt;/li&gt;
+&lt;li&gt;One virtual private server running Ubuntu 18.04, including a non-root &lt;code&gt;sudo&lt;/code&gt;-enabled user and a firewall&lt;/li&gt;
+&lt;li&gt;A React application to deploy&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Digital Ocean and the initial setup&lt;/h2&gt;
-&lt;p&gt;Please refer to the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;Deploying a Flask application on a Linux server - Part I&lt;/a&gt; for details regarding signing up for a Digital Ocean account and performing the initial setup on the server. Although the two-parter article is written for the deployment of a Flask application, part one is generic. One recommended change would be to allow port &lt;code&gt;3000&lt;/code&gt; instead of &lt;code&gt;5000&lt;/code&gt; while setting up the firewall (step 5).&lt;/p&gt;
+&lt;p&gt;You can refer to the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;Deploying a Flask application on a Linux server - Part I&lt;/a&gt; article for details regarding signing up for a DigitalOcean account and performing the initial setup on the server. Although the two-parter article is written for the deployment of a Flask application, part one is generic. One recommended change would be to allow port &lt;code&gt;3000&lt;/code&gt; instead of &lt;code&gt;5000&lt;/code&gt; while setting up the firewall (step 5).&lt;/p&gt;
 &lt;h2&gt;Our React application&lt;/h2&gt;
-&lt;p&gt;The application that we will deploy is a simple single-page React application. It displays a random Chuck Norris joke from a public API. Refreshing the page or clicking on the button, displays a new joke. The complete code is accessible via the &lt;a href="https://github.com/AbhishekPednekar84/react-demo-app"&gt;Github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This post will not go into details about the application that will be deployed. At a high level, you will deploy a single-page React application which displays a random Chuck Norris joke from a public API. Refreshing the page or clicking on the button, displays a new joke. The complete code is accessible via the &lt;a href="https://github.com/AbhishekPednekar84/react-demo-app"&gt;Github repository&lt;/a&gt;. The &lt;code&gt;readme&lt;/code&gt; file documents the steps to create a local setup.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="&amp;quot;Chuck&amp;quot;" src="https://codedisciples.in/images/index21/chuck.gif"&gt;&lt;/p&gt;
-&lt;p&gt;As indicated earlier, the application is created using the &lt;code&gt;create-react-app&lt;/code&gt; package. In other words, we did not install &lt;code&gt;babel&lt;/code&gt;, &lt;code&gt;webpack&lt;/code&gt; or any of the other goodies that go into creating a React application from scratch. At the root of our application, we have a directory called &lt;code&gt;client&lt;/code&gt; which contains our React components and modules. Here is what the &lt;code&gt;client&lt;/code&gt; directory structure looks like.&lt;/p&gt;
+&lt;p&gt;The root folder of the application contains a directory called &lt;code&gt;client&lt;/code&gt;. All the React components and modules are present in this directory. Its structure is as follows.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;
     &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
@@ -28,14 +32,20 @@
 
 
 &lt;h2&gt;Preparing for deployment&lt;/h2&gt;
-&lt;p&gt;We will be using Node.js to run our application on the server. However, before we start deploying, we will need to perform a set of tasks locally -&lt;/p&gt;
+&lt;p&gt;This section deals with a set of pre-deployment tasks. These include,&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Build our project to create the binaries that will be deployed on our server&lt;/li&gt;
-&lt;li&gt;Create a &lt;code&gt;server.js&lt;/code&gt; file with information for Node.js on how to find our site's static assets and port information&lt;/li&gt;
-&lt;li&gt;Use Node.js to test the build locally&lt;/li&gt;
+&lt;li&gt;Creating the production build of the application that will be deployed on the server&lt;/li&gt;
+&lt;li&gt;Creating a &lt;code&gt;server.js&lt;/code&gt; file using Node.js and Express. This file will contain the path to the static assets that were built along with the port information&lt;/li&gt;
+&lt;li&gt;Test the build locally&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;To build our project, we will &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;client&lt;/code&gt; directory and run the &lt;code&gt;npm run build&lt;/code&gt; command. This will create a directory named &lt;code&gt;build&lt;/code&gt; inside &lt;code&gt;client&lt;/code&gt;. The &lt;code&gt;build&lt;/code&gt; directory will contain the static assets which we will later copy over to our server.&lt;/p&gt;
-&lt;p&gt;Next, we will create a directory called &lt;code&gt;server&lt;/code&gt; in the project root folder, within it, we will create a file called &lt;code&gt;server.js&lt;/code&gt; and add the below code to the file.&lt;/p&gt;
+&lt;p&gt;To build the project, you will &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;client&lt;/code&gt; directory and run the &lt;code&gt;npm run build&lt;/code&gt; command. This will create a folder named &lt;code&gt;build&lt;/code&gt; inside the &lt;code&gt;client&lt;/code&gt; directory. The &lt;code&gt;build&lt;/code&gt; folder contains the static assets which will be deployed on the server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;
+
+&lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The next step is to a create directory called &lt;code&gt;server&lt;/code&gt; in the project root folder (in the same level as the &lt;code&gt;client&lt;/code&gt; directory). Within &lt;code&gt;server&lt;/code&gt;, you will create a &lt;code&gt;server.js&lt;/code&gt; file with the following code.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nv"&gt;server&lt;/span&gt;.&lt;span class="nv"&gt;js&lt;/span&gt;
 
 &lt;span class="nv"&gt;const&lt;/span&gt; &lt;span class="nv"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;require&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;express&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
@@ -52,8 +62,8 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The code in &lt;code&gt;server.js&lt;/code&gt; uses &lt;code&gt;express&lt;/code&gt; to specify the path to the &lt;code&gt;static&lt;/code&gt; assets in our &lt;code&gt;build&lt;/code&gt; directory. Also, we are ensuring that when accessing the root of our site, we are loading the &lt;code&gt;index.html&lt;/code&gt; file and that the application will run on port &lt;code&gt;3000&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;To run &lt;code&gt;server.js&lt;/code&gt; we need the &lt;code&gt;express&lt;/code&gt; package. To do that, we will first &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;server&lt;/code&gt; directory and run &lt;code&gt;npm install express&lt;/code&gt;. Finally, we can test our build by running it locally using the &lt;code&gt;node server.js&lt;/code&gt; command. If all goes fine, our application will be accessible on &lt;code&gt;http://localhost:3000&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The code in &lt;code&gt;server.js&lt;/code&gt; uses Node.js and &lt;code&gt;express&lt;/code&gt; to specify the path to the &lt;code&gt;static&lt;/code&gt; assets in the &lt;code&gt;build&lt;/code&gt; folder. Also, you are ensuring that when accessing the root of the site, the &lt;code&gt;index.html&lt;/code&gt; file is presented to an end-user. The application is being configured to listen for requests on port &lt;code&gt;3000&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To run &lt;code&gt;server.js&lt;/code&gt; you need the &lt;code&gt;express&lt;/code&gt; package. To do that, you will first &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;server&lt;/code&gt; directory and run &lt;code&gt;npm install express&lt;/code&gt;. Finally, the build can be tested by running it locally using the &lt;code&gt;node server.js&lt;/code&gt; command. If all goes fine, the application will be accessible on &lt;code&gt;http://localhost:3000&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;
 
 &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;express&lt;/span&gt;
@@ -63,8 +73,8 @@
 
 
 &lt;h2&gt;Deploying the application&lt;/h2&gt;
-&lt;p&gt;With our server now primed for deployment and our build tested locally, we can now copy over the necessary files/folders from our local machine to our DigitalOcean droplet. There are several ways to this. To keep things simple, we will use the &lt;code&gt;scp&lt;/code&gt; command.&lt;/p&gt;
-&lt;p&gt;For the deployment, we will be copying the &lt;code&gt;server.js&lt;/code&gt; file from the &lt;code&gt;server&lt;/code&gt; directory. From the &lt;code&gt;client&lt;/code&gt; directory, we will only be copying the entire &lt;code&gt;build&lt;/code&gt; folder along with the &lt;code&gt;package.json&lt;/code&gt; and &lt;code&gt;package-lock.json&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;With the server now primed for deployment and the build tested locally, you can now copy over the necessary files/folders from the local machine to the DigitalOcean droplet. There are several ways to accomplish this. One way is to use the &lt;code&gt;scp&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;Below is the complete list of files/folders that will be copied to the server.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;
 &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
@@ -75,16 +85,20 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We will be moving our project files to a directory called &lt;code&gt;react-demo-app&lt;/code&gt; located in the home directory of the user &lt;code&gt;demo&lt;/code&gt;. Remember to change the username, IP address and path when running the below command. Assuming we are in the project root directory on our local machine (&lt;code&gt;/mnt/c/Learning/Live/react-demo-app/&lt;/code&gt; in this case), the command will copy the &lt;code&gt;client&lt;/code&gt; and &lt;code&gt;server&lt;/code&gt; subdirectories to the server.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Learning&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;p&gt;On the server, these files/folders will be copied to a folder named &lt;code&gt;react-demo-app&lt;/code&gt; located in the home directory of the user &lt;code&gt;demo&lt;/code&gt;. You can place these anywhere. Remember to change the username, IP address and path when running the below &lt;code&gt;scp&lt;/code&gt; command. Assuming we are in the project's root directory on our local machine (&lt;code&gt;/mnt/c/react-demo-app/&lt;/code&gt; in this case), the command will copy the &lt;code&gt;client&lt;/code&gt; and &lt;code&gt;server&lt;/code&gt; subdirectories to the server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 
 &lt;span class="n"&gt;scp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="mf"&gt;@139.59.4.54&lt;/span&gt;&lt;span class="o"&gt;:~/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Most of the next steps will need to be carried out on our DigitalOcean droplet. So let's login with our &lt;code&gt;sudo&lt;/code&gt; user - &lt;code&gt;ssh demo@139.59.4.54&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Most of the next steps will need to be carried out on our DigitalOcean droplet. You will need to log in with the &lt;code&gt;sudo&lt;/code&gt; user to perform the next steps.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="mf"&gt;@139.59.4.54&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h3&gt;Installing Node.js&lt;/h3&gt;
-&lt;p&gt;To install the latest version of Node.js and npm, we will run the following commands.&lt;/p&gt;
+&lt;p&gt;To install the latest version of Node.js and npm on the server, the following commands should be run.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
 
 &lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sL&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nodesource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;setup_12&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;
@@ -93,7 +107,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;To verify if the installation was successful, we can run&lt;/p&gt;
+&lt;p&gt;To verify if the installation was successful, you can run&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="c1"&gt;--version&lt;/span&gt;
 
 &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="c1"&gt;--version&lt;/span&gt;
@@ -101,21 +115,21 @@
 
 
 &lt;h3&gt;Installing project dependencies on the server&lt;/h3&gt;
-&lt;p&gt;With Node.js and npm now installed, we can install our project dependencies. We will first navigate to the &lt;code&gt;client&lt;/code&gt; directory and install the dependencies.&lt;/p&gt;
+&lt;p&gt;With Node.js and npm installed, you can now install our project dependencies. First, navigate to the &lt;code&gt;client&lt;/code&gt; directory and install the dependencies using the &lt;code&gt;npm install&lt;/code&gt; command.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;
 
 &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Remember, that our &lt;code&gt;server&lt;/code&gt; directory in &lt;code&gt;~/react-demo-app&lt;/code&gt; only contains the &lt;code&gt;server.js&lt;/code&gt; file. Also, to run our application using Node.js, we need the &lt;code&gt;express&lt;/code&gt; package. To install express, we will &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;server&lt;/code&gt; directory and run &lt;code&gt;npm install express&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Remember, that the &lt;code&gt;server&lt;/code&gt; directory in &lt;code&gt;~/react-demo-app&lt;/code&gt; only contains the &lt;code&gt;server.js&lt;/code&gt; file. Also, to run the application using Node.js, you need the &lt;code&gt;express&lt;/code&gt; package. To install &lt;code&gt;express&lt;/code&gt;, navigate to the &lt;code&gt;server&lt;/code&gt; directory and run &lt;code&gt;npm install express&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
 
 &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;express&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;At this time, we can do a quick test to see if our site works by running &lt;code&gt;node server.js&lt;/code&gt;. The site should be accessible at &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;:3000&lt;/code&gt;. Port &lt;code&gt;3000&lt;/code&gt; will work provided we configured the firewall to &lt;code&gt;allow&lt;/code&gt; it during the initial setup&lt;/p&gt;
+&lt;p&gt;At this time, you can do a quick test to see if the site works by running &lt;code&gt;node server.js&lt;/code&gt;. The site should be accessible at &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;:3000&lt;/code&gt;. Port &lt;code&gt;3000&lt;/code&gt; will work provided the firewall (&lt;code&gt;ufw&lt;/code&gt;) was configured to allow it.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
 
 &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
@@ -124,22 +138,31 @@
 
 &lt;p&gt;&lt;br /&gt;
 &lt;img alt="site" src="https://codedisciples.in/images/index21/site.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;We are almost there! Disconnecting from the terminal will kill the process running our site. We will, therefore, install the PM2 process manager to run our site.&lt;/p&gt;
+&lt;p&gt;Almost there! Disconnecting from the terminal will kill the process that is running the site. To keep the site running at all times, you will next install the PM2 process manager.&lt;/p&gt;
 &lt;h3&gt;Installing PM2 to run the site&lt;/h3&gt;
-&lt;p&gt;We will be installing PM2 as a global dependency using the &lt;code&gt;sudo npm install -g pm2&lt;/code&gt; command. Once installed we can use PM2 to start and manage our application using the &lt;code&gt;pm2 start&lt;/code&gt; command.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
+&lt;p&gt;PM2 will be installed as a global dependency using the &lt;code&gt;sudo npm install -g pm2&lt;/code&gt; command. Once installed PM2 can be used to start and manage the site via the &lt;code&gt;pm2 start&lt;/code&gt; command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;Install&lt;/span&gt; &lt;span class="n"&gt;PM2&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;g&lt;/span&gt; &lt;span class="n"&gt;pm2&lt;/span&gt;
+
+&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;Navigate&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;PM2&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;react&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
 
 &lt;span class="n"&gt;pm2&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We should see an output similar to this -&lt;/p&gt;
+&lt;p&gt;You should see an output similar to this -&lt;/p&gt;
 &lt;p&gt;&lt;img alt="pm2" src="https://codedisciples.in/images/index21/pm2.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;Now, the site will continue to be accessible on &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;:3000&lt;/code&gt; despite disconnecting from the terminal. To check the status of PM2, we can run &lt;code&gt;sudo pm2 status&lt;/code&gt;. Well, we are close now. We don't want our users to always specify a port number while accessing our site. We will, therefore, route our traffic using a web server called Nginx.&lt;/p&gt;
+&lt;p&gt;Now, the site will continue to be accessible on &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;:3000&lt;/code&gt; despite disconnecting from the terminal. To check the status of PM2, you can run &lt;code&gt;sudo pm2 status&lt;/code&gt;. You, however, don't want your users to always specify a port number while accessing the site. To ensure this, incoming traffic will be routed through the Nginx web server.&lt;/p&gt;
 &lt;h3&gt;Installing and configuring Nginx&lt;/h3&gt;
-&lt;p&gt;Nginx will act as our webserver and route incoming traffic based on some configuration. We will need to first install it on our server and add some configuration.&lt;/p&gt;
-&lt;p&gt;To install Nginx, we will run &lt;code&gt;sudo apt install nginx -y&lt;/code&gt;. Before we create a configuration file for Nginx, we will need to make sure that Nginx can find the configuration that we are about to create. Check the contents of the &lt;code&gt;nginx.conf&lt;/code&gt; file located in &lt;code&gt;/etc/nginx&lt;/code&gt; using &lt;code&gt;cat /etc/nginx/nginx.conf&lt;/code&gt; and look for the line &lt;code&gt;include /etc/nginx/sites-enabled/*;&lt;/code&gt; in the &lt;code&gt;http&lt;/code&gt; directive. If it does not exist, we will need to add it.&lt;/p&gt;
-&lt;p&gt;To add the line, we will open &lt;code&gt;nginx.conf&lt;/code&gt; using the &lt;code&gt;nano&lt;/code&gt; (or any suitable) editor.&lt;/p&gt;
+&lt;p&gt;Nginx will act as the webserver and route incoming traffic based on the specified configuration. You will need to first install it on the server and add some configuration.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;Installing&lt;/span&gt; &lt;span class="n"&gt;Nginx&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Before creating a configuration file for Nginx, you will need to make sure that Nginx can find the configuration that you are about to create. Check the contents of the &lt;code&gt;nginx.conf&lt;/code&gt; file located in &lt;code&gt;/etc/nginx&lt;/code&gt; using &lt;code&gt;cat /etc/nginx/nginx.conf&lt;/code&gt; and look for the line &lt;code&gt;include /etc/nginx/sites-enabled/*;&lt;/code&gt; in the &lt;code&gt;http&lt;/code&gt; directive. If it does not exist, you will need to add it.&lt;/p&gt;
+&lt;p&gt;To add the line, open &lt;code&gt;nginx.conf&lt;/code&gt; using the &lt;code&gt;nano&lt;/code&gt; (or any suitable) editor.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;nano&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;.&lt;span class="nv"&gt;conf&lt;/span&gt;
 
 &lt;span class="nv"&gt;http&lt;/span&gt; {
@@ -151,12 +174,15 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Next, we will delete the &lt;code&gt;default&lt;/code&gt; nginx configuration by running &lt;code&gt;sudo rm /etc/nginx/sites-enabled/default&lt;/code&gt;. Once deleted, we will create a new configuration file called &lt;code&gt;demo&lt;/code&gt; (it can be named anything) in the &lt;code&gt;/etc/nginx/sites-enabled/&lt;/code&gt; directory.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;nano&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sites&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;
+&lt;p&gt;Next, delete the &lt;code&gt;default&lt;/code&gt; nginx configuration and create a new configuration file called &lt;code&gt;demo&lt;/code&gt; (it can be named anything) in the &lt;code&gt;/etc/nginx/sites-enabled/&lt;/code&gt; directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;Delete&lt;/span&gt; &lt;span class="k"&gt;existing&lt;/span&gt; &lt;span class="n"&gt;Nginx&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sites&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;
+
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;nano&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sites&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We will add the following code to the &lt;code&gt;demo&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Add the below code to the &lt;code&gt;demo&lt;/code&gt; file.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="nt"&gt;server_name&lt;/span&gt; &lt;span class="nt"&gt;139&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;59&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;54&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Whatever&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;your&lt;/span&gt; &lt;span class="nt"&gt;IP&lt;/span&gt; &lt;span class="nt"&gt;or&lt;/span&gt; &lt;span class="nt"&gt;domain&lt;/span&gt;
 
     &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -170,15 +196,24 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;To check the syntax of our nginx configuration file, we can run &lt;code&gt;sudo nginx -t&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This is a very basic configuration and will suffice for this demo project. We are telling nginx to forward any request that comes to the root &lt;code&gt;/&lt;/code&gt; of our site to &lt;code&gt;http://localhost:3000&lt;/code&gt; which is our application running on the server. This way, users will just need to enter the domain name or ipaddress in their browsers and Nginx will make sure that their requests are routed correctly.&lt;/p&gt;
-&lt;p&gt;We have also added some &lt;code&gt;proxy_set_header&lt;/code&gt; directives that will be included in the request headers. This is by no means the most complete Nginx configuration but a bare minimum one that serves the current purpose. The Nginx documentation lists the &lt;a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html"&gt;complete set&lt;/a&gt; of directives.&lt;/p&gt;
-&lt;p&gt;We will now restart Nginx using &lt;code&gt;sudo systemctl restart nginx&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;The last step will be to configure our firewall to allow traffic on the &lt;code&gt;http/tcp&lt;/code&gt; port. At this point, we can also delete port &lt;code&gt;3000&lt;/code&gt; from our firewall rules.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;ufw&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;
+&lt;p&gt;To check the syntax of the nginx configuration file, you can run &lt;code&gt;sudo nginx -t&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This is a very basic configuration and will suffice for this demo project. Based on this current configuration, Nginx will forward any request that comes to the root &lt;code&gt;/&lt;/code&gt; of the site to &lt;code&gt;http://localhost:3000&lt;/code&gt;. Remember that PM2 is running our site on port &lt;code&gt;3000&lt;/code&gt; on the server. This way, users will just need to enter the domain name or IP address in their browsers and Nginx will make sure that their requests are routed correctly.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;proxy_set_header&lt;/code&gt; directives in the configuration will be included in the request headers. This is by no means the most complete Nginx configuration but a bare minimum one that serves the current purpose. The Nginx documentation lists the &lt;a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html"&gt;complete set&lt;/a&gt; of directives.&lt;/p&gt;
+&lt;p&gt;Once the configuration file is saved, you can restart Nginx.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;Restarting&lt;/span&gt; &lt;span class="n"&gt;Nginx&lt;/span&gt;
 
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="k"&gt;restart&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The last step will be to configure the firewall to allow traffic on the &lt;code&gt;http/tcp&lt;/code&gt; port. At this point, you can also delete port &lt;code&gt;3000&lt;/code&gt; from our firewall rules.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;Add&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;ufw&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;
+
+&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;Delete&lt;/span&gt; &lt;span class="mi"&gt;3000&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;ufw&lt;/span&gt; &lt;span class="k"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt; &lt;span class="mi"&gt;3000&lt;/span&gt;
 
+&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;Restart&lt;/span&gt; &lt;span class="n"&gt;ufw&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;ufw&lt;/span&gt; &lt;span class="n"&gt;enable&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -195,7 +230,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;That's it! Our site will now be accessible on &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;That's it! The fully functioning site will now be accessible on &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="site2" src="https://codedisciples.in/images/index21/site2.jpg"&gt;&lt;/p&gt;</content><category term="ReactJs"></category><category term="Deployment"></category></entry><entry><title>Using a PostgreSQL database with Travis CI</title><link href="https://codedisciples.in/travis-postgres.html" rel="alternate"></link><published>2020-05-05T21:00:00+05:30</published><updated>2020-05-05T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-05:/travis-postgres.html</id><summary type="html">&lt;p&gt;Adding a PostgreSQL test database as part of continuous integration with Travis CI&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will see how one can use a PostgreSQL database to support automated tests during continuous integration (CI) with Travis CI.&lt;/p&gt;
 &lt;p&gt;Travis CI is a distributed CI service that can be integrated with a source control system like Github to automatically build a project and run tests whenever code is pushed to a remote repository.&lt;/p&gt;
 &lt;p&gt;We will be using a sample Django project as an example. The primary focus of the article will be Travis CI and PostgreSQL. Therefore, no prior knowledge of Django is needed. However, basic knowledge about PostgreSQL and Travis CI (particularly the usage of the &lt;code&gt;.travis.yml&lt;/code&gt; file) is assumed.&lt;/p&gt;
@@ -809,18 +844,31 @@ author:
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;Structure&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;flask_demo&lt;/span&gt; &lt;span class="n"&gt;folder&lt;/span&gt;
 
 &lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;commands&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;feedback&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;lm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;templates&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;views&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;css&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;images&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;templates&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;feedback&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;shared&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;views&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;feedback_views&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;home_views&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;login_views&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;register_views&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;wsgi&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 

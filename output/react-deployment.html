@@ -103,18 +103,22 @@
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In this article, we will deploy a React application created with the <code>create-react-app</code> package. This article assumes that the reader has a basic understanding of Node.js and the React framework. We will therefore not be looking into any of the application-specific code. The focus will be on the steps to deploy the application on a virtual private (Linux) server (VPS). For this demo, we will be using a virtual server provisioned by <strong>DigitalOcean</strong>.</p>
+	<p>In this post, you will deploy a React application created with the <code>create-react-app</code> package. Unlike a React application that is built from scratch, <code>create-react-app</code> does not require us to install packages like <code>babel</code> or <code>webpack</code>. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.</p>
+<p>Web deployments on a bare-bones server can sometimes be tricky. This post will go over all the steps that need to be followed to deploy a React application on a virtual private server. The server will be a <strong>DigitalOcean</strong> droplet. The same steps can be followed on servers provisioned by other providers (like Linode). At the end of this article, you will be familiar with the pre-deployment and deployment tasks for a React application.</p>
 <h2>Pre-requisites</h2>
 <ol>
-<li>A Linux server with <code>root</code> / <code>sudo</code> access</li>
-<li><a href="https://Node.js.org/en/">Node.js</a> to test locally</li>
+<li>A local <code>git</code> installation (if you are planning to use the same application as this post)</li>
+<li><a href="https://Node.js.org/en/">Node.js</a> to test the application locally</li>
+<li>A <a href="https://www.digitalocean.com/">DigitalOcean</a> account or an account with any IAAS provider</li>
+<li>One virtual private server running Ubuntu 18.04, including a non-root <code>sudo</code>-enabled user and a firewall</li>
+<li>A React application to deploy</li>
 </ol>
 <h2>Digital Ocean and the initial setup</h2>
-<p>Please refer to the <a href="https://www.codedisciples.in/linux-vps-deployment1.html">Deploying a Flask application on a Linux server - Part I</a> for details regarding signing up for a Digital Ocean account and performing the initial setup on the server. Although the two-parter article is written for the deployment of a Flask application, part one is generic. One recommended change would be to allow port <code>3000</code> instead of <code>5000</code> while setting up the firewall (step 5).</p>
+<p>You can refer to the <a href="https://www.codedisciples.in/linux-vps-deployment1.html">Deploying a Flask application on a Linux server - Part I</a> article for details regarding signing up for a DigitalOcean account and performing the initial setup on the server. Although the two-parter article is written for the deployment of a Flask application, part one is generic. One recommended change would be to allow port <code>3000</code> instead of <code>5000</code> while setting up the firewall (step 5).</p>
 <h2>Our React application</h2>
-<p>The application that we will deploy is a simple single-page React application. It displays a random Chuck Norris joke from a public API. Refreshing the page or clicking on the button, displays a new joke. The complete code is accessible via the <a href="https://github.com/AbhishekPednekar84/react-demo-app">Github repository</a>.</p>
+<p>This post will not go into details about the application that will be deployed. At a high level, you will deploy a single-page React application which displays a random Chuck Norris joke from a public API. Refreshing the page or clicking on the button, displays a new joke. The complete code is accessible via the <a href="https://github.com/AbhishekPednekar84/react-demo-app">Github repository</a>. The <code>readme</code> file documents the steps to create a local setup.</p>
 <p><img alt="&quot;Chuck&quot;" src="https://codedisciples.in/images/index21/chuck.gif"></p>
-<p>As indicated earlier, the application is created using the <code>create-react-app</code> package. In other words, we did not install <code>babel</code>, <code>webpack</code> or any of the other goodies that go into creating a React application from scratch. At the root of our application, we have a directory called <code>client</code> which contains our React components and modules. Here is what the <code>client</code> directory structure looks like.</p>
+<p>The root folder of the application contains a directory called <code>client</code>. All the React components and modules are present in this directory. Its structure is as follows.</p>
 <div class="highlight"><pre><span></span><span class="p">.</span>
 <span class="err">└──</span> <span class="n">client</span>
     <span class="err">├──</span> <span class="n">package</span><span class="o">-</span><span class="k">lock</span><span class="p">.</span><span class="n">json</span>
@@ -132,14 +136,20 @@
 
 
 <h2>Preparing for deployment</h2>
-<p>We will be using Node.js to run our application on the server. However, before we start deploying, we will need to perform a set of tasks locally -</p>
+<p>This section deals with a set of pre-deployment tasks. These include,</p>
 <ol>
-<li>Build our project to create the binaries that will be deployed on our server</li>
-<li>Create a <code>server.js</code> file with information for Node.js on how to find our site's static assets and port information</li>
-<li>Use Node.js to test the build locally</li>
+<li>Creating the production build of the application that will be deployed on the server</li>
+<li>Creating a <code>server.js</code> file using Node.js and Express. This file will contain the path to the static assets that were built along with the port information</li>
+<li>Test the build locally</li>
 </ol>
-<p>To build our project, we will <code>cd</code> into the <code>client</code> directory and run the <code>npm run build</code> command. This will create a directory named <code>build</code> inside <code>client</code>. The <code>build</code> directory will contain the static assets which we will later copy over to our server.</p>
-<p>Next, we will create a directory called <code>server</code> in the project root folder, within it, we will create a file called <code>server.js</code> and add the below code to the file.</p>
+<p>To build the project, you will <code>cd</code> into the <code>client</code> directory and run the <code>npm run build</code> command. This will create a folder named <code>build</code> inside the <code>client</code> directory. The <code>build</code> folder contains the static assets which will be deployed on the server.</p>
+<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">client</span>
+
+<span class="n">npm</span> <span class="n">run</span> <span class="n">build</span>
+</pre></div>
+
+
+<p>The next step is to a create directory called <code>server</code> in the project root folder (in the same level as the <code>client</code> directory). Within <code>server</code>, you will create a <code>server.js</code> file with the following code.</p>
 <div class="highlight"><pre><span></span><span class="o">//</span> <span class="nv">server</span>.<span class="nv">js</span>
 
 <span class="nv">const</span> <span class="nv">express</span> <span class="o">=</span> <span class="nv">require</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">express</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
@@ -156,8 +166,8 @@
 </pre></div>
 
 
-<p>The code in <code>server.js</code> uses <code>express</code> to specify the path to the <code>static</code> assets in our <code>build</code> directory. Also, we are ensuring that when accessing the root of our site, we are loading the <code>index.html</code> file and that the application will run on port <code>3000</code>.</p>
-<p>To run <code>server.js</code> we need the <code>express</code> package. To do that, we will first <code>cd</code> into the <code>server</code> directory and run <code>npm install express</code>. Finally, we can test our build by running it locally using the <code>node server.js</code> command. If all goes fine, our application will be accessible on <code>http://localhost:3000</code>.</p>
+<p>The code in <code>server.js</code> uses Node.js and <code>express</code> to specify the path to the <code>static</code> assets in the <code>build</code> folder. Also, you are ensuring that when accessing the root of the site, the <code>index.html</code> file is presented to an end-user. The application is being configured to listen for requests on port <code>3000</code>.</p>
+<p>To run <code>server.js</code> you need the <code>express</code> package. To do that, you will first <code>cd</code> into the <code>server</code> directory and run <code>npm install express</code>. Finally, the build can be tested by running it locally using the <code>node server.js</code> command. If all goes fine, the application will be accessible on <code>http://localhost:3000</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">server</span>
 
 <span class="n">npm</span> <span class="n">install</span> <span class="n">express</span>
@@ -167,8 +177,8 @@
 
 
 <h2>Deploying the application</h2>
-<p>With our server now primed for deployment and our build tested locally, we can now copy over the necessary files/folders from our local machine to our DigitalOcean droplet. There are several ways to this. To keep things simple, we will use the <code>scp</code> command.</p>
-<p>For the deployment, we will be copying the <code>server.js</code> file from the <code>server</code> directory. From the <code>client</code> directory, we will only be copying the entire <code>build</code> folder along with the <code>package.json</code> and <code>package-lock.json</code> files.</p>
+<p>With the server now primed for deployment and the build tested locally, you can now copy over the necessary files/folders from the local machine to the DigitalOcean droplet. There are several ways to accomplish this. One way is to use the <code>scp</code> command.</p>
+<p>Below is the complete list of files/folders that will be copied to the server.</p>
 <div class="highlight"><pre><span></span><span class="p">.</span>
 <span class="err">├──</span> <span class="n">client</span>
 <span class="err">│</span>   <span class="err">├──</span> <span class="n">build</span>
@@ -179,16 +189,20 @@
 </pre></div>
 
 
-<p>We will be moving our project files to a directory called <code>react-demo-app</code> located in the home directory of the user <code>demo</code>. Remember to change the username, IP address and path when running the below command. Assuming we are in the project root directory on our local machine (<code>/mnt/c/Learning/Live/react-demo-app/</code> in this case), the command will copy the <code>client</code> and <code>server</code> subdirectories to the server.</p>
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Learning</span><span class="o">/</span><span class="n">Live</span><span class="o">/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span>
+<p>On the server, these files/folders will be copied to a folder named <code>react-demo-app</code> located in the home directory of the user <code>demo</code>. You can place these anywhere. Remember to change the username, IP address and path when running the below <code>scp</code> command. Assuming we are in the project's root directory on our local machine (<code>/mnt/c/react-demo-app/</code> in this case), the command will copy the <code>client</code> and <code>server</code> subdirectories to the server.</p>
+<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span>
 
 <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">demo</span><span class="mf">@139.59.4.54</span><span class="o">:~/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span>
 </pre></div>
 
 
-<p>Most of the next steps will need to be carried out on our DigitalOcean droplet. So let's login with our <code>sudo</code> user - <code>ssh demo@139.59.4.54</code>.</p>
+<p>Most of the next steps will need to be carried out on our DigitalOcean droplet. You will need to log in with the <code>sudo</code> user to perform the next steps.</p>
+<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">demo</span><span class="p">@</span><span class="mf">@139.59.4.54</span>
+</pre></div>
+
+
 <h3>Installing Node.js</h3>
-<p>To install the latest version of Node.js and npm, we will run the following commands.</p>
+<p>To install the latest version of Node.js and npm on the server, the following commands should be run.</p>
 <div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="k">update</span>
 
 <span class="n">curl</span> <span class="o">-</span><span class="n">sL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">deb</span><span class="p">.</span><span class="n">nodesource</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">setup_12</span><span class="p">.</span><span class="n">x</span> <span class="o">|</span> <span class="n">sudo</span> <span class="o">-</span><span class="n">E</span> <span class="n">bash</span> <span class="o">-</span>
@@ -197,7 +211,7 @@
 </pre></div>
 
 
-<p>To verify if the installation was successful, we can run</p>
+<p>To verify if the installation was successful, you can run</p>
 <div class="highlight"><pre><span></span><span class="n">node</span> <span class="c1">--version</span>
 
 <span class="n">npm</span> <span class="c1">--version</span>
@@ -205,21 +219,21 @@
 
 
 <h3>Installing project dependencies on the server</h3>
-<p>With Node.js and npm now installed, we can install our project dependencies. We will first navigate to the <code>client</code> directory and install the dependencies.</p>
+<p>With Node.js and npm installed, you can now install our project dependencies. First, navigate to the <code>client</code> directory and install the dependencies using the <code>npm install</code> command.</p>
 <div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span><span class="n">client</span>
 
 <span class="n">npm</span> <span class="n">install</span>
 </pre></div>
 
 
-<p>Remember, that our <code>server</code> directory in <code>~/react-demo-app</code> only contains the <code>server.js</code> file. Also, to run our application using Node.js, we need the <code>express</code> package. To install express, we will <code>cd</code> into the <code>server</code> directory and run <code>npm install express</code>.</p>
+<p>Remember, that the <code>server</code> directory in <code>~/react-demo-app</code> only contains the <code>server.js</code> file. Also, to run the application using Node.js, you need the <code>express</code> package. To install <code>express</code>, navigate to the <code>server</code> directory and run <code>npm install express</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span><span class="n">server</span>
 
 <span class="n">npm</span> <span class="n">install</span> <span class="n">express</span>
 </pre></div>
 
 
-<p>At this time, we can do a quick test to see if our site works by running <code>node server.js</code>. The site should be accessible at <code>http://&lt;ipaddress&gt;:3000</code>. Port <code>3000</code> will work provided we configured the firewall to <code>allow</code> it during the initial setup</p>
+<p>At this time, you can do a quick test to see if the site works by running <code>node server.js</code>. The site should be accessible at <code>http://&lt;ipaddress&gt;:3000</code>. Port <code>3000</code> will work provided the firewall (<code>ufw</code>) was configured to allow it.</p>
 <div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span><span class="n">server</span>
 
 <span class="n">node</span> <span class="n">server</span><span class="p">.</span><span class="n">js</span>
@@ -228,22 +242,31 @@
 
 <p><br />
 <img alt="site" src="https://codedisciples.in/images/index21/site.jpg"></p>
-<p>We are almost there! Disconnecting from the terminal will kill the process running our site. We will, therefore, install the PM2 process manager to run our site.</p>
+<p>Almost there! Disconnecting from the terminal will kill the process that is running the site. To keep the site running at all times, you will next install the PM2 process manager.</p>
 <h3>Installing PM2 to run the site</h3>
-<p>We will be installing PM2 as a global dependency using the <code>sudo npm install -g pm2</code> command. Once installed we can use PM2 to start and manage our application using the <code>pm2 start</code> command.</p>
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span><span class="n">server</span>
+<p>PM2 will be installed as a global dependency using the <code>sudo npm install -g pm2</code> command. Once installed PM2 can be used to start and manage the site via the <code>pm2 start</code> command.</p>
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Install</span> <span class="n">PM2</span>
+<span class="n">sudo</span> <span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="k">g</span> <span class="n">pm2</span>
+
+<span class="o">//</span> <span class="n">Navigate</span> <span class="k">to</span> <span class="n">the</span> <span class="n">server</span> <span class="n">directory</span> <span class="k">and</span> <span class="n">run</span> <span class="n">the</span> <span class="n">site</span> <span class="k">with</span> <span class="n">PM2</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">react</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="n">app</span><span class="o">/</span><span class="n">server</span>
 
 <span class="n">pm2</span> <span class="k">start</span> <span class="n">server</span><span class="p">.</span><span class="n">js</span>
 </pre></div>
 
 
-<p>We should see an output similar to this -</p>
+<p>You should see an output similar to this -</p>
 <p><img alt="pm2" src="https://codedisciples.in/images/index21/pm2.jpg"></p>
-<p>Now, the site will continue to be accessible on <code>http://&lt;ipaddress&gt;:3000</code> despite disconnecting from the terminal. To check the status of PM2, we can run <code>sudo pm2 status</code>. Well, we are close now. We don't want our users to always specify a port number while accessing our site. We will, therefore, route our traffic using a web server called Nginx.</p>
+<p>Now, the site will continue to be accessible on <code>http://&lt;ipaddress&gt;:3000</code> despite disconnecting from the terminal. To check the status of PM2, you can run <code>sudo pm2 status</code>. You, however, don't want your users to always specify a port number while accessing the site. To ensure this, incoming traffic will be routed through the Nginx web server.</p>
 <h3>Installing and configuring Nginx</h3>
-<p>Nginx will act as our webserver and route incoming traffic based on some configuration. We will need to first install it on our server and add some configuration.</p>
-<p>To install Nginx, we will run <code>sudo apt install nginx -y</code>. Before we create a configuration file for Nginx, we will need to make sure that Nginx can find the configuration that we are about to create. Check the contents of the <code>nginx.conf</code> file located in <code>/etc/nginx</code> using <code>cat /etc/nginx/nginx.conf</code> and look for the line <code>include /etc/nginx/sites-enabled/*;</code> in the <code>http</code> directive. If it does not exist, we will need to add it.</p>
-<p>To add the line, we will open <code>nginx.conf</code> using the <code>nano</code> (or any suitable) editor.</p>
+<p>Nginx will act as the webserver and route incoming traffic based on the specified configuration. You will need to first install it on the server and add some configuration.</p>
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Installing</span> <span class="n">Nginx</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="o">-</span><span class="n">y</span>
+</pre></div>
+
+
+<p>Before creating a configuration file for Nginx, you will need to make sure that Nginx can find the configuration that you are about to create. Check the contents of the <code>nginx.conf</code> file located in <code>/etc/nginx</code> using <code>cat /etc/nginx/nginx.conf</code> and look for the line <code>include /etc/nginx/sites-enabled/*;</code> in the <code>http</code> directive. If it does not exist, you will need to add it.</p>
+<p>To add the line, open <code>nginx.conf</code> using the <code>nano</code> (or any suitable) editor.</p>
 <div class="highlight"><pre><span></span><span class="nv">sudo</span> <span class="nv">nano</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">nginx</span>.<span class="nv">conf</span>
 
 <span class="nv">http</span> {
@@ -255,12 +278,15 @@
 </pre></div>
 
 
-<p>Next, we will delete the <code>default</code> nginx configuration by running <code>sudo rm /etc/nginx/sites-enabled/default</code>. Once deleted, we will create a new configuration file called <code>demo</code> (it can be named anything) in the <code>/etc/nginx/sites-enabled/</code> directory.</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">demo</span>
+<p>Next, delete the <code>default</code> nginx configuration and create a new configuration file called <code>demo</code> (it can be named anything) in the <code>/etc/nginx/sites-enabled/</code> directory.</p>
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="k">Delete</span> <span class="k">existing</span> <span class="n">Nginx</span> <span class="n">configuration</span>
+<span class="n">sudo</span> <span class="n">rm</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="k">default</span>
+
+<span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">demo</span>
 </pre></div>
 
 
-<p>We will add the following code to the <code>demo</code> file.</p>
+<p>Add the below code to the <code>demo</code> file.</p>
 <div class="highlight"><pre><span></span>    <span class="nt">server_name</span> <span class="nt">139</span><span class="p">.</span><span class="nc">59</span><span class="p">.</span><span class="nc">4</span><span class="p">.</span><span class="nc">54</span><span class="o">;</span> <span class="err">#</span> <span class="nt">Whatever</span> <span class="nt">is</span> <span class="nt">your</span> <span class="nt">IP</span> <span class="nt">or</span> <span class="nt">domain</span>
 
     <span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
@@ -274,15 +300,24 @@
 </pre></div>
 
 
-<p>To check the syntax of our nginx configuration file, we can run <code>sudo nginx -t</code>.</p>
-<p>This is a very basic configuration and will suffice for this demo project. We are telling nginx to forward any request that comes to the root <code>/</code> of our site to <code>http://localhost:3000</code> which is our application running on the server. This way, users will just need to enter the domain name or ipaddress in their browsers and Nginx will make sure that their requests are routed correctly.</p>
-<p>We have also added some <code>proxy_set_header</code> directives that will be included in the request headers. This is by no means the most complete Nginx configuration but a bare minimum one that serves the current purpose. The Nginx documentation lists the <a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html">complete set</a> of directives.</p>
-<p>We will now restart Nginx using <code>sudo systemctl restart nginx</code></p>
-<p>The last step will be to configure our firewall to allow traffic on the <code>http/tcp</code> port. At this point, we can also delete port <code>3000</code> from our firewall rules.</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="n">http</span><span class="o">/</span><span class="n">tcp</span>
+<p>To check the syntax of the nginx configuration file, you can run <code>sudo nginx -t</code>.</p>
+<p>This is a very basic configuration and will suffice for this demo project. Based on this current configuration, Nginx will forward any request that comes to the root <code>/</code> of the site to <code>http://localhost:3000</code>. Remember that PM2 is running our site on port <code>3000</code> on the server. This way, users will just need to enter the domain name or IP address in their browsers and Nginx will make sure that their requests are routed correctly.</p>
+<p>The <code>proxy_set_header</code> directives in the configuration will be included in the request headers. This is by no means the most complete Nginx configuration but a bare minimum one that serves the current purpose. The Nginx documentation lists the <a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html">complete set</a> of directives.</p>
+<p>Once the configuration file is saved, you can restart Nginx.</p>
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Restarting</span> <span class="n">Nginx</span>
 
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="k">restart</span> <span class="n">nginx</span>
+</pre></div>
+
+
+<p>The last step will be to configure the firewall to allow traffic on the <code>http/tcp</code> port. At this point, you can also delete port <code>3000</code> from our firewall rules.</p>
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="k">Add</span> <span class="n">http</span>
+<span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="n">http</span><span class="o">/</span><span class="n">tcp</span>
+
+<span class="o">//</span> <span class="k">Delete</span> <span class="mi">3000</span>
 <span class="n">sudo</span> <span class="n">ufw</span> <span class="k">delete</span> <span class="n">allow</span> <span class="mi">3000</span>
 
+<span class="o">//</span> <span class="k">Restart</span> <span class="n">ufw</span>
 <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">enable</span>
 </pre></div>
 
@@ -299,7 +334,7 @@
 </pre></div>
 
 
-<p>That's it! Our site will now be accessible on <code>http://&lt;ipaddress&gt;</code>.</p>
+<p>That's it! The fully functioning site will now be accessible on <code>http://&lt;ipaddress&gt;</code>.</p>
 <p><img alt="site2" src="https://codedisciples.in/images/index21/site2.jpg"></p>
   </div>
   

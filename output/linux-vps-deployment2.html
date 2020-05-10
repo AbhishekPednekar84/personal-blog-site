@@ -122,18 +122,31 @@
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">Structure</span> <span class="k">of</span> <span class="n">the</span> <span class="n">flask_demo</span> <span class="n">folder</span>
 
 <span class="p">.</span>
-<span class="err">├──</span> <span class="p">.</span><span class="n">env</span>
 <span class="err">├──</span> <span class="n">app</span><span class="p">.</span><span class="n">py</span>
 <span class="err">├──</span> <span class="n">commands</span><span class="p">.</span><span class="n">py</span>
 <span class="err">├──</span> <span class="n">config</span><span class="p">.</span><span class="n">py</span>
 <span class="err">├──</span> <span class="n">db</span><span class="p">.</span><span class="n">py</span>
-<span class="err">├──</span> <span class="n">forms</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="err">├──</span> <span class="n">forms</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">feedback</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">login</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">register</span><span class="p">.</span><span class="n">py</span>
 <span class="err">├──</span> <span class="n">lm</span><span class="p">.</span><span class="n">py</span>
-<span class="err">├──</span> <span class="n">models</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="err">├──</span> <span class="n">models</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">models</span><span class="p">.</span><span class="n">py</span>
 <span class="err">├──</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
-<span class="err">├──</span> <span class="k">static</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
-<span class="err">├──</span> <span class="n">templates</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
-<span class="err">├──</span> <span class="n">views</span> <span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="err">├──</span> <span class="k">static</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">css</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">images</span>
+<span class="err">├──</span> <span class="n">templates</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">feedback</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">home</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">shared</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="k">user</span>
+<span class="err">├──</span> <span class="n">views</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">feedback_views</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">home_views</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">login_views</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">register_views</span><span class="p">.</span><span class="n">py</span>
 <span class="err">└──</span> <span class="n">wsgi</span><span class="p">.</span><span class="n">py</span>
 </pre></div>
 
