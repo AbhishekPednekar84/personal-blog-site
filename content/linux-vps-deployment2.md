@@ -34,18 +34,31 @@ The current git repository contains some directories (like tests) and configurat
 # Structure of the flask_demo folder
 
 .
-├── .env
 ├── app.py
 ├── commands.py
 ├── config.py
 ├── db.py
-├── forms (D)
+├── forms
+│   ├── feedback.py
+│   ├── login.py
+│   └── register.py
 ├── lm.py
-├── models (D)
+├── models
+│   └── models.py
 ├── requirements.txt
-├── static (D)
-├── templates (D)
-├── views (D)
+├── static
+│   ├── css
+│   └── images
+├── templates
+│   ├── feedback
+│   ├── home
+│   ├── shared
+│   └── user
+├── views
+│   ├── feedback_views.py
+│   ├── home_views.py
+│   ├── login_views.py
+│   └── register_views.py
 └── wsgi.py
 ```
 
