@@ -294,7 +294,7 @@
 <p>To install <code>supervisor</code> on the server, we will run <code>sudo apt install supervisor</code>.</p>
 <p>Next, we will create a configuration file that will tell <code>supervisor</code> to run <code>gunicorn</code> and start it back up in case it stops for some reason. The file will also contain the paths to our standard output and error logs.</p>
 <p>Once again, we will create this file (flask-demo.conf) using <code>nano</code> and add the lines of code indicated below - <code>nano /etc/supervisor/conf.d/flask-demo.conf</code>. To save the file - <code>Ctrl + X</code>, <code>Y</code> and <code>Enter</code>.</p>
-<div class="highlight"><pre><span></span><span class="k">[program:flask_demo]</span>
+<div class="highlight"><pre><span></span><span class="k">[program:gunicorn]</span>
 <span class="na">directory</span><span class="o">=</span><span class="s">/home/flaskuser/flask_demo</span>
 <span class="na">command</span><span class="o">=</span><span class="s">/home/flaskuser/flask_demo/venv/bin/gunicorn -w 3 wsgi:app</span>
 <span class="na">user</span><span class="o">=</span><span class="s">flaskuser</span>
@@ -302,14 +302,14 @@
 <span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
 <span class="na">stopasgroup</span><span class="o">=</span><span class="s">true</span>
 <span class="na">killasgroup</span><span class="o">=</span><span class="s">true</span>
-<span class="na">stderr_logfile</span><span class="o">=</span><span class="s">/var/log/flask_demo/flask-demo.err.log</span>
-<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/var/log/flask_demo/flask-demo.out.log</span>
+<span class="na">stderr_logfile</span><span class="o">=</span><span class="s">/var/log/flask_demo/gunicorn.err.log</span>
+<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/var/log/flask_demo/gunicorn.out.log</span>
 </pre></div>
 
 
 <p>The final steps in our deployment will be to create the log files that we configured in the<code>supervisor</code> configuration file followed by restarting <code>supervisor</code>.</p>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">touch</span><span class="w"> </span><span class="o">/</span><span class="nf">var</span><span class="o">/</span><span class="nf">log</span><span class="o">/</span><span class="n">flask_demo</span><span class="o">/</span><span class="n">flask</span><span class="o">-</span><span class="n">demo</span><span class="p">.</span><span class="n">err</span><span class="p">.</span><span class="nf">log</span><span class="w"></span>
-<span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">touch</span><span class="w"> </span><span class="o">/</span><span class="nf">var</span><span class="o">/</span><span class="nf">log</span><span class="o">/</span><span class="n">flask_demo</span><span class="o">/</span><span class="n">flask</span><span class="o">-</span><span class="n">demo</span><span class="p">.</span><span class="k">out</span><span class="p">.</span><span class="nf">log</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">touch</span><span class="w"> </span><span class="o">/</span><span class="nf">var</span><span class="o">/</span><span class="nf">log</span><span class="o">/</span><span class="n">flask_demo</span><span class="o">/</span><span class="n">gunicorn</span><span class="p">.</span><span class="n">err</span><span class="p">.</span><span class="nf">log</span><span class="w"></span>
+<span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">flaskuser</span><span class="nv">@Flask</span><span class="o">-</span><span class="n">Demo</span><span class="o">-</span><span class="nl">Server</span><span class="p">:</span><span class="o">/</span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">touch</span><span class="w"> </span><span class="o">/</span><span class="nf">var</span><span class="o">/</span><span class="nf">log</span><span class="o">/</span><span class="n">flask_demo</span><span class="o">/</span><span class="n">gunicorn</span><span class="p">.</span><span class="k">out</span><span class="p">.</span><span class="nf">log</span><span class="w"></span>
 </pre></div>
 
 

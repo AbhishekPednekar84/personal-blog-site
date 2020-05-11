@@ -239,7 +239,7 @@ Next, we will create a configuration file that will tell `supervisor` to run `gu
 Once again, we will create this file (flask-demo.conf) using `nano` and add the lines of code indicated below - `nano /etc/supervisor/conf.d/flask-demo.conf`. To save the file - `Ctrl + X`, `Y` and `Enter`.
 
 ```
-[program:flask_demo]
+[program:gunicorn]
 directory=/home/flaskuser/flask_demo
 command=/home/flaskuser/flask_demo/venv/bin/gunicorn -w 3 wsgi:app
 user=flaskuser
@@ -247,15 +247,15 @@ autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
-stderr_logfile=/var/log/flask_demo/flask-demo.err.log
-stdout_logfile=/var/log/flask_demo/flask-demo.out.log
+stderr_logfile=/var/log/flask_demo/gunicorn.err.log
+stdout_logfile=/var/log/flask_demo/gunicorn.out.log
 ```
 
 The final steps in our deployment will be to create the log files that we configured in the`supervisor` configuration file followed by restarting `supervisor`.
 
 ```
-(venv) flaskuser@Flask-Demo-Server:/$ sudo touch /var/log/flask_demo/flask-demo.err.log
-(venv) flaskuser@Flask-Demo-Server:/$ sudo touch /var/log/flask_demo/flask-demo.out.log
+(venv) flaskuser@Flask-Demo-Server:/$ sudo touch /var/log/flask_demo/gunicorn.err.log
+(venv) flaskuser@Flask-Demo-Server:/$ sudo touch /var/log/flask_demo/gunicorn.out.log
 ```
 
 To restart supervisor run `sudo supervisorctl reload`.
