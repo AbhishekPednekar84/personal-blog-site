@@ -288,3 +288,6 @@ To                         Action      From
 That's it! The fully functioning site will now be accessible on `http://<ipaddress>`.
 
 ![site2]({static}/images/index21/site2.jpg)
+
+## Next steps
+As next steps, you can create a CI/CD pipeline for automated deployments. Please refer to the [Continuous Deployment with Travis CI and DigitalOcean](https://codedisciples.in/travis-digitalocean) post for more details.

@@ -1,5 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-05-08T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Deploying a React application on a Linux server</title><link href="https://codedisciples.in/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. Unlike a React application that is built from scratch, &lt;code&gt;create-react-app&lt;/code&gt; does not require us to install packages like &lt;code&gt;babel&lt;/code&gt; or &lt;code&gt;webpack&lt;/code&gt;. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-06-01T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Continuous Deployment with Travis CI and DigitalOcean</title><link href="https://codedisciples.in/travis-digitalocean.html" rel="alternate"></link><published>2020-06-01T21:00:00+05:30</published><updated>2020-06-01T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-06-01:/travis-digitalocean.html</id><summary type="html">&lt;p&gt;Setting up a CI/CD pipeline with Travis CI and DigitalOcean&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will set up a Continuous Deployment (CD) pipeline using Travis CI and DigitalOcean. CD is a release process that involves running automated tests on a piece of software followed by deployment of the software if all the tests pass. There are several tools available to run a CD pipeline. Travis CI, CircleCI and Buddy Works are few of the popular ones. Since this post aims to be language-agnostic, the focus will only be on the deployment piece of the equation and not the testing aspects.&lt;/p&gt;
+&lt;p&gt;The example in this post will involve using &lt;strong&gt;Travis CI&lt;/strong&gt; to deploy a React.js application on a &lt;strong&gt;DigitalOcean&lt;/strong&gt; droplet. The same techniques can, however, be extended to any language or framework with some slight tweaks. This example will be using a Windows 10 local machine.&lt;/p&gt;
+&lt;h2&gt;Pre-requisites&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;A local &lt;code&gt;git&lt;/code&gt; installation (if you are planning to use the same application as this post)&lt;/li&gt;
+&lt;li&gt;A &lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt; account&lt;/li&gt;
+&lt;li&gt;A &lt;a href="https://www.digitalocean.com/"&gt;DigitalOcean&lt;/a&gt; account or an account with any IAAS provider&lt;/li&gt;
+&lt;li&gt;A &lt;a href="https://travis-ci.org/"&gt;Travis CI&lt;/a&gt; account having access to your GitHub repositories. Travis CI will let new users sign up with their GitHub credentials.&lt;/li&gt;
+&lt;li&gt;Windows Subsystem for Linux (WSL) enabled if using Windows. Please refer to &lt;a href="https://youtu.be/xzgwDbe7foQ"&gt;this video&lt;/a&gt; to enable and set up WSL on your Windows 10 machine. &lt;/li&gt;
+&lt;li&gt;An application to deploy&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This post will not go into details of the initial setup on the DigitalOcean droplet. Please refer to the below article in case you are setting up a virtual private server for the first time. 
+- &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;Deploying a Flask application on a Linux server - Part I&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;The demo application&lt;/h2&gt;
+&lt;p&gt;If you are planning to use the demo application, you may fork this &lt;a href="https://github.com/AbhishekPednekar84/react-demo-app"&gt;repository&lt;/a&gt;. The readme file contains steps to set up the application locally.&lt;/p&gt;
+&lt;p&gt;Alternately, you can use your any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.  &lt;/p&gt;
+&lt;h2&gt;Travis CI&lt;/h2&gt;
+&lt;p&gt;Once signed up, you will need to provide Travis CI access to the GitHub repository of the application you are planning to deploy. This option is available under the account settings.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis" src="https://codedisciples.in/images/index22/travis.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;You will also be using the Travis CI command line later on to encrypt the private key that will be used to log into the deployment server. To install the Travis CLI locally, you will run the following commands in WSL.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;libffi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;gcc&lt;/span&gt;
+
+&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;travis&lt;/span&gt; &lt;span class="c1"&gt;--version &amp;#39;1.8.10&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If using OS X, you will need to install &lt;a href="https://brew.sh/"&gt;HomeBrew&lt;/a&gt; and run the following commands in the terminal.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;
+
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;travis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You will use the CLI a subsequent section.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: At the time of publishing this post, the latest version of the Travis CLI is &lt;code&gt;v1.8.11&lt;/code&gt;. However, there are some known issues in this version concerning the &lt;code&gt;travis encrypt-file&lt;/code&gt; command on Windows. All working suggestions indicated downgrading to &lt;code&gt;v1.8.10&lt;/code&gt;. However, these issues might well be fixed depending on when you are reading this post.&lt;/p&gt;
+&lt;h2&gt;Creating a new user on the Linux server&lt;/h2&gt;
+&lt;p&gt;Travis CI will talk to the droplet via public key authentication. To enable that you will first need to create a new user on the droplet. &lt;/p&gt;
+&lt;p&gt;Assuming that the initial setup on the server is done, you can log in to the droplet with the &lt;code&gt;sudo&lt;/code&gt; user and create a new user called &lt;code&gt;travis&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Login&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;
+&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;@&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;droplet&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;adduser&lt;/span&gt; &lt;span class="c1"&gt;--disabled-password --gecos &amp;quot;&amp;quot; travis&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, you will need to create a folder on the server to which the code will be deployed via CD. The folder can be created in an accessible location on the server. In this case, it will be a folder named &lt;code&gt;demo&lt;/code&gt; in the &lt;code&gt;home&lt;/code&gt; directory of the sudo user. The &lt;code&gt;travis&lt;/code&gt; user will be made the owner of the &lt;code&gt;demo&lt;/code&gt; directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;~/&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;
+
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;chown&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="n"&gt;travis&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;travis&lt;/span&gt; &lt;span class="o"&gt;~/&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once the permissions are set, you will need to log in as the &lt;code&gt;travis&lt;/code&gt; user and create the pre-requisite directories and files for the public key authentication to be successful. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# &lt;span class="nv"&gt;Switch&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;travis&lt;/span&gt; &lt;span class="nv"&gt;user&lt;/span&gt;
+&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;su&lt;/span&gt; &lt;span class="nv"&gt;travis&lt;/span&gt;
+
+# &lt;span class="nv"&gt;Create&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; .&lt;span class="nv"&gt;ssh&lt;/span&gt; &lt;span class="nv"&gt;directory&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;user&lt;/span&gt;
+&lt;span class="nv"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;.&lt;span class="nv"&gt;ssh&lt;/span&gt;
+
+# &lt;span class="nv"&gt;Provide&lt;/span&gt; &lt;span class="mi"&gt;700&lt;/span&gt; &lt;span class="nv"&gt;permissions&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;directory&lt;/span&gt;
+&lt;span class="nv"&gt;chmod&lt;/span&gt; &lt;span class="mi"&gt;700&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;.&lt;span class="nv"&gt;ssh&lt;/span&gt;
+
+# &lt;span class="nv"&gt;Create&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;authorized_keys&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; .&lt;span class="nv"&gt;ssh&lt;/span&gt;
+&lt;span class="nv"&gt;cd&lt;/span&gt; .&lt;span class="nv"&gt;ssh&lt;/span&gt;
+&lt;span class="nv"&gt;touch&lt;/span&gt; &lt;span class="nv"&gt;authorized_keys&lt;/span&gt;
+
+# &lt;span class="nv"&gt;Provide&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt; &lt;span class="nv"&gt;permissions&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt;
+&lt;span class="nv"&gt;chmod&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;.&lt;span class="nv"&gt;ssh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;authorized_keys&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Keep this terminal session open for now as the public key needs to be copied into the &lt;code&gt;authorized_keys&lt;/code&gt; file.&lt;/p&gt;
+&lt;h2&gt;Travis CI configuration&lt;/h2&gt;
+&lt;p&gt;Travis CI looks for a file called &lt;code&gt;.travis.yml&lt;/code&gt; in the git repository before running the build. This configuration file contains all the steps that Travis CI needs to follow while running the pipeline. You will need to create &lt;code&gt;.travis.yml&lt;/code&gt; in the project root folder. You can use any text editor of your choice. The example uses &lt;code&gt;nano&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;nano&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;travis&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the following code to the &lt;code&gt;.travis.yml&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;node_js&lt;/span&gt;
+&lt;span class="n"&gt;node_js&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;12.16&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;addons&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;ssh_known_hosts&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;droplet&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;before_install&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;
+&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
+&lt;span class="n"&gt;script&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;after_success&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt; &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;deploy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To save and close the file with its current name, use &lt;code&gt;Ctrl + X&lt;/code&gt;, &lt;code&gt;Y&lt;/code&gt; and &lt;code&gt;enter&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Since this example uses a React.js project, the language will be &lt;code&gt;node_js&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Next, you will need to specify the version of &lt;code&gt;node.js&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;ssh_known_hosts&lt;/code&gt; key will specify the ip address of your droplet&lt;/li&gt;
+&lt;li&gt;Since all the client dependencies of the project are in a folder named &lt;code&gt;client&lt;/code&gt;, you will first &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;client&lt;/code&gt; folder before installing the dependencies. &lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;install&lt;/code&gt; shared key will contain the &lt;code&gt;npm install&lt;/code&gt; command that will install all the client libraries specified in &lt;code&gt;package.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Travis CI looks for tests by default while executing a pipeline. To skip tests, you will need to pass a &lt;code&gt;true&lt;/code&gt; value to the &lt;code&gt;script&lt;/code&gt; shared key&lt;/li&gt;
+&lt;li&gt;Once the project dependencies are installed, you can then create the production build by running the &lt;code&gt;npm run build&lt;/code&gt; command. This will create a sub-folder called &lt;code&gt;build&lt;/code&gt; in the &lt;code&gt;client&lt;/code&gt; folder and place all the deployable binaries in the &lt;code&gt;build&lt;/code&gt; folder&lt;/li&gt;
+&lt;li&gt;Finally, you will run a bash script called &lt;code&gt;deploy.sh&lt;/code&gt; to deploy the code to the server. You will create this file in a subsequent section&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Public key authentication&lt;/h2&gt;
+&lt;p&gt;With the server primed for deployment and the initial &lt;code&gt;.travis.yml&lt;/code&gt; ready, you will now need to ensure that Travis CI can communicate with the server. Navigate to the local folder containing the application code. Remember to use WSL if you are on Windows. Run the below command to generate the public and private keys in the folder.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keygen&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;rsa&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Although the &lt;code&gt;passphrase&lt;/code&gt; is optional, it is recommended that you specify one for added security. Now, you will see a private key - &lt;code&gt;travis_rsa&lt;/code&gt; and a public key - &lt;code&gt;travis_rsa.pub&lt;/code&gt; in the project folder. &lt;code&gt;cat&lt;/code&gt; the contents of the public key and copy it to the &lt;code&gt;authorized_keys&lt;/code&gt; file that you created in the previous section.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Using the Travis CLI that you installed earlier, you will now encrypt the private key. To do so, run the following command. This will create a &lt;code&gt;travis_rsa.enc&lt;/code&gt; file which is an encrypted version of the private key. It is ok to check this file into source control.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;travis&lt;/span&gt; &lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt; &lt;span class="c1"&gt;--add&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can now delete the original private key as that &lt;strong&gt;should not&lt;/strong&gt; be checked into source control.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In addition to creating the &lt;code&gt;.enc&lt;/code&gt; file the above command will also modify the &lt;code&gt;before_install&lt;/code&gt; shared key in &lt;code&gt;.travis.yml&lt;/code&gt;. This command will decrypt the private key so that it can be used by Travis CI to connect to the droplet.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;before_install&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt; &lt;span class="n"&gt;aes&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cbc&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;encrypted_0ddd2445e49f_key&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iv&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;encrypted_0ddd2445e49f_iv&lt;/span&gt;
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;enc&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To complete the public key authentication setup, you will need to add some additional commands to the &lt;code&gt;before_install&lt;/code&gt; shared key. These should be familiar from the earlier server setup.&lt;/p&gt;
+&lt;p&gt;This is what the complete &lt;code&gt;before_install&lt;/code&gt; section should look like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;before_install&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt; &lt;span class="n"&gt;aes&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cbc&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;encrypted_0ddd2445e49f_key&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iv&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;encrypted_0ddd2445e49f_iv&lt;/span&gt;
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;enc&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;mv&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;id_rsa&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Deployment script&lt;/h2&gt;
+&lt;p&gt;Finally, you will need to create &lt;code&gt;bash&lt;/code&gt; script called &lt;code&gt;deploy.sh&lt;/code&gt; with the below code. This script should reside in the root folder of the project. Again, the example will use &lt;code&gt;nano&lt;/code&gt; to create the file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;nano&lt;/span&gt; &lt;span class="n"&gt;deploy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the following code to &lt;code&gt;deploy.sh&lt;/code&gt; and use &lt;code&gt;Ctrl + X&lt;/code&gt;, &lt;code&gt;Y' and 'Enter&lt;/code&gt; to save the file and exit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;xe&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; [ $&lt;span class="nv"&gt;TRAVIS_BRANCH&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;master&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; ] &lt;span class="c1"&gt;; then&lt;/span&gt;
+  &lt;span class="nv"&gt;eval&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;$(ssh-agent -s)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class="nv"&gt;ssh&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;add&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;.&lt;span class="nv"&gt;ssh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;id_rsa&lt;/span&gt;
+
+  &lt;span class="nv"&gt;rsync&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;client&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;build&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;travis&lt;/span&gt;@&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;droplet&lt;/span&gt; &lt;span class="nv"&gt;ipaddress&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;:&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;user&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;/&lt;/span&gt;&lt;span class="nv"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;client&lt;/span&gt;
+  &lt;span class="nv"&gt;rsync&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;server&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;travis&lt;/span&gt;@&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;droplet&lt;/span&gt; &lt;span class="nv"&gt;ipaddress&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;:&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;user&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;/&lt;/span&gt;&lt;span class="nv"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;
+  &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Not deploying, since the branch isn&amp;#39;t master.&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The script uses an environment variable called &lt;code&gt;TRAVIS_BRANCH&lt;/code&gt; provided by Travis CI to determine current branch. The script will run only if there is a &lt;code&gt;push&lt;/code&gt; to the &lt;code&gt;master&lt;/code&gt; branch&lt;/li&gt;
+&lt;li&gt;Next, the script will start an &lt;code&gt;ssh-agent&lt;/code&gt; instance to connect to the droplet and use the private key to authenticate into the server&lt;/li&gt;
+&lt;li&gt;The script uses the &lt;code&gt;rsync&lt;/code&gt; command to move the necessary files and folders to the server. The arguments to the &lt;code&gt;rsync&lt;/code&gt; command will vary depending on how your project is structured. For more details on &lt;code&gt;rsync&lt;/code&gt;, refer to &lt;a href="https://gist.github.com/AbhishekPednekar84/3e60603d6da8e0d296d138f69340d3f7"&gt;this gist&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Deploying the application&lt;/h2&gt;
+&lt;p&gt;You are now ready to push the changes to the remote repository. Here is what the final project structure looks like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;travis&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;assets&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;assets&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;chuck&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gif&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;public&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;deploy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;travis_rsa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;enc&lt;/span&gt;
+&lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;travis_rsa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, before you do that, you will need to determine whether you would like the pipeline to run as soon as you push your changes or if you would like to trigger a manual build. You can set the desired option on the settings page of your project on Travis CI.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis2" src="https://codedisciples.in/images/index22/travis2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Finally, you can push your project using &lt;code&gt;git push origin master&lt;/code&gt; assuming you are working directly on the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
+&lt;p&gt;If you set your build to start automatically on every push, you will now see a build for the project queued up on the Travis CI dashboard page.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis3" src="https://codedisciples.in/images/index22/travis3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Clicking on the build number will take you to the build page where you can view the log as the build progresses. The log below shows the build progressing through each step defined in the &lt;code&gt;.travis.yml&lt;/code&gt; file. If the build is successful, it will exit with a &lt;code&gt;0&lt;/code&gt; code.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis4" src="https://codedisciples.in/images/index22/travis4.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;You should now see the files in the &lt;code&gt;demo&lt;/code&gt; folder that you created earlier on the server.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Next steps&lt;/h2&gt;
+&lt;p&gt;As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the &lt;a href="https://www.codedisciples.in/react-deployment.html"&gt;React.js deployment&lt;/a&gt; article for more details.&lt;/p&gt;</content><category term="CI/CD"></category></entry><entry><title>Deploying a React application on a Linux server</title><link href="https://codedisciples.in/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. Unlike a React application that is built from scratch, &lt;code&gt;create-react-app&lt;/code&gt; does not require us to install packages like &lt;code&gt;babel&lt;/code&gt; or &lt;code&gt;webpack&lt;/code&gt;. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.&lt;/p&gt;
 &lt;p&gt;Web deployments on a bare-bones server can sometimes be tricky. This post will go over all the steps that need to be followed to deploy a React application on a virtual private server. The server will be a &lt;strong&gt;DigitalOcean&lt;/strong&gt; droplet. The same steps can be followed on servers provisioned by other providers (like Linode). At the end of this article, you will be familiar with the pre-deployment and deployment tasks for a React application.&lt;/p&gt;
 &lt;h2&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
@@ -231,7 +442,9 @@
 
 
 &lt;p&gt;That's it! The fully functioning site will now be accessible on &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="site2" src="https://codedisciples.in/images/index21/site2.jpg"&gt;&lt;/p&gt;</content><category term="ReactJs"></category><category term="Deployment"></category></entry><entry><title>Using a PostgreSQL database with Travis CI</title><link href="https://codedisciples.in/travis-postgres.html" rel="alternate"></link><published>2020-05-05T21:00:00+05:30</published><updated>2020-05-05T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-05:/travis-postgres.html</id><summary type="html">&lt;p&gt;Adding a PostgreSQL test database as part of continuous integration with Travis CI&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will see how one can use a PostgreSQL database to support automated tests during continuous integration (CI) with Travis CI.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="site2" src="https://codedisciples.in/images/index21/site2.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Next steps&lt;/h2&gt;
+&lt;p&gt;As next steps, you can create a CI/CD pipeline for automated deployments. Please refer to the &lt;a href="https://codedisciples.in/travis-digitalocean"&gt;Continuous Deployment with Travis CI and DigitalOcean&lt;/a&gt; post for more details.&lt;/p&gt;</content><category term="ReactJs"></category><category term="Deployment"></category></entry><entry><title>Using a PostgreSQL database with Travis CI</title><link href="https://codedisciples.in/travis-postgres.html" rel="alternate"></link><published>2020-05-05T21:00:00+05:30</published><updated>2020-05-05T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-05:/travis-postgres.html</id><summary type="html">&lt;p&gt;Adding a PostgreSQL test database as part of continuous integration with Travis CI&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will see how one can use a PostgreSQL database to support automated tests during continuous integration (CI) with Travis CI.&lt;/p&gt;
 &lt;p&gt;Travis CI is a distributed CI service that can be integrated with a source control system like Github to automatically build a project and run tests whenever code is pushed to a remote repository.&lt;/p&gt;
 &lt;p&gt;We will be using a sample Django project as an example. The primary focus of the article will be Travis CI and PostgreSQL. Therefore, no prior knowledge of Django is needed. However, basic knowledge about PostgreSQL and Travis CI (particularly the usage of the &lt;code&gt;.travis.yml&lt;/code&gt; file) is assumed.&lt;/p&gt;
 &lt;h2&gt;Updating the &lt;code&gt;.travis.yml&lt;/code&gt; file&lt;/h2&gt;
