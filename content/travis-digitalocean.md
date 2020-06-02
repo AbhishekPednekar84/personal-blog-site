@@ -17,18 +17,18 @@ The example in this post will involve using **Travis CI** to deploy a React.js a
 2. A [GitHub](https://github.com/) account
 3. A [DigitalOcean](https://www.digitalocean.com/) account or an account with any IAAS provider
 4. A [Travis CI](https://travis-ci.org/) account having access to your GitHub repositories. Travis CI will let new users sign up with their GitHub credentials.
-5. Windows Subsystem for Linux (WSL) enabled if using Windows. Please refer to [this video](https://youtu.be/xzgwDbe7foQ) to enable and set up WSL on your Windows 10 machine. 
+5. Windows Subsystem for Linux (WSL) enabled if using Windows. Please refer to [this video](https://youtu.be/xzgwDbe7foQ) to enable and set up WSL on your Windows 10 machine.
 6. An application to deploy
 
-This post will not go into details of the initial setup on the DigitalOcean droplet. Please refer to the below article in case you are setting up a virtual private server for the first time. 
-- [Deploying a Flask application on a Linux server - Part I](https://www.codedisciples.in/linux-vps-deployment1.html)
+This post will not go into details of the initial setup on the DigitalOcean droplet. Please refer to the below article in case you are setting up a virtual private server for the first time.
 
+- [Deploying a Flask application on a Linux server - Part I](https://www.codedisciples.in/linux-vps-deployment1.html)
 
 ## The demo application
 
 If you are planning to use the demo application, you may fork this [repository](https://github.com/AbhishekPednekar84/react-demo-app). The readme file contains steps to set up the application locally.
 
-Alternately, you can use any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.  
+Alternately, you can use any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.
 
 ## Travis CI
 
@@ -58,11 +58,11 @@ sudo gem install travis -v 1.8.10
 
 You will use the CLI a subsequent section.
 
-**Note**: At the time of publishing this post, the latest version of the Travis CLI is `v1.8.11`. However, there are some known issues in this version concerning the `travis encrypt-file` command on Windows. All working suggestions indicated downgrading to `v1.8.10`. However, these issues might well be fixed depending on when you are reading this post.
+**Note** <i class="fas fa-clipboard"></i>: At the time of publishing this post, the latest version of the Travis CLI is `v1.8.11`. However, there are some known issues in this version concerning the `travis encrypt-file` command on Windows. All working suggestions indicated downgrading to `v1.8.10`. However, these issues might well be fixed depending on when you are reading this post.
 
 ## Creating a new user on the Linux server
 
-Travis CI will talk to the droplet via public key authentication. To enable that you will first need to create a new user on the droplet. 
+Travis CI will talk to the droplet via public key authentication. To enable that you will first need to create a new user on the droplet.
 
 Assuming that the initial setup on the server is done (please refer the pre-requisites section), you can log in to the droplet with the `sudo` user and create a new user called `travis`.
 
@@ -82,7 +82,7 @@ mkdir ~/<sudo user>/demo
 sudo chown -R travis:travis ~/<sudo user>/demo
 ```
 
-Once the permissions are set, you will need to log in as the `travis` user and create the pre-requisite directories and files for the public key authentication to be successful. 
+Once the permissions are set, you will need to log in as the `travis` user and create the pre-requisite directories and files for the public key authentication to be successful.
 
 ```
 # Switch to the travis user
@@ -105,6 +105,7 @@ chmod 600 ~/.ssh/authorized_keys
 Keep this terminal session open for now as the public key needs to be copied into the `authorized_keys` file.
 
 ## Travis CI configuration
+
 Travis CI looks for a file called `.travis.yml` in the git repository before running the build. This configuration file contains all the steps that Travis CI needs to follow while running the build and should be created in the project root folder. You can use any text editor of your choice. This example uses `nano`.
 
 ```
@@ -133,18 +134,19 @@ after_success:
 
 To save and close the file with its current name, use `Ctrl + X`, `Y` and `Enter`.
 
-**Explanation**:
+**Explanation** <i class="fas fa-book-open"></i>:
 
 - Since this example uses a React.js project, the language will be `node_js`
 - Next, you will need to specify the version of `node.js`
 - The `ssh_known_hosts` key will specify the ip address of your droplet
-- Since all the client dependencies of the project are in a folder named `client`, you will first `cd` into the `client` folder before installing the dependencies. 
+- Since all the client dependencies of the project are in a folder named `client`, you will first `cd` into the `client` folder before installing the dependencies.
 - The `install` shared key will contain the `npm install` command that will install all the client libraries specified in `package.json`
 - Travis CI looks for tests by default while executing a pipeline. To skip tests, you will need to pass a `true` value to the `script` shared key
 - Once the project dependencies are installed, you can then create the production build by running the `npm run build` command. This will create a sub-folder called `build` in the `client` folder and place all the deployable binaries in the `build` folder
 - Finally, you will run a bash script called `deploy.sh` to deploy the code to the server. You will create this file in a subsequent section
 
 ## Public key authentication
+
 With the server primed for deployment and the initial `.travis.yml` ready, you will now need to ensure that Travis CI can communicate with the server. Navigate to the local folder containing the application code. Remember to use WSL if you are on Windows. Run the below command to generate the public and private keys in the folder.
 
 ```
@@ -157,7 +159,7 @@ The `-N ""` argument creates the keys without a `passphrase`. Although the `pass
 cat travis_rsa.pub
 ```
 
-Using the Travis CLI that you installed earlier, you will now encrypt the private key. To do so, run the following command. 
+Using the Travis CLI that you installed earlier, you will now encrypt the private key. To do so, run the following command.
 
 ```
 travis encrypt-file travis_rsa --add
@@ -191,6 +193,7 @@ before_install:
 ```
 
 ## Deployment script
+
 Finally, you will need to create `bash` script called `deploy.sh` with the below code. This script should reside in the root folder of the project. Again, the example will use `nano` to create the file.
 
 ```
@@ -213,7 +216,7 @@ else
 fi
 ```
 
-**Explanation**:
+**Explanation** <i class="fas fa-book-open"></i>:
 
 - The script uses an environment variable called `TRAVIS_BRANCH` provided by Travis CI to determine current branch. The script will run only if there is a `push` to the `master` branch
 - Next, the script will start an `ssh-agent` instance to connect to the droplet and use the private key to authenticate into the server
@@ -260,6 +263,16 @@ You should now see the files in the `demo` folder that you created earlier on th
 
 ![demo]({static}/images/index22/demo.jpg)
 
+**Note** <i class="fas fa-clipboard"></i>: You must **always** remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in `deploy.sh` fails.
+
 ## Next steps
 
 As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the [React.js deployment](https://www.codedisciples.in/react-deployment.html) article for more details.
+
+Another thing to note is that typically Node.js applications are run on the server using a package like `pm2` (details available in the article referenced above). So whenever you deploy changes to the server, it would require a restart of the application. Add the following line at the end of `deploy.sh` to automatically restart the application once deployed.
+
+```
+ssh travis@<server ipaddress> 'pm2 restart all'
+```
+
+![travis5]({static}/images/index22/travis5.jpg)

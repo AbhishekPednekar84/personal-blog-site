@@ -7,14 +7,16 @@
 &lt;li&gt;A &lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt; account&lt;/li&gt;
 &lt;li&gt;A &lt;a href="https://www.digitalocean.com/"&gt;DigitalOcean&lt;/a&gt; account or an account with any IAAS provider&lt;/li&gt;
 &lt;li&gt;A &lt;a href="https://travis-ci.org/"&gt;Travis CI&lt;/a&gt; account having access to your GitHub repositories. Travis CI will let new users sign up with their GitHub credentials.&lt;/li&gt;
-&lt;li&gt;Windows Subsystem for Linux (WSL) enabled if using Windows. Please refer to &lt;a href="https://youtu.be/xzgwDbe7foQ"&gt;this video&lt;/a&gt; to enable and set up WSL on your Windows 10 machine. &lt;/li&gt;
+&lt;li&gt;Windows Subsystem for Linux (WSL) enabled if using Windows. Please refer to &lt;a href="https://youtu.be/xzgwDbe7foQ"&gt;this video&lt;/a&gt; to enable and set up WSL on your Windows 10 machine.&lt;/li&gt;
 &lt;li&gt;An application to deploy&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;This post will not go into details of the initial setup on the DigitalOcean droplet. Please refer to the below article in case you are setting up a virtual private server for the first time. 
-- &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;Deploying a Flask application on a Linux server - Part I&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This post will not go into details of the initial setup on the DigitalOcean droplet. Please refer to the below article in case you are setting up a virtual private server for the first time.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;Deploying a Flask application on a Linux server - Part I&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;The demo application&lt;/h2&gt;
 &lt;p&gt;If you are planning to use the demo application, you may fork this &lt;a href="https://github.com/AbhishekPednekar84/react-demo-app"&gt;repository&lt;/a&gt;. The readme file contains steps to set up the application locally.&lt;/p&gt;
-&lt;p&gt;Alternately, you can use any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.  &lt;/p&gt;
+&lt;p&gt;Alternately, you can use any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.&lt;/p&gt;
 &lt;h2&gt;Travis CI&lt;/h2&gt;
 &lt;p&gt;Once signed up, you will need to provide Travis CI access to the GitHub repository of the application you are planning to deploy. This option is available under the account settings.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="travis" src="https://codedisciples.in/images/index22/travis.jpg"&gt;&lt;/p&gt;
@@ -37,9 +39,9 @@
 
 
 &lt;p&gt;You will use the CLI a subsequent section.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: At the time of publishing this post, the latest version of the Travis CLI is &lt;code&gt;v1.8.11&lt;/code&gt;. However, there are some known issues in this version concerning the &lt;code&gt;travis encrypt-file&lt;/code&gt; command on Windows. All working suggestions indicated downgrading to &lt;code&gt;v1.8.10&lt;/code&gt;. However, these issues might well be fixed depending on when you are reading this post.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; &lt;i class="fas fa-clipboard"&gt;&lt;/i&gt;: At the time of publishing this post, the latest version of the Travis CLI is &lt;code&gt;v1.8.11&lt;/code&gt;. However, there are some known issues in this version concerning the &lt;code&gt;travis encrypt-file&lt;/code&gt; command on Windows. All working suggestions indicated downgrading to &lt;code&gt;v1.8.10&lt;/code&gt;. However, these issues might well be fixed depending on when you are reading this post.&lt;/p&gt;
 &lt;h2&gt;Creating a new user on the Linux server&lt;/h2&gt;
-&lt;p&gt;Travis CI will talk to the droplet via public key authentication. To enable that you will first need to create a new user on the droplet. &lt;/p&gt;
+&lt;p&gt;Travis CI will talk to the droplet via public key authentication. To enable that you will first need to create a new user on the droplet.&lt;/p&gt;
 &lt;p&gt;Assuming that the initial setup on the server is done (please refer the pre-requisites section), you can log in to the droplet with the &lt;code&gt;sudo&lt;/code&gt; user and create a new user called &lt;code&gt;travis&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Login&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt;
 &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;@&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;droplet&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
@@ -56,7 +58,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Once the permissions are set, you will need to log in as the &lt;code&gt;travis&lt;/code&gt; user and create the pre-requisite directories and files for the public key authentication to be successful. &lt;/p&gt;
+&lt;p&gt;Once the permissions are set, you will need to log in as the &lt;code&gt;travis&lt;/code&gt; user and create the pre-requisite directories and files for the public key authentication to be successful.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# &lt;span class="nv"&gt;Switch&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;travis&lt;/span&gt; &lt;span class="nv"&gt;user&lt;/span&gt;
 &lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;su&lt;/span&gt; &lt;span class="nv"&gt;travis&lt;/span&gt;
 
@@ -102,12 +104,12 @@
 
 
 &lt;p&gt;To save and close the file with its current name, use &lt;code&gt;Ctrl + X&lt;/code&gt;, &lt;code&gt;Y&lt;/code&gt; and &lt;code&gt;Enter&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt; &lt;i class="fas fa-book-open"&gt;&lt;/i&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Since this example uses a React.js project, the language will be &lt;code&gt;node_js&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Next, you will need to specify the version of &lt;code&gt;node.js&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;ssh_known_hosts&lt;/code&gt; key will specify the ip address of your droplet&lt;/li&gt;
-&lt;li&gt;Since all the client dependencies of the project are in a folder named &lt;code&gt;client&lt;/code&gt;, you will first &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;client&lt;/code&gt; folder before installing the dependencies. &lt;/li&gt;
+&lt;li&gt;Since all the client dependencies of the project are in a folder named &lt;code&gt;client&lt;/code&gt;, you will first &lt;code&gt;cd&lt;/code&gt; into the &lt;code&gt;client&lt;/code&gt; folder before installing the dependencies.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;install&lt;/code&gt; shared key will contain the &lt;code&gt;npm install&lt;/code&gt; command that will install all the client libraries specified in &lt;code&gt;package.json&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Travis CI looks for tests by default while executing a pipeline. To skip tests, you will need to pass a &lt;code&gt;true&lt;/code&gt; value to the &lt;code&gt;script&lt;/code&gt; shared key&lt;/li&gt;
 &lt;li&gt;Once the project dependencies are installed, you can then create the production build by running the &lt;code&gt;npm run build&lt;/code&gt; command. This will create a sub-folder called &lt;code&gt;build&lt;/code&gt; in the &lt;code&gt;client&lt;/code&gt; folder and place all the deployable binaries in the &lt;code&gt;build&lt;/code&gt; folder&lt;/li&gt;
@@ -124,7 +126,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Using the Travis CLI that you installed earlier, you will now encrypt the private key. To do so, run the following command. &lt;/p&gt;
+&lt;p&gt;Using the Travis CLI that you installed earlier, you will now encrypt the private key. To do so, run the following command.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;travis&lt;/span&gt; &lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt; &lt;span class="c1"&gt;--add&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -173,7 +175,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt; &lt;i class="fas fa-book-open"&gt;&lt;/i&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The script uses an environment variable called &lt;code&gt;TRAVIS_BRANCH&lt;/code&gt; provided by Travis CI to determine current branch. The script will run only if there is a &lt;code&gt;push&lt;/code&gt; to the &lt;code&gt;master&lt;/code&gt; branch&lt;/li&gt;
 &lt;li&gt;Next, the script will start an &lt;code&gt;ssh-agent&lt;/code&gt; instance to connect to the droplet and use the private key to authenticate into the server&lt;/li&gt;
@@ -209,5 +211,12 @@
 &lt;p&gt;&lt;img alt="travis4" src="https://codedisciples.in/images/index22/travis4.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;You should now see the files in the &lt;code&gt;demo&lt;/code&gt; folder that you created earlier on the server.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; &lt;i class="fas fa-clipboard"&gt;&lt;/i&gt;: You must &lt;strong&gt;always&lt;/strong&gt; remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in &lt;code&gt;deploy.sh&lt;/code&gt; fails.&lt;/p&gt;
 &lt;h2&gt;Next steps&lt;/h2&gt;
-&lt;p&gt;As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the &lt;a href="https://www.codedisciples.in/react-deployment.html"&gt;React.js deployment&lt;/a&gt; article for more details.&lt;/p&gt;</content><category term="CI/CD"></category></entry></feed>
+&lt;p&gt;As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the &lt;a href="https://www.codedisciples.in/react-deployment.html"&gt;React.js deployment&lt;/a&gt; article for more details.&lt;/p&gt;
+&lt;p&gt;Another thing to note is that typically Node.js applications are run on the server using a package like &lt;code&gt;pm2&lt;/code&gt; (details available in the article referenced above). So whenever you deploy changes to the server, it would require a restart of the application. Add the following line at the end of &lt;code&gt;deploy.sh&lt;/code&gt; to automatically restart the application once deployed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;travis&lt;/span&gt;&lt;span class="o"&gt;@&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;ipaddress&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pm2 restart all&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="travis5" src="https://codedisciples.in/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="CI/CD"></category></entry></feed>
