@@ -28,7 +28,7 @@ This post will not go into details of the initial setup on the DigitalOcean drop
 
 If you are planning to use the demo application, you may fork this [repository](https://github.com/AbhishekPednekar84/react-demo-app). The readme file contains steps to set up the application locally.
 
-Alternately, you can use your any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.  
+Alternately, you can use any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.  
 
 ## Travis CI
 
@@ -36,7 +36,7 @@ Once signed up, you will need to provide Travis CI access to the GitHub reposito
 
 ![travis]({static}/images/index22/travis.jpg)
 
-You will also be using the Travis CI command line later on to encrypt the private key that will be used to log into the deployment server. To install the Travis CLI locally, you will run the following commands in WSL.
+You will also be using the Travis CI command line later on to encrypt the private key that will be used to log into the DigitalOcean droplet. To install the Travis CLI locally, you will run the following commands in WSL.
 
 ```
 sudo apt install ruby
@@ -48,7 +48,7 @@ sudo apt install gcc
 gem install travis --version '1.8.10'
 ```
 
-If using OS X, you will need to install [HomeBrew](https://brew.sh/) and run the following commands in the terminal.
+If using OS X, you will need to install [HomeBrew](https://brew.sh/) and run the following commands in a terminal.
 
 ```
 sudo brew install ruby
@@ -64,7 +64,7 @@ You will use the CLI a subsequent section.
 
 Travis CI will talk to the droplet via public key authentication. To enable that you will first need to create a new user on the droplet. 
 
-Assuming that the initial setup on the server is done, you can log in to the droplet with the `sudo` user and create a new user called `travis`.
+Assuming that the initial setup on the server is done (please refer the pre-requisites section), you can log in to the droplet with the `sudo` user and create a new user called `travis`.
 
 ```
 # Login with sudo user
@@ -74,7 +74,7 @@ ssh <your sudo username>@<your droplet ip address>
 sudo adduser --disabled-password --gecos "" travis
 ```
 
-Next, you will need to create a folder on the server to which the code will be deployed via CD. The folder can be created in an accessible location on the server. In this case, it will be a folder named `demo` in the `home` directory of the sudo user. The `travis` user will be made the owner of the `demo` directory.
+Next, you will need to create a folder on the server to which the code will be deployed via CD. The folder can be created in an accessible location on the server. In this case, it will be a folder named `demo` in the `home` directory of the `sudo` user. The `travis` user will be made the owner of the `demo` directory.
 
 ```
 mkdir ~/<sudo user>/demo
@@ -105,7 +105,7 @@ chmod 600 ~/.ssh/authorized_keys
 Keep this terminal session open for now as the public key needs to be copied into the `authorized_keys` file.
 
 ## Travis CI configuration
-Travis CI looks for a file called `.travis.yml` in the git repository before running the build. This configuration file contains all the steps that Travis CI needs to follow while running the pipeline. You will need to create `.travis.yml` in the project root folder. You can use any text editor of your choice. The example uses `nano`.
+Travis CI looks for a file called `.travis.yml` in the git repository before running the build. This configuration file contains all the steps that Travis CI needs to follow while running the build and should be created in the project root folder. You can use any text editor of your choice. This example uses `nano`.
 
 ```
 sudo nano .travis.yml
@@ -131,7 +131,7 @@ after_success:
   - bash ./deploy.sh
 ```
 
-To save and close the file with its current name, use `Ctrl + X`, `Y` and `enter`.
+To save and close the file with its current name, use `Ctrl + X`, `Y` and `Enter`.
 
 **Explanation**:
 
@@ -151,25 +151,25 @@ With the server primed for deployment and the initial `.travis.yml` ready, you w
 ssh-keygen -t rsa -N "" -f travis_rsa
 ```
 
-Although the `passphrase` is optional, it is recommended that you specify one for added security. Now, you will see a private key - `travis_rsa` and a public key - `travis_rsa.pub` in the project folder. `cat` the contents of the public key and copy it to the `authorized_keys` file that you created in the previous section.
+The `-N ""` argument creates the keys without a `passphrase`. Although the `passphrase` is optional, it is recommended that you specify one for added security. Now, you will see a private key - `travis_rsa` and a public key - `travis_rsa.pub` in the project folder. `cat` the contents of the public key and copy it to the `authorized_keys` file that you created in the previous section.
 
 ```
 cat travis_rsa.pub
 ```
 
-Using the Travis CLI that you installed earlier, you will now encrypt the private key. To do so, run the following command. This will create a `travis_rsa.enc` file which is an encrypted version of the private key. It is ok to check this file into source control.
+Using the Travis CLI that you installed earlier, you will now encrypt the private key. To do so, run the following command. 
 
 ```
 travis encrypt-file travis_rsa --add
 ```
 
-You can now delete the original private key as that **should not** be checked into source control.
+This will create a `travis_rsa.enc` file which is an encrypted version of the private key. It is ok to check this file into source control. You can now delete the original private key (`travis_rsa`) as that **should not** be checked into source control.
 
 ```
 sudo rm travis_rsa
 ```
 
-In addition to creating the `.enc` file the above command will also modify the `before_install` shared key in `.travis.yml`. This command will decrypt the private key so that it can be used by Travis CI to connect to the droplet.
+In addition to creating the `.enc` file, the above command will also modify the `before_install` shared key in `.travis.yml`. This command will decrypt the private key so that it can be used by Travis CI to connect to the droplet.
 
 ```
 before_install:
@@ -179,7 +179,7 @@ before_install:
 
 To complete the public key authentication setup, you will need to add some additional commands to the `before_install` shared key. These should be familiar from the earlier server setup.
 
-This is what the complete `before_install` section should look like.
+This is what the final `before_install` section should look like.
 
 ```
 before_install:
@@ -197,7 +197,7 @@ Finally, you will need to create `bash` script called `deploy.sh` with the below
 sudo nano deploy.sh
 ```
 
-Add the following code to `deploy.sh` and use `Ctrl + X`, `Y' and 'Enter` to save the file and exit.
+Add the following code to `deploy.sh` and use `Ctrl + X`, `Y` and `Enter` to save the file and exit.
 
 ```
 set -xe
@@ -246,7 +246,7 @@ However, before you do that, you will need to determine whether you would like t
 
 ![travis2]({static}/images/index22/travis2.jpg)
 
-Finally, you can push your project using `git push origin master` assuming you are working directly on the `master` branch.
+Finally, you can `push` to the remote repository using `git push origin master` assuming you are working directly on the `master` branch.
 
 If you set your build to start automatically on every push, you will now see a build for the project queued up on the Travis CI dashboard page.
 
