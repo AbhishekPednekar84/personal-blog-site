@@ -131,8 +131,8 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This will create a &lt;code&gt;travis_rsa.enc&lt;/code&gt; file which is an encrypted version of the private key. It is ok to check this file into source control. You can now delete the original private key (&lt;code&gt;travis_rsa&lt;/code&gt;) as that &lt;strong&gt;should not&lt;/strong&gt; be checked into source control.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;
+&lt;p&gt;This will create a &lt;code&gt;travis_rsa.enc&lt;/code&gt; file which is an encrypted version of the private key. It is ok to check this file into source control. You can now delete the original private key (&lt;code&gt;travis_rsa&lt;/code&gt;) as that &lt;strong&gt;should not&lt;/strong&gt; be checked into source control. The public key (&lt;code&gt;travis_rsa.pub&lt;/code&gt;) can be deleted as well.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

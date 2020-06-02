@@ -165,10 +165,10 @@ Using the Travis CLI that you installed earlier, you will now encrypt the privat
 travis encrypt-file travis_rsa --add
 ```
 
-This will create a `travis_rsa.enc` file which is an encrypted version of the private key. It is ok to check this file into source control. You can now delete the original private key (`travis_rsa`) as that **should not** be checked into source control.
+This will create a `travis_rsa.enc` file which is an encrypted version of the private key. It is ok to check this file into source control. You can now delete the original private key (`travis_rsa`) as that **should not** be checked into source control. The public key (`travis_rsa.pub`) can be deleted as well.
 
 ```
-sudo rm travis_rsa
+sudo rm travis_rsa travis_rsa.pub
 ```
 
 In addition to creating the `.enc` file, the above command will also modify the `before_install` shared key in `.travis.yml`. This command will decrypt the private key so that it can be used by Travis CI to connect to the droplet.

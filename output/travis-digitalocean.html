@@ -235,8 +235,8 @@
 </pre></div>
 
 
-<p>This will create a <code>travis_rsa.enc</code> file which is an encrypted version of the private key. It is ok to check this file into source control. You can now delete the original private key (<code>travis_rsa</code>) as that <strong>should not</strong> be checked into source control.</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rm</span> <span class="n">travis_rsa</span>
+<p>This will create a <code>travis_rsa.enc</code> file which is an encrypted version of the private key. It is ok to check this file into source control. You can now delete the original private key (<code>travis_rsa</code>) as that <strong>should not</strong> be checked into source control. The public key (<code>travis_rsa.pub</code>) can be deleted as well.</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rm</span> <span class="n">travis_rsa</span> <span class="n">travis_rsa</span><span class="p">.</span><span class="n">pub</span>
 </pre></div>
 
 
