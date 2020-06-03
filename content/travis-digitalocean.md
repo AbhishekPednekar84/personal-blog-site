@@ -153,7 +153,7 @@ With the server primed for deployment and the initial `.travis.yml` ready, you w
 ssh-keygen -t rsa -N "" -f travis_rsa
 ```
 
-The `-N ""` argument creates the keys without a `passphrase`. Although the `passphrase` is optional, it is recommended that you specify one for added security. Now, you will see a private key - `travis_rsa` and a public key - `travis_rsa.pub` in the project folder. `cat` the contents of the public key and copy it to the `authorized_keys` file that you created in the previous section.
+Now, you will see a private key - `travis_rsa` and a public key - `travis_rsa.pub` in the project folder. `cat` the contents of the public key and copy it to the `authorized_keys` file that you created in the previous section.
 
 ```
 cat travis_rsa.pub

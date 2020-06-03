@@ -121,7 +121,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The &lt;code&gt;-N ""&lt;/code&gt; argument creates the keys without a &lt;code&gt;passphrase&lt;/code&gt;. Although the &lt;code&gt;passphrase&lt;/code&gt; is optional, it is recommended that you specify one for added security. Now, you will see a private key - &lt;code&gt;travis_rsa&lt;/code&gt; and a public key - &lt;code&gt;travis_rsa.pub&lt;/code&gt; in the project folder. &lt;code&gt;cat&lt;/code&gt; the contents of the public key and copy it to the &lt;code&gt;authorized_keys&lt;/code&gt; file that you created in the previous section.&lt;/p&gt;
+&lt;p&gt;Now, you will see a private key - &lt;code&gt;travis_rsa&lt;/code&gt; and a public key - &lt;code&gt;travis_rsa.pub&lt;/code&gt; in the project folder. &lt;code&gt;cat&lt;/code&gt; the contents of the public key and copy it to the &lt;code&gt;authorized_keys&lt;/code&gt; file that you created in the previous section.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;travis_rsa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
