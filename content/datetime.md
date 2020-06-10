@@ -343,6 +343,8 @@ Both naive and aware `datetime` objects can be converted to the ISO format using
 
 The `strftime()` method converts the `datetime` object to a `string`. Furthermore, it accepts format codes as parameters to represent the `datetime` in the desired format. The complete [list of format codes](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes) are available in the official documentation.
 
+Another great tool to generate the format string for `strftime` is [pystrftime.com](https://pystrftime.com/). You can simply enter the required date and time and the format string will be auto generated.
+
 The format codes can be applied to both naive and aware objects.
 
 ```
