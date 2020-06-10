@@ -342,8 +342,10 @@
 
 <h3>Convert naive <code>datetime</code> objects</h3>
 <p>To convert a naive object to a specific time zone is a two-step process -</p>
-<p><i class="fas fa-angle-double-right"></i> Convert the naive object to an aware <code>datetime</code> object using the <code>localize()</code> method<br />
-<i class="fas fa-angle-double-right"></i> Convert the aware object to the preferred time zone using <code>astimezone()</code></p>
+<ol>
+<li>Convert the naive object to an aware <code>datetime</code> object using the <code>localize()</code> method<br /></li>
+<li>Convert the aware object to the preferred time zone using <code>astimezone()</code></li>
+</ol>
 <div class="highlight"><pre><span></span># <span class="nv">Create</span> <span class="nv">the</span> <span class="nv">naive</span> <span class="nv">object</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="nv">dt_now</span> <span class="o">=</span> <span class="nv">datetime</span>.<span class="nv">datetime</span>.<span class="nv">now</span><span class="ss">()</span>

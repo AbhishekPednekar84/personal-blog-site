@@ -290,8 +290,8 @@ datetime.datetime(2020, 6, 10, 5, 0, 32, 42287, tzinfo=<DstTzInfo 'US/Central' C
 
 To convert a naive object to a specific time zone is a two-step process -
 
-<i class="fas fa-angle-double-right"></i> Convert the naive object to an aware `datetime` object using the `localize()` method<br />
-<i class="fas fa-angle-double-right"></i> Convert the aware object to the preferred time zone using `astimezone()`
+1. Convert the naive object to an aware `datetime` object using the `localize()` method<br />
+2. Convert the aware object to the preferred time zone using `astimezone()`
 
 ```
 # Create the naive object
