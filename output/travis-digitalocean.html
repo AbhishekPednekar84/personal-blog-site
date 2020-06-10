@@ -316,7 +316,8 @@
 <p>You should now see the files in the <code>demo</code> folder that you created earlier on the server.</p>
 <p><img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"></p>
 <p><strong>Note</strong> <i class="fas fa-clipboard"></i>: You must <strong>always</strong> remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in <code>deploy.sh</code> fails.</p>
-<h2>Next steps</h2>
+<h2>Conclusion</h2>
+<p>You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean. </p>
 <p>As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the <a href="https://www.codedisciples.in/react-deployment.html">React.js deployment</a> article for more details.</p>
 <p>Another thing to note is that typically Node.js applications are run on the server using a package like <code>pm2</code> (details available in the article referenced above). So whenever you deploy changes to the server, it would require a restart of the application. Add the following line at the end of <code>deploy.sh</code> to automatically restart the application once deployed.</p>
 <div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">travis</span><span class="o">@&lt;</span><span class="n">server</span> <span class="n">ipaddress</span><span class="o">&gt;</span> <span class="s1">&#39;pm2 restart all&#39;</span>
@@ -415,6 +416,9 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Python
+      </a>
       <a href="https://codedisciples.in/tag/cicd.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>CI/CD
       </a>
@@ -429,9 +433,6 @@
       </a>
       <a href="https://codedisciples.in/tag/ci.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>CI
-      </a>
-      <a href="https://codedisciples.in/tag/python.html">
-        <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
       <a href="https://codedisciples.in/tag/html.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>HTML

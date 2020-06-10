@@ -265,7 +265,9 @@ You should now see the files in the `demo` folder that you created earlier on th
 
 **Note** <i class="fas fa-clipboard"></i>: You must **always** remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in `deploy.sh` fails.
 
-## Next steps
+## Conclusion
+
+You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean. 
 
 As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the [React.js deployment](https://www.codedisciples.in/react-deployment.html) article for more details.
 
@@ -276,3 +278,7 @@ ssh travis@<server ipaddress> 'pm2 restart all'
 ```
 
 ![travis5]({static}/images/index22/travis5.jpg)
+
+
+
+
