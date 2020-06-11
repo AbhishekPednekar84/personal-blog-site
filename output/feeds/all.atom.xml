@@ -284,6 +284,7 @@
 
 &lt;h3&gt;&lt;code&gt;strftime&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;strftime()&lt;/code&gt; method converts the &lt;code&gt;datetime&lt;/code&gt; object to a &lt;code&gt;string&lt;/code&gt;. Furthermore, it accepts format codes as parameters to represent the &lt;code&gt;datetime&lt;/code&gt; in the desired format. The complete &lt;a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes"&gt;list of format codes&lt;/a&gt; are available in the official documentation.&lt;/p&gt;
+&lt;p&gt;Another great tool to generate the format string for &lt;code&gt;strftime&lt;/code&gt; is &lt;a href="https://pystrftime.com/"&gt;pystrftime.com&lt;/a&gt;. You can simply enter the required date and time and the format string will be auto generated.&lt;/p&gt;
 &lt;p&gt;The format codes can be applied to both naive and aware objects.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Formatting&lt;/span&gt; &lt;span class="n"&gt;naive&lt;/span&gt; &lt;span class="n"&gt;objects&lt;/span&gt;
 
