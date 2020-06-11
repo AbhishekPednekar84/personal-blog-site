@@ -59,7 +59,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON|default('favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON|default('logo.png') }}" />
     {% if CUSTOM_HTML_HEAD %}
     {% include "includes/" + CUSTOM_HTML_HEAD %}
     {% endif %}
@@ -166,8 +166,7 @@
       {% else %}
       <address id="site-colophon">
         <p class="text-center text-muted">
-        Built with <img id="footer-image" src="/static/images/love.ico"> in Bangalore&nbsp;&bull;&nbsp; Powered by <a href="http://getpelican.com/" target="_blank">Pelican</a> and <a href="https://www.netlify.com"
-           target="_blank">Netlify</a>
+        Made with <i class="fas fa-heart footer-image"></i> in Bangalore
         </p>
       </address><!-- /colophon  -->
       {% endif %}

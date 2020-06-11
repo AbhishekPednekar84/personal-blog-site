@@ -97,10 +97,11 @@ a:hover {
   font-weight: 700;
 }
 
-#footer-image {
+.footer-image {
   height: 16px;
   width: 16px;
   border: none;
+  color: red;
 }
 
 .jumbotron {
