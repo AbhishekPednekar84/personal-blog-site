@@ -21,16 +21,16 @@
             crossorigin="anonymous">
 
 
-      <link rel="stylesheet" href="http://localhost:8000/theme/css/blog.css" />
-      <link rel="stylesheet" href="http://localhost:8000/theme/css/tomorrow_night.css" />
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/blog.css" />
+      <link rel="stylesheet" href="https://codedisciples.in/theme/css/tomorrow_night.css" />
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="http://localhost:8000/static/images/logo.png" />
-        <link href="http://localhost:8000/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
+    <link rel="shortcut icon" href="https://codedisciples.in/static/images/logo.png" />
+        <link href="https://codedisciples.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Code Disciples Atom Feed" />
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -55,7 +55,7 @@
 		  <span class="icon-bar"></span>
 		  <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="http://localhost:8000/" rel="home">
+		<a class="navbar-brand" href="https://codedisciples.in/" rel="home">
           <i class="fas fa-home fa-fw fa-lg"> </i> </a>
        </div>
 
@@ -63,10 +63,10 @@
         <ul class="nav navbar-nav">
             <li class="divider"></li>
             <li class="">
-              <a href="http://localhost:8000/archives.html">Archives</a>
+              <a href="https://codedisciples.in/archives.html">Archives</a>
             </li>
           <li class="divider"></li>
-            <li><a href="http://localhost:8000/feeds/all.atom.xml" 
+            <li><a href="https://codedisciples.in/feeds/all.atom.xml" 
                    type="application/atom+xml" rel="alternate">
                 <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
         </ul> <!-- /nav -->
@@ -89,15 +89,15 @@
 <abbr class="article-header-date">
   Mon 19 August 2019
 </abbr> <h1>
-  <a href="http://localhost:8000/embedding-jupyter.html" rel="bookmark"
+  <a href="https://codedisciples.in/embedding-jupyter.html" rel="bookmark"
      title="Permalink to Embedding Jupyter Notebooks in a website">
     Embedding Jupyter Notebooks in a website
   </a>
 </h1><div class="article-header-info">
   <p>
-      Posted by <a href="http://localhost:8000/author/abhishek-pednekar.html">Abhishek Pednekar</a>
+      Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
     in 
-    <a href="http://localhost:8000/category/python.html">
+    <a href="https://codedisciples.in/category/python.html">
       Python</a>
     &nbsp;&nbsp;
   </p>
@@ -113,7 +113,7 @@
 <p>Before we proceed, we will need a Jupyter Notebook to work with. The one used for this blog is available in this <em><a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_2-embed-jupyter">Github repository</a></em>. </p>
 <p>With our notebook now in place, we can simply drag and drop it on the page to create a new <code>gist</code>. If there are any dependencies (third-party packages) that are needed in order for the code in our notebook to run, we will need to add those as well. Dependencies if any, will need to be added to either a <code>requirements.txt</code> file (for pypi) or an <code>environment.yml</code> file (for Conda / pypi). These files will also need to be added to the <code>gist</code>. Finally, to create the gist click either of the <code>Create gist</code> buttons. Our <code>gist</code> will be public in this case.</p>
 <p><br/>
-<img alt="Gist" src="http://localhost:8000/images/index2/gist.jpg"></p>
+<img alt="Gist" src="https://codedisciples.in/images/index2/gist.jpg"></p>
 <h2>Creating the iframe</h2>
 <p>As mentioned earlier, we will be using the <code>iframe</code> tag in <code>html</code> to embed our notebook. Before we can do that, our notebook will need to be converted to an <code>html</code> file. This will be achieved via a third-party package called <em><a href="https://www.nbinteract.com/">nbinteract</a></em>. So let's first create a <em><a href="https://www.youtube.com/watch?v=APOPm01BVrk">virtual environment</a></em> in the directory containing our notebook. Creating a virtual environment is optional but is a good practice as it isolates all our project dependencies. </p>
 <p>Once the virtual environment is activated, we will run the <code>pip install nbinteract</code> command to install the library. <code>nbinteract</code> is a command-line application (CLI). To use it, we will first navigate to the directory containing the <code>.ipynb</code> file and then run the below command.</p>
@@ -122,7 +122,7 @@
 
 
 <p><br/>
-<img alt="NBInteract" src="http://localhost:8000/images/index2/nbinteract.jpg"></p>
+<img alt="NBInteract" src="https://codedisciples.in/images/index2/nbinteract.jpg"></p>
 <p>This will create an <code>html</code> file with the same name as our Jupyter Notebook. Now before creating the <code>iframe</code>, we will need to make a couple of changes to the <code>html</code> file.</p>
 <p>In the embedded <code>JavaScript</code> at the end of the file, we will change the provider from <code>gh</code> to <code>gist</code>. Had we used a Github repository instead of a <code>gist</code>, no change was needed.</p>
 <div class="highlight"><pre><span></span>  <span class="o">&lt;!--</span> <span class="nv">Loads</span> <span class="nv">nbinteract</span> <span class="nv">package</span> <span class="o">--&gt;</span>
@@ -152,10 +152,10 @@
 <p>Also, <code>nbinteract</code> inserts a whole bunch of <code>Bootstrap</code> and <code>Font-Awesome CSS</code> in the file. So we can keep as much or as little of it. Finally, some sections of the notebook can be excluded if needed by simply removing the corresponding <code>div</code> tags.</p>
 <p>For example, to exclude this cell,</p>
 <p><br/>
-<img alt="delete-nb" src="http://localhost:8000/images/index2/delete-nb.jpg"></p>
+<img alt="delete-nb" src="https://codedisciples.in/images/index2/delete-nb.jpg"></p>
 <p>we can remove this block from the html file</p>
 <p><br/>
-<img alt="delete-html" src="http://localhost:8000/images/index2/delete-html.jpg"></p>
+<img alt="delete-html" src="https://codedisciples.in/images/index2/delete-html.jpg"></p>
 <p>Now, let's embed an <code>iframe</code> tag in our blog that links to the <code>html</code> file created by <code>nbinteract</code>. we will be adding the below iframe tag directly to the <code>markdown</code> of this blog post. </p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">&quot;https://codedisciples.in/Index_2-Embed_Jupyter.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span>
 </pre></div>
@@ -232,23 +232,23 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
   <div class="col-xs-6 col-md-12">
     <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
     <ul class="list-unstyled category-links">
-      <li><a href="http://localhost:8000/category/ci.html">
+      <li><a href="https://codedisciples.in/category/ci.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> CI</a></li>
-      <li><a href="http://localhost:8000/category/cicd.html">
+      <li><a href="https://codedisciples.in/category/cicd.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> CI/CD</a></li>
-      <li><a href="http://localhost:8000/category/css.html">
+      <li><a href="https://codedisciples.in/category/css.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> CSS</a></li>
-      <li><a href="http://localhost:8000/category/docker.html">
+      <li><a href="https://codedisciples.in/category/docker.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Docker</a></li>
-      <li><a href="http://localhost:8000/category/flask.html">
+      <li><a href="https://codedisciples.in/category/flask.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Flask</a></li>
-      <li><a href="http://localhost:8000/category/git.html">
+      <li><a href="https://codedisciples.in/category/git.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Git</a></li>
-      <li><a href="http://localhost:8000/category/linux.html">
+      <li><a href="https://codedisciples.in/category/linux.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
-      <li><a href="http://localhost:8000/category/markdown.html">
+      <li><a href="https://codedisciples.in/category/markdown.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Markdown</a></li>
-      <li><a href="http://localhost:8000/category/python.html">
+      <li><a href="https://codedisciples.in/category/python.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
     </ul>
   </div>
@@ -257,58 +257,58 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-      <a href="http://localhost:8000/tag/python.html">
+      <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
-      <a href="http://localhost:8000/tag/cicd.html">
+      <a href="https://codedisciples.in/tag/cicd.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>CI/CD
       </a>
-      <a href="http://localhost:8000/tag/reactjs.html">
+      <a href="https://codedisciples.in/tag/reactjs.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>ReactJs
       </a>
-      <a href="http://localhost:8000/tag/deployment.html">
+      <a href="https://codedisciples.in/tag/deployment.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Deployment
       </a>
-      <a href="http://localhost:8000/tag/postgres.html">
+      <a href="https://codedisciples.in/tag/postgres.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
       </a>
-      <a href="http://localhost:8000/tag/ci.html">
+      <a href="https://codedisciples.in/tag/ci.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>CI
       </a>
-      <a href="http://localhost:8000/tag/html.html">
+      <a href="https://codedisciples.in/tag/html.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>HTML
       </a>
-      <a href="http://localhost:8000/tag/css.html">
+      <a href="https://codedisciples.in/tag/css.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>CSS
       </a>
-      <a href="http://localhost:8000/tag/markdown.html">
+      <a href="https://codedisciples.in/tag/markdown.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Markdown
       </a>
-      <a href="http://localhost:8000/tag/linux.html">
+      <a href="https://codedisciples.in/tag/linux.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Linux
       </a>
-      <a href="http://localhost:8000/tag/flask.html">
+      <a href="https://codedisciples.in/tag/flask.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Flask
       </a>
-      <a href="http://localhost:8000/tag/heroku.html">
+      <a href="https://codedisciples.in/tag/heroku.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Heroku
       </a>
-      <a href="http://localhost:8000/tag/celery.html">
+      <a href="https://codedisciples.in/tag/celery.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Celery
       </a>
-      <a href="http://localhost:8000/tag/git.html">
+      <a href="https://codedisciples.in/tag/git.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Git
       </a>
-      <a href="http://localhost:8000/tag/docker.html">
+      <a href="https://codedisciples.in/tag/docker.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Docker
       </a>
-      <a href="http://localhost:8000/tag/google-maps.html">
+      <a href="https://codedisciples.in/tag/google-maps.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Google Maps
       </a>
-      <a href="http://localhost:8000/tag/aws.html">
+      <a href="https://codedisciples.in/tag/aws.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>AWS
       </a>
-      <a href="http://localhost:8000/tag/jupyter.html">
+      <a href="https://codedisciples.in/tag/jupyter.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Jupyter
       </a>
 </p>

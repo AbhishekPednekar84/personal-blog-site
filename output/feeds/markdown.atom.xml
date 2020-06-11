@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Markdown</title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/markdown.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2020-01-30T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Presentations with Markdown</title><link href="http://localhost:8000/markdown-presentations.html" rel="alternate"></link><published>2020-01-30T12:00:00+05:30</published><updated>2020-01-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-01-30:/markdown-presentations.html</id><summary type="html">&lt;p&gt;Creating presentation slides with Markdown, Pandoc and LaTeX&lt;/p&gt;</summary><content type="html">&lt;p&gt;For several years, Microsoft Powerpoint has been the industry's goto software for creating presentation slides. While Powerpoint is great and comes with a lot of features out of the box, there is a bit of a learning curve for beginners. Today, however, several other options make creating slides a lot easier and therefore a lot less time-consuming. One of them is to use Markdown to create slide decks. In this post, we will be using simple Markdown syntax and convert it to a presentation with Pandoc and LaTeX.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Markdown</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/markdown.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-01-30T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Presentations with Markdown</title><link href="https://codedisciples.in/markdown-presentations.html" rel="alternate"></link><published>2020-01-30T12:00:00+05:30</published><updated>2020-01-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-01-30:/markdown-presentations.html</id><summary type="html">&lt;p&gt;Creating presentation slides with Markdown, Pandoc and LaTeX&lt;/p&gt;</summary><content type="html">&lt;p&gt;For several years, Microsoft Powerpoint has been the industry's goto software for creating presentation slides. While Powerpoint is great and comes with a lot of features out of the box, there is a bit of a learning curve for beginners. Today, however, several other options make creating slides a lot easier and therefore a lot less time-consuming. One of them is to use Markdown to create slide decks. In this post, we will be using simple Markdown syntax and convert it to a presentation with Pandoc and LaTeX.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with basic Markdown syntax (if not, &lt;a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"&gt;this&lt;/a&gt; is a nice cheatsheet).&lt;/p&gt;
 &lt;p&gt;At the end of this post, the reader will be able to install all the pre-requisite software and create presentation slides using Markdown.&lt;/p&gt;
 &lt;h2&gt;Software Installation&lt;/h2&gt;
@@ -11,7 +11,7 @@
 &lt;p&gt;The MiKTeX installer can be downloaded from the &lt;a href="https://miktex.org/download"&gt;official website&lt;/a&gt;. If there are any issues with downloading the Windows installer, using the &lt;code&gt;wget&lt;/code&gt; package on Windows Subsystem for Linux is a good alternative. &lt;a href="https://www.youtube.com/watch?v=xzgwDbe7foQ"&gt;Here&lt;/a&gt; is a nice tutorial on setting up WSL. Once the Linux shell is up and running, execute the command &lt;code&gt;apt install wget&lt;/code&gt; to install the &lt;code&gt;wget&lt;/code&gt; package. Once installed, run &lt;code&gt;wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe&lt;/code&gt; to download the MiKTeX installer.&lt;/p&gt;
 &lt;p&gt;Once the installation is complete, we will have access to the MikTex console on our computer and the path to the binary file will be added to the system &lt;code&gt;PATH&lt;/code&gt;. First, we will open the &lt;code&gt;Tasks&lt;/code&gt; menu and click &lt;code&gt;Refresh file name database&lt;/code&gt;.  Next, in the &lt;code&gt;Packages&lt;/code&gt; section of the console, we will select the &lt;code&gt;beamer&lt;/code&gt;, &lt;code&gt;pdftex&lt;/code&gt; and &lt;code&gt;pdftexcmds&lt;/code&gt; packages and install them.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="miktex" src="http://localhost:8000/images/index17/miktex.jpg"&gt;&lt;/p&gt;
+&lt;img alt="miktex" src="https://codedisciples.in/images/index17/miktex.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Writing our Markdown&lt;/h2&gt;
 &lt;p&gt;With all our pre-requisite software now installed, we can write some Markdown. The following code is written in a file named &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;---
@@ -56,9 +56,9 @@ author:
 &lt;p&gt;By running this command, we are telling &lt;code&gt;pandoc&lt;/code&gt; to (&lt;code&gt;-t&lt;/code&gt;) use the &lt;code&gt;beamer&lt;/code&gt; class and generate an output (&lt;code&gt;-o&lt;/code&gt;) file called &lt;code&gt;presentation.pdf&lt;/code&gt; using the contents of &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;That's it! We should now see a PDF file called &lt;code&gt;presentation.pdf&lt;/code&gt; in the same folder as &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="slide1" src="http://localhost:8000/images/index17/slide1.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="slide2" src="http://localhost:8000/images/index17/slide2.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="slide3" src="http://localhost:8000/images/index17/slide3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="slide1" src="https://codedisciples.in/images/index17/slide1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide2" src="https://codedisciples.in/images/index17/slide2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide3" src="https://codedisciples.in/images/index17/slide3.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Adding themes&lt;/h2&gt;
 &lt;p&gt;While our presentation looks okay, it would be good to add a nice theme and make it look a lot better. Luckily for us, &lt;code&gt;beamer&lt;/code&gt; comes with some built-in themes and colors to choose from. The &lt;a href="http://deic.uab.es/~iblanes/beamer_gallery/"&gt;Beamer theme gallery&lt;/a&gt; website lists all the available themes and color schemes.&lt;/p&gt;
 &lt;p&gt;To specify a theme, we just need a small change to our introduction section.&lt;/p&gt;
@@ -89,6 +89,6 @@ author:
 
 &lt;p&gt;To generate our new slide deck, we can again run &lt;code&gt;pandoc demo.md -t beamer -o presentation.pdf&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="theme1" src="http://localhost:8000/images/index17/theme1.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="theme2" src="http://localhost:8000/images/index17/theme2.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="theme3" src="http://localhost:8000/images/index17/theme3.jpg"&gt;&lt;/p&gt;</content><category term="Markdown"></category></entry></feed>
+&lt;img alt="theme1" src="https://codedisciples.in/images/index17/theme1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme2" src="https://codedisciples.in/images/index17/theme2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme3" src="https://codedisciples.in/images/index17/theme3.jpg"&gt;&lt;/p&gt;</content><category term="Markdown"></category></entry></feed>
