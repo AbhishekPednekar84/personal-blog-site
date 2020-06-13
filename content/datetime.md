@@ -196,7 +196,7 @@ datetime.datetime(2020, 6, 10, 13, 3, 40, 691966)
 
 ### `datetime.utcnow()`
 
-The `datetime.now()` method returns UTC (Coordinated Universal Time) without any time zone information.
+The `datetime.utcnow()` method returns UTC (Coordinated Universal Time) without any time zone information.
 
 ```
 >>> dt_utc_now = datetime.datetime.utcnow()
@@ -275,13 +275,13 @@ datetime.datetime(2020, 6, 10, 10, 0, 32, 42287, tzinfo=<UTC>)
 
 # Convert UTC to IST
 
->>> dt_ist = dt_utc.astime zone(pytz.timezone("Asia/Calcutta"))
+>>> dt_ist = dt_utc.astimezone(pytz.timezone("Asia/Calcutta"))
 >>> dt_ist
 datetime.datetime(2020, 6, 10, 15, 30, 32, 42287, tzinfo=<DstTzInfo 'Asia/Calcutta' IST+5:30:00 STD>)
 
 # Convert UTC to CST/CDT
 
->>> dt_cdt = dt_utc.astime zone(pytz.timezone("US/Central"))
+>>> dt_cdt = dt_utc.astimezone(pytz.timezone("US/Central"))
 >>> dt_cdt
 datetime.datetime(2020, 6, 10, 5, 0, 32, 42287, tzinfo=<DstTzInfo 'US/Central' CDT-1 day, 19:00:00 DST>)
 ```
@@ -309,7 +309,7 @@ datetime.datetime(2020, 6, 10, 16, 3, 4, 110521, tzinfo=<DstTzInfo 'Asia/Calcutt
 
 # Convert IST to CDT
 
->>> dt_cdt = dt_now.astime zone(pytz.timezone("US/Central"))
+>>> dt_cdt = dt_now.astimezone(pytz.timezone("US/Central"))
 >>> dt_cdt
 datetime.datetime(2020, 6, 10, 5, 33, 4, 110521, tzinfo=<DstTzInfo 'US/Central' CDT-1 day, 19:00:00 DST>)
 ```
