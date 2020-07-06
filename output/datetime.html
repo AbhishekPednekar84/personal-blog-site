@@ -256,8 +256,8 @@
 
 <h3><code>datetime.now()</code></h3>
 <p>The <code>datetime.now()</code> method returns the local date and time. It, however, accepts an optional time zone (<code>tz</code>) argument. <code>tz</code> has a default value of <code>None</code>. Time zones will be the focus of the next section.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dt_today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_today</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dt_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_now</span>
 <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">691966</span><span class="p">)</span>
 </pre></div>
 
@@ -298,7 +298,7 @@
 
 <h2>Time zone conversions</h2>
 <p>Thus far, all the aware <code>datetime</code> objects have been in UTC. However, UTC can be converted to other time zones which is what you will be doing in most cases. To view all the time zones provided by <code>pytz</code> or to determine your current time zone, you can loop over the <code>all_time zones</code> attribute.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">_</span> <span class="nv">in</span> <span class="nv">pytz</span>.<span class="nv">all_time</span> <span class="nv">zones</span>:
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">_</span> <span class="nv">in</span> <span class="nv">pytz</span>.<span class="nv">all_timezones</span>:
         <span class="nv">print</span><span class="ss">(</span><span class="nv">_</span><span class="ss">)</span>
 
 <span class="nv">Africa</span><span class="o">/</span><span class="nv">Abidjan</span>
@@ -405,7 +405,7 @@
 
 
 <h3><code>strptime</code></h3>
-<p>The <code>strftime()</code> method converts a <code>string</code> to a <code>datetime</code> object. This method also accepts format codes. The codes should match the string being converted.</p>
+<p>The <code>strptime()</code> method converts a <code>string</code> to a <code>datetime</code> object. This method also accepts format codes. The codes should match the string being converted.</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dt_str</span> <span class="o">=</span> <span class="ss">&quot;03/30/2020&quot;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">dt_str</span><span class="p">,</span> <span class="ss">&quot;%m/%d/%Y&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">dt</span>

@@ -189,8 +189,8 @@ datetime.datetime(2020, 6, 10, 13, 3, 40, 691966)
 The `datetime.now()` method returns the local date and time. It, however, accepts an optional time zone (`tz`) argument. `tz` has a default value of `None`. Time zones will be the focus of the next section.
 
 ```
->>> dt_today = datetime.datetime.today()
->>> dt_today
+>>> dt_now = datetime.datetime.now()
+>>> dt_now
 datetime.datetime(2020, 6, 10, 13, 3, 40, 691966)
 ```
 
@@ -241,7 +241,7 @@ datetime.datetime(2020, 6, 10, 8, 13, 21, 597852, tzinfo=<UTC>)
 Thus far, all the aware `datetime` objects have been in UTC. However, UTC can be converted to other time zones which is what you will be doing in most cases. To view all the time zones provided by `pytz` or to determine your current time zone, you can loop over the `all_time zones` attribute.
 
 ```
->>> for _ in pytz.all_time zones:
+>>> for _ in pytz.all_timezones:
 	    print(_)
 
 Africa/Abidjan
@@ -363,7 +363,7 @@ The format codes can be applied to both naive and aware objects.
 
 ### `strptime`
 
-The `strftime()` method converts a `string` to a `datetime` object. This method also accepts format codes. The codes should match the string being converted.
+The `strptime()` method converts a `string` to a `datetime` object. This method also accepts format codes. The codes should match the string being converted.
 
 ```
 >>> dt_str = "03/30/2020"
