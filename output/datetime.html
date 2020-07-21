@@ -256,14 +256,14 @@
 
 <h3><code>datetime.now()</code></h3>
 <p>The <code>datetime.now()</code> method returns the local date and time. It, however, accepts an optional time zone (<code>tz</code>) argument. <code>tz</code> has a default value of <code>None</code>. Time zones will be the focus of the next section.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dt_today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_today</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dt_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_now</span>
 <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">691966</span><span class="p">)</span>
 </pre></div>
 
 
 <h3><code>datetime.utcnow()</code></h3>
-<p>The <code>datetime.now()</code> method returns UTC (Coordinated Universal Time) without any time zone information.</p>
+<p>The <code>datetime.utcnow()</code> method returns UTC (Coordinated Universal Time) without any time zone information.</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dt_utc_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">dt_utc_now</span>
 <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">488672</span><span class="p">)</span>
@@ -298,7 +298,7 @@
 
 <h2>Time zone conversions</h2>
 <p>Thus far, all the aware <code>datetime</code> objects have been in UTC. However, UTC can be converted to other time zones which is what you will be doing in most cases. To view all the time zones provided by <code>pytz</code> or to determine your current time zone, you can loop over the <code>all_time zones</code> attribute.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">_</span> <span class="nv">in</span> <span class="nv">pytz</span>.<span class="nv">all_time</span> <span class="nv">zones</span>:
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="nv">_</span> <span class="nv">in</span> <span class="nv">pytz</span>.<span class="nv">all_timezones</span>:
         <span class="nv">print</span><span class="ss">(</span><span class="nv">_</span><span class="ss">)</span>
 
 <span class="nv">Africa</span><span class="o">/</span><span class="nv">Abidjan</span>
@@ -328,13 +328,13 @@
 
 <span class="o">#</span> <span class="k">Convert</span> <span class="n">UTC</span> <span class="k">to</span> <span class="n">IST</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_ist</span> <span class="o">=</span> <span class="n">dt_utc</span><span class="p">.</span><span class="n">astime</span> <span class="k">zone</span><span class="p">(</span><span class="n">pytz</span><span class="p">.</span><span class="n">timezone</span><span class="p">(</span><span class="ss">&quot;Asia/Calcutta&quot;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_ist</span> <span class="o">=</span> <span class="n">dt_utc</span><span class="p">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">pytz</span><span class="p">.</span><span class="n">timezone</span><span class="p">(</span><span class="ss">&quot;Asia/Calcutta&quot;</span><span class="p">))</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">dt_ist</span>
 <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">42287</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=&lt;</span><span class="n">DstTzInfo</span> <span class="s1">&#39;Asia/Calcutta&#39;</span> <span class="n">IST</span><span class="o">+</span><span class="mi">5</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span> <span class="n">STD</span><span class="o">&gt;</span><span class="p">)</span>
 
 <span class="o">#</span> <span class="k">Convert</span> <span class="n">UTC</span> <span class="k">to</span> <span class="n">CST</span><span class="o">/</span><span class="n">CDT</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_cdt</span> <span class="o">=</span> <span class="n">dt_utc</span><span class="p">.</span><span class="n">astime</span> <span class="k">zone</span><span class="p">(</span><span class="n">pytz</span><span class="p">.</span><span class="n">timezone</span><span class="p">(</span><span class="ss">&quot;US/Central&quot;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dt_cdt</span> <span class="o">=</span> <span class="n">dt_utc</span><span class="p">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">pytz</span><span class="p">.</span><span class="n">timezone</span><span class="p">(</span><span class="ss">&quot;US/Central&quot;</span><span class="p">))</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">dt_cdt</span>
 <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">42287</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=&lt;</span><span class="n">DstTzInfo</span> <span class="s1">&#39;US/Central&#39;</span> <span class="n">CDT</span><span class="o">-</span><span class="mi">1</span> <span class="k">day</span><span class="p">,</span> <span class="mi">19</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">DST</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
@@ -361,7 +361,7 @@
 
 # <span class="nv">Convert</span> <span class="nv">IST</span> <span class="nv">to</span> <span class="nv">CDT</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="nv">dt_cdt</span> <span class="o">=</span> <span class="nv">dt_now</span>.<span class="nv">astime</span> <span class="nv">zone</span><span class="ss">(</span><span class="nv">pytz</span>.<span class="nv">timezone</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">US/Central</span><span class="s2">&quot;</span><span class="ss">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nv">dt_cdt</span> <span class="o">=</span> <span class="nv">dt_now</span>.<span class="nv">astimezone</span><span class="ss">(</span><span class="nv">pytz</span>.<span class="nv">timezone</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">US/Central</span><span class="s2">&quot;</span><span class="ss">))</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nv">dt_cdt</span>
 <span class="nv">datetime</span>.<span class="nv">datetime</span><span class="ss">(</span><span class="mi">2020</span>, <span class="mi">6</span>, <span class="mi">10</span>, <span class="mi">5</span>, <span class="mi">33</span>, <span class="mi">4</span>, <span class="mi">110521</span>, <span class="nv">tzinfo</span><span class="o">=&lt;</span><span class="nv">DstTzInfo</span> <span class="s1">&#39;</span><span class="s">US/Central</span><span class="s1">&#39;</span> <span class="nv">CDT</span><span class="o">-</span><span class="mi">1</span> <span class="nv">day</span>, <span class="mi">19</span>:<span class="mi">00</span>:<span class="mi">00</span> <span class="nv">DST</span><span class="o">&gt;</span><span class="ss">)</span>
 </pre></div>
@@ -405,7 +405,7 @@
 
 
 <h3><code>strptime</code></h3>
-<p>The <code>strftime()</code> method converts a <code>string</code> to a <code>datetime</code> object. This method also accepts format codes. The codes should match the string being converted.</p>
+<p>The <code>strptime()</code> method converts a <code>string</code> to a <code>datetime</code> object. This method also accepts format codes. The codes should match the string being converted.</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">dt_str</span> <span class="o">=</span> <span class="ss">&quot;03/30/2020&quot;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">dt_str</span><span class="p">,</span> <span class="ss">&quot;%m/%d/%Y&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">dt</span>
