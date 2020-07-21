@@ -232,15 +232,17 @@ sudo nano /etc/nginx/sites-enabled/demo
 Add the below code to the `demo` file.
 
 ```
-    server_name 139.59.4.54; # Whatever is your IP or domain
+    server {
+        server_name 139.59.4.54; # Whatever is your IP or domain
 
-    location / {
-        proxy_pass http://localhost:3000; # Whatever port your app runs on
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+        location / {
+            proxy_pass http://localhost:3000; # Whatever port your app runs on
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
     }
 ```
 
@@ -290,4 +292,5 @@ That's it! The fully functioning site will now be accessible on `http://<ipaddre
 ![site2]({static}/images/index21/site2.jpg)
 
 ## Next steps
+
 As next steps, you can create a CI/CD pipeline for automated deployments. Please refer to the [Continuous Deployment with Travis CI and DigitalOcean](https://codedisciples.in/travis-digitalocean) post for more details.

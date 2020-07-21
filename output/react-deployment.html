@@ -287,16 +287,18 @@
 
 
 <p>Add the below code to the <code>demo</code> file.</p>
-<div class="highlight"><pre><span></span>    <span class="nt">server_name</span> <span class="nt">139</span><span class="p">.</span><span class="nc">59</span><span class="p">.</span><span class="nc">4</span><span class="p">.</span><span class="nc">54</span><span class="o">;</span> <span class="err">#</span> <span class="nt">Whatever</span> <span class="nt">is</span> <span class="nt">your</span> <span class="nt">IP</span> <span class="nt">or</span> <span class="nt">domain</span>
+<div class="highlight"><pre><span></span>    <span class="nt">server</span> <span class="p">{</span>
+        <span class="err">server_name</span> <span class="err">139.59.4.54</span><span class="p">;</span> <span class="err">#</span> <span class="err">Whatever</span> <span class="err">is</span> <span class="err">your</span> <span class="err">IP</span> <span class="err">or</span> <span class="err">domain</span>
 
-    <span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
-        <span class="err">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="o">:</span><span class="mi">3000</span><span class="p">;</span> <span class="err">#</span> <span class="err">Whatever</span> <span class="err">port</span> <span class="err">your</span> <span class="err">app</span> <span class="err">runs</span> <span class="err">on</span>
-        <span class="err">proxy_http_version</span> <span class="err">1.1</span><span class="p">;</span>
-        <span class="err">proxy_set_header</span> <span class="err">Upgrade</span> <span class="err">$http_upgrade</span><span class="p">;</span>
-        <span class="err">proxy_set_header</span> <span class="err">Connection</span> <span class="err">&#39;upgrade&#39;</span><span class="p">;</span>
-        <span class="err">proxy_set_header</span> <span class="err">Host</span> <span class="err">$host</span><span class="p">;</span>
-        <span class="err">proxy_cache_bypass</span> <span class="err">$http_upgrade</span><span class="p">;</span>
-    <span class="p">}</span>
+        <span class="err">location</span> <span class="err">/</span> <span class="err">{</span>
+            <span class="err">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="o">:</span><span class="mi">3000</span><span class="p">;</span> <span class="err">#</span> <span class="err">Whatever</span> <span class="err">port</span> <span class="err">your</span> <span class="err">app</span> <span class="err">runs</span> <span class="err">on</span>
+            <span class="err">proxy_http_version</span> <span class="err">1.1</span><span class="p">;</span>
+            <span class="err">proxy_set_header</span> <span class="err">Upgrade</span> <span class="err">$http_upgrade</span><span class="p">;</span>
+            <span class="err">proxy_set_header</span> <span class="err">Connection</span> <span class="err">&#39;upgrade&#39;</span><span class="p">;</span>
+            <span class="err">proxy_set_header</span> <span class="err">Host</span> <span class="err">$host</span><span class="p">;</span>
+            <span class="err">proxy_cache_bypass</span> <span class="err">$http_upgrade</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="err">}</span>
 </pre></div>
 
 
