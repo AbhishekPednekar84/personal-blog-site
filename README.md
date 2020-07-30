@@ -4,7 +4,7 @@
 
 [Code Disciples](https://www.codedisciples.in) is a blog for all things code. The internet is vast and is full of great content and mostly awesome folks who are always willing to help. However, sometimes, we run into a real head-scratcher that requires rummaging through heaps of documentation or tutorials until we hit that "eureka!" moment. Most blogs on Code Disciples stem from such painful moments of frustration. The site provides a means for me to document topics or scenarios that I struggled with when I first encountered them or subjects that I simply felt would be fun to blog about. I hope you find at least some of them to be useful.
 
-The site is developed with Pelican and deployed using Netlify
+The site is developed with **Pelican** and deployed using **Netlify**.
 
 Here's a list of the articles on [Code Disciples](https://www.codedisciples.in)
 1. [Pre-commit hooks for Python code](https://codedisciples.in/pre-commit.html)
