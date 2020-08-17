@@ -8,7 +8,7 @@
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Running PostgreSQL in a Docker Container - Code Disciples</title>
+    <title>Running PostgreSQL in a docker Container - Code Disciples</title>
 
    
         <link rel="stylesheet"
@@ -90,8 +90,8 @@
   Wed 18 September 2019
 </abbr> <h1>
   <a href="https://codedisciples.in/docker-postgres.html" rel="bookmark"
-     title="Permalink to Running PostgreSQL in a Docker Container">
-    Running PostgreSQL in a Docker Container
+     title="Permalink to Running PostgreSQL in a docker Container">
+    Running PostgreSQL in a docker Container
   </a>
 </h1><div class="article-header-info">
   <p>
@@ -103,11 +103,12 @@
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>Containers have revolutionized the way we code, build and ship software. They also provide a means wherein we no longer need to mandatorily install software but run the software in a container instead. In this post, we will run <strong>PostgreSQL</strong> (postgres) and <strong>pgAdmin 4</strong> in seprate <strong>Docker Containers</strong> on a <strong>Windows</strong> machine using Docker Toolbox. We will then connect to the postgres database from pgAdmin.</p>
+	<p>Containers have revolutionized the way software is built and shipped. They also provide a means wherein software no longer needs to be mandatorily installed since it can be directly run in the container. In this post, you will run <strong>PostgreSQL</strong> (postgres) and <strong>pgAdmin 4</strong> in separate docker containers on a <strong>Windows</strong> machine using docker toolbox. Once both docker containers are up, you will use pgAdmin to connect to the postgres database.</p>
+<p>This post assumes that the reader has <code>docker</code> installed and running on a Windows machine. Installation instructions can be found in the <a href="https://docs.docker.com/toolbox/toolbox_install_windows/">official documentation</a>.</p>
 <p><strong>PostgreSQL</strong> is a free and open-source relational database management system<br/>
 <strong>pgAdmin 4</strong> is an open-source database management tool for postgres</p>
-<h2>Creating the Docker containers</h2>
-<p>To create the postgres and pgAdmin Docker containers, we will use a <strong>docker-compose.yml</strong> file. </p>
+<h2>Creating the docker containers</h2>
+<p>To create the postgres and pgAdmin docker containers, we will use a <code>docker-compose.yml</code> file.</p>
 <div class="highlight"><pre><span></span><span class="nl">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.2&#39;</span><span class="w"></span>
 <span class="nl">services</span><span class="p">:</span><span class="w"></span>
 
@@ -134,37 +135,37 @@
 <span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="s1">&#39;8080:80&#39;</span><span class="w"></span>
 <span class="w">    </span><span class="nl">environment</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nl">pgAdmin_DEFAULT_EMAIL</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;admin@pgAdmin.com&#39;</span><span class="w"></span>
-<span class="w">      </span><span class="nl">pgAdmin_DEFAULT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pgAdmin-pass&#39;</span><span class="w">  </span>
+<span class="w">      </span><span class="nl">pgAdmin_DEFAULT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pgAdmin-pass&#39;</span><span class="w"></span>
 </pre></div>
 
 
 <p>Let's go over the attributes in the file.<br/></p>
-<p><strong>version</strong> is the version of the Compose file format<br/>
-<strong>services</strong> provides configuration for the containers that will be started<br/>
-<strong>image</strong> is the application image that will be downloaded from <a href="https://hub.docker.com/">Docker Hub</a><br/>
-<strong>ports</strong> are the exposed host and container ports<br/>
-<strong>environment</strong> contains the environment variables for the services defined in the yaml file<br/>
-<strong>volume</strong> signifies the location of the persistent data stored in the container</p>
-<p>To create the containers, we will run the command <code>docker-compose -f docker-compose.yml up</code> and to verify whether the containers were created and are running, we will run <code>docker container ls</code>.</p>
+<p><code>version</code> is the version of the Compose file format<br/>
+<code>services</code> provides configuration for the containers that will be started<br/>
+<code>image</code> is the application image installed from <a href="https://hub.docker.com/">Docker Hub</a><br/>
+<code>ports</code> are the exposed host and container ports<br/>
+<code>environment</code> contains the environment variables for the services defined in the <code>yaml</code> file<br/>
+<code>volume</code> signifies the location of the persistent data stored in the container</p>
+<p>To create the containers, you will need to run the <code>docker-compose -f docker-compose.yml up</code> command. To verify if the docker containers are running, you can use the <code>docker container ls</code> command.</p>
 <p><br/>
 <img alt="docker1" src="https://codedisciples.in/images/index9/docker1.jpg"></p>
 <h2>Running pgAdmin 4</h2>
-<p>First, we will run pgAdmin. Note that the docker-compose.yml specifies 8080 as the port for the Docker host. However, since we are running on Windows, we cannot access pgAdmin using http://localhost:8080. Instead, we will need to use the ip address of our virtual machine that is running Docker Toolbox. To get the ip address run <code>docker-machine ls</code>. The ip address, in this case, is 192.168.99.101. Therefore our url for pgAdmin will be http://192.168.99.101:8080.</p>
-<p>To log in, we will use the default email and password specified in the yaml file.</p>
+<p>The <code>docker-compose.yml</code> file specifies <code>8080</code> as the port to run pgAdmin. However, since docker is running on Windows, pgAdmin cannot be accessed using <code>http://localhost:8080</code>. Instead, you will need to use the ip address of the virtual machine that is running docker toolbox. To get the ip address, you can run the <code>docker-machine ls</code> command. The ip address, in this case, is <code>192.168.99.101</code>. Therefore the url for pgAdmin will be <code>http://192.168.99.101:8080</code>.</p>
+<p>To log in, you will use the default email and password specified in the <code>yaml</code> file.</p>
 <p><br/>
 <img alt="pgAdmin1" src="https://codedisciples.in/images/index9/pgAdmin1.jpg"></p>
 <h2>Connecting to a postgres database</h2>
-<p>Once logged into pgAdmin, we will select the <strong>Add New Server</strong> option to connect to our postgres database.</p>
+<p>Once logged into pgAdmin, you will select the <strong>Add New Server</strong> option to connect to the postgres database.</p>
 <p><br/>
 <img alt="postgres1" src="https://codedisciples.in/images/index9/postgres1.jpg"></p>
 <p><br/>
-The database name, username and password will be as specified in the yaml file. The hostname will once again be the ip address of our virtual machine.</p>
+The database name, username and the password will be as specified in the <code>yaml</code> file. The hostname will once again be the ip address of the virtual machine.</p>
 <p><br/>
 <img alt="postgres2" src="https://codedisciples.in/images/index9/postgres2.jpg"></p>
 <p><br/>
 <img alt="postgres3" src="https://codedisciples.in/images/index9/postgres3.jpg"></p>
 <h2>Creating database objects with psql</h2>
-<p>To create database objects, we can either use pgAdmin or the <strong>psql</strong> command line. To run psql, we will first need to run <strong>bash</strong> in the container, then connect to our database and finally run our SQL statements. As an example, here is how we can create a new table.</p>
+<p>To create database objects, we can either use pgAdmin or the <code>psql</code> command line. To run <code>psql</code>, you will first need to run a <code>bash</code> shell in the container, then connect to our database and finally run our SQL statements. As an example, here is how you can create a new table.</p>
 <p><br/>
 <img alt="psql" src="https://codedisciples.in/images/index9/psql.jpg"></p>
 <p><br/>
