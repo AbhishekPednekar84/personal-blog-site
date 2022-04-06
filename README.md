@@ -7,6 +7,7 @@
 The site is developed with **Pelican** and deployed using **Netlify**.
 
 Here's a list of the articles on [Code Disciples](https://www.codedisciples.in)
+
 1. [Pre-commit hooks for Python code](https://codedisciples.in/pre-commit.html)
 2. [Embedding Jupyter Notebooks in a website](https://codedisciples.in/embedding-jupyter.html)
 3. [A reminder app with Python, Twilio and AWS Lambda](https://codedisciples.in/reminders.html)
@@ -31,3 +32,4 @@ Here's a list of the articles on [Code Disciples](https://www.codedisciples.in)
 22. [Continuous Deployment with Travis CI and DigitalOcean](https://www.codedisciples.in/travis-digitalocean.html)
 23. [Working with date and time in Python](https://www.codedisciples.in/datetime.html)
 24. [Installing Python packages from Github ](https://www.codedisciples.in/github-install.html)
+25. [CSS ::selection Selector ](https://www.codedisciples.in/css-selection.html)
