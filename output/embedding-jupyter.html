@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
-
+   
     <title>Embedding Jupyter Notebooks in a website - Code Disciples</title>
 
    
@@ -82,13 +82,13 @@
 		<p class="lead">A blog for all things code</p>
 	  </div>
 	</div>
-
+  
     <div class="container" id="main-container">
-      <div class="row">
+        <div class="row">
         <div class="col-md-9" id="content">
-<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
-<abbr class="article-header-date">
+ <abbr class="article-header-date">
   Mon 19 August 2019
 </abbr> <h1>
   <a href="https://codedisciples.in/embedding-jupyter.html" rel="bookmark"
@@ -103,9 +103,9 @@
       Python</a>
     &nbsp;&nbsp;
   </p>
-</div> <!-- /.article-header-info -->  </header>
+</div> <!-- /.article-header-info -->   </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In this post, we will learn how to embed a Jupyter Notebook in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like <strong><a href="https://codedesiples.in">Code Disciples</a></strong>) since the content can be added directly to the markdown. Readers therefore do not need to navigate to a notebook server or a repository to explicitly view the notebook.</p>
+   <p>In this post, we will learn how to embed a Jupyter Notebook in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like <strong><a href="https://codedesiples.in">Code Disciples</a></strong>) since the content can be added directly to the markdown. Readers therefore do not need to navigate to a notebook server or a repository to explicitly view the notebook.</p>
 <p>This post assumes that the reader has some experience of working with Github and is familiar with Python and pip.</p>
 <p>To start, we will create a <strong><a href="https://gist.github.com/">Github Gist</a></strong> by uploading a Jupyter Notebook (a file with extension <code>.ipynb</code>). To keep it simple, we will be using a notebook containing some Math formulae written in markdown. We can use a repository instead of a gist. However, since we are dealing with just a few lines of code, a gist seems more appropriate.</p>
 <p>Once our gist is in place, we will be using a tool called <strong>NBInteract</strong> to generate an html file corresponding to our notebook. After a few modifications to the html file, we will embed the content in this blog post using an <code>iframe</code> tag. Agreed, that there might be other and no doubt better ways to achieve the same results. However, this is one of the simplest methods to achieve our result.</p>
@@ -174,45 +174,41 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
 <h2>Further Reading</h2>
 <p><strong>Ezequiel Leonardo Castaño</strong> goes over some of the topics discussed here in further detail. Please check out his excellent article <a href="https://elc.github.io/posts/embed-interactive-notebooks/">Embed Interactive Jupyter Notebooks in Static Websites for Free</a>.</p>
   </div>
-  
-  <br/>
+
+  <br />
   <div class="comments">
-  <h2>Share</h2>
-  <br/>
-  <!-- AddToAny BEGIN -->
+    <h2>Share</h2>
+    <br />
+    <!-- AddToAny BEGIN -->
     <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-      <a class="a2a_button_blogger"></a>
       <a class="a2a_button_email"></a>
-      <a class="a2a_button_flipboard"></a>
-      <a class="a2a_button_google_gmail"></a>
-      <a class="a2a_button_hacker_news"></a>
-      <a class="a2a_button_linkedin"></a> 
-      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_linkedin"></a>
       <a class="a2a_button_telegram"></a>
       <a class="a2a_button_twitter"></a>
       <a class="a2a_button_whatsapp"></a>
-      <a class="a2a_button_wordpress"></a>
     </div>
     <script async src="https://static.addtoany.com/menu/page.js"></script>
-  <!-- AddToAny END -->
+    <!-- AddToAny END -->
   </div>
-  <br/>
+  <br />
   <div class="comments">
-	<h2>Comments</h2>
-	<div id="disqus_thread"></div>
-	<script type="text/javascript">
-				   (function() {
-						var dsq = document.createElement('script');
-						dsq.type = 'text/javascript'; dsq.async = true;
-						dsq.src = '//code-disciples.disqus.com/embed.js';
-						(document.getElementsByTagName('head')[0] ||
-						 document.getElementsByTagName('body')[0]).appendChild(dsq);
-				  })();
-	</script>
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//code-disciples.disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
+    </script>
   </div>
-
 </article>
-        </div><!-- /content -->
+          </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">
 
@@ -226,7 +222,7 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
         <span itemprop="addressLocality">Bangalore</span>,
         <span itemprop="addressCountry">India</span>
       </span>
-      and have worn many hats over a 12 year IT career. This coding blog was started as a means to
+      and have worn many hats over a 15 plus years IT career. This coding blog was started as a means to
       document topics that I took a while to wrap my head around or to just write about something cool that I came
       across.
       Outside of blogging and work, I enjoy watching football and motorsports, love listening to podcasts and "try" to
@@ -264,6 +260,9 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/css.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>CSS
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
@@ -284,9 +283,6 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
       </a>
       <a href="https://codedisciples.in/tag/html.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>HTML
-      </a>
-      <a href="https://codedisciples.in/tag/css.html">
-        <i class="fas fa-tag fa-fw fa-lg"></i>CSS
       </a>
       <a href="https://codedisciples.in/tag/markdown.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Markdown
@@ -324,7 +320,7 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
 
         </div><!--/sidebar -->
       </div><!--/row-->
-    </div><!--/.container /#main-container -->
+      </div><!--/.container /#main-container -->
     <br>
     <footer id="site-footer">
  
@@ -354,5 +350,5 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
             crossorigin="anonymous"></script>
 
 
-  </body>
+    </body>
 </html>

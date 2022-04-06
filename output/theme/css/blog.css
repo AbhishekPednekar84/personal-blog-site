@@ -63,6 +63,11 @@ h2 {
 }     */
 
 /* Custom CSS for Voidy Bootstrap */
+::selection {
+  color: #164e63;
+  background: #cffafe;
+}
+
 p {
   font-size: 17px;
 }

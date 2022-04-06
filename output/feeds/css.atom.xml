@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - CSS</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/css.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-02-23T12:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Toggle Switches</title><link href="https://codedisciples.in/toggle-switches.html" rel="alternate"></link><published>2020-02-23T12:00:00+05:30</published><updated>2020-02-23T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-23:/toggle-switches.html</id><summary type="html">&lt;p&gt;Creating toggle switches with HTML and CSS&lt;/p&gt;</summary><content type="html">&lt;p&gt;Modern websites no longer use vanilla checkboxes. Toggle switches built on top of checkboxes give any UI a cleaner and professional look and feel. &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - CSS</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/css.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2022-04-06T22:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>CSS ::selection Selector</title><link href="https://codedisciples.in/css-selection.html" rel="alternate"></link><published>2022-04-06T22:00:00+05:30</published><updated>2022-04-06T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-06:/css-selection.html</id><summary type="html">&lt;p&gt;Add a little more pizzazz to your modern website with &lt;code&gt;::selection&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we'll learn how we can change the default text selection color on a website.&lt;/p&gt;
+&lt;p&gt;By default, a browser applies a dark blue background with black text when the text on a webpage is selected.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="css-selection-default" src="https://codedisciples.in/images/index25/css-selection-default.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code&gt; CSS selector.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;/* CSS ::selection selector */&lt;/span&gt;
+
+&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;selection&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#164e63&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#cffafe&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img alt="css-selection-default" src="https://codedisciples.in/images/index25/css-selection-new.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;The usability across different browsers is good - &lt;a href="https://caniuse.com/?search=%3A%3Aselection" target="_blank" rel="noopener noreferrer"&gt;caniuse.com&lt;/a&gt;&lt;/p&gt;</content><category term="CSS"></category></entry><entry><title>Toggle Switches</title><link href="https://codedisciples.in/toggle-switches.html" rel="alternate"></link><published>2020-02-23T12:00:00+05:30</published><updated>2020-02-23T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-23:/toggle-switches.html</id><summary type="html">&lt;p&gt;Creating toggle switches with HTML and CSS&lt;/p&gt;</summary><content type="html">&lt;p&gt;Modern websites no longer use vanilla checkboxes. Toggle switches built on top of checkboxes give any UI a cleaner and professional look and feel. &lt;/p&gt;
 &lt;p&gt;In this post, we will learn how to create toggle switches using &lt;code&gt;HTML&lt;/code&gt; and &lt;code&gt;CSS&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This post assumes that the reader is familiar with basic &lt;code&gt;HTML&lt;/code&gt; and &lt;code&gt;CSS&lt;/code&gt;. &lt;/p&gt;
 &lt;h2&gt;HTML&lt;/h2&gt;

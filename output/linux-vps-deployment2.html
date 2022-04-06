@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
-
+   
     <title>Deploying a Flask application on a Linux server - Part II - Code Disciples</title>
 
    
@@ -82,13 +82,13 @@
 		<p class="lead">A blog for all things code</p>
 	  </div>
 	</div>
-
+  
     <div class="container" id="main-container">
-      <div class="row">
+        <div class="row">
         <div class="col-md-9" id="content">
-<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
-<abbr class="article-header-date">
+ <abbr class="article-header-date">
   Tue 10 December 2019
 </abbr> <h1>
   <a href="https://codedisciples.in/linux-vps-deployment2.html" rel="bookmark"
@@ -103,9 +103,9 @@
       Linux</a>
     &nbsp;&nbsp;
   </p>
-</div> <!-- /.article-header-info -->  </header>
+</div> <!-- /.article-header-info -->   </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>In the <a href="https://www.codedisciples.in/linux-vps-deployment1.html">part one</a> of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
+   <p>In the <a href="https://www.codedisciples.in/linux-vps-deployment1.html">part one</a> of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with <strong>nginx</strong> and <strong>gunicorn</strong>.</p>
 <p>The post assumes that the reader is familiar with the basics of Linux and Flask.</p>
 <p><a href="https://github.com/AbhishekPednekar84/flask_demo_app">Click here</a> to download the source code of the Flask application that will be deployed. An important thing to note is that we will be using a <code>.env</code> file to configure our environment variables (see <code>.env.example</code> in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on <a href="ttps://www.google.com/recaptcha/">Google reCAPTCHA</a> to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by <a href="https://www.elephantsql.com/">ElephantSQL</a>. The <code>DATABASE_URL</code> variable in the <code>.env</code> file will need to be modified depending on the database in use.</p>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Environment</span> <span class="n">Variables</span>
@@ -325,45 +325,41 @@
 <p>That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site with <code>https</code>. Those, however, are out of scope for this series of posts.</p>
 <p>Please be aware that the DigitalOcean droplet used in this post will be destroyed in the near future. So the URL <a href="http://206.189.132.233">http://206.189.132.233</a> may not be accessible depending on when you are reading this post.</p>
   </div>
-  
-  <br/>
+
+  <br />
   <div class="comments">
-  <h2>Share</h2>
-  <br/>
-  <!-- AddToAny BEGIN -->
+    <h2>Share</h2>
+    <br />
+    <!-- AddToAny BEGIN -->
     <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-      <a class="a2a_button_blogger"></a>
       <a class="a2a_button_email"></a>
-      <a class="a2a_button_flipboard"></a>
-      <a class="a2a_button_google_gmail"></a>
-      <a class="a2a_button_hacker_news"></a>
-      <a class="a2a_button_linkedin"></a> 
-      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_linkedin"></a>
       <a class="a2a_button_telegram"></a>
       <a class="a2a_button_twitter"></a>
       <a class="a2a_button_whatsapp"></a>
-      <a class="a2a_button_wordpress"></a>
     </div>
     <script async src="https://static.addtoany.com/menu/page.js"></script>
-  <!-- AddToAny END -->
+    <!-- AddToAny END -->
   </div>
-  <br/>
+  <br />
   <div class="comments">
-	<h2>Comments</h2>
-	<div id="disqus_thread"></div>
-	<script type="text/javascript">
-				   (function() {
-						var dsq = document.createElement('script');
-						dsq.type = 'text/javascript'; dsq.async = true;
-						dsq.src = '//code-disciples.disqus.com/embed.js';
-						(document.getElementsByTagName('head')[0] ||
-						 document.getElementsByTagName('body')[0]).appendChild(dsq);
-				  })();
-	</script>
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//code-disciples.disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
+    </script>
   </div>
-
 </article>
-        </div><!-- /content -->
+          </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">
 
@@ -377,7 +373,7 @@
         <span itemprop="addressLocality">Bangalore</span>,
         <span itemprop="addressCountry">India</span>
       </span>
-      and have worn many hats over a 12 year IT career. This coding blog was started as a means to
+      and have worn many hats over a 15 plus years IT career. This coding blog was started as a means to
       document topics that I took a while to wrap my head around or to just write about something cool that I came
       across.
       Outside of blogging and work, I enjoy watching football and motorsports, love listening to podcasts and "try" to
@@ -415,6 +411,9 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/css.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>CSS
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
@@ -435,9 +434,6 @@
       </a>
       <a href="https://codedisciples.in/tag/html.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>HTML
-      </a>
-      <a href="https://codedisciples.in/tag/css.html">
-        <i class="fas fa-tag fa-fw fa-lg"></i>CSS
       </a>
       <a href="https://codedisciples.in/tag/markdown.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Markdown
@@ -475,7 +471,7 @@
 
         </div><!--/sidebar -->
       </div><!--/row-->
-    </div><!--/.container /#main-container -->
+      </div><!--/.container /#main-container -->
     <br>
     <footer id="site-footer">
  
@@ -505,5 +501,5 @@
             crossorigin="anonymous"></script>
 
 
-  </body>
+    </body>
 </html>
