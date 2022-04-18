@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content=" Posts tagged with Google Maps" />
+    <meta name="description" content="" />
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
-
-    <title>Tag:Google Maps - Code Disciples</title>
+   
+    <title>Hours, days and weeks with Python - Code Disciples</title>
 
    
         <link rel="stylesheet"
@@ -82,23 +82,18 @@
 		<p class="lead">A blog for all things code</p>
 	  </div>
 	</div>
-
+  
     <div class="container" id="main-container">
-      <div class="row">
+        <div class="row">
         <div class="col-md-9" id="content">
-<ol class="breadcrumb">
-    <li><a href="https://codedisciples.in/" title="Home" rel="home">
-		<i class="fas fa-home fa-fw fa-lg"></i> </a></li>
-    <li>Tags </li>
-    <li class="active">Google Maps</li>
-</ol>
-    <article>
-<abbr class="article-header-date">
-  Thu 29 August 2019
+  <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+ <abbr class="article-header-date">
+  Tue 19 April 2022
 </abbr> <h1>
-  <a href="https://codedisciples.in/google-map-plots.html" rel="bookmark"
-     title="Permalink to Plotting on Google Maps with gmplot">
-    Plotting on Google Maps with gmplot
+  <a href="https://codedisciples.in/python-timedelta.html" rel="bookmark"
+     title="Permalink to Hours, days and weeks with Python">
+    Hours, days and weeks with Python
   </a>
 </h1><div class="article-header-info">
   <p>
@@ -108,19 +103,87 @@
       Python</a>
     &nbsp;&nbsp;
   </p>
-</div> <!-- /.article-header-info -->
-      <div class="summary">
-		<p>Add markers, polygons, heatmaps and more to Google Maps with Python</p>
-		<p class="content-emphasis"><a href="https://codedisciples.in/google-map-plots.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
-    <hr />
+</div> <!-- /.article-header-info -->   </header>
+  <div class="content-body" itemprop="text articleBody">
+   <p>Python does not have a built-in function to directly compute the number of hours, days or weeks between two given datetime values. This article will show how we can use the <code>timedelta</code> class of python's <code>datetime</code> module to do exactly that.</p>
+<p>A rather obvious way to compute the number of days (for example) between two dates is to use <code>total_seconds()</code>.
+<br /></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
 
-<nav class="index-pager">
+<span class="n">yesterday</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">today</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-</nav> <!-- /index-pager -->
-        </div><!-- /content -->
+<span class="n">difference</span> <span class="o">=</span> <span class="n">today</span> <span class="o">-</span> <span class="n">yesterday</span> <span class="c1"># Returns datetime.timedelta(days=1)</span>
+
+<span class="n">days</span> <span class="o">=</span> <span class="n">difference</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">24</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">days</span><span class="p">))</span> <span class="c1"># Returns 1</span>
+</pre></div>
+
+
+<p>Python does have a non-obvious way to do this by dividing the difference between the datetime values with the <code>timedelta</code>.
+<br /></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+
+<span class="n">today</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">week_from_today</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">diff</span> <span class="o">=</span> <span class="n">week_from_today</span> <span class="o">-</span> <span class="n">today</span>
+</pre></div>
+
+
+<h3>Total hours</h3>
+<div class="highlight"><pre><span></span><span class="n">total_hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">diff</span><span class="o">/</span><span class="n">dt</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">#</span> <span class="k">Returns</span> <span class="mi">168</span> <span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>Total days</h3>
+<div class="highlight"><pre><span></span><span class="n">total_days</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">diff</span><span class="o">/</span><span class="n">dt</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">#</span> <span class="k">Returns</span> <span class="mi">7</span>
+</pre></div>
+
+
+<h3>Total weeks</h3>
+<div class="highlight"><pre><span></span><span class="n">total_weeks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">diff</span><span class="o">/</span><span class="n">dt</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">#</span> <span class="k">Returns</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>For an in-depth look at python's <code>datetime</code> module, check out <a href="http://localhost:8000/datetime.html">Working with date and time in Python</a>.</p>
+  </div>
+
+  <br />
+  <div class="comments">
+    <h2>Share</h2>
+    <br />
+    <!-- AddToAny BEGIN -->
+    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_linkedin"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+    </div>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+  </div>
+  <br />
+  <div class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//code-disciples.disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
+    </script>
+  </div>
+</article>
+          </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">
 
@@ -232,7 +295,7 @@
 
         </div><!--/sidebar -->
       </div><!--/row-->
-    </div><!--/.container /#main-container -->
+      </div><!--/.container /#main-container -->
     <br>
     <footer id="site-footer">
  
@@ -262,5 +325,5 @@
             crossorigin="anonymous"></script>
 
 
-  </body>
+    </body>
 </html>
