@@ -5,6 +5,7 @@ Tags: Python
 Slug: python-timedelta
 Authors: Abhishek Pednekar
 Summary: Hours, days and weeks with Python
+Description: A Simple way to calculate the hours, days and weeks using Pythons timedelta class
 Cover: /static/images/gradient-texture-cubes.jpg
 
 Python does not have a built-in function to directly compute the number of hours, days or weeks between two given datetime values. This article will show how we can use the `timedelta` class of python's `datetime` module to do exactly that.

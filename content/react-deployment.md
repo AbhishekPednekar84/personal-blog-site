@@ -6,6 +6,7 @@ Slug: react-deployment
 Authors: Abhishek Pednekar
 Summary: Deploying a React application created with the `create-react-app` package
 Cover: /static/images/gradient-texture-cubes.jpg
+Description: Deploy a react website on a linux server provisioned by DigitalOcean
 
 In this post, you will deploy a React application created with the `create-react-app` package. Unlike a React application that is built from scratch, `create-react-app` does not require us to install packages like `babel` or `webpack`. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.
 

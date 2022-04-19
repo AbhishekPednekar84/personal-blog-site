@@ -5,10 +5,7 @@ endblock %} {% block open_graph %} {% if OPEN_GRAPH %}
 <meta property="og:title" content="{{ article.title|striptags|e }}" />
 <meta property="og:url" content="{{ SITEURL }}/{{ article.url }}" />
 {% if article.description %}
-<meta
-  property="og:description"
-  content="{{ article.description|striptags|e }}"
-/>
+<meta property="og:description" content="{{ article.description|e }}" />
 {% endif %} {% if article.category %}
 <meta property="article:section" content="{{ article.category }}" />
 {% endif %} {% if article.tags %} {% for tag in article.tags %}
