@@ -56,4 +56,4 @@ total_days = int(diff/dt.timedelta(days=1)) # Returns 7
 total_weeks = int(diff/dt.timedelta(weeks=1)) # Returns 1
 ```
 
-For an in-depth look at python's `datetime` module, check out [Working with date and time in Python](http://localhost:8000/datetime.html).
+For an in-depth look at python's `datetime` module, check out [Working with date and time in Python](https://codedisciples.in/datetime.html).
