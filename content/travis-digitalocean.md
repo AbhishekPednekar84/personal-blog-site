@@ -1,7 +1,7 @@
 Title: Continuous Deployment with Travis CI and DigitalOcean
 Date: 2020-06-01 21:00
 Category: CI/CD
-Tags: CI/CD
+Tags: TravisCI
 Slug: travis-digitalocean
 Authors: Abhishek Pednekar
 Summary: Setting up a CI/CD pipeline with Travis CI and DigitalOcean
@@ -267,7 +267,7 @@ You should now see the files in the `demo` folder that you created earlier on th
 
 ## Conclusion
 
-You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean. 
+You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean.
 
 As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the [React.js deployment](https://www.codedisciples.in/react-deployment.html) article for more details.
 
@@ -278,7 +278,3 @@ ssh travis@<server ipaddress> 'pm2 restart all'
 ```
 
 ![travis5]({static}/images/index22/travis5.jpg)
-
-
-
-

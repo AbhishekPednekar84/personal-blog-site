@@ -1,7 +1,7 @@
 Title: Using a PostgreSQL database with Travis CI
 Date: 2020-05-05 21:00
 Category: CI
-Tags: Postgres, CI
+Tags: Postgres, TravisCI
 Slug: travis-postgres
 Authors: Abhishek Pednekar
 Summary: Adding a PostgreSQL test database as part of continuous integration with Travis CI

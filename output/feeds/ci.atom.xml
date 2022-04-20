@@ -70,4 +70,4 @@
   &lt;span class="n"&gt;slack&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;rooms&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
       &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;secure&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;xxxxxxx&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Postgres"></category><category term="CI"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Postgres"></category><category term="TravisCI"></category></entry></feed>

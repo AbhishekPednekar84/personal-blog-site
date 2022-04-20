@@ -213,11 +213,11 @@
 &lt;p&gt;&lt;img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; &lt;i class="fas fa-clipboard"&gt;&lt;/i&gt;: You must &lt;strong&gt;always&lt;/strong&gt; remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in &lt;code&gt;deploy.sh&lt;/code&gt; fails.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean. &lt;/p&gt;
+&lt;p&gt;You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean.&lt;/p&gt;
 &lt;p&gt;As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the &lt;a href="https://www.codedisciples.in/react-deployment.html"&gt;React.js deployment&lt;/a&gt; article for more details.&lt;/p&gt;
 &lt;p&gt;Another thing to note is that typically Node.js applications are run on the server using a package like &lt;code&gt;pm2&lt;/code&gt; (details available in the article referenced above). So whenever you deploy changes to the server, it would require a restart of the application. Add the following line at the end of &lt;code&gt;deploy.sh&lt;/code&gt; to automatically restart the application once deployed.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;travis&lt;/span&gt;&lt;span class="o"&gt;@&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;ipaddress&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pm2 restart all&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="travis5" src="https://codedisciples.in/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="CI/CD"></category></entry></feed>
+&lt;p&gt;&lt;img alt="travis5" src="https://codedisciples.in/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="TravisCI"></category></entry></feed>

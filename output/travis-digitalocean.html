@@ -12,7 +12,7 @@
 <meta property="og:title" content="Continuous Deployment with Travis CI and DigitalOcean" />
 <meta property="og:url" content="https://codedisciples.in/travis-digitalocean.html" />
  <meta property="article:section" content="CI/CD" />
-  <meta property="article:tag" content="CI/CD" />
+  <meta property="article:tag" content="TravisCI" />
         
     <title>Continuous Deployment with Travis CI and DigitalOcean - Code Disciples</title>
 
@@ -324,7 +324,7 @@
 <p><img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"></p>
 <p><strong>Note</strong> <i class="fas fa-clipboard"></i>: You must <strong>always</strong> remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in <code>deploy.sh</code> fails.</p>
 <h2>Conclusion</h2>
-<p>You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean. </p>
+<p>You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean.</p>
 <p>As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the <a href="https://www.codedisciples.in/react-deployment.html">React.js deployment</a> article for more details.</p>
 <p>Another thing to note is that typically Node.js applications are run on the server using a package like <code>pm2</code> (details available in the article referenced above). So whenever you deploy changes to the server, it would require a restart of the application. Add the following line at the end of <code>deploy.sh</code> to automatically restart the application once deployed.</p>
 <div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">travis</span><span class="o">@&lt;</span><span class="n">server</span> <span class="n">ipaddress</span><span class="o">&gt;</span> <span class="s1">&#39;pm2 restart all&#39;</span>
@@ -410,6 +410,8 @@
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
       <li><a href="https://codedisciples.in/category/markdown.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Markdown</a></li>
+      <li><a href="https://codedisciples.in/category/nextjs.html">
+          <i class="fas fa-folder-open fa-fw fa-lg"></i> Next.js</a></li>
       <li><a href="https://codedisciples.in/category/python.html">
           <i class="fas fa-folder-open fa-fw fa-lg"></i> Python</a></li>
     </ul>
@@ -419,14 +421,17 @@
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+      <a href="https://codedisciples.in/tag/nextjs.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>Next.js
+      </a>
       <a href="https://codedisciples.in/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Python
       </a>
       <a href="https://codedisciples.in/tag/css.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>CSS
       </a>
-      <a href="https://codedisciples.in/tag/cicd.html">
-        <i class="fas fa-tag fa-fw fa-lg"></i>CI/CD
+      <a href="https://codedisciples.in/tag/travisci.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>TravisCI
       </a>
       <a href="https://codedisciples.in/tag/reactjs.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>ReactJs
@@ -436,9 +441,6 @@
       </a>
       <a href="https://codedisciples.in/tag/postgres.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>Postgres
-      </a>
-      <a href="https://codedisciples.in/tag/ci.html">
-        <i class="fas fa-tag fa-fw fa-lg"></i>CI
       </a>
       <a href="https://codedisciples.in/tag/html.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>HTML

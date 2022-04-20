@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Next.js</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/nextjs.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2022-04-20T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Google Analytics 4 with Next.js</title><link href="https://codedisciples.in/next-ga4.html" rel="alternate"></link><published>2022-04-20T21:00:00+05:30</published><updated>2022-04-20T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-20:/next-ga4.html</id><summary type="html">&lt;p&gt;Enable Google Analytics 4 in a Next.js website&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, Google announced that Universal Analytics (UA) would be sunset on July 1st, 2023. Post this date, UA would not process any new hits. The data collected by UA would be available for six months thereafter. Google has strongly recommended individuals and businesses using the UA property switch to their new analytics measurement solution, &lt;strong&gt;Google Analytics 4&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In this article, we will see how Google Analytics 4 can be integrated with a Next.js website. The article assumes that the reader has a Google Analytics account and is familiar with Next.js.&lt;/p&gt;
+&lt;h2&gt;Creating a Google Analytics 4 property&lt;/h2&gt;
+&lt;p&gt;On the &lt;strong&gt;Admin&lt;/strong&gt; section of your Google Analytics dashboard, click on the &lt;strong&gt;Create Property&lt;/strong&gt; button. This by default will create a Google Analytics 4 property.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-create-property" src="https://codedisciples.in/images/index27/next-ga4-1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+Once you enter basic information like the property name and work details, you will be prompted to create a data stream. Click on &lt;strong&gt;Web&lt;/strong&gt; to generate the site tag for your Next.js website.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-create-stream" src="https://codedisciples.in/images/index27/next-ga4-2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+You will now see the code you need to embed in your website in the &lt;strong&gt;Tagging instructions&lt;/strong&gt; section.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-tag-details" src="https://codedisciples.in/images/index27/next-ga4-3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Embedding the site tag in Next.js&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Step 1&lt;/strong&gt;: Create an environment variable with the Google Analytics 4 measurement id.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;
+
+&lt;span class="n"&gt;NEXT_PUBLIC_GA4_MEASUREMENT_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;G-xxxxxxxx&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;Step 2&lt;/strong&gt;: Create a &lt;code&gt;_document.js&lt;/code&gt; file in the &lt;code&gt;pages&lt;/code&gt; directory (if not already present) to add the tracking code. &lt;code&gt;_document.js&lt;/code&gt; overrides the default document provided by Next.js.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;_document&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;Document&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;Html&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Main&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;NextScript&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;next/document&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyDocument&lt;/span&gt; &lt;span class="n"&gt;extends&lt;/span&gt; &lt;span class="n"&gt;Document&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Html&lt;/span&gt; &lt;span class="n"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;
+            &lt;span class="n"&gt;async&lt;/span&gt;
+            &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="sb"&gt;`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}`&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+          &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;
+            &lt;span class="n"&gt;dangerouslySetInnerHTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{{&lt;/span&gt;
+              &lt;span class="n"&gt;__html&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;
+            &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dataLayer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dataLayer&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;[];&lt;/span&gt;
+            &lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;&lt;span class="n"&gt;dataLayer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arguments&lt;/span&gt;&lt;span class="p"&gt;);}&lt;/span&gt;
+            &lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+            &lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;config&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;${process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="n"&gt;page_path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pathname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;});&lt;/span&gt;
+          &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;}}&lt;/span&gt;
+          &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;Head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+        &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Main&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;NextScript&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;Html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;default&lt;/span&gt; &lt;span class="n"&gt;MyDocument&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;Step 3&lt;/strong&gt;: Finally, in &lt;code&gt;_app.js&lt;/code&gt;, we will use the &lt;code&gt;useEffect&lt;/code&gt; hook and the &lt;code&gt;routeChangeComplete&lt;/code&gt; event provided by the Next.js &lt;code&gt;router&lt;/code&gt; to run the analytics code when a route changes. We will subscribe to the &lt;code&gt;routeChangeComplete&lt;/code&gt; event whenever the component mounts and unsubscribe on unmount.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;useEffect&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;react&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="n"&gt;MyApp&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="n"&gt;Component&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pageProps&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;router&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="n"&gt;useEffect&lt;/span&gt;&lt;span class="p"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;handleRouteChange&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;config&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NEXT_PUBLIC_GA4_MEASUREMENT_ID&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;page_path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+
+    &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;Subscribe&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;
+    &lt;span class="n"&gt;router&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;routeChangeComplete&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;handleRouteChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;router&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;off&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;routeChangeComplete&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;handleRouteChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;router&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+
+ &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="n"&gt;pageProps&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;default&lt;/span&gt; &lt;span class="n"&gt;MyApp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That's it! Refresh your page a couple of times to see the activity on your Google Analytics dashboard.&lt;/p&gt;
+&lt;h3&gt;Further reading&lt;/h3&gt;
+&lt;p&gt;&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; This article is inspired by a &lt;a href="https://mariestarck.com/add-google-analytics-to-your-next-js-application-in-5-easy-steps/"&gt;post&lt;/a&gt; from Marie Starch&lt;br /&gt;
+&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; Next.js &lt;a href="https://nextjs.org/docs/advanced-features/custom-document"&gt;custom document&lt;/a&gt;&lt;br /&gt;
+&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; Next.js &lt;a href="https://nextjs.org/docs/api-reference/next/router#routerevents"&gt;router events&lt;/a&gt;&lt;/p&gt;</content><category term="Next.js"></category></entry></feed>

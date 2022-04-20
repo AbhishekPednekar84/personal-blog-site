@@ -1,5 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Abhishek Pednekar</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/abhishek-pednekar.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2022-04-19T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Hours, days and weeks with Python</title><link href="https://codedisciples.in/python-timedelta.html" rel="alternate"></link><published>2022-04-19T21:00:00+05:30</published><updated>2022-04-19T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-19:/python-timedelta.html</id><summary type="html">&lt;p&gt;Hours, days and weeks with Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python does not have a built-in function to directly compute the number of hours, days or weeks between two given datetime values. This article will show how we can use the &lt;code&gt;timedelta&lt;/code&gt; class of python's &lt;code&gt;datetime&lt;/code&gt; module to do exactly that.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - Abhishek Pednekar</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/abhishek-pednekar.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2022-04-20T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Google Analytics 4 with Next.js</title><link href="https://codedisciples.in/next-ga4.html" rel="alternate"></link><published>2022-04-20T21:00:00+05:30</published><updated>2022-04-20T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-20:/next-ga4.html</id><summary type="html">&lt;p&gt;Enable Google Analytics 4 in a Next.js website&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, Google announced that Universal Analytics (UA) would be sunset on July 1st, 2023. Post this date, UA would not process any new hits. The data collected by UA would be available for six months thereafter. Google has strongly recommended individuals and businesses using the UA property switch to their new analytics measurement solution, &lt;strong&gt;Google Analytics 4&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In this article, we will see how Google Analytics 4 can be integrated with a Next.js website. The article assumes that the reader has a Google Analytics account and is familiar with Next.js.&lt;/p&gt;
+&lt;h2&gt;Creating a Google Analytics 4 property&lt;/h2&gt;
+&lt;p&gt;On the &lt;strong&gt;Admin&lt;/strong&gt; section of your Google Analytics dashboard, click on the &lt;strong&gt;Create Property&lt;/strong&gt; button. This by default will create a Google Analytics 4 property.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-create-property" src="https://codedisciples.in/images/index27/next-ga4-1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+Once you enter basic information like the property name and work details, you will be prompted to create a data stream. Click on &lt;strong&gt;Web&lt;/strong&gt; to generate the site tag for your Next.js website.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-create-stream" src="https://codedisciples.in/images/index27/next-ga4-2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+You will now see the code you need to embed in your website in the &lt;strong&gt;Tagging instructions&lt;/strong&gt; section.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-tag-details" src="https://codedisciples.in/images/index27/next-ga4-3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2&gt;Embedding the site tag in Next.js&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Step 1&lt;/strong&gt;: Create an environment variable with the Google Analytics 4 measurement id.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;
+
+&lt;span class="n"&gt;NEXT_PUBLIC_GA4_MEASUREMENT_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;G-xxxxxxxx&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;Step 2&lt;/strong&gt;: Create a &lt;code&gt;_document.js&lt;/code&gt; file in the &lt;code&gt;pages&lt;/code&gt; directory (if not already present) to add the tracking code. &lt;code&gt;_document.js&lt;/code&gt; overrides the default document provided by Next.js.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;_document&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;Document&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;Html&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Main&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;NextScript&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;next/document&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyDocument&lt;/span&gt; &lt;span class="n"&gt;extends&lt;/span&gt; &lt;span class="n"&gt;Document&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Html&lt;/span&gt; &lt;span class="n"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;
+            &lt;span class="n"&gt;async&lt;/span&gt;
+            &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="sb"&gt;`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}`&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+          &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;
+            &lt;span class="n"&gt;dangerouslySetInnerHTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{{&lt;/span&gt;
+              &lt;span class="n"&gt;__html&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;
+            &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dataLayer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dataLayer&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;[];&lt;/span&gt;
+            &lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;&lt;span class="n"&gt;dataLayer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arguments&lt;/span&gt;&lt;span class="p"&gt;);}&lt;/span&gt;
+            &lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+            &lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;config&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;${process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="n"&gt;page_path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pathname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;});&lt;/span&gt;
+          &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;}}&lt;/span&gt;
+          &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;Head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+        &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Main&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;NextScript&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;Html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;default&lt;/span&gt; &lt;span class="n"&gt;MyDocument&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;Step 3&lt;/strong&gt;: Finally, in &lt;code&gt;_app.js&lt;/code&gt;, we will use the &lt;code&gt;useEffect&lt;/code&gt; hook and the &lt;code&gt;routeChangeComplete&lt;/code&gt; event provided by the Next.js &lt;code&gt;router&lt;/code&gt; to run the analytics code when a route changes. We will subscribe to the &lt;code&gt;routeChangeComplete&lt;/code&gt; event whenever the component mounts and unsubscribe on unmount.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;useEffect&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;react&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="n"&gt;MyApp&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="n"&gt;Component&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pageProps&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;router&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="n"&gt;useEffect&lt;/span&gt;&lt;span class="p"&gt;(()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;handleRouteChange&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;config&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NEXT_PUBLIC_GA4_MEASUREMENT_ID&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;page_path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+
+    &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;Subscribe&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;
+    &lt;span class="n"&gt;router&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;routeChangeComplete&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;handleRouteChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;router&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;off&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;routeChangeComplete&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;handleRouteChange&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;router&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+
+ &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="n"&gt;pageProps&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;default&lt;/span&gt; &lt;span class="n"&gt;MyApp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That's it! Refresh your page a couple of times to see the activity on your Google Analytics dashboard.&lt;/p&gt;
+&lt;h3&gt;Further reading&lt;/h3&gt;
+&lt;p&gt;&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; This article is inspired by a &lt;a href="https://mariestarck.com/add-google-analytics-to-your-next-js-application-in-5-easy-steps/"&gt;post&lt;/a&gt; from Marie Starch&lt;br /&gt;
+&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; Next.js &lt;a href="https://nextjs.org/docs/advanced-features/custom-document"&gt;custom document&lt;/a&gt;&lt;br /&gt;
+&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; Next.js &lt;a href="https://nextjs.org/docs/api-reference/next/router#routerevents"&gt;router events&lt;/a&gt;&lt;/p&gt;</content><category term="Next.js"></category></entry><entry><title>Hours, days and weeks with Python</title><link href="https://codedisciples.in/python-timedelta.html" rel="alternate"></link><published>2022-04-19T21:00:00+05:30</published><updated>2022-04-19T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-19:/python-timedelta.html</id><summary type="html">&lt;p&gt;Hours, days and weeks with Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python does not have a built-in function to directly compute the number of hours, days or weeks between two given datetime values. This article will show how we can use the &lt;code&gt;timedelta&lt;/code&gt; class of python's &lt;code&gt;datetime&lt;/code&gt; module to do exactly that.&lt;/p&gt;
 &lt;p&gt;A rather obvious way to compute the number of days (for example) between two dates is to use &lt;code&gt;total_seconds()&lt;/code&gt;.
 &lt;br /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;dt&lt;/span&gt;
@@ -720,14 +815,14 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;p&gt;&lt;img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; &lt;i class="fas fa-clipboard"&gt;&lt;/i&gt;: You must &lt;strong&gt;always&lt;/strong&gt; remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in &lt;code&gt;deploy.sh&lt;/code&gt; fails.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean. &lt;/p&gt;
+&lt;p&gt;You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean.&lt;/p&gt;
 &lt;p&gt;As next steps, you can install and configure Nginx on the droplet to serve your application on the web. Please refer to the &lt;a href="https://www.codedisciples.in/react-deployment.html"&gt;React.js deployment&lt;/a&gt; article for more details.&lt;/p&gt;
 &lt;p&gt;Another thing to note is that typically Node.js applications are run on the server using a package like &lt;code&gt;pm2&lt;/code&gt; (details available in the article referenced above). So whenever you deploy changes to the server, it would require a restart of the application. Add the following line at the end of &lt;code&gt;deploy.sh&lt;/code&gt; to automatically restart the application once deployed.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;travis&lt;/span&gt;&lt;span class="o"&gt;@&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;ipaddress&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pm2 restart all&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="travis5" src="https://codedisciples.in/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="CI/CD"></category></entry><entry><title>Deploying a React application on a Linux server</title><link href="https://codedisciples.in/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. Unlike a React application that is built from scratch, &lt;code&gt;create-react-app&lt;/code&gt; does not require us to install packages like &lt;code&gt;babel&lt;/code&gt; or &lt;code&gt;webpack&lt;/code&gt;. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis5" src="https://codedisciples.in/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="TravisCI"></category></entry><entry><title>Deploying a React application on a Linux server</title><link href="https://codedisciples.in/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. Unlike a React application that is built from scratch, &lt;code&gt;create-react-app&lt;/code&gt; does not require us to install packages like &lt;code&gt;babel&lt;/code&gt; or &lt;code&gt;webpack&lt;/code&gt;. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.&lt;/p&gt;
 &lt;p&gt;Web deployments on a bare-bones server can sometimes be tricky. This post will go over all the steps that need to be followed to deploy a React application on a virtual private server. The server will be a &lt;strong&gt;DigitalOcean&lt;/strong&gt; droplet. The same steps can be followed on servers provisioned by other providers (like Linode). At the end of this article, you will be familiar with the pre-deployment and deployment tasks for a React application.&lt;/p&gt;
 &lt;h2&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
@@ -1034,7 +1129,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
   &lt;span class="n"&gt;slack&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;rooms&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
       &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;secure&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;xxxxxxx&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Postgres"></category><category term="CI"></category></entry><entry><title>Iterools</title><link href="https://codedisciples.in/itertools.html" rel="alternate"></link><published>2020-02-28T12:00:00+05:30</published><updated>2020-02-28T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-28:/itertools.html</id><summary type="html">&lt;p&gt;A look at the &lt;code&gt;itertools&lt;/code&gt; module in Python 3&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will dive into the &lt;code&gt;itertools&lt;/code&gt; module in Python. The &lt;code&gt;itertools&lt;/code&gt; module contains a truckload of functions to operate on Python iterators. Depending on the use case, these functions can make our code cleaner and more efficient.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Postgres"></category><category term="TravisCI"></category></entry><entry><title>Iterools</title><link href="https://codedisciples.in/itertools.html" rel="alternate"></link><published>2020-02-28T12:00:00+05:30</published><updated>2020-02-28T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-28:/itertools.html</id><summary type="html">&lt;p&gt;A look at the &lt;code&gt;itertools&lt;/code&gt; module in Python 3&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will dive into the &lt;code&gt;itertools&lt;/code&gt; module in Python. The &lt;code&gt;itertools&lt;/code&gt; module contains a truckload of functions to operate on Python iterators. Depending on the use case, these functions can make our code cleaner and more efficient.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with the concept of iterators and iterables in Python. At the end of this post, the reader will be familiar with the usage of some common functions from the &lt;code&gt;itertools&lt;/code&gt; module.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;itertools&lt;/code&gt; module is built into the Python standard library and therefore does not need to be installed separately. The &lt;code&gt;import itertools&lt;/code&gt; statement will give us access to all the functions contained in the module. On that note, we will be skipping the  &lt;code&gt;import&lt;/code&gt; statement in all but the first code snippet to avoid redundancy and keep the examples concise. &lt;/p&gt;
 &lt;p&gt;Here is the list of functions that will be discussed in this post -&lt;/p&gt;
