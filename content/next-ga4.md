@@ -8,7 +8,7 @@ Summary: Enable Google Analytics 4 in a Next.js website
 Description: Enable Google Analytics 4 in a Next.js website
 Cover: /static/images/nextjs.jpg
 
-Recently, Google announced that Universal Analytics (UA) would be sunset on July 1st, 2023. Post this date, UA would not process any new hits. The data collected by UA would be available for six months thereafter. Google has strongly recommended individuals and businesses using the UA property switch to their new analytics measurement solution, **Google Analytics 4**.
+Recently, Google announced that Universal Analytics (UA) would be sunset on July 1st, 2023. Post this date, UA would not process any new hits. The data collected by UA would be available for six months thereafter. Google has strongly recommended that individuals and businesses using the UA property switch to their new analytics measurement solution, **Google Analytics 4**.
 
 In this article, we will see how Google Analytics 4 can be integrated with a Next.js website. The article assumes that the reader has a Google Analytics account and is familiar with Next.js.
 
