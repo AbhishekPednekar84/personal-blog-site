@@ -120,12 +120,26 @@
 </pre></div>
 
 
+<p><br /></p>
+<h2>Check for the empty object</h2>
 <div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Empty</span> <span class="k">object</span>
 
 <span class="n">obj</span> <span class="o">=</span> <span class="err">{}</span>
 
 <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="k">Object</span><span class="p">.</span><span class="n">keys</span><span class="p">(</span><span class="n">obj</span><span class="p">).</span><span class="k">length</span><span class="p">)</span> <span class="o">//</span> <span class="mi">0</span>
 <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="k">Object</span><span class="p">.</span><span class="n">keys</span><span class="p">(</span><span class="n">obj</span><span class="p">).</span><span class="k">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="o">//</span> <span class="k">true</span>
+</pre></div>
+
+
+<p><br /></p>
+<h2>Why does this work?</h2>
+<p><code>Object.keys()</code> returns an array containing the keys of the object passed to it. We can therefore use the <code>length</code> attribute to check the length of the resulting array.</p>
+<div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="err">{</span><span class="ss">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">&quot;c&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="err">}</span>
+
+<span class="n">keysArray</span> <span class="o">=</span> <span class="k">Object</span><span class="p">.</span><span class="n">keys</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+<span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">keysArray</span><span class="p">)</span> <span class="o">//</span> <span class="p">[</span><span class="ss">&quot;a&quot;</span><span class="p">,</span> <span class="ss">&quot;b&quot;</span><span class="p">,</span> <span class="ss">&quot;c&quot;</span><span class="p">]</span>
+<span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">keysArray</span><span class="p">.</span><span class="k">length</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
 </pre></div>
 
 

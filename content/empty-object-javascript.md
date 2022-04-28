@@ -19,6 +19,10 @@ console.log(Object.keys(obj).length) // 3
 
 ```
 
+<br />
+
+## Check for the empty object
+
 ```
 // Empty object
 
@@ -26,6 +30,22 @@ obj = {}
 
 console.log(Object.keys(obj).length) // 0
 console.log(Object.keys(obj).length === 0) // true
+
+```
+
+<br />
+
+## Why does this work?
+
+`Object.keys()` returns an array containing the keys of the object passed to it. We can therefore use the `length` attribute to check the length of the resulting array.
+
+```
+obj = {"a": 1, "b": 2, "c": 3}
+
+keysArray = Object.keys(obj)
+
+console.log(keysArray) // ["a", "b", "c"]
+console.log(keysArray.length) // 3
 
 ```
 
