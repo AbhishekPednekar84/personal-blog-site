@@ -110,7 +110,7 @@ a:hover {
 }
 
 .jumbotron {
-  background-image: url("/static/images/gradient-texture-cubes.jpg");
+  background: linear-gradient(to right, #4b6cb7, #182848);
   color: #fff;
 }
 

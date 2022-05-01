@@ -12,10 +12,10 @@ In this short article, we will learn how to check if a Javascript object is empt
 
 ```
 // Non-empty object
-
 obj = {"a": 1, "b": 2, "c": 3}
 
-console.log(Object.keys(obj).length) // 3
+// Will output 3
+console.log(Object.keys(obj).length)
 
 ```
 
@@ -25,11 +25,13 @@ console.log(Object.keys(obj).length) // 3
 
 ```
 // Empty object
-
 obj = {}
 
-console.log(Object.keys(obj).length) // 0
-console.log(Object.keys(obj).length === 0) // true
+// Will output 0
+console.log(Object.keys(obj).length)
+
+// Will output true
+console.log(Object.keys(obj).length === 0)
 
 ```
 
@@ -44,8 +46,11 @@ obj = {"a": 1, "b": 2, "c": 3}
 
 keysArray = Object.keys(obj)
 
-console.log(keysArray) // ["a", "b", "c"]
-console.log(keysArray.length) // 3
+// Will output ["a", "b", "c"]
+console.log(keysArray)
+
+// Will output 3
+console.log(keysArray.length)
 
 ```
 

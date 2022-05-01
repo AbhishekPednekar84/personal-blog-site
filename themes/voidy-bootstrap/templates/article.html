@@ -66,6 +66,7 @@ endblock content_header%} {% block content_body %}
       itemprop="image"
       src="{{ SITEURL }}/images/{{ article.image }}"
     />
+    <p>{{ article.image }}</p>
     {% endif %} {% include "includes/" +
     CUSTOM_ARTICLE_PRECONTENT|default('article_precontent.html') ignore missing
     %} {{ article.content }}
