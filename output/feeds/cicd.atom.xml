@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - CI/CD</title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/cicd.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2020-06-01T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Continuous Deployment with Travis CI and DigitalOcean</title><link href="http://localhost:8000/travis-digitalocean.html" rel="alternate"></link><published>2020-06-01T21:00:00+05:30</published><updated>2020-06-01T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-06-01:/travis-digitalocean.html</id><summary type="html">&lt;p&gt;Setting up a CI/CD pipeline with Travis CI and DigitalOcean&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will set up a Continuous Deployment (CD) pipeline using Travis CI and DigitalOcean. CD is a release process that involves running automated tests on a piece of software followed by deployment of the software if all the tests pass. There are several tools available to run a CD pipeline. Travis CI, CircleCI and Buddy Works are few of the popular ones. Since this post aims to be language-agnostic, the focus will only be on the deployment piece of the equation and not the testing aspects.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples - CI/CD</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/cicd.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2020-06-01T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Continuous Deployment with Travis CI and DigitalOcean</title><link href="https://codedisciples.in/travis-digitalocean.html" rel="alternate"></link><published>2020-06-01T21:00:00+05:30</published><updated>2020-06-01T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-06-01:/travis-digitalocean.html</id><summary type="html">&lt;p&gt;Setting up a CI/CD pipeline with Travis CI and DigitalOcean&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will set up a Continuous Deployment (CD) pipeline using Travis CI and DigitalOcean. CD is a release process that involves running automated tests on a piece of software followed by deployment of the software if all the tests pass. There are several tools available to run a CD pipeline. Travis CI, CircleCI and Buddy Works are few of the popular ones. Since this post aims to be language-agnostic, the focus will only be on the deployment piece of the equation and not the testing aspects.&lt;/p&gt;
 &lt;p&gt;The example in this post will involve using &lt;strong&gt;Travis CI&lt;/strong&gt; to deploy a React.js application on a &lt;strong&gt;DigitalOcean&lt;/strong&gt; droplet. The same techniques can, however, be extended to any language or framework with some slight tweaks. This example will be using a Windows 10 local machine.&lt;/p&gt;
 &lt;h2&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
@@ -19,7 +19,7 @@
 &lt;p&gt;Alternately, you can use any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.&lt;/p&gt;
 &lt;h2&gt;Travis CI&lt;/h2&gt;
 &lt;p&gt;Once signed up, you will need to provide Travis CI access to the GitHub repository of the application you are planning to deploy. This option is available under the account settings.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis" src="http://localhost:8000/images/index22/travis.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis" src="https://codedisciples.in/images/index22/travis.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;You will also be using the Travis CI command line later on to encrypt the private key that will be used to log into the DigitalOcean droplet. To install the Travis CLI locally, you will run the following commands in WSL.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
@@ -203,14 +203,14 @@
 
 
 &lt;p&gt;However, before you do that, you will need to determine whether you would like the pipeline to run as soon as you push your changes or if you would like to trigger a manual build. You can set the desired option on the settings page of your project on Travis CI.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis2" src="http://localhost:8000/images/index22/travis2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis2" src="https://codedisciples.in/images/index22/travis2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Finally, you can &lt;code&gt;push&lt;/code&gt; to the remote repository using &lt;code&gt;git push origin master&lt;/code&gt; assuming you are working directly on the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
 &lt;p&gt;If you set your build to start automatically on every push, you will now see a build for the project queued up on the Travis CI dashboard page.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis3" src="http://localhost:8000/images/index22/travis3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis3" src="https://codedisciples.in/images/index22/travis3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Clicking on the build number will take you to the build page where you can view the log as the build progresses. The log below shows the build progressing through each step defined in the &lt;code&gt;.travis.yml&lt;/code&gt; file. If the build is successful, it will exit with a &lt;code&gt;0&lt;/code&gt; code.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis4" src="http://localhost:8000/images/index22/travis4.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis4" src="https://codedisciples.in/images/index22/travis4.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;You should now see the files in the &lt;code&gt;demo&lt;/code&gt; folder that you created earlier on the server.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="demo" src="http://localhost:8000/images/index22/demo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; &lt;i class="fas fa-clipboard"&gt;&lt;/i&gt;: You must &lt;strong&gt;always&lt;/strong&gt; remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in &lt;code&gt;deploy.sh&lt;/code&gt; fails.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean.&lt;/p&gt;
@@ -220,4 +220,4 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="travis5" src="http://localhost:8000/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="TravisCI"></category></entry></feed>
+&lt;p&gt;&lt;img alt="travis5" src="https://codedisciples.in/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="TravisCI"></category></entry></feed>

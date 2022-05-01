@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/all-en.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2022-05-01T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Swapping Variables in Python - How &amp; Why</title><link href="http://localhost:8000/variable-swapping-python.html" rel="alternate"></link><published>2022-05-01T21:00:00+05:30</published><updated>2022-05-01T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2022-05-01:/variable-swapping-python.html</id><summary type="html">&lt;p&gt;How and why does Python's succinct variable swapping syntax work&lt;/p&gt;</summary><content type="html">&lt;p&gt;In today's article, we will see how to swap the values of two variables in Python. More importantly, we will understand why this works.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Code Disciples</title><link href="https://codedisciples.in/" rel="alternate"></link><link href="https://codedisciples.in/feeds/all-en.atom.xml" rel="self"></link><id>https://codedisciples.in/</id><updated>2022-05-01T21:00:00+05:30</updated><subtitle>A blog for all things code</subtitle><entry><title>Swapping Variables in Python - How &amp; Why</title><link href="https://codedisciples.in/variable-swapping-python.html" rel="alternate"></link><published>2022-05-01T21:00:00+05:30</published><updated>2022-05-01T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-05-01:/variable-swapping-python.html</id><summary type="html">&lt;p&gt;How and why does Python's succinct variable swapping syntax work&lt;/p&gt;</summary><content type="html">&lt;p&gt;In today's article, we will see how to swap the values of two variables in Python. More importantly, we will understand why this works.&lt;/p&gt;
 &lt;p&gt;Traditionally, variable swapping in any language involves the introduction of a temporary variable to hold a value.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
 &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
@@ -31,7 +31,7 @@
 
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2&gt;Why does this work&lt;/h2&gt;
+&lt;h2&gt;Why does this work?&lt;/h2&gt;
 &lt;p&gt;To understand why this works, we need to delve into the world of tuples. Tuples are immutable data structures in Python. Traditionally, a tuple is represented as x = (1, 2). Its elements can be accessed using the index values.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -74,7 +74,7 @@
 
 &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Variables&lt;/span&gt; &lt;span class="k"&gt;are&lt;/span&gt; &lt;span class="n"&gt;swapped&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
 &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Javascript"></category></entry><entry><title>Check for empty objects in Javascript</title><link href="http://localhost:8000/empty-object-javascript.html" rel="alternate"></link><published>2022-04-28T21:00:00+05:30</published><updated>2022-04-28T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2022-04-28:/empty-object-javascript.html</id><summary type="html">&lt;p&gt;Check if a Javascript object is empty&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this short article, we will learn how to check if a Javascript object is empty (&lt;code&gt;{}&lt;/code&gt;). This is particularly useful when checking responses from API's. We will run this test using the &lt;code&gt;Object.keys()&lt;/code&gt; method.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Javascript"></category></entry><entry><title>Check for empty objects in Javascript</title><link href="https://codedisciples.in/empty-object-javascript.html" rel="alternate"></link><published>2022-04-28T21:00:00+05:30</published><updated>2022-04-28T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-28:/empty-object-javascript.html</id><summary type="html">&lt;p&gt;Check if a Javascript object is empty&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this short article, we will learn how to check if a Javascript object is empty (&lt;code&gt;{}&lt;/code&gt;). This is particularly useful when checking responses from API's. We will run this test using the &lt;code&gt;Object.keys()&lt;/code&gt; method.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;Non&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt; &lt;span class="k"&gt;object&lt;/span&gt;
 &lt;span class="n"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;
 
@@ -111,17 +111,17 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;code&gt;Object.keys()&lt;/code&gt; is supported across all browsers.&lt;/p&gt;</content><category term="Javascript"></category></entry><entry><title>Google Analytics 4 with Next.js</title><link href="http://localhost:8000/next-ga4.html" rel="alternate"></link><published>2022-04-20T21:00:00+05:30</published><updated>2022-04-20T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2022-04-20:/next-ga4.html</id><summary type="html">&lt;p&gt;Enable Google Analytics 4 in a Next.js website&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, Google announced that Universal Analytics (UA) would be sunset on July 1st, 2023. Post this date, UA would not process any new hits. The data collected by UA would be available for six months thereafter. Google has strongly recommended that individuals and businesses using the UA property switch to their new analytics measurement solution, &lt;strong&gt;Google Analytics 4&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Object.keys()&lt;/code&gt; is supported across all browsers.&lt;/p&gt;</content><category term="Javascript"></category></entry><entry><title>Google Analytics 4 with Next.js</title><link href="https://codedisciples.in/next-ga4.html" rel="alternate"></link><published>2022-04-20T21:00:00+05:30</published><updated>2022-04-20T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-20:/next-ga4.html</id><summary type="html">&lt;p&gt;Enable Google Analytics 4 in a Next.js website&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, Google announced that Universal Analytics (UA) would be sunset on July 1st, 2023. Post this date, UA would not process any new hits. The data collected by UA would be available for six months thereafter. Google has strongly recommended that individuals and businesses using the UA property switch to their new analytics measurement solution, &lt;strong&gt;Google Analytics 4&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In this article, we will see how Google Analytics 4 can be integrated with a Next.js website. The article assumes that the reader has a Google Analytics account and is familiar with Next.js.&lt;/p&gt;
 &lt;h2&gt;Creating a Google Analytics 4 property&lt;/h2&gt;
 &lt;p&gt;On the &lt;strong&gt;Admin&lt;/strong&gt; section of your Google Analytics dashboard, click on the &lt;strong&gt;Create Property&lt;/strong&gt; button. This by default will create a Google Analytics 4 property.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="ga4-create-property" src="http://localhost:8000/images/index27/next-ga4-1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-create-property" src="https://codedisciples.in/images/index27/next-ga4-1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
 Once you enter basic information like the property name and work details, you will be prompted to create a data stream. Click on &lt;strong&gt;Web&lt;/strong&gt; to generate the site tag for your Next.js website.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="ga4-create-stream" src="http://localhost:8000/images/index27/next-ga4-2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-create-stream" src="https://codedisciples.in/images/index27/next-ga4-2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
 You will now see the code you need to embed in your website in the &lt;strong&gt;Tagging instructions&lt;/strong&gt; section.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="ga4-tag-details" src="http://localhost:8000/images/index27/next-ga4-3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ga4-tag-details" src="https://codedisciples.in/images/index27/next-ga4-3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2&gt;Embedding the site tag in Next.js&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Step 1&lt;/strong&gt;: Create an environment variable with the Google Analytics 4 measurement id.&lt;/p&gt;
@@ -206,7 +206,7 @@ You will now see the code you need to embed in your website in the &lt;strong&gt
 &lt;h3&gt;Further reading&lt;/h3&gt;
 &lt;p&gt;&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; This article is inspired by a &lt;a href="https://mariestarck.com/add-google-analytics-to-your-next-js-application-in-5-easy-steps/"&gt;post&lt;/a&gt; from Marie Starch&lt;br /&gt;
 &lt;i class="fas fa-book-open"&gt;&lt;/i&gt; Next.js &lt;a href="https://nextjs.org/docs/advanced-features/custom-document"&gt;custom document&lt;/a&gt;&lt;br /&gt;
-&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; Next.js &lt;a href="https://nextjs.org/docs/api-reference/next/router#routerevents"&gt;router events&lt;/a&gt;&lt;/p&gt;</content><category term="Next.js"></category></entry><entry><title>Hours, days and weeks with Python</title><link href="http://localhost:8000/python-timedelta.html" rel="alternate"></link><published>2022-04-19T21:00:00+05:30</published><updated>2022-04-19T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2022-04-19:/python-timedelta.html</id><summary type="html">&lt;p&gt;Hours, days and weeks with Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python does not have a built-in function to directly compute the number of hours, days or weeks between two given datetime values. This article will show how we can use the &lt;code&gt;timedelta&lt;/code&gt; class of python's &lt;code&gt;datetime&lt;/code&gt; module to do exactly that.&lt;/p&gt;
+&lt;i class="fas fa-book-open"&gt;&lt;/i&gt; Next.js &lt;a href="https://nextjs.org/docs/api-reference/next/router#routerevents"&gt;router events&lt;/a&gt;&lt;/p&gt;</content><category term="Next.js"></category></entry><entry><title>Hours, days and weeks with Python</title><link href="https://codedisciples.in/python-timedelta.html" rel="alternate"></link><published>2022-04-19T21:00:00+05:30</published><updated>2022-04-19T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-19:/python-timedelta.html</id><summary type="html">&lt;p&gt;Hours, days and weeks with Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python does not have a built-in function to directly compute the number of hours, days or weeks between two given datetime values. This article will show how we can use the &lt;code&gt;timedelta&lt;/code&gt; class of python's &lt;code&gt;datetime&lt;/code&gt; module to do exactly that.&lt;/p&gt;
 &lt;p&gt;A rather obvious way to compute the number of days (for example) between two dates is to use &lt;code&gt;total_seconds()&lt;/code&gt;.
 &lt;br /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;dt&lt;/span&gt;
@@ -248,10 +248,10 @@ You will now see the code you need to embed in your website in the &lt;strong&gt
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;For an in-depth look at python's &lt;code&gt;datetime&lt;/code&gt; module, check out &lt;a href="https://codedisciples.in/datetime.html"&gt;Working with date and time in Python&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>CSS ::selection Selector</title><link href="http://localhost:8000/css-selection.html" rel="alternate"></link><published>2022-04-06T22:00:00+05:30</published><updated>2022-04-06T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2022-04-06:/css-selection.html</id><summary type="html">&lt;p&gt;Add a little more pizzazz to your modern website with &lt;code&gt;::selection&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we'll learn how we can change the default text selection color on a website.&lt;/p&gt;
+&lt;p&gt;For an in-depth look at python's &lt;code&gt;datetime&lt;/code&gt; module, check out &lt;a href="https://codedisciples.in/datetime.html"&gt;Working with date and time in Python&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>CSS ::selection Selector</title><link href="https://codedisciples.in/css-selection.html" rel="alternate"></link><published>2022-04-06T22:00:00+05:30</published><updated>2022-04-06T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-06:/css-selection.html</id><summary type="html">&lt;p&gt;Add a little more pizzazz to your modern website with &lt;code&gt;::selection&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we'll learn how we can change the default text selection color on a website.&lt;/p&gt;
 &lt;p&gt;By default, a browser applies a dark blue background with black text when the text on a webpage is selected.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="css-selection-default" src="http://localhost:8000/images/index25/css-selection-default.jpg"&gt;&lt;/p&gt;
+&lt;img alt="css-selection-default" src="https://codedisciples.in/images/index25/css-selection-default.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
 To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code&gt; CSS selector.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;/* CSS ::selection selector */&lt;/span&gt;
@@ -264,8 +264,8 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="css-selection-default" src="http://localhost:8000/images/index25/css-selection-new.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;The usability across different browsers is good - &lt;a href="https://caniuse.com/?search=%3A%3Aselection" target="_blank" rel="noopener noreferrer"&gt;caniuse.com&lt;/a&gt;&lt;/p&gt;</content><category term="CSS"></category></entry><entry><title>Installing Python packages from Github</title><link href="http://localhost:8000/github-install.html" rel="alternate"></link><published>2020-07-30T12:00:00+05:30</published><updated>2020-07-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-07-30:/github-install.html</id><summary type="html">&lt;p&gt;&lt;code&gt;pip install&lt;/code&gt; a Python package from Github&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will learn how to &lt;code&gt;pip install&lt;/code&gt; a Python package from Github. Installing a package from Github instead of the Python Package Index (PyPI) is useful when the package version (latest commit for instance) on Github contains changes that you would like to use or test but are not available on the latest PyPI version. This way, as a developer, you need not wait for the next release of a package to work with a specific change or feature. As long as the change is present in the version control system (VCS), you can work with it in advance to determine whether your project will be compatible with the new features.&lt;/p&gt;
+&lt;img alt="css-selection-default" src="https://codedisciples.in/images/index25/css-selection-new.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;The usability across different browsers is good - &lt;a href="https://caniuse.com/?search=%3A%3Aselection" target="_blank" rel="noopener noreferrer"&gt;caniuse.com&lt;/a&gt;&lt;/p&gt;</content><category term="CSS"></category></entry><entry><title>Installing Python packages from Github</title><link href="https://codedisciples.in/github-install.html" rel="alternate"></link><published>2020-07-30T12:00:00+05:30</published><updated>2020-07-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-07-30:/github-install.html</id><summary type="html">&lt;p&gt;&lt;code&gt;pip install&lt;/code&gt; a Python package from Github&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will learn how to &lt;code&gt;pip install&lt;/code&gt; a Python package from Github. Installing a package from Github instead of the Python Package Index (PyPI) is useful when the package version (latest commit for instance) on Github contains changes that you would like to use or test but are not available on the latest PyPI version. This way, as a developer, you need not wait for the next release of a package to work with a specific change or feature. As long as the change is present in the version control system (VCS), you can work with it in advance to determine whether your project will be compatible with the new features.&lt;/p&gt;
 &lt;p&gt;This post assumes that the reader is familiar with using &lt;code&gt;pip&lt;/code&gt;. The examples will use a &lt;a href="https://www.youtube.com/watch?v=APOPm01BVrk"&gt;virtual environment&lt;/a&gt;. Creating a virtual environment is optional, however, recommended. This post uses the &lt;code&gt;flask&lt;/code&gt; library as an example.&lt;/p&gt;
 &lt;p&gt;Although this post demonstrates installing Python packages from Github, &lt;code&gt;pip&lt;/code&gt; also supports installations from Mercurial, Subversion and Bazaar. The &lt;a href="https://pip.pypa.io/en/stable/reference/pip_install/#vcs-support"&gt;official documentation&lt;/a&gt; has more details on VCS support.&lt;/p&gt;
 &lt;hr&gt;
@@ -294,7 +294,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;Now, if you verify the &lt;a href="https://github.com/pallets/flask"&gt;repository&lt;/a&gt; for &lt;code&gt;flask&lt;/code&gt; on Github, you will notice several commits to the &lt;code&gt;master&lt;/code&gt; branch after April 3rd, meaning that they are not part of the version of &lt;code&gt;flask&lt;/code&gt; that you just installed. If you need to incorporate any of these commits into your local &lt;code&gt;flask&lt;/code&gt; installation before they are made available in PyPI, you can install the specific version of the package directly from Github as you will see in the next section.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="commits" src="http://localhost:8000/images/index24/commits.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="commits" src="https://codedisciples.in/images/index24/commits.jpg"&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2&gt;Installing from Github&lt;/h2&gt;
 &lt;p&gt;To &lt;code&gt;pip install&lt;/code&gt; from a Github repository, the repository needs to have a &lt;code&gt;setup.py&lt;/code&gt; file.&lt;/p&gt;
@@ -325,7 +325,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;Notice that you have now installed the latest version of &lt;code&gt;flask&lt;/code&gt; from the project's Github repository. You can confirm that by comparing the hash (&lt;code&gt;flask@37551e6...&lt;/code&gt;) of the installation with that on Github.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="flask-hash" src="http://localhost:8000/images/index24/flask-hash.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="flask-hash" src="https://codedisciples.in/images/index24/flask-hash.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;As mentioned earlier, using the editable mode helps if we are creating a requirements file. To create one, you can run the &lt;code&gt;pip freeze &amp;gt; requirements.txt&lt;/code&gt; command. Now, you can share this &lt;code&gt;requirements.txt&lt;/code&gt; file with anyone who is looking to use or collaborate on your project thereby ensuring that they use the same version of &lt;code&gt;flask&lt;/code&gt; as you and not the one from PyPI.&lt;/p&gt;
 &lt;p&gt;To install from a requirements file, you can run &lt;code&gt;pip install -r requirements.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;λ&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
@@ -342,9 +342,9 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;hr&gt;
 &lt;h2&gt;Installing a specific version&lt;/h2&gt;
 &lt;p&gt;If you would like to install a specific commit, you can do that based on the &lt;strong&gt;commit hash&lt;/strong&gt;. For instance, to install the version of &lt;code&gt;flask&lt;/code&gt; before the most recent commit, you will need the commit hash from Github.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="commit-1" src="http://localhost:8000/images/index24/commit-1.jpg"&gt;
+&lt;p&gt;&lt;img alt="commit-1" src="https://codedisciples.in/images/index24/commit-1.jpg"&gt;
 &lt;br /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="commit-2" src="http://localhost:8000/images/index24/commit-2.jpg"&gt;
+&lt;p&gt;&lt;img alt="commit-2" src="https://codedisciples.in/images/index24/commit-2.jpg"&gt;
 &lt;br /&gt;&lt;/p&gt;
 &lt;p&gt;Once you have the hash, you can substitute it in the following command - &lt;code&gt;pip install -e git+https://github.com/pallets/flask@&amp;lt;the-commit-hash&amp;gt;#egg=flask&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//github.com/pallets/flask@36e6fc8#egg=flask&lt;/span&gt;
@@ -391,7 +391,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 &lt;hr&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;You should now be familiar with installing a Python package from Github. If you would like to use package features that are not in the latest version on PyPI, then installing from a VCS is the way to go.&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>Working with date and time in Python</title><link href="http://localhost:8000/datetime.html" rel="alternate"></link><published>2020-06-10T21:00:00+05:30</published><updated>2020-06-10T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-06-10:/datetime.html</id><summary type="html">&lt;p&gt;A look at Python's awesome &lt;code&gt;datetime&lt;/code&gt; library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will learn how to effectively use Python's built-in &lt;code&gt;datetime&lt;/code&gt; library. Working with dates and time is a fundamental concept with any programming language. Python's &lt;code&gt;datetime&lt;/code&gt; library makes this simple by exposing a wide range of methods and attributes.&lt;/p&gt;
+&lt;p&gt;You should now be familiar with installing a Python package from Github. If you would like to use package features that are not in the latest version on PyPI, then installing from a VCS is the way to go.&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>Working with date and time in Python</title><link href="https://codedisciples.in/datetime.html" rel="alternate"></link><published>2020-06-10T21:00:00+05:30</published><updated>2020-06-10T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-06-10:/datetime.html</id><summary type="html">&lt;p&gt;A look at Python's awesome &lt;code&gt;datetime&lt;/code&gt; library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will learn how to effectively use Python's built-in &lt;code&gt;datetime&lt;/code&gt; library. Working with dates and time is a fundamental concept with any programming language. Python's &lt;code&gt;datetime&lt;/code&gt; library makes this simple by exposing a wide range of methods and attributes.&lt;/p&gt;
 &lt;p&gt;To keep the examples succinct, the &lt;code&gt;import datetime&lt;/code&gt; statement will be excluded in all but the first code snippet. This post covers a more widely used subset of the attributes and methods provided by the &lt;code&gt;datetime&lt;/code&gt; library. For the complete list, refer to the &lt;a href="https://docs.python.org/3/library/datetime.html"&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Aware vs. Naive&lt;/h2&gt;
 &lt;p&gt;Python's date and time objects can be classified as &lt;strong&gt;aware&lt;/strong&gt; or &lt;strong&gt;naive&lt;/strong&gt; depending on whether they include time zone information or not.&lt;/p&gt;
@@ -713,7 +713,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Python's &lt;code&gt;datetime&lt;/code&gt; library makes it easy to work with dates and times. When used in conjunction with the third-party &lt;code&gt;pytz&lt;/code&gt; module, it enables straightforward conversions between time zones.&lt;/p&gt;
-&lt;p&gt;You should now be familiar with naive and aware objects, working with deltas and converting between time zones.&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>Continuous Deployment with Travis CI and DigitalOcean</title><link href="http://localhost:8000/travis-digitalocean.html" rel="alternate"></link><published>2020-06-01T21:00:00+05:30</published><updated>2020-06-01T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-06-01:/travis-digitalocean.html</id><summary type="html">&lt;p&gt;Setting up a CI/CD pipeline with Travis CI and DigitalOcean&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will set up a Continuous Deployment (CD) pipeline using Travis CI and DigitalOcean. CD is a release process that involves running automated tests on a piece of software followed by deployment of the software if all the tests pass. There are several tools available to run a CD pipeline. Travis CI, CircleCI and Buddy Works are few of the popular ones. Since this post aims to be language-agnostic, the focus will only be on the deployment piece of the equation and not the testing aspects.&lt;/p&gt;
+&lt;p&gt;You should now be familiar with naive and aware objects, working with deltas and converting between time zones.&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>Continuous Deployment with Travis CI and DigitalOcean</title><link href="https://codedisciples.in/travis-digitalocean.html" rel="alternate"></link><published>2020-06-01T21:00:00+05:30</published><updated>2020-06-01T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-06-01:/travis-digitalocean.html</id><summary type="html">&lt;p&gt;Setting up a CI/CD pipeline with Travis CI and DigitalOcean&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will set up a Continuous Deployment (CD) pipeline using Travis CI and DigitalOcean. CD is a release process that involves running automated tests on a piece of software followed by deployment of the software if all the tests pass. There are several tools available to run a CD pipeline. Travis CI, CircleCI and Buddy Works are few of the popular ones. Since this post aims to be language-agnostic, the focus will only be on the deployment piece of the equation and not the testing aspects.&lt;/p&gt;
 &lt;p&gt;The example in this post will involve using &lt;strong&gt;Travis CI&lt;/strong&gt; to deploy a React.js application on a &lt;strong&gt;DigitalOcean&lt;/strong&gt; droplet. The same techniques can, however, be extended to any language or framework with some slight tweaks. This example will be using a Windows 10 local machine.&lt;/p&gt;
 &lt;h2&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
@@ -733,7 +733,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;p&gt;Alternately, you can use any application and make sure it is available in a public (if you are using the free tier of Travis CI) repository on GitHub.&lt;/p&gt;
 &lt;h2&gt;Travis CI&lt;/h2&gt;
 &lt;p&gt;Once signed up, you will need to provide Travis CI access to the GitHub repository of the application you are planning to deploy. This option is available under the account settings.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis" src="http://localhost:8000/images/index22/travis.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis" src="https://codedisciples.in/images/index22/travis.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;You will also be using the Travis CI command line later on to encrypt the private key that will be used to log into the DigitalOcean droplet. To install the Travis CLI locally, you will run the following commands in WSL.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
@@ -917,14 +917,14 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;However, before you do that, you will need to determine whether you would like the pipeline to run as soon as you push your changes or if you would like to trigger a manual build. You can set the desired option on the settings page of your project on Travis CI.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis2" src="http://localhost:8000/images/index22/travis2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis2" src="https://codedisciples.in/images/index22/travis2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Finally, you can &lt;code&gt;push&lt;/code&gt; to the remote repository using &lt;code&gt;git push origin master&lt;/code&gt; assuming you are working directly on the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
 &lt;p&gt;If you set your build to start automatically on every push, you will now see a build for the project queued up on the Travis CI dashboard page.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis3" src="http://localhost:8000/images/index22/travis3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis3" src="https://codedisciples.in/images/index22/travis3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Clicking on the build number will take you to the build page where you can view the log as the build progresses. The log below shows the build progressing through each step defined in the &lt;code&gt;.travis.yml&lt;/code&gt; file. If the build is successful, it will exit with a &lt;code&gt;0&lt;/code&gt; code.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="travis4" src="http://localhost:8000/images/index22/travis4.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis4" src="https://codedisciples.in/images/index22/travis4.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;You should now see the files in the &lt;code&gt;demo&lt;/code&gt; folder that you created earlier on the server.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="demo" src="http://localhost:8000/images/index22/demo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="demo" src="https://codedisciples.in/images/index22/demo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; &lt;i class="fas fa-clipboard"&gt;&lt;/i&gt;: You must &lt;strong&gt;always&lt;/strong&gt; remember to check the logs after the deploy step is complete to ascertain if the deployment worked. Travis CI will pass the build even if any step in &lt;code&gt;deploy.sh&lt;/code&gt; fails.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;You have now learnt the steps that go into setting up a continuous deployment pipeline with Travis CI and DigitalOcean.&lt;/p&gt;
@@ -934,7 +934,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="travis5" src="http://localhost:8000/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="TravisCI"></category></entry><entry><title>Deploying a React application on a Linux server</title><link href="http://localhost:8000/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. Unlike a React application that is built from scratch, &lt;code&gt;create-react-app&lt;/code&gt; does not require us to install packages like &lt;code&gt;babel&lt;/code&gt; or &lt;code&gt;webpack&lt;/code&gt;. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="travis5" src="https://codedisciples.in/images/index22/travis5.jpg"&gt;&lt;/p&gt;</content><category term="TravisCI"></category></entry><entry><title>Deploying a React application on a Linux server</title><link href="https://codedisciples.in/react-deployment.html" rel="alternate"></link><published>2020-05-08T21:00:00+05:30</published><updated>2020-05-08T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-08:/react-deployment.html</id><summary type="html">&lt;p&gt;Deploying a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, you will deploy a React application created with the &lt;code&gt;create-react-app&lt;/code&gt; package. Unlike a React application that is built from scratch, &lt;code&gt;create-react-app&lt;/code&gt; does not require us to install packages like &lt;code&gt;babel&lt;/code&gt; or &lt;code&gt;webpack&lt;/code&gt;. It enables you to get up and running quickly with a basic React application, without a lot of setup work. You can then build on this foundation to develop a full-featured application.&lt;/p&gt;
 &lt;p&gt;Web deployments on a bare-bones server can sometimes be tricky. This post will go over all the steps that need to be followed to deploy a React application on a virtual private server. The server will be a &lt;strong&gt;DigitalOcean&lt;/strong&gt; droplet. The same steps can be followed on servers provisioned by other providers (like Linode). At the end of this article, you will be familiar with the pre-deployment and deployment tasks for a React application.&lt;/p&gt;
 &lt;h2&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
@@ -948,7 +948,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;p&gt;You can refer to the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;Deploying a Flask application on a Linux server - Part I&lt;/a&gt; article for details regarding signing up for a DigitalOcean account and performing the initial setup on the server. Although the two-parter article is written for the deployment of a Flask application, part one is generic. One recommended change would be to allow port &lt;code&gt;3000&lt;/code&gt; instead of &lt;code&gt;5000&lt;/code&gt; while setting up the firewall (step 5).&lt;/p&gt;
 &lt;h2&gt;Our React application&lt;/h2&gt;
 &lt;p&gt;This post will not go into details about the application that will be deployed. At a high level, you will deploy a single-page React application which displays a random Chuck Norris joke from a public API. Refreshing the page or clicking on the button, displays a new joke. The complete code is accessible via the &lt;a href="https://github.com/AbhishekPednekar84/react-demo-app"&gt;Github repository&lt;/a&gt;. The &lt;code&gt;readme&lt;/code&gt; file documents the steps to create a local setup.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="&amp;quot;Chuck&amp;quot;" src="http://localhost:8000/images/index21/chuck.gif"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="&amp;quot;Chuck&amp;quot;" src="https://codedisciples.in/images/index21/chuck.gif"&gt;&lt;/p&gt;
 &lt;p&gt;The root folder of the application contains a directory called &lt;code&gt;client&lt;/code&gt;. All the React components and modules are present in this directory. Its structure is as follows.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;
@@ -1072,7 +1072,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="site" src="http://localhost:8000/images/index21/site.jpg"&gt;&lt;/p&gt;
+&lt;img alt="site" src="https://codedisciples.in/images/index21/site.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Almost there! Disconnecting from the terminal will kill the process that is running the site. To keep the site running at all times, you will next install the PM2 process manager.&lt;/p&gt;
 &lt;h3&gt;Installing PM2 to run the site&lt;/h3&gt;
 &lt;p&gt;PM2 will be installed as a global dependency using the &lt;code&gt;sudo npm install -g pm2&lt;/code&gt; command. Once installed PM2 can be used to start and manage the site via the &lt;code&gt;pm2 start&lt;/code&gt; command.&lt;/p&gt;
@@ -1087,7 +1087,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;You should see an output similar to this -&lt;/p&gt;
-&lt;p&gt;&lt;img alt="pm2" src="http://localhost:8000/images/index21/pm2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="pm2" src="https://codedisciples.in/images/index21/pm2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Now, the site will continue to be accessible on &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;:3000&lt;/code&gt; despite disconnecting from the terminal. To check the status of PM2, you can run &lt;code&gt;sudo pm2 status&lt;/code&gt;. You, however, don't want your users to always specify a port number while accessing the site. To ensure this, incoming traffic will be routed through the Nginx web server.&lt;/p&gt;
 &lt;h3&gt;Installing and configuring Nginx&lt;/h3&gt;
 &lt;p&gt;Nginx will act as the webserver and route incoming traffic based on the specified configuration. You will need to first install it on the server and add some configuration.&lt;/p&gt;
@@ -1168,9 +1168,9 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;That's it! The fully functioning site will now be accessible on &lt;code&gt;http://&amp;lt;ipaddress&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="site2" src="http://localhost:8000/images/index21/site2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="site2" src="https://codedisciples.in/images/index21/site2.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Next steps&lt;/h2&gt;
-&lt;p&gt;As next steps, you can create a CI/CD pipeline for automated deployments. Please refer to the &lt;a href="https://codedisciples.in/travis-digitalocean"&gt;Continuous Deployment with Travis CI and DigitalOcean&lt;/a&gt; post for more details.&lt;/p&gt;</content><category term="ReactJs"></category><category term="Deployment"></category></entry><entry><title>Using a PostgreSQL database with Travis CI</title><link href="http://localhost:8000/travis-postgres.html" rel="alternate"></link><published>2020-05-05T21:00:00+05:30</published><updated>2020-05-05T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-05-05:/travis-postgres.html</id><summary type="html">&lt;p&gt;Adding a PostgreSQL test database as part of continuous integration with Travis CI&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will see how one can use a PostgreSQL database to support automated tests during continuous integration (CI) with Travis CI.&lt;/p&gt;
+&lt;p&gt;As next steps, you can create a CI/CD pipeline for automated deployments. Please refer to the &lt;a href="https://codedisciples.in/travis-digitalocean"&gt;Continuous Deployment with Travis CI and DigitalOcean&lt;/a&gt; post for more details.&lt;/p&gt;</content><category term="ReactJs"></category><category term="Deployment"></category></entry><entry><title>Using a PostgreSQL database with Travis CI</title><link href="https://codedisciples.in/travis-postgres.html" rel="alternate"></link><published>2020-05-05T21:00:00+05:30</published><updated>2020-05-05T21:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-05-05:/travis-postgres.html</id><summary type="html">&lt;p&gt;Adding a PostgreSQL test database as part of continuous integration with Travis CI&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will see how one can use a PostgreSQL database to support automated tests during continuous integration (CI) with Travis CI.&lt;/p&gt;
 &lt;p&gt;Travis CI is a distributed CI service that can be integrated with a source control system like Github to automatically build a project and run tests whenever code is pushed to a remote repository.&lt;/p&gt;
 &lt;p&gt;We will be using a sample Django project as an example. The primary focus of the article will be Travis CI and PostgreSQL. Therefore, no prior knowledge of Django is needed. However, basic knowledge about PostgreSQL and Travis CI (particularly the usage of the &lt;code&gt;.travis.yml&lt;/code&gt; file) is assumed.&lt;/p&gt;
 &lt;h2&gt;Updating the &lt;code&gt;.travis.yml&lt;/code&gt; file&lt;/h2&gt;
@@ -1223,7 +1223,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="env_vars" src="http://localhost:8000/images/index20/env_vars.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="env_vars" src="https://codedisciples.in/images/index20/env_vars.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;That's it! Travis CI will now provide us with a temporary PostgreSQL database whenever we run our tests during CI.&lt;/p&gt;
 &lt;p&gt;The full &lt;code&gt;.travis.yml&lt;/code&gt; file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;
@@ -1241,7 +1241,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
   &lt;span class="n"&gt;slack&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;rooms&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
       &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;secure&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;xxxxxxx&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Postgres"></category><category term="TravisCI"></category></entry><entry><title>Iterools</title><link href="http://localhost:8000/itertools.html" rel="alternate"></link><published>2020-02-28T12:00:00+05:30</published><updated>2020-02-28T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-02-28:/itertools.html</id><summary type="html">&lt;p&gt;A look at the &lt;code&gt;itertools&lt;/code&gt; module in Python 3&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will dive into the &lt;code&gt;itertools&lt;/code&gt; module in Python. The &lt;code&gt;itertools&lt;/code&gt; module contains a truckload of functions to operate on Python iterators. Depending on the use case, these functions can make our code cleaner and more efficient.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Postgres"></category><category term="TravisCI"></category></entry><entry><title>Iterools</title><link href="https://codedisciples.in/itertools.html" rel="alternate"></link><published>2020-02-28T12:00:00+05:30</published><updated>2020-02-28T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-28:/itertools.html</id><summary type="html">&lt;p&gt;A look at the &lt;code&gt;itertools&lt;/code&gt; module in Python 3&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will dive into the &lt;code&gt;itertools&lt;/code&gt; module in Python. The &lt;code&gt;itertools&lt;/code&gt; module contains a truckload of functions to operate on Python iterators. Depending on the use case, these functions can make our code cleaner and more efficient.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with the concept of iterators and iterables in Python. At the end of this post, the reader will be familiar with the usage of some common functions from the &lt;code&gt;itertools&lt;/code&gt; module.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;itertools&lt;/code&gt; module is built into the Python standard library and therefore does not need to be installed separately. The &lt;code&gt;import itertools&lt;/code&gt; statement will give us access to all the functions contained in the module. On that note, we will be skipping the  &lt;code&gt;import&lt;/code&gt; statement in all but the first code snippet to avoid redundancy and keep the examples concise. &lt;/p&gt;
 &lt;p&gt;Here is the list of functions that will be discussed in this post -&lt;/p&gt;
@@ -1584,7 +1584,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;p&gt;The &lt;code&gt;itertools.tee()&lt;/code&gt; function is used to replicate iterators. In other words, create copies of an existing iterator. The key thing to note is that once we create a copy, we should no longer use the original iterator as it could result in the iterable getting advanced without the copies getting notified.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;itertools&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;groupby&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;teams&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;get_country&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;copy_of_results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;itertools&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tee&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category></entry><entry><title>Toggle Switches</title><link href="http://localhost:8000/toggle-switches.html" rel="alternate"></link><published>2020-02-23T12:00:00+05:30</published><updated>2020-02-23T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-02-23:/toggle-switches.html</id><summary type="html">&lt;p&gt;Creating toggle switches with HTML and CSS&lt;/p&gt;</summary><content type="html">&lt;p&gt;Modern websites no longer use vanilla checkboxes. Toggle switches built on top of checkboxes give any UI a cleaner and professional look and feel. &lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category></entry><entry><title>Toggle Switches</title><link href="https://codedisciples.in/toggle-switches.html" rel="alternate"></link><published>2020-02-23T12:00:00+05:30</published><updated>2020-02-23T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-02-23:/toggle-switches.html</id><summary type="html">&lt;p&gt;Creating toggle switches with HTML and CSS&lt;/p&gt;</summary><content type="html">&lt;p&gt;Modern websites no longer use vanilla checkboxes. Toggle switches built on top of checkboxes give any UI a cleaner and professional look and feel. &lt;/p&gt;
 &lt;p&gt;In this post, we will learn how to create toggle switches using &lt;code&gt;HTML&lt;/code&gt; and &lt;code&gt;CSS&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This post assumes that the reader is familiar with basic &lt;code&gt;HTML&lt;/code&gt; and &lt;code&gt;CSS&lt;/code&gt;. &lt;/p&gt;
 &lt;h2&gt;HTML&lt;/h2&gt;
@@ -1672,7 +1672,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 
 
 &lt;p&gt;Here is the complete code:&lt;/p&gt;
-&lt;iframe src="https://codepen.io/abhishekpednekar84/pen/bGdwRGY" style="width: 846px; height: 700px"&gt;&lt;/iframe&gt;</content><category term="HTML"></category><category term="CSS"></category></entry><entry><title>Presentations with Markdown</title><link href="http://localhost:8000/markdown-presentations.html" rel="alternate"></link><published>2020-01-30T12:00:00+05:30</published><updated>2020-01-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2020-01-30:/markdown-presentations.html</id><summary type="html">&lt;p&gt;Creating presentation slides with Markdown, Pandoc and LaTeX&lt;/p&gt;</summary><content type="html">&lt;p&gt;For several years, Microsoft Powerpoint has been the industry's goto software for creating presentation slides. While Powerpoint is great and comes with a lot of features out of the box, there is a bit of a learning curve for beginners. Today, however, several other options make creating slides a lot easier and therefore a lot less time-consuming. One of them is to use Markdown to create slide decks. In this post, we will be using simple Markdown syntax and convert it to a presentation with Pandoc and LaTeX.&lt;/p&gt;
+&lt;iframe src="https://codepen.io/abhishekpednekar84/pen/bGdwRGY" style="width: 846px; height: 700px"&gt;&lt;/iframe&gt;</content><category term="HTML"></category><category term="CSS"></category></entry><entry><title>Presentations with Markdown</title><link href="https://codedisciples.in/markdown-presentations.html" rel="alternate"></link><published>2020-01-30T12:00:00+05:30</published><updated>2020-01-30T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2020-01-30:/markdown-presentations.html</id><summary type="html">&lt;p&gt;Creating presentation slides with Markdown, Pandoc and LaTeX&lt;/p&gt;</summary><content type="html">&lt;p&gt;For several years, Microsoft Powerpoint has been the industry's goto software for creating presentation slides. While Powerpoint is great and comes with a lot of features out of the box, there is a bit of a learning curve for beginners. Today, however, several other options make creating slides a lot easier and therefore a lot less time-consuming. One of them is to use Markdown to create slide decks. In this post, we will be using simple Markdown syntax and convert it to a presentation with Pandoc and LaTeX.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with basic Markdown syntax (if not, &lt;a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"&gt;this&lt;/a&gt; is a nice cheatsheet).&lt;/p&gt;
 &lt;p&gt;At the end of this post, the reader will be able to install all the pre-requisite software and create presentation slides using Markdown.&lt;/p&gt;
 &lt;h2&gt;Software Installation&lt;/h2&gt;
@@ -1684,7 +1684,7 @@ To change this default behavior, we can use the &lt;code&gt;::selection&lt;/code
 &lt;p&gt;The MiKTeX installer can be downloaded from the &lt;a href="https://miktex.org/download"&gt;official website&lt;/a&gt;. If there are any issues with downloading the Windows installer, using the &lt;code&gt;wget&lt;/code&gt; package on Windows Subsystem for Linux is a good alternative. &lt;a href="https://www.youtube.com/watch?v=xzgwDbe7foQ"&gt;Here&lt;/a&gt; is a nice tutorial on setting up WSL. Once the Linux shell is up and running, execute the command &lt;code&gt;apt install wget&lt;/code&gt; to install the &lt;code&gt;wget&lt;/code&gt; package. Once installed, run &lt;code&gt;wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe&lt;/code&gt; to download the MiKTeX installer.&lt;/p&gt;
 &lt;p&gt;Once the installation is complete, we will have access to the MikTex console on our computer and the path to the binary file will be added to the system &lt;code&gt;PATH&lt;/code&gt;. First, we will open the &lt;code&gt;Tasks&lt;/code&gt; menu and click &lt;code&gt;Refresh file name database&lt;/code&gt;.  Next, in the &lt;code&gt;Packages&lt;/code&gt; section of the console, we will select the &lt;code&gt;beamer&lt;/code&gt;, &lt;code&gt;pdftex&lt;/code&gt; and &lt;code&gt;pdftexcmds&lt;/code&gt; packages and install them.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="miktex" src="http://localhost:8000/images/index17/miktex.jpg"&gt;&lt;/p&gt;
+&lt;img alt="miktex" src="https://codedisciples.in/images/index17/miktex.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Writing our Markdown&lt;/h2&gt;
 &lt;p&gt;With all our pre-requisite software now installed, we can write some Markdown. The following code is written in a file named &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;---
@@ -1729,9 +1729,9 @@ author:
 &lt;p&gt;By running this command, we are telling &lt;code&gt;pandoc&lt;/code&gt; to (&lt;code&gt;-t&lt;/code&gt;) use the &lt;code&gt;beamer&lt;/code&gt; class and generate an output (&lt;code&gt;-o&lt;/code&gt;) file called &lt;code&gt;presentation.pdf&lt;/code&gt; using the contents of &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;That's it! We should now see a PDF file called &lt;code&gt;presentation.pdf&lt;/code&gt; in the same folder as &lt;code&gt;demo.md&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="slide1" src="http://localhost:8000/images/index17/slide1.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="slide2" src="http://localhost:8000/images/index17/slide2.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="slide3" src="http://localhost:8000/images/index17/slide3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="slide1" src="https://codedisciples.in/images/index17/slide1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide2" src="https://codedisciples.in/images/index17/slide2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="slide3" src="https://codedisciples.in/images/index17/slide3.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Adding themes&lt;/h2&gt;
 &lt;p&gt;While our presentation looks okay, it would be good to add a nice theme and make it look a lot better. Luckily for us, &lt;code&gt;beamer&lt;/code&gt; comes with some built-in themes and colors to choose from. The &lt;a href="http://deic.uab.es/~iblanes/beamer_gallery/"&gt;Beamer theme gallery&lt;/a&gt; website lists all the available themes and color schemes.&lt;/p&gt;
 &lt;p&gt;To specify a theme, we just need a small change to our introduction section.&lt;/p&gt;
@@ -1762,9 +1762,9 @@ author:
 
 &lt;p&gt;To generate our new slide deck, we can again run &lt;code&gt;pandoc demo.md -t beamer -o presentation.pdf&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="theme1" src="http://localhost:8000/images/index17/theme1.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="theme2" src="http://localhost:8000/images/index17/theme2.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="theme3" src="http://localhost:8000/images/index17/theme3.jpg"&gt;&lt;/p&gt;</content><category term="Markdown"></category></entry><entry><title>Deploying a Flask application on a Linux server - Part II</title><link href="http://localhost:8000/linux-vps-deployment2.html" rel="alternate"></link><published>2019-12-10T23:00:00+05:30</published><updated>2019-12-10T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-12-10:/linux-vps-deployment2.html</id><summary type="html">&lt;p&gt;Deploying a Flask application on a Virtual Private (Linux) Server&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;part one&lt;/a&gt; of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with &lt;strong&gt;nginx&lt;/strong&gt; and &lt;strong&gt;gunicorn&lt;/strong&gt;.&lt;/p&gt;
+&lt;img alt="theme1" src="https://codedisciples.in/images/index17/theme1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme2" src="https://codedisciples.in/images/index17/theme2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="theme3" src="https://codedisciples.in/images/index17/theme3.jpg"&gt;&lt;/p&gt;</content><category term="Markdown"></category></entry><entry><title>Deploying a Flask application on a Linux server - Part II</title><link href="https://codedisciples.in/linux-vps-deployment2.html" rel="alternate"></link><published>2019-12-10T23:00:00+05:30</published><updated>2019-12-10T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-12-10:/linux-vps-deployment2.html</id><summary type="html">&lt;p&gt;Deploying a Flask application on a Virtual Private (Linux) Server&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/linux-vps-deployment1.html"&gt;part one&lt;/a&gt; of this two-parter, we performed the initial set up to deploy a Flask application on a bare-bones virtual private server (VPS). In this post, we will deploy a Flask application and get it up and running with &lt;strong&gt;nginx&lt;/strong&gt; and &lt;strong&gt;gunicorn&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with the basics of Linux and Flask.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;Click here&lt;/a&gt; to download the source code of the Flask application that will be deployed. An important thing to note is that we will be using a &lt;code&gt;.env&lt;/code&gt; file to configure our environment variables (see &lt;code&gt;.env.example&lt;/code&gt; in the repository). So these variables will need to be configured before deploying the application on the server. Since the application uses reCAPTCHA during login, we will need to register on &lt;a href="ttps://www.google.com/recaptcha/"&gt;Google reCAPTCHA&lt;/a&gt; to obtain the public and private keys. Also, for the database, we are using a Postgres database provisioned by &lt;a href="https://www.elephantsql.com/"&gt;ElephantSQL&lt;/a&gt;. The &lt;code&gt;DATABASE_URL&lt;/code&gt; variable in the &lt;code&gt;.env&lt;/code&gt; file will need to be modified depending on the database in use.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Environment&lt;/span&gt; &lt;span class="n"&gt;Variables&lt;/span&gt;
@@ -1949,7 +1949,7 @@ author:
 &lt;p&gt;The &lt;code&gt;-w&lt;/code&gt; parameter specifies the number of worker processes which is 3 in our case. The general rule of thumb is to use the formula &lt;code&gt;(2 x number of CPU cores) + 1&lt;/code&gt;. The command &lt;code&gt;nproc --all&lt;/code&gt; will give us the number of CPU cores on our server.&lt;/p&gt;
 &lt;p&gt;At this point, we can access our application on &lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
-&lt;img alt="site" src="http://localhost:8000/images/index16/site.jpg"&gt;&lt;/p&gt;
+&lt;img alt="site" src="https://codedisciples.in/images/index16/site.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;However, note that &lt;code&gt;gunicorn&lt;/code&gt; is running in the foreground. In other words, if we were to close the terminal, our site would no longer be accessible. To avoid this, we will install a package called &lt;code&gt;supervisor&lt;/code&gt; which will monitor &lt;code&gt;gunicorn&lt;/code&gt; and keep it running as a daemon process.&lt;/p&gt;
 &lt;h3&gt;Step 5 - Configuring supervisor and logging&lt;/h3&gt;
 &lt;p&gt;To install &lt;code&gt;supervisor&lt;/code&gt; on the server, we will run &lt;code&gt;sudo apt install supervisor&lt;/code&gt;.&lt;/p&gt;
@@ -1982,7 +1982,7 @@ author:
 
 &lt;p&gt;We will now be able to access our website in spite of disconnecting from our terminal.&lt;/p&gt;
 &lt;p&gt;That's it! We now have a fully functional Flask site running in production. As next steps, we can add a custom domain and secure our site with &lt;code&gt;https&lt;/code&gt;. Those, however, are out of scope for this series of posts.&lt;/p&gt;
-&lt;p&gt;Please be aware that the DigitalOcean droplet used in this post will be destroyed in the near future. So the URL &lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt; may not be accessible depending on when you are reading this post.&lt;/p&gt;</content><category term="Python"></category><category term="Linux"></category><category term="Deployment"></category></entry><entry><title>Deploying a Flask application on a Linux server - Part I</title><link href="http://localhost:8000/linux-vps-deployment1.html" rel="alternate"></link><published>2019-11-20T23:00:00+05:30</published><updated>2019-11-20T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-11-20:/linux-vps-deployment1.html</id><summary type="html">&lt;p&gt;Set up a bare-bones Virtual Private (Linux) Server from scratch&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/flask-heroku.html"&gt;previous&lt;/a&gt; post, we deployed a Flask application on Heroku. In this post, we will deploy the &lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;same application&lt;/a&gt; on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. &lt;a href="https://linode.com"&gt;Linode&lt;/a&gt; and &lt;a href="https://digitalocean.com"&gt;DigitalOcean&lt;/a&gt; are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider.&lt;/p&gt;
+&lt;p&gt;Please be aware that the DigitalOcean droplet used in this post will be destroyed in the near future. So the URL &lt;a href="http://206.189.132.233"&gt;http://206.189.132.233&lt;/a&gt; may not be accessible depending on when you are reading this post.&lt;/p&gt;</content><category term="Python"></category><category term="Linux"></category><category term="Deployment"></category></entry><entry><title>Deploying a Flask application on a Linux server - Part I</title><link href="https://codedisciples.in/linux-vps-deployment1.html" rel="alternate"></link><published>2019-11-20T23:00:00+05:30</published><updated>2019-11-20T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-20:/linux-vps-deployment1.html</id><summary type="html">&lt;p&gt;Set up a bare-bones Virtual Private (Linux) Server from scratch&lt;/p&gt;</summary><content type="html">&lt;p&gt;In the &lt;a href="https://www.codedisciples.in/flask-heroku.html"&gt;previous&lt;/a&gt; post, we deployed a Flask application on Heroku. In this post, we will deploy the &lt;a href="https://github.com/AbhishekPednekar84/flask_demo_app"&gt;same application&lt;/a&gt; on a Virtual Private (Linux) Server (VPS). Several providers offer VPS' hosted on a cloud-based infrastructure. &lt;a href="https://linode.com"&gt;Linode&lt;/a&gt; and &lt;a href="https://digitalocean.com"&gt;DigitalOcean&lt;/a&gt; are the more popular ones. We will be using DigitalOcean for our deployment. However, the setup and deployment steps will be the same for Linode or any other provider.&lt;/p&gt;
 &lt;p&gt;This is the part one of a two-part series. In this post, we will set up a bare-bones Linux server and prime it for deployment. In part two, we will deploy the Flask application with &lt;strong&gt;nginx&lt;/strong&gt; and &lt;strong&gt;gunicorn&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The post assumes that the reader is familiar with the basics of Linux.&lt;/p&gt;
 &lt;h2&gt;Getting started with DigitalOcean&lt;/h2&gt;
@@ -2110,7 +2110,7 @@ author:
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;That's it! Our set up is complete. In the &lt;a href="https://www.codedisciples.in/linux-vps-deployment2.html"&gt;next&lt;/a&gt; post, we will deploy our Flask application.&lt;/p&gt;</content><category term="Python"></category><category term="Linux"></category><category term="Deployment"></category></entry><entry><title>Custom Commands with Flask</title><link href="http://localhost:8000/flask-commands.html" rel="alternate"></link><published>2019-11-07T07:00:00+05:30</published><updated>2019-11-07T07:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-11-07:/flask-commands.html</id><summary type="html">&lt;p&gt;Writing custom commands in Flask using the &lt;code&gt;click&lt;/code&gt; library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will explore creating custom commands in Flask using the &lt;a href="https://click.palletsprojects.com/en/7.x/"&gt;Click&lt;/a&gt; 
+&lt;p&gt;That's it! Our set up is complete. In the &lt;a href="https://www.codedisciples.in/linux-vps-deployment2.html"&gt;next&lt;/a&gt; post, we will deploy our Flask application.&lt;/p&gt;</content><category term="Python"></category><category term="Linux"></category><category term="Deployment"></category></entry><entry><title>Custom Commands with Flask</title><link href="https://codedisciples.in/flask-commands.html" rel="alternate"></link><published>2019-11-07T07:00:00+05:30</published><updated>2019-11-07T07:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-07:/flask-commands.html</id><summary type="html">&lt;p&gt;Writing custom commands in Flask using the &lt;code&gt;click&lt;/code&gt; library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will explore creating custom commands in Flask using the &lt;a href="https://click.palletsprojects.com/en/7.x/"&gt;Click&lt;/a&gt; 
 library. Click is one of the dependencies that is installed along with Flask. &lt;/p&gt;
 &lt;p&gt;Whenever we run &lt;code&gt;pip install flask&lt;/code&gt;, the &lt;code&gt;flask&lt;/code&gt; command is also installed. &lt;code&gt;flask --help&lt;/code&gt; lists all the options that can 
 be run along with the &lt;code&gt;flask&lt;/code&gt; command. For example, &lt;code&gt;flask run&lt;/code&gt;, &lt;code&gt;flask shell&lt;/code&gt; etc.&lt;/p&gt;
@@ -2147,7 +2147,7 @@ The function contains the code we would like to execute whenever we run our comm
 &lt;p&gt;Next, we will pass the &lt;code&gt;print_text&lt;/code&gt; function to the &lt;code&gt;add_command&lt;/code&gt; method to create our custom command. To run this command, we use the syntax &lt;code&gt;flask &amp;lt;custom_command_name&lt;/code&gt; which in our case is 
 &lt;code&gt;flask print_text&lt;/code&gt;. Ensure that the virtual environment is activated before running the command.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="flask-command" src="http://localhost:8000/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
+&lt;img alt="flask-command" src="https://codedisciples.in/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Custom Command - Example 2&lt;/h2&gt;
 &lt;p&gt;In this example, we will create two custom commands. The first command will create a table called user in a SQLite database and the 
 second will add records to the table.&lt;/p&gt;
@@ -2181,9 +2181,9 @@ as &lt;code&gt;create_tables&lt;/code&gt; to the &lt;code&gt;command()&lt;/code&
 &lt;p&gt;Now running &lt;code&gt;flask create_tables&lt;/code&gt; in the terminal will create a database called &lt;em&gt;data.db&lt;/em&gt; in the project folder. The database should contain a 
 table called &lt;em&gt;user&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="flask-command" src="http://localhost:8000/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
+&lt;img alt="flask-command" src="https://codedisciples.in/images/index14/flask-command.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="table" src="http://localhost:8000/images/index14/table.jpg"&gt;&lt;/p&gt;
+&lt;img alt="table" src="https://codedisciples.in/images/index14/table.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Next, we will add a couple of records to the table. The code will be similar to what we have seen thus far. However, our table has 
 two columns - &lt;em&gt;name&lt;/em&gt; and &lt;em&gt;role&lt;/em&gt;. We will need to specify values for these columns by passing them as arguments to the custom command. 
 To achieve this, we will need to specify these arguments using the &lt;code&gt;@click.argument()&lt;/code&gt; decorator. One decorator will need to be 
@@ -2203,9 +2203,9 @@ specified per argument. We will also need to pass the &lt;em&gt;name&lt;/em&gt; 
 
 &lt;p&gt;To create our users using the custom command, we will run &lt;code&gt;flask create_user &amp;lt;name&amp;gt; &amp;lt;role&amp;gt;&lt;/code&gt; in a terminal window.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="flask-command2" src="http://localhost:8000/images/index14/flask-command2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="flask-command2" src="https://codedisciples.in/images/index14/flask-command2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="table2" src="http://localhost:8000/images/index14/table2.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Deploying a Flask website on Heroku</title><link href="http://localhost:8000/flask-heroku.html" rel="alternate"></link><published>2019-11-06T17:00:00+05:30</published><updated>2019-11-06T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-11-06:/flask-heroku.html</id><summary type="html">&lt;p&gt;Steps to deploy a Flask website using Heroku&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will be deploying a &lt;strong&gt;Flask&lt;/strong&gt; application using &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt;. Heroku is a popular 
+&lt;img alt="table2" src="https://codedisciples.in/images/index14/table2.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Deploying a Flask website on Heroku</title><link href="https://codedisciples.in/flask-heroku.html" rel="alternate"></link><published>2019-11-06T17:00:00+05:30</published><updated>2019-11-06T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-11-06:/flask-heroku.html</id><summary type="html">&lt;p&gt;Steps to deploy a Flask website using Heroku&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will be deploying a &lt;strong&gt;Flask&lt;/strong&gt; application using &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt;. Heroku is a popular 
 Platform as a Service (PaaS) that is used to deploy, manage and scale web applications. It comes with a lot of features 
 built-in that abstract away most of the complications involved in traditional web-based deployments. Deployments on 
 Heroku are quick and the platform ensures that you do not have to worry about the infrastructural maintenance headache's that accompany website / server maintenance.  &lt;/p&gt;
@@ -2229,17 +2229,17 @@ is called as a &lt;strong&gt;dyno&lt;/strong&gt;, We will be using a free dyno f
 &lt;p&gt;The region can be the United States or Europe. This doesn't matter for our demo application. I've chosen Europe simply 
 because, geographically, my current location is closer to Europe. We will not be adding a pipeline in this example.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="heroku-create" src="http://localhost:8000/images/index13/heroku-create.jpg"&gt;&lt;/p&gt;
+&lt;img alt="heroku-create" src="https://codedisciples.in/images/index13/heroku-create.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;On the subsequent page, we will be selecting our deployment method as &lt;strong&gt;GitHub&lt;/strong&gt;. As mentioned in the previous section, 
 this will trigger a build whenever we push changes to our GitHub repository. We will need to authorize Heroku to access 
 GitHub repositories and specify which repository will be used in our current deployment.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="heroku-setup" src="http://localhost:8000/images/index13/heroku-setup.jpg"&gt;&lt;/p&gt;
+&lt;img alt="heroku-setup" src="https://codedisciples.in/images/index13/heroku-setup.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Next, we will enable automatic deployments. At this point, I would like to point out that our repository does have continuous 
 integration (CI) configured in TravisCI due to which we will be checking the &lt;em&gt;Wait for CI to pass before deploy&lt;/em&gt; box. However, 
 this can be skipped by simply removing the .travis.yml file from the repository. A separate article pertaining to the CI pipeline will be posted soon.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="auto-deploy" src="http://localhost:8000/images/index13/auto-deploy.jpg"&gt;&lt;/p&gt;
+&lt;img alt="auto-deploy" src="https://codedisciples.in/images/index13/auto-deploy.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;This completes our initial setup on Heroku.&lt;/p&gt;
 &lt;h2&gt;Creating environment variables&lt;/h2&gt;
 &lt;p&gt;For the local deployment, all our environment variables were included in a &lt;code&gt;.env&lt;/code&gt; file (which was deliberately excluded 
@@ -2249,18 +2249,18 @@ be configured. The values of these attributes are being read into our &lt;code&g
 first of these will be a connection string to a new &lt;strong&gt;Postgres&lt;/strong&gt; database. To do this, on the &lt;em&gt;Resources&lt;/em&gt; section of our 
 dashboard, we will specify &lt;strong&gt;heroku-postgres&lt;/strong&gt; and provision the database on our free dyno.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres" src="http://localhost:8000/images/index13/postgres.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres" src="https://codedisciples.in/images/index13/postgres.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres2" src="http://localhost:8000/images/index13/postgres2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres2" src="https://codedisciples.in/images/index13/postgres2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Once this is complete, we can see the environment variable containing the connection string by navigating to the &lt;em&gt;Settings&lt;/em&gt; 
 and revealing our config variables.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres3" src="http://localhost:8000/images/index13/postgres3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres3" src="https://codedisciples.in/images/index13/postgres3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Since we have a few more to add (see &lt;code&gt;.env.example&lt;/code&gt;), we will do that as well. To obtain the &lt;em&gt;reCAPTCHA&lt;/em&gt; public and private keys,
  one will need to signup for the service on &lt;a href="https://www.google.com/recaptcha/"&gt;Google&lt;/a&gt; and follow the steps. &lt;/p&gt;
 &lt;p&gt;Here is a final screenshot of this section.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="env-vars" src="http://localhost:8000/images/index13/env-vars.jpg"&gt;&lt;/p&gt;
+&lt;img alt="env-vars" src="https://codedisciples.in/images/index13/env-vars.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Creating the Heroku &lt;code&gt;Procfile&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Heroku requires a file named &lt;code&gt;Procfile&lt;/code&gt; that contains all the commands to be executed by an app on startup. The commands 
 need to be specified using the syntax &lt;code&gt;&amp;lt;process name&amp;gt;: &amp;lt;command&amp;gt;&lt;/code&gt;. Before, we update this file, let's look at how we are exposing 
@@ -2282,7 +2282,7 @@ application called &lt;strong&gt;app&lt;/strong&gt; that is present in a module 
 so that an initial build can be triggered. We can follow the build in the &lt;em&gt;Overview&lt;/em&gt; section of the dashboard. Details of 
 any build errors can be found in the logs - &lt;em&gt;More &amp;gt; View Logs&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="build" src="http://localhost:8000/images/index13/build.jpg"&gt;&lt;/p&gt;
+&lt;img alt="build" src="https://codedisciples.in/images/index13/build.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Creating our database tables&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;models.py&lt;/code&gt; file in our &lt;code&gt;models&lt;/code&gt; package indicates that the application uses two tables - &lt;code&gt;UserModel&lt;/code&gt; and &lt;code&gt;FeedbackModel&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To create these on Heroku, we will be using a custom flask command called &lt;em&gt;create_tables&lt;/em&gt; present in &lt;code&gt;commands.py&lt;/code&gt;. 
@@ -2290,12 +2290,12 @@ The command is created in &lt;code&gt;app.py&lt;/code&gt; as part of the app cre
 &lt;p&gt;To run this command, navigate to &lt;em&gt;More &amp;gt; Run Console&lt;/em&gt; and run the command - &lt;code&gt;flask run create_tables&lt;/code&gt;. If everything runs 
 as expected, we will simply see a &lt;em&gt;Process Exited&lt;/em&gt; message on the console.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="console" src="http://localhost:8000/images/index13/console.jpg"&gt;&lt;/p&gt;
+&lt;img alt="console" src="https://codedisciples.in/images/index13/console.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Now our app is fully set up and deployed. To run the application, click &lt;em&gt;Open App&lt;/em&gt; on the dashboard. The url 
 &lt;a href="https://flask-organic-foods-app.herokuapp.com/"&gt;https://flask-organic-foods-app.herokuapp.com/&lt;/a&gt; was assigned by Heroku. 
 This can be changed with a custom domain name in the application settings.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="site" src="http://localhost:8000/images/index13/site.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category><category term="Heroku"></category></entry><entry><title>Queries using Flask SQLAlchemy</title><link href="http://localhost:8000/flask-sqlalchemy-queries.html" rel="alternate"></link><published>2019-10-31T17:00:00+05:30</published><updated>2019-10-31T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-10-31:/flask-sqlalchemy-queries.html</id><summary type="html">&lt;p&gt;Writing queries using the flask-sqlalchemy library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will go over writing database queries using the &lt;strong&gt;Flask SQLAlchemy&lt;/strong&gt; library. The post assumes that the
+&lt;img alt="site" src="https://codedisciples.in/images/index13/site.jpg"&gt;&lt;/p&gt;</content><category term="Flask"></category><category term="Python"></category><category term="Heroku"></category></entry><entry><title>Queries using Flask SQLAlchemy</title><link href="https://codedisciples.in/flask-sqlalchemy-queries.html" rel="alternate"></link><published>2019-10-31T17:00:00+05:30</published><updated>2019-10-31T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-10-31:/flask-sqlalchemy-queries.html</id><summary type="html">&lt;p&gt;Writing queries using the flask-sqlalchemy library&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will go over writing database queries using the &lt;strong&gt;Flask SQLAlchemy&lt;/strong&gt; library. The post assumes that the
  reader has some basic knowledge of flask and SQL in general.&lt;/p&gt;
 &lt;p&gt;First, we will create a simple flask application (app.py) with a SQLite backend database containing a couple of models. 
 Ideally, database models should be created as a separate module or package within the project for better maintainability. 
@@ -2627,7 +2627,7 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
 &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;image2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;image3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flask2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Running Celery on Windows 10</title><link href="http://localhost:8000/celery-windows.html" rel="alternate"></link><published>2019-10-22T22:00:00+05:30</published><updated>2019-10-22T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-10-22:/celery-windows.html</id><summary type="html">&lt;p&gt;Running Celery (with Redis) on Windows 10 using Windows Subsystem for Linux&lt;/p&gt;</summary><content type="html">&lt;p&gt;Celery is an asynchronous task queue that is fairly easy to integrate with a Python application. It requires a messaging queue (also known as a broker) to send and receive messages. Popular brokers are Redis and RabbitMQ.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Flask"></category><category term="Python"></category></entry><entry><title>Running Celery on Windows 10</title><link href="https://codedisciples.in/celery-windows.html" rel="alternate"></link><published>2019-10-22T22:00:00+05:30</published><updated>2019-10-22T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-10-22:/celery-windows.html</id><summary type="html">&lt;p&gt;Running Celery (with Redis) on Windows 10 using Windows Subsystem for Linux&lt;/p&gt;</summary><content type="html">&lt;p&gt;Celery is an asynchronous task queue that is fairly easy to integrate with a Python application. It requires a messaging queue (also known as a broker) to send and receive messages. Popular brokers are Redis and RabbitMQ.&lt;/p&gt;
 &lt;p&gt;In this post, we will see how to install and run Celery using Windows Subsystem for Linux (WSL) on Windows 10. &lt;strong&gt;Redis&lt;/strong&gt; will be our broker in the example.  We will also be using the &lt;strong&gt;Remote-WSL&lt;/strong&gt; extension in VS Code to develop our Python application in a Linux environment. Finally, we will store the results of the tasks executed by Celery in a &lt;strong&gt;SQLite&lt;/strong&gt; database.&lt;/p&gt;
 &lt;p&gt;This post assumes that the reader already has WSL setup and has installed Python and pip on WSL. If not, one can refer to the below resources before proceeding further -&lt;/p&gt;
 &lt;ol&gt;
@@ -2644,10 +2644,10 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;/ol&gt;
 &lt;p&gt;As mentioned earlier, we will be using the &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl"&gt;Remote-WSL&lt;/a&gt; extension to run our code in a Linux based environment. This plugin can be installed from the VS Code marketplace.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Remote-WSL" src="http://localhost:8000/images/index11/remote-wsl.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Remote-WSL" src="https://codedisciples.in/images/index11/remote-wsl.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Once installed, we will have an option to reopen our (Windows) project folder in WSL.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Windows-WSL" src="http://localhost:8000/images/index11/windows-wsl.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Windows-WSL" src="https://codedisciples.in/images/index11/windows-wsl.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;The final thing we need to do before writing our code is to install a Redis server instance locally. Running the following commands in &lt;code&gt;WSL&lt;/code&gt; will install a &lt;code&gt;Redis server&lt;/code&gt; on your computer.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;
@@ -2680,16 +2680,16 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;p&gt;Next, we will fire up our &lt;code&gt;Celery&lt;/code&gt; worker process.We need to make sure that we are in the virtual environment when executing the below command. The command will be run in a &lt;code&gt;WSL&lt;/code&gt; window. Note that we are passing our module name, the &lt;code&gt;worker&lt;/code&gt; argument and setting the logging level with the &lt;code&gt;--loglevel&lt;/code&gt; argument which will enable us to see results in our console.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;celery -A celery_demo worker --loglevel=info&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Celery" src="http://localhost:8000/images/index11/celery.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Celery" src="https://codedisciples.in/images/index11/celery.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Now, we will call our task in a Python REPL using the &lt;code&gt;delay()&lt;/code&gt; method. Calling the task will return an &lt;em&gt;AsyncResult&lt;/em&gt; instance, each having a unique guid. Again, we will be using &lt;code&gt;WSL&lt;/code&gt; to run the REPL.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Calling-Task" src="http://localhost:8000/images/index11/calling-task.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Calling-Task" src="https://codedisciples.in/images/index11/calling-task.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;If the task is called successfully, we can see the result of the task as executed by our &lt;code&gt;Celery&lt;/code&gt; worker.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Celery-Result" src="http://localhost:8000/images/index11/celery-result.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Celery-Result" src="https://codedisciples.in/images/index11/celery-result.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;At this point, our &lt;code&gt;SQLite&lt;/code&gt; database is created.  The &lt;code&gt;celery-taskmeta&lt;/code&gt; table will store the results of all our tasks. The tasks can be identified based on the guid of the async result instance. The results will be stored in a binary (BLOB) format. &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="SQLite-Results" src="http://localhost:8000/images/index11/sqlite-results.jpg"&gt;&lt;/p&gt;
+&lt;img alt="SQLite-Results" src="https://codedisciples.in/images/index11/sqlite-results.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Here is a readable version of our result BLOB.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;
   &lt;span class="ss"&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
@@ -2710,7 +2710,7 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
   &lt;span class="p"&gt;],&lt;/span&gt;
   &lt;span class="ss"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;Buffer&amp;quot;&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Celery"></category></entry><entry><title>git rebase - a cautious alternative to git merge</title><link href="http://localhost:8000/git-rebase.html" rel="alternate"></link><published>2019-09-27T17:00:00+05:30</published><updated>2019-09-27T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-09-27:/git-rebase.html</id><summary type="html">&lt;p&gt;An overview of the rebase workflow for git repositories&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will look at &lt;code&gt;git rebase&lt;/code&gt; and scenarios where it can and should not be used as an alternative to &lt;code&gt;git merge&lt;/code&gt;. For those unfamiliar with the concept of merging - at a super high-level, when you are done developing and testing on your &lt;em&gt;feature&lt;/em&gt; branch and are ready to merge those changes with &lt;em&gt;master&lt;/em&gt;, &lt;code&gt;git merge&lt;/code&gt; performs the merge operation by creating a &lt;strong&gt;new&lt;/strong&gt; commit for the merge. With that said, let's look at what happens during a &lt;em&gt;rebase&lt;/em&gt; operation.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Celery"></category></entry><entry><title>git rebase - a cautious alternative to git merge</title><link href="https://codedisciples.in/git-rebase.html" rel="alternate"></link><published>2019-09-27T17:00:00+05:30</published><updated>2019-09-27T17:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-27:/git-rebase.html</id><summary type="html">&lt;p&gt;An overview of the rebase workflow for git repositories&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will look at &lt;code&gt;git rebase&lt;/code&gt; and scenarios where it can and should not be used as an alternative to &lt;code&gt;git merge&lt;/code&gt;. For those unfamiliar with the concept of merging - at a super high-level, when you are done developing and testing on your &lt;em&gt;feature&lt;/em&gt; branch and are ready to merge those changes with &lt;em&gt;master&lt;/em&gt;, &lt;code&gt;git merge&lt;/code&gt; performs the merge operation by creating a &lt;strong&gt;new&lt;/strong&gt; commit for the merge. With that said, let's look at what happens during a &lt;em&gt;rebase&lt;/em&gt; operation.&lt;/p&gt;
 &lt;p&gt;We will start by initializing an empty local repository called &lt;strong&gt;rebase-demo&lt;/strong&gt;. Note that we are in the &lt;em&gt;master&lt;/em&gt; branch.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;
 &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;init&lt;/span&gt;
@@ -2790,9 +2790,9 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;/ol&gt;
 &lt;p&gt;We will also run &lt;code&gt;git log&lt;/code&gt; on both our branches.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="log-master" src="http://localhost:8000/images/index10/log-master.jpg"&gt;&lt;/p&gt;
+&lt;img alt="log-master" src="https://codedisciples.in/images/index10/log-master.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="log-feature" src="http://localhost:8000/images/index10/log-feature.jpg"&gt;&lt;/p&gt;
+&lt;img alt="log-feature" src="https://codedisciples.in/images/index10/log-feature.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Finally, let's run &lt;code&gt;git rebase&lt;/code&gt; on our &lt;em&gt;new-feature&lt;/em&gt; branch. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;rebase&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;rebase&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
@@ -2811,7 +2811,7 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;p&gt;Note that if there are any conflicts during the rebase, Git will call those out so that we can address them manually. Now let us once again run &lt;code&gt;git log&lt;/code&gt;. Notice that after the &lt;code&gt;git rebase&lt;/code&gt;, Git has moved the two commits in &lt;em&gt;master&lt;/em&gt; down and then added the two commits from &lt;em&gt;new feature&lt;/em&gt;. This, although the "Added python.py" commit in &lt;em&gt;master&lt;/em&gt; was done after the two commits in &lt;em&gt;new-feature&lt;/em&gt;. Another crucial thing is that unlike &lt;code&gt;git merge&lt;/code&gt;, no new commit was created. Just the existing commits were realigned linearly. In other words, our &lt;em&gt;new-feature&lt;/em&gt; branch is now a fast forward from &lt;em&gt;master&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Also, did you notice the commit hash values? Other than the one for the "Initial Commit", all the hash values changed while Git moved our commits around during the &lt;code&gt;git rebase&lt;/code&gt;. So essentially Git created new commit objects, thereby modifying the Git history. My previous &lt;a href="https://www.codedisciples.in/advanced-git.html"&gt;post&lt;/a&gt; on Git briefly talked about modifying the Git history. This is a bad idea if we are planning to push changes that modified the Git history, to a remote repository from where others will pull in our changes. Modifying Git history is ideal if we are working on projects that do not involve a large scale sharing of the codebase. &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="git-log-rebase" src="http://localhost:8000/images/index10/git-log-rebase.jpg"&gt;&lt;/p&gt;
+&lt;img alt="git-log-rebase" src="https://codedisciples.in/images/index10/git-log-rebase.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;To further highlight the difference between &lt;code&gt;git rebase&lt;/code&gt; and &lt;code&gt;git merge&lt;/code&gt;, here is a screenshot of a &lt;code&gt;git log&lt;/code&gt; after the two branches were merged (as opposed to rebased). Notice the additional commit created by the merge operation. Also, the git history remains unchanged.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Initial commit - ed4bee2 (master, new-feature)&lt;/li&gt;
@@ -2820,12 +2820,12 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;li&gt;Added python.py - 38fa1e0 (master)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="git-log-merge" src="http://localhost:8000/images/index10/git-log-merge.jpg"&gt;&lt;/p&gt;
+&lt;img alt="git-log-merge" src="https://codedisciples.in/images/index10/git-log-merge.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Our commits would now look something like this.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                                 &lt;span class="n"&gt;master&lt;/span&gt;
        &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="c1"&gt;------O------O------O------O&lt;/span&gt;
                               &lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;feature&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Git"></category></entry><entry><title>Running PostgreSQL in a docker Container</title><link href="http://localhost:8000/docker-postgres.html" rel="alternate"></link><published>2019-09-18T23:00:00+05:30</published><updated>2019-09-18T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-09-18:/docker-postgres.html</id><summary type="html">&lt;p&gt;Running PostgreSQL and pgAdmin 4 in docker containers&lt;/p&gt;</summary><content type="html">&lt;p&gt;Containers have revolutionized the way software is built and shipped. They also provide a means wherein software no longer needs to be mandatorily installed since it can be directly run in the container. In this post, you will run &lt;strong&gt;PostgreSQL&lt;/strong&gt; (postgres) and &lt;strong&gt;pgAdmin 4&lt;/strong&gt; in separate docker containers on a &lt;strong&gt;Windows&lt;/strong&gt; machine using docker toolbox. Once both docker containers are up, you will use pgAdmin to connect to the postgres database.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Git"></category></entry><entry><title>Running PostgreSQL in a docker Container</title><link href="https://codedisciples.in/docker-postgres.html" rel="alternate"></link><published>2019-09-18T23:00:00+05:30</published><updated>2019-09-18T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-18:/docker-postgres.html</id><summary type="html">&lt;p&gt;Running PostgreSQL and pgAdmin 4 in docker containers&lt;/p&gt;</summary><content type="html">&lt;p&gt;Containers have revolutionized the way software is built and shipped. They also provide a means wherein software no longer needs to be mandatorily installed since it can be directly run in the container. In this post, you will run &lt;strong&gt;PostgreSQL&lt;/strong&gt; (postgres) and &lt;strong&gt;pgAdmin 4&lt;/strong&gt; in separate docker containers on a &lt;strong&gt;Windows&lt;/strong&gt; machine using docker toolbox. Once both docker containers are up, you will use pgAdmin to connect to the postgres database.&lt;/p&gt;
 &lt;p&gt;This post assumes that the reader has &lt;code&gt;docker&lt;/code&gt; installed and running on a Windows machine. Installation instructions can be found in the &lt;a href="https://docs.docker.com/toolbox/toolbox_install_windows/"&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt; is a free and open-source relational database management system&lt;br/&gt;
 &lt;strong&gt;pgAdmin 4&lt;/strong&gt; is an open-source database management tool for postgres&lt;/p&gt;
@@ -2870,48 +2870,48 @@ To use a &lt;strong&gt;not&lt;/strong&gt; conditional, we can simply use &lt;str
 &lt;code&gt;volume&lt;/code&gt; signifies the location of the persistent data stored in the container&lt;/p&gt;
 &lt;p&gt;To create the containers, you will need to run the &lt;code&gt;docker-compose -f docker-compose.yml up&lt;/code&gt; command. To verify if the docker containers are running, you can use the &lt;code&gt;docker container ls&lt;/code&gt; command.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="docker1" src="http://localhost:8000/images/index9/docker1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="docker1" src="https://codedisciples.in/images/index9/docker1.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Running pgAdmin 4&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;docker-compose.yml&lt;/code&gt; file specifies &lt;code&gt;8080&lt;/code&gt; as the port to run pgAdmin. However, since docker is running on Windows, pgAdmin cannot be accessed using &lt;code&gt;http://localhost:8080&lt;/code&gt;. Instead, you will need to use the ip address of the virtual machine that is running docker toolbox. To get the ip address, you can run the &lt;code&gt;docker-machine ls&lt;/code&gt; command. The ip address, in this case, is &lt;code&gt;192.168.99.101&lt;/code&gt;. Therefore the url for pgAdmin will be &lt;code&gt;http://192.168.99.101:8080&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To log in, you will use the default email and password specified in the &lt;code&gt;yaml&lt;/code&gt; file.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="pgAdmin1" src="http://localhost:8000/images/index9/pgAdmin1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="pgAdmin1" src="https://codedisciples.in/images/index9/pgAdmin1.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Connecting to a postgres database&lt;/h2&gt;
 &lt;p&gt;Once logged into pgAdmin, you will select the &lt;strong&gt;Add New Server&lt;/strong&gt; option to connect to the postgres database.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres1" src="http://localhost:8000/images/index9/postgres1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres1" src="https://codedisciples.in/images/index9/postgres1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 The database name, username and the password will be as specified in the &lt;code&gt;yaml&lt;/code&gt; file. The hostname will once again be the ip address of the virtual machine.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres2" src="http://localhost:8000/images/index9/postgres2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres2" src="https://codedisciples.in/images/index9/postgres2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres3" src="http://localhost:8000/images/index9/postgres3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres3" src="https://codedisciples.in/images/index9/postgres3.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Creating database objects with psql&lt;/h2&gt;
 &lt;p&gt;To create database objects, we can either use pgAdmin or the &lt;code&gt;psql&lt;/code&gt; command line. To run &lt;code&gt;psql&lt;/code&gt;, you will first need to run a &lt;code&gt;bash&lt;/code&gt; shell in the container, then connect to our database and finally run our SQL statements. As an example, here is how you can create a new table.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="psql" src="http://localhost:8000/images/index9/psql.jpg"&gt;&lt;/p&gt;
+&lt;img alt="psql" src="https://codedisciples.in/images/index9/psql.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="postgres4" src="http://localhost:8000/images/index9/postgres4.jpg"&gt;&lt;/p&gt;
+&lt;img alt="postgres4" src="https://codedisciples.in/images/index9/postgres4.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-Here is a link to official postgres &lt;a href="https://www.postgresql.org/docs/11/tutorial.html"&gt;tutorial&lt;/a&gt;.&lt;/p&gt;</content><category term="Docker"></category><category term="Postgres"></category></entry><entry><title>Bind Mounting with Docker Toolbox on Windows</title><link href="http://localhost:8000/docker-bind-mounts.html" rel="alternate"></link><published>2019-09-18T14:00:00+05:30</published><updated>2019-09-18T14:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-09-18:/docker-bind-mounts.html</id><summary type="html">&lt;p&gt;Creating containers with bind mounting using Docker Toolbox on Windows&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you have racked your brains trying to get Docker bind mounting to work on Windows, you certainly are not alone. Documentation for Docker on Windows is not exactly verbose, especially if you are using the Docker Toolbox. In this post, we will look at binding a local Windows folder to a directory in a Docker Container using Docker Toolbox. In the example below, we will create an &lt;em&gt;nginx&lt;/em&gt; container with a bind to a local folder in "C:\Users". We will test the bind by copying over files from the local folder to the container.&lt;/p&gt;
+Here is a link to official postgres &lt;a href="https://www.postgresql.org/docs/11/tutorial.html"&gt;tutorial&lt;/a&gt;.&lt;/p&gt;</content><category term="Docker"></category><category term="Postgres"></category></entry><entry><title>Bind Mounting with Docker Toolbox on Windows</title><link href="https://codedisciples.in/docker-bind-mounts.html" rel="alternate"></link><published>2019-09-18T14:00:00+05:30</published><updated>2019-09-18T14:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-18:/docker-bind-mounts.html</id><summary type="html">&lt;p&gt;Creating containers with bind mounting using Docker Toolbox on Windows&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you have racked your brains trying to get Docker bind mounting to work on Windows, you certainly are not alone. Documentation for Docker on Windows is not exactly verbose, especially if you are using the Docker Toolbox. In this post, we will look at binding a local Windows folder to a directory in a Docker Container using Docker Toolbox. In the example below, we will create an &lt;em&gt;nginx&lt;/em&gt; container with a bind to a local folder in "C:\Users". We will test the bind by copying over files from the local folder to the container.&lt;/p&gt;
 &lt;p&gt;An important thing to note on Windows is to use &lt;code&gt;//&amp;lt;drive letter&amp;gt;/&lt;/code&gt; to reference our local drive in the &lt;code&gt;docker container run&lt;/code&gt; command. For instance, to reference "C:\Users", we will use "//c/users".  &lt;/p&gt;
 &lt;p&gt;Next, we will add a shared folder on our virtual machine (VM). In this example, &lt;strong&gt;Oracle VirtualBox&lt;/strong&gt; provides the VM to run Docker Toolbox. We can add a shared folder in the &lt;em&gt;Settings&lt;/em&gt; of our VM.  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="vm1" src="http://localhost:8000/images/index8/vm1.jpg"&gt;  &lt;/p&gt;
+&lt;img alt="vm1" src="https://codedisciples.in/images/index8/vm1.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 To add a shared folder, we will select the &lt;em&gt;Shared Folders&lt;/em&gt; option. We will then need to specify the desired folder on our computer and give it an appropriate name. This name will be used in the &lt;code&gt;docker container run&lt;/code&gt; command. So in the example below, by including "//c/Docker" in our command, we are simply referring to "C:\users\abhi_\Docker". Be sure to select the &lt;em&gt;Auto Mount&lt;/em&gt; and &lt;em&gt;Make Permanent&lt;/em&gt; options. For these settings to take effect, the VM will need to be restarted. To reboot, right-click on the VM and select &lt;em&gt;Reset&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="vm2" src="http://localhost:8000/images/index8/vm2.jpg"&gt;  &lt;/p&gt;
+&lt;img alt="vm2" src="https://codedisciples.in/images/index8/vm2.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 The local "Docker" folder has two files. These will get copied over to the directory (in our container) which will be bound to the local folder using the &lt;code&gt;-v&lt;/code&gt; or &lt;code&gt;--volume&lt;/code&gt; options.  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="vm3" src="http://localhost:8000/images/index8/vm3.jpg"&gt;  &lt;/p&gt;
+&lt;img alt="vm3" src="https://codedisciples.in/images/index8/vm3.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Finally, we will create our nginx container. The &lt;code&gt;-v //c/Docker:/usr/share/nginx/html&lt;/code&gt; in the command, binds "C:\users\abhi_\Docker" to "/usr/share/nginx/html" on the container.  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;docker container run -d --name nginx -p 80:80 -v //c/Docker:/usr/share/nginx/html nginx&lt;/code&gt;  &lt;/p&gt;
 &lt;p&gt;To verify whether the bind mounting worked, we will run &lt;em&gt;bash&lt;/em&gt; on the container and look for the files in "/usr/share/nginx/html".  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="vm4" src="http://localhost:8000/images/index8/vm4.jpg"&gt;&lt;/p&gt;</content><category term="Docker"></category></entry><entry><title>Namedtuples</title><link href="http://localhost:8000/named-tuples.html" rel="alternate"></link><published>2019-09-13T23:00:00+05:30</published><updated>2019-09-13T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-09-13:/named-tuples.html</id><summary type="html">&lt;p&gt;An overview of the namedtuple container type in Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will take a look at Python's &lt;strong&gt;namedtuple&lt;/strong&gt; container type. Firstly, namedtuples are immutable containers just like regular tuples. However, unlike regular tuples, which can be accessed only through indices, namedtuples can be accessed via identifiers/keys as well as index values. To use namedtuples, we will need to import the &lt;strong&gt;collections&lt;/strong&gt; module.&lt;/p&gt;
+&lt;img alt="vm4" src="https://codedisciples.in/images/index8/vm4.jpg"&gt;&lt;/p&gt;</content><category term="Docker"></category></entry><entry><title>Namedtuples</title><link href="https://codedisciples.in/named-tuples.html" rel="alternate"></link><published>2019-09-13T23:00:00+05:30</published><updated>2019-09-13T23:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-13:/named-tuples.html</id><summary type="html">&lt;p&gt;An overview of the namedtuple container type in Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will take a look at Python's &lt;strong&gt;namedtuple&lt;/strong&gt; container type. Firstly, namedtuples are immutable containers just like regular tuples. However, unlike regular tuples, which can be accessed only through indices, namedtuples can be accessed via identifiers/keys as well as index values. To use namedtuples, we will need to import the &lt;strong&gt;collections&lt;/strong&gt; module.&lt;/p&gt;
 &lt;p&gt;Below, we are defining a namedtuple called &lt;em&gt;Movie&lt;/em&gt; with four fields in a list - &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;genre&lt;/em&gt;, &lt;em&gt;year&lt;/em&gt; and &lt;em&gt;director&lt;/em&gt;. Notice that we are passing &lt;em&gt;Movie&lt;/em&gt; as the first argument to the namedtuple method. This parameter is called the &lt;em&gt;typename&lt;/em&gt; and is essentially the name of the class being created by calling the namedtuple method.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Movie&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Movie&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;genre&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;year&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;director&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -3015,11 +3015,11 @@ Finally, we will create our nginx container. The &lt;code&gt;-v //c/Docker:/usr/
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;movie_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;director&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;C. Nolan&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="n"&gt;NewMovie&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;The Dark Knight&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;genre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Action&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;year&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2008&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;director&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C. Nolan&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;music&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Hans Zimmer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category></entry><entry><title>Advanced Git Commands</title><link href="http://localhost:8000/advanced-git.html" rel="alternate"></link><published>2019-09-03T12:00:00+05:30</published><updated>2019-09-03T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-09-03:/advanced-git.html</id><summary type="html">&lt;p&gt;A look at some git commands beyond the usual workflow&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will take a look at some useful advanced &lt;strong&gt;git&lt;/strong&gt; commands. These commands essentially supplement the usual git workflow and help in fixing mistakes or undoing changes. This post assumes that the reader already knows the usage of basic git commands like &lt;code&gt;git status&lt;/code&gt;, &lt;code&gt;git add&lt;/code&gt;, &lt;code&gt;git commit&lt;/code&gt;, &lt;code&gt;git branch&lt;/code&gt;, &lt;code&gt;git push&lt;/code&gt; etc...&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category></entry><entry><title>Advanced Git Commands</title><link href="https://codedisciples.in/advanced-git.html" rel="alternate"></link><published>2019-09-03T12:00:00+05:30</published><updated>2019-09-03T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-03:/advanced-git.html</id><summary type="html">&lt;p&gt;A look at some git commands beyond the usual workflow&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will take a look at some useful advanced &lt;strong&gt;git&lt;/strong&gt; commands. These commands essentially supplement the usual git workflow and help in fixing mistakes or undoing changes. This post assumes that the reader already knows the usage of basic git commands like &lt;code&gt;git status&lt;/code&gt;, &lt;code&gt;git add&lt;/code&gt;, &lt;code&gt;git commit&lt;/code&gt;, &lt;code&gt;git branch&lt;/code&gt;, &lt;code&gt;git push&lt;/code&gt; etc...&lt;/p&gt;
 &lt;p&gt;To demonstrate the usage of these git commands, we will use a simple code snippet. The snippet will be saved in a file named &lt;strong&gt;calc.py&lt;/strong&gt;. The file itself will be present in a local git repository with two branches - &lt;strong&gt;master&lt;/strong&gt; and &lt;strong&gt;new-feature&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Running a &lt;code&gt;git log&lt;/code&gt; command shows that we have only had one commit so far in the local repository. The &lt;code&gt;git branch&lt;/code&gt; command lists all the current local branches.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="initial-setup" src="http://localhost:8000/images/index6/initial-setup.jpg"&gt;&lt;/p&gt;
+&lt;img alt="initial-setup" src="https://codedisciples.in/images/index6/initial-setup.jpg"&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# &lt;span class="nv"&gt;Code&lt;/span&gt; &lt;span class="nv"&gt;snippet&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;basic&lt;/span&gt; &lt;span class="nv"&gt;Arithematic&lt;/span&gt; &lt;span class="nv"&gt;operations&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;calc&lt;/span&gt;.&lt;span class="nv"&gt;py&lt;/span&gt;
 &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;calc&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;operator&lt;/span&gt;, &lt;span class="nv"&gt;x&lt;/span&gt;, &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
     &lt;span class="k"&gt;return&lt;/span&gt; {
@@ -3037,11 +3037,11 @@ Finally, we will create our nginx container. The &lt;code&gt;-v //c/Docker:/usr/
 &lt;p&gt;To demonstrate, we will modify &lt;strong&gt;calc.py&lt;/strong&gt; by adding a comment after the subtract function in our code snippet - &lt;code&gt;"Sub": f"{x} - {y} = {x - y}", # Subtract function&lt;/code&gt;. &lt;/p&gt;
 &lt;p&gt;Running a &lt;code&gt;git status&lt;/code&gt; and &lt;code&gt;git diff&lt;/code&gt; in our repository, shows the modified file and the exact changes that were made respectively.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="checkout1" src="http://localhost:8000/images/index6/checkout1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="checkout1" src="https://codedisciples.in/images/index6/checkout1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 To undo the changes, let's run &lt;code&gt;git checkout calc.py&lt;/code&gt;. Running a &lt;code&gt;git status&lt;/code&gt; or &lt;code&gt;git diff&lt;/code&gt; now, will no longer show any changes as the code has been reverted to its original state.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="checkout2" src="http://localhost:8000/images/index6/checkout2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="checkout2" src="https://codedisciples.in/images/index6/checkout2.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Fixing &lt;code&gt;git commit&lt;/code&gt;'s&lt;/h2&gt;
 &lt;p&gt;Providing a descriptive commit message is very important as it helps other developers get a high level of understating of the changes that were checked-in. However, there could be scenarios wherein we may provide an incorrect commit message or inadvertently make a typo in our message. These issues can be fixed using the &lt;code&gt;git commit --amend&lt;/code&gt; command.&lt;/p&gt;
 &lt;p&gt;To demonstrate, we will add a new item to our dictionary - &lt;code&gt;"Exp": f"{x} ** {y} = {x ** y}"&lt;/code&gt; and commit the change using - &lt;code&gt;git commit -m "Updated calc function to include square root"&lt;/code&gt;. Clearly, this message is incorrect as we've added an entry for &lt;em&gt;exponent&lt;/em&gt; and not &lt;em&gt;square root&lt;/em&gt;.&lt;/p&gt;
@@ -3061,25 +3061,25 @@ To undo the changes, let's run &lt;code&gt;git checkout calc.py&lt;/code&gt;. Ru
 &lt;p&gt;&lt;br/&gt;
 Running a &lt;code&gt;git log&lt;/code&gt; shows the last commit with the "bad" commit message.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="amend1" src="http://localhost:8000/images/index6/amend1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="amend1" src="https://codedisciples.in/images/index6/amend1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 To fix the message, we simply run &lt;code&gt;git commit --amend -m "Updated calc function to include exponents"&lt;/code&gt;. Running a &lt;code&gt;git log&lt;/code&gt; now will show the updated commit message.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="amend2" src="http://localhost:8000/images/index6/amend2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="amend2" src="https://codedisciples.in/images/index6/amend2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Few important things to note - running a &lt;code&gt;git log&lt;/code&gt; essentially shows us the &lt;em&gt;history&lt;/em&gt; of commits that were made thus far. It also shows us the value of the unique hash associated with our commits. Notice that when we ran the &lt;code&gt;--amend&lt;/code&gt; to fix our commit message, we did not add a new commit. Instead, we replaced the commit with the "bad" message, with our new commit. This is evident from the value of the hash associated with the two commits. They are not the same. What does this mean? Well, we just modified the git history by running the &lt;code&gt;--amend&lt;/code&gt; command. This is fine as long as we are the only ones with access to the code base/repository in question or if no one else has pulled our commits before we modified the history. When working in a team wherein multiple developers are accessing the same repository, modifying the git history is risky as it could cause problems with the local repositories of other developers when they pull in our changes. Later in the post, we will look at ways to make corrections without modifying the git history.&lt;/p&gt;
 &lt;p&gt;In the previous example, we fixed a "bad" commit message. Now, what if we forgot to include an entire file before running our &lt;code&gt;git commit&lt;/code&gt;? Let's say, we now create a .gitignore file in our repository and would like to include it with the &lt;strong&gt;last&lt;/strong&gt; commit that we made. We can add the .gitignore file to staging and run &lt;code&gt;git commit --amend&lt;/code&gt;. Running this command will open an interactive window that shows us the changes that will be added to the last commit. The commit message can also be modified (in the window) if needed. Since we are not making any further changes, we can use &lt;code&gt;:wq&lt;/code&gt; to exit. Following this, our .gitignore file will be added to the last commit.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="amend3" src="http://localhost:8000/images/index6/amend3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="amend3" src="https://codedisciples.in/images/index6/amend3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 We can verify the addition of the .gitignore file by running a &lt;code&gt;git log --stat&lt;/code&gt;. Also, note that the commit hash has changed which means we modified our git history.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="amend4" src="http://localhost:8000/images/index6/amend4.jpg"&gt;&lt;/p&gt;
+&lt;img alt="amend4" src="https://codedisciples.in/images/index6/amend4.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Cherry picking with git&lt;/h2&gt;
 &lt;p&gt;A very common issue that developers run into is making commits to an incorrect branch by forgetting to run the &lt;code&gt;git checkout &amp;lt;branchname&amp;gt;&lt;/code&gt; command before committing their changes. So in our case, say we intended to make our last commit in the &lt;strong&gt;new-feature&lt;/strong&gt; branch but accidentally ended up making the commits in &lt;strong&gt;master&lt;/strong&gt;. Luckily, git provides a way to correct this easily.&lt;/p&gt;
 &lt;p&gt;Below is what our commit history looks like at the moment. What we want to do now is to move the "Updated calc function to include exponents" commit to the &lt;strong&gt;new-feature&lt;/strong&gt; branch after which &lt;strong&gt;master&lt;/strong&gt; will only have the "Initial commit".&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="cp1" src="http://localhost:8000/images/index6/cp1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="cp1" src="https://codedisciples.in/images/index6/cp1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 We will use the &lt;code&gt;git cherry-pick&lt;/code&gt; command to copy this commit to the new branch. This command creates a new commit based on an existing one. Please note, that cherry-pick will &lt;u&gt;not&lt;/u&gt; delete the original commit. &lt;/p&gt;
 &lt;p&gt;To cherry-pick,
@@ -3092,59 +3092,59 @@ We will use the &lt;code&gt;git cherry-pick&lt;/code&gt; command to copy this co
 &lt;br/&gt;
 4. Run a &lt;code&gt;git log&lt;/code&gt; to confirm whether the branch was copied over&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="cp2" src="http://localhost:8000/images/index6/cp2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="cp2" src="https://codedisciples.in/images/index6/cp2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Now that our commit has been copied over to the &lt;strong&gt;new-feature&lt;/strong&gt; branch, we need to remove it from our &lt;strong&gt;master&lt;/strong&gt; branch. To do this, we will use the &lt;code&gt;git reset&lt;/code&gt; command. There are three types of reset's in git - soft, mixed (default) and hard. Let's try each one of them on our &lt;strong&gt;master&lt;/strong&gt; branch to remove the commit. To run &lt;code&gt;git reset&lt;/code&gt;, we will first need to copy the hash of the commit that was made &lt;u&gt;before&lt;/u&gt; the one that needs to be deleted (the "Inital commit" in our case).&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;b&gt;&lt;u&gt;Soft Reset&lt;/u&gt;&lt;/b&gt;&lt;br/&gt;
 To run a soft reset on our &lt;strong&gt;master&lt;/strong&gt; branch, we will first need to switch to the &lt;strong&gt;master&lt;/strong&gt; branch - &lt;code&gt;git checkout master&lt;/code&gt;. Next, we will run &lt;code&gt;git reset --soft 2da509&lt;/code&gt; on the branch. On running the soft reset, the &lt;strong&gt;master&lt;/strong&gt; branch will no longer have the commit that was copied over to &lt;strong&gt;new-feature&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="reset1" src="http://localhost:8000/images/index6/reset1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="reset1" src="https://codedisciples.in/images/index6/reset1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 However, if we now run a &lt;code&gt;git status&lt;/code&gt; in &lt;strong&gt;master&lt;/strong&gt;, we will see the changes from the branch that was removed, in the staging area. So, a soft reset will revert our branch to the specified commit but will keep the changes (associated with the commit that was removed), in our staging area. We, therefore, do not lose any of the changes.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="reset2" src="http://localhost:8000/images/index6/reset2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="reset2" src="https://codedisciples.in/images/index6/reset2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;b&gt;&lt;u&gt;Mixed Reset&lt;/u&gt;&lt;/b&gt;&lt;br/&gt;
 This is the default reset option provided by git. Again, we will run this command using the hash of the "Initial commit" - &lt;code&gt;git reset 2da509&lt;/code&gt;. Like the soft reset, we do not lose any changes. However, the changes will now be in the working directory as opposed to the staging area.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="reset3" src="http://localhost:8000/images/index6/reset3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="reset3" src="https://codedisciples.in/images/index6/reset3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;b&gt;&lt;u&gt;Hard Reset&lt;/u&gt;&lt;/b&gt;&lt;br/&gt;
 Since our intent of running the reset was to completely get rid of the changes (in &lt;strong&gt;master&lt;/strong&gt;) that were moved to the &lt;strong&gt;new-feature&lt;/strong&gt; branch, neither the soft nor the mixed reset options served our purpose. We will now look at the hard reset option, which will revert tracked files (calc.py) to their original state and will leave untracked files (.gitignore) alone. So let's run &lt;code&gt;git reset --hard 2da509&lt;/code&gt;. Notice that a &lt;code&gt;git status&lt;/code&gt; only shows us the untracked files now.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="reset4" src="http://localhost:8000/images/index6/reset4.jpg"&gt;&lt;/p&gt;
+&lt;img alt="reset4" src="https://codedisciples.in/images/index6/reset4.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Removing an untracked file can be achieved by using the &lt;code&gt;git clean -df&lt;/code&gt; command. The &lt;code&gt;-df&lt;/code&gt; force deletes files and directories. Our &lt;strong&gt;master&lt;/strong&gt; branch is now in its desired state.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="reset5" src="http://localhost:8000/images/index6/reset5.jpg"&gt;&lt;/p&gt;
+&lt;img alt="reset5" src="https://codedisciples.in/images/index6/reset5.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Reverting to old commits&lt;/h2&gt;
 &lt;p&gt;Let's assume that we ran the hard reset on our branch accidentally and we now need those changes back. Are we out of luck? Fortunately, no! Enter &lt;code&gt;git reflog&lt;/code&gt;. The &lt;code&gt;git reflog&lt;/code&gt; command shows us the entire history of all commits made in a particular branch. The commits are shown in the order of reference. The reflog expiration date is 90 days by default. &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="reflog" src="http://localhost:8000/images/index6/reflog.jpg"&gt;&lt;/p&gt;
+&lt;img alt="reflog" src="https://codedisciples.in/images/index6/reflog.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Now let's say we want to revert to the changes that were in the repository prior to running our &lt;code&gt;git reset&lt;/code&gt; commands. We will need to copy the appropriate hash and run a &lt;code&gt;git checkout &amp;lt;hash&amp;gt;&lt;/code&gt; command. Running this command on a hash as opposed to a branch name will put us in a detached HEAD state. At a high level, this means that we are no longer checked out to the current branch (HEAD). Running a &lt;code&gt;git log&lt;/code&gt; now will show both our commits.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="dhead" src="http://localhost:8000/images/index6/d-head.jpg"&gt;&lt;/p&gt;
+&lt;img alt="dhead" src="https://codedisciples.in/images/index6/d-head.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 To save our changes, we will need to create a branch from the detached HEAD. So let's create one called &lt;em&gt;new-feature-backup&lt;/em&gt; - &lt;code&gt;git branch new-feature-backup&lt;/code&gt;. &lt;code&gt;git branch&lt;/code&gt; will now show three branches. We can switch to the new backup branch and run a &lt;code&gt;git log&lt;/code&gt; to confirm that our desired commits exist in the new branch.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="dhead" src="http://localhost:8000/images/index6/d-head2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="dhead" src="https://codedisciples.in/images/index6/d-head2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Previously, we spoke about not modifying the git history if our commits have already been pulled by others. Let us now look at options to undo commits without changing the git history. This will ensure that when others pull in our changes, we will not be impacting their code base. We will use the &lt;code&gt;git revert&lt;/code&gt; command to create a &lt;em&gt;new&lt;/em&gt; commit to reverse changes from a previous commit.&lt;/p&gt;
 &lt;p&gt;Let us now undo the changes that we introduced in the "Updated calc function to include exponents" commit. To do that, copy the hash of that commit and run a &lt;code&gt;git revert &amp;lt;hash&amp;gt;&lt;/code&gt;. This will open an interactive window. Since we are not making any other changes, let's save and exit using &lt;code&gt;:wq&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="revert1" src="http://localhost:8000/images/index6/revert1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="revert1" src="https://codedisciples.in/images/index6/revert1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="revert2" src="http://localhost:8000/images/index6/revert2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="revert2" src="https://codedisciples.in/images/index6/revert2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Now, running a &lt;code&gt;git log&lt;/code&gt; will show us the new commit that was created by reversing the previous commit which is exactly what we wanted. Also, notice that the hashes of the older commits are unchanged. We have therefore not modified the git history. If others were to now pull our changes, they will just be pulling in the new commit that will reverse the changes from the previous commit in their code base as well.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="revert3" src="http://localhost:8000/images/index6/revert3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="revert3" src="https://codedisciples.in/images/index6/revert3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Running a &lt;code&gt;git diff&lt;/code&gt; on the two most recent branches (using their hash) will show us the exact changes that were undone.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="revert4" src="http://localhost:8000/images/index6/revert4.jpg"&gt;&lt;/p&gt;</content><category term="Git"></category></entry><entry><title>Pythonic Dictionaries</title><link href="http://localhost:8000/pythonic-dictionaries.html" rel="alternate"></link><published>2019-09-01T12:00:00+05:30</published><updated>2019-09-01T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-09-01:/pythonic-dictionaries.html</id><summary type="html">&lt;p&gt;An overview of some dictionary methods&lt;/p&gt;</summary><content type="html">&lt;p&gt;Dictionaries are one of the most helpful data structures in Python. In this post, we'll look at some methods that make dictionary usage more pythonic.&lt;/p&gt;
+&lt;img alt="revert4" src="https://codedisciples.in/images/index6/revert4.jpg"&gt;&lt;/p&gt;</content><category term="Git"></category></entry><entry><title>Pythonic Dictionaries</title><link href="https://codedisciples.in/pythonic-dictionaries.html" rel="alternate"></link><published>2019-09-01T12:00:00+05:30</published><updated>2019-09-01T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-09-01:/pythonic-dictionaries.html</id><summary type="html">&lt;p&gt;An overview of some dictionary methods&lt;/p&gt;</summary><content type="html">&lt;p&gt;Dictionaries are one of the most helpful data structures in Python. In this post, we'll look at some methods that make dictionary usage more pythonic.&lt;/p&gt;
 &lt;h2&gt;The &lt;code&gt;get()&lt;/code&gt; method&lt;/h2&gt;
 &lt;p&gt;A common way to check whether a key exists in a dictionary is to iterate over the dictionary using a loop. Another way would be to use, the &lt;em&gt;"&lt;code&gt;if&lt;/code&gt; key &lt;code&gt;in&lt;/code&gt; dict"&lt;/em&gt; syntax. While these work, they do not keep in line with the &lt;em&gt;easier to ask for forgiveness than permission&lt;/em&gt; (EAFP) coding style specified in the Python documentation.&lt;/p&gt;
 &lt;p&gt;Python dictionaries provide a &lt;code&gt;get()&lt;/code&gt; method that allows a &lt;em&gt;default&lt;/em&gt; parameter which can be used as a fall-back value in case the key does not exist. In the below example, we use the &lt;code&gt;get()&lt;/code&gt; method to look for a key a dictionary. We also provide a default parameter of &lt;em&gt;Not found&lt;/em&gt; that will be returned if the key does not exist. If the key is present, then the value associated with that key will be returned.&lt;/p&gt;
@@ -3281,7 +3281,7 @@ Running a &lt;code&gt;git diff&lt;/code&gt; on the two most recent branches (usi
 
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;f1_teams&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Redbull&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;No drivers&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category></entry><entry><title>Plotting on Google Maps with gmplot</title><link href="http://localhost:8000/google-map-plots.html" rel="alternate"></link><published>2019-08-29T12:00:00+05:30</published><updated>2019-08-29T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-08-29:/google-map-plots.html</id><summary type="html">&lt;p&gt;Add markers, polygons, heatmaps and more to Google Maps with Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will look at plotting different plot types on Google maps using the &lt;a href="https://github.com/vgm64/gmplot"&gt;gmplot&lt;/a&gt; Python library. This library is useful if we need to highlight a specific section like a building, a street, a locality or other areas of interest on a map. &lt;code&gt;gmplot&lt;/code&gt; provides a variety of plots out of the box.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category></entry><entry><title>Plotting on Google Maps with gmplot</title><link href="https://codedisciples.in/google-map-plots.html" rel="alternate"></link><published>2019-08-29T12:00:00+05:30</published><updated>2019-08-29T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-08-29:/google-map-plots.html</id><summary type="html">&lt;p&gt;Add markers, polygons, heatmaps and more to Google Maps with Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will look at plotting different plot types on Google maps using the &lt;a href="https://github.com/vgm64/gmplot"&gt;gmplot&lt;/a&gt; Python library. This library is useful if we need to highlight a specific section like a building, a street, a locality or other areas of interest on a map. &lt;code&gt;gmplot&lt;/code&gt; provides a variety of plots out of the box.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Polygons with fills&lt;/li&gt;
 &lt;li&gt;Drop pins&lt;/li&gt;
@@ -3294,7 +3294,7 @@ Running a &lt;code&gt;git diff&lt;/code&gt; on the two most recent branches (usi
 &lt;h2&gt;Google API Key&lt;/h2&gt;
 &lt;p&gt;Before we start coding, we need to procure an API key from the &lt;a href="https://cloud.google.com/console/google/maps-apis/overview"&gt;Google Cloud Platform Console&lt;/a&gt;. Refer to &lt;a href="https://developers.google.com/maps/documentation/javascript/get-api-key"&gt;this link&lt;/a&gt; for steps to obtain a new key. Google recommends restricting the API key to avoid unauthorized usage. For this demo, we will be running our app on a local Python &lt;code&gt;http&lt;/code&gt; server. Hence, we will need to add &lt;code&gt;localhost&lt;/code&gt; as a referrer. To do this, select &lt;em&gt;HTTP referrers (web sites)&lt;/em&gt; under &lt;em&gt;Application restrictions&lt;/em&gt; and add &lt;strong&gt;localhost&lt;/strong&gt;. This way, we will ensure that when we use the API key to generate a map from our &lt;code&gt;localhost&lt;/code&gt;, Google will &lt;u&gt;not&lt;/U&gt; deny the request. Failing to do this, will result in a &lt;em&gt;referrer not allowed&lt;/em&gt; error.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Google-API_Key" src="http://localhost:8000/images/index4/google-api-key.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Google-API_Key" src="https://codedisciples.in/images/index4/google-api-key.jpg"&gt;&lt;/p&gt;
 &lt;h2&gt;Python code&lt;/h2&gt;
 &lt;p&gt;Before we start writing out Python code, we will need to install the &lt;code&gt;gmplot&lt;/code&gt; library. But before that, let's create a &lt;a href="https://www.youtube.com/watch?v=APOPm01BVrk"&gt;virtual environment&lt;/a&gt;. Once created and activated, run &lt;code&gt;pip install gmplot&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;After we import the library, we will create an object of the &lt;code&gt;GoogleMapPlotter&lt;/code&gt; class. We can do this in one of two ways.&lt;/p&gt;
@@ -3347,7 +3347,7 @@ To add a &lt;strong&gt;polygon with fill&lt;/strong&gt; to highlight our locatio
 &lt;p&gt;I will also be dropping a point on, and adding a polygon around my old apartment. In the next section, we will plot a couple of routes between the school and my old apartment. The complete code will be available in the Github repository.&lt;/p&gt;
 &lt;p&gt;Here's what our map looks like at the moment.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Marker-Polygon" src="http://localhost:8000/images/index4/marker-polygon.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Marker-Polygon" src="https://codedisciples.in/images/index4/marker-polygon.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;i class="fas fa-map-pin"&gt;&lt;/i&gt; &lt;strong&gt;Line Plot&lt;/strong&gt;&lt;br/&gt;
 We will now plot two routes between the school and the apartment. To do this, we will first need the coordinates for multiples points along the routes and pass them to the &lt;code&gt;plot&lt;/code&gt; method. The color and thickness of the plot can also be specified n the method call.&lt;/p&gt;
@@ -3373,7 +3373,7 @@ We will now plot two routes between the school and the apartment. To do this, we
 
 &lt;p&gt;Here's what our plots look like now. The alternate route is in green and has been specified only from the point where it diverges from the primary path.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Routes" src="http://localhost:8000/images/index4/routes.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Routes" src="https://codedisciples.in/images/index4/routes.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;i class="fas fa-map-pin"&gt;&lt;/i&gt; &lt;strong&gt;Scatter Plots and Heatmaps&lt;/strong&gt;&lt;br/&gt;
 Next, we will add some &lt;strong&gt;scatters&lt;/strong&gt; and &lt;strong&gt;heatmaps&lt;/strong&gt; to indicate some areas of interest around the school. Agreed, that this is not the best use case for a scatter plot or a heatmap. But the idea here is to show the implementation.&lt;/p&gt;
@@ -3393,20 +3393,20 @@ Next, we will add some &lt;strong&gt;scatters&lt;/strong&gt; and &lt;strong&gt;h
 &lt;p&gt;&lt;br/&gt;
 &lt;u&gt;Scatter plot&lt;/u&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Scatters" src="http://localhost:8000/images/index4/scatters.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Scatters" src="https://codedisciples.in/images/index4/scatters.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 &lt;u&gt;Heatmap&lt;/u&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Heatmaps" src="http://localhost:8000/images/index4/heatmaps.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Google Maps"></category></entry><entry><title>A reminder app with Python, Twilio and AWS Lambda</title><link href="http://localhost:8000/reminders.html" rel="alternate"></link><published>2019-08-22T12:00:00+05:30</published><updated>2019-08-22T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-08-22:/reminders.html</id><summary type="html">&lt;p&gt;Send reminders on WhatsApp with Python, Twilio and AWS Lambda&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, my wife and I missed the due date alert on a pretty important payment. This, despite having reminders set on our phones. Although we were able to sort it out without a lot of hassle, we knew that we couldn't afford a repeat of this scenario. Since an auto-payment (which I am not a big fan of anyways) wasn't an option here, additional alerting was the way to go. So as a true engineer, I decided to set up a custom alerting mechanism to which I would "hopefully" pay more attention. Since WhatsApp is pretty heavily used in my household, sending the reminder as a WhatsApp message to multiple phones seemed like a good idea. &lt;/p&gt;
+&lt;img alt="Heatmaps" src="https://codedisciples.in/images/index4/heatmaps.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Google Maps"></category></entry><entry><title>A reminder app with Python, Twilio and AWS Lambda</title><link href="https://codedisciples.in/reminders.html" rel="alternate"></link><published>2019-08-22T12:00:00+05:30</published><updated>2019-08-22T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-08-22:/reminders.html</id><summary type="html">&lt;p&gt;Send reminders on WhatsApp with Python, Twilio and AWS Lambda&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, my wife and I missed the due date alert on a pretty important payment. This, despite having reminders set on our phones. Although we were able to sort it out without a lot of hassle, we knew that we couldn't afford a repeat of this scenario. Since an auto-payment (which I am not a big fan of anyways) wasn't an option here, additional alerting was the way to go. So as a true engineer, I decided to set up a custom alerting mechanism to which I would "hopefully" pay more attention. Since WhatsApp is pretty heavily used in my household, sending the reminder as a WhatsApp message to multiple phones seemed like a good idea. &lt;/p&gt;
 &lt;p&gt;In this post, we will create a very simple Python (v3.7) script that calls the Twilio sandbox API to send an event reminder via WhatsApp. The reminder details and the list of recipients will be stored in separate json files. To run the script daily, we will be creating a function in AWS Lambda. &lt;/p&gt;
 &lt;p&gt;The entire code is available in &lt;a href="https://github.com/AbhishekPednekar84/reminder_app_twilio_aws_lambda"&gt;this Github repository&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Twilio&lt;/h2&gt;
 &lt;p&gt;Before we get to the code, we will need to create a &lt;a href="https://www.twilio.com/try-twilio"&gt;Twilio&lt;/a&gt; account. The process is pretty straightforward. Once you are logged in, you will see an &lt;strong&gt;Account Security ID (SID)&lt;/strong&gt; and an &lt;strong&gt;Authentication Token&lt;/strong&gt; in your Twilio Console Dashboard. Those are key parameters that will be needed to send the WhatsApp message. We'll be using those later when working with AWS. &lt;/p&gt;
 &lt;p&gt;To set up the sandbox, navigate to the All Products and Services console and click on WhatsApp. Twilio will then give you a sandbox number (that can be saved as a contact on your phone) and walk you through the setup which involves sending an &lt;strong&gt;activation code&lt;/strong&gt; to the sandbox number to enable messaging between your phone number and the sandbox. The short tutorial will also cover one-way and two-way messaging. Once you have sent the activation code from your phone to the sandbox number, you are all set to send and receive messages. If you would like other's to be able to communicate with the sandbox, the same activation code will need to be sent from their phones to the sandbox number. All the phone numbers that send the activation code will be listed as sandbox participants in your Twilio account.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="twilio1" src="http://localhost:8000/images/index3/twilio1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="twilio1" src="https://codedisciples.in/images/index3/twilio1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="twilio1" src="http://localhost:8000/images/index3/twilio2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="twilio1" src="https://codedisciples.in/images/index3/twilio2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 When you use the sandbox to send a random message to your number, a 24-hour messaging window is created between the sandbox and your number. To extend this window for whatever reason, you will need to send a message back to the sandbox within those 24 hours. Luckily, the sandbox provides three messaging templates that do not follow this 24-hour rule. Messages composed using these templates can be sent any number of times at varying frequencies. The template that we will be using is &lt;code&gt;Your {{1}} appointment is coming up on {{2}}&lt;/code&gt;. More on this in the next section.&lt;/p&gt;
 &lt;h2&gt;Python&lt;/h2&gt;
@@ -3512,32 +3512,32 @@ When you use the sandbox to send a random message to your number, a 24-hour mess
 &lt;h2&gt;AWS Lambda&lt;/h2&gt;
 &lt;p&gt;Now that we have our Python script and our Twilio sandbox ready to go, let's schedule the script in AWS Lambda. Sign up for the &lt;a href="https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&amp;amp;all-free-tier.sort-order=asc"&gt;AWS Free Tier&lt;/a&gt;. In the AWS Management Console, look for Lambda.  &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="lambda1" src="http://localhost:8000/images/index3/lambda1.jpg"&gt;&lt;/p&gt;
+&lt;img alt="lambda1" src="https://codedisciples.in/images/index3/lambda1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 On the following page, you will see an option to create a Lambda function. The free tier for Lambda offers 1M free requests per month. So its a great platform to run simple scripts like this. &lt;/p&gt;
 &lt;p&gt;Give your function a name and select the runtime as Python 3.7&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="lambda1" src="http://localhost:8000/images/index3/lambda2.jpg"&gt;&lt;/p&gt;
+&lt;img alt="lambda1" src="https://codedisciples.in/images/index3/lambda2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 On the configuration page, set the code entry type as Upload zip file. Next, set the two environment variables for the Account SID and the Authentication Token. Change the Handler to &lt;code&gt;module_name.function_name&lt;/code&gt;. In this case, all our code is in the &lt;em&gt;reminders.py&lt;/em&gt; file and we require the Lambda function to call the &lt;em&gt;check_appointments()&lt;/em&gt; method. So, the handler will be &lt;code&gt;reminders.check_appointments&lt;/code&gt;. I also set the timeout to 10 seconds from the default 3 seconds under Basic Settings. The script however, takes less than three seconds to complete, making this step optional.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Creating the zip file&lt;/strong&gt; - copy reminders.py and the two json files to the &lt;em&gt;site-packages&lt;/em&gt; directory. Since I used a virtual environment, the path on my laptop is &lt;code&gt;&amp;lt;Project_folder&amp;gt;/venv/Lib/site-packages&lt;/code&gt;. Now, select all the contents of your site-packages directory and zip them. Please &lt;u&gt;do not&lt;/u&gt; zip the site-packages directory itself, just the contents. Zipping the directory will result in a &lt;em&gt;Module not found&lt;/em&gt; error when running the Lambda function. Give an appropriate name to the zip file and add it to the configuration.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="lambda1" src="http://localhost:8000/images/index3/lambda3.jpg"&gt;&lt;/p&gt;
+&lt;img alt="lambda1" src="https://codedisciples.in/images/index3/lambda3.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Next, add a trigger to set up our &lt;strong&gt;cron&lt;/strong&gt; job. &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="lambda1" src="http://localhost:8000/images/index3/lambda4.jpg"&gt;&lt;/p&gt;
+&lt;img alt="lambda1" src="https://codedisciples.in/images/index3/lambda4.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;In the Trigger configuration, select &lt;em&gt;CloudWatch Events&lt;/em&gt;. Create a new rule with an appropriate name, specify the Rule Type as Schedule Expression and provide a cron expression. If you are new to cron, here's a link to the &lt;a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html?source=post_page---------------------------#CronExpressions"&gt;AWS cron documentation&lt;/a&gt;. The time zone specified in the cron expression on Lambda is UTC by default. So &lt;code&gt;cron(30 4 * * ? *)&lt;/code&gt; will execute our script at 4:30 AM UTC every day which is 10 AM local time for me. Make sure that the trigger is enabled and add it to the configuration. &lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="lambda1" src="http://localhost:8000/images/index3/lambda5.jpg"&gt;&lt;/p&gt;
+&lt;img alt="lambda1" src="https://codedisciples.in/images/index3/lambda5.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 If added successfully, you will see a new CloudWatch Event added to your function configuration.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="lambda1" src="http://localhost:8000/images/index3/lambda6.jpg"&gt;&lt;/p&gt;
+&lt;img alt="lambda1" src="https://codedisciples.in/images/index3/lambda6.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 That's it! Now, whenever the script runs and finds an event that is due on the current day, it will send a WhatsApp message to your number.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="lambda1" src="http://localhost:8000/images/index3/WhatsApp-final.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="AWS"></category></entry><entry><title>Embedding Jupyter Notebooks in a website</title><link href="http://localhost:8000/embedding-jupyter.html" rel="alternate"></link><published>2019-08-19T12:00:00+05:30</published><updated>2019-08-19T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-08-19:/embedding-jupyter.html</id><summary type="html">&lt;p&gt;Embed Jupyter Notebooks in your website using Github and NBInteract&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will learn how to embed a Jupyter Notebook in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like &lt;strong&gt;&lt;a href="https://codedesiples.in"&gt;Code Disciples&lt;/a&gt;&lt;/strong&gt;) since the content can be added directly to the markdown. Readers therefore do not need to navigate to a notebook server or a repository to explicitly view the notebook.&lt;/p&gt;
+&lt;img alt="lambda1" src="https://codedisciples.in/images/index3/WhatsApp-final.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="AWS"></category></entry><entry><title>Embedding Jupyter Notebooks in a website</title><link href="https://codedisciples.in/embedding-jupyter.html" rel="alternate"></link><published>2019-08-19T12:00:00+05:30</published><updated>2019-08-19T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-08-19:/embedding-jupyter.html</id><summary type="html">&lt;p&gt;Embed Jupyter Notebooks in your website using Github and NBInteract&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we will learn how to embed a Jupyter Notebook in a website. The great thing about being able to embed notebooks is that either all or a subset of the notebook content, whether static or interactive can be made available directly on a website or a blog post. This is especially helpful for static sites (like &lt;strong&gt;&lt;a href="https://codedesiples.in"&gt;Code Disciples&lt;/a&gt;&lt;/strong&gt;) since the content can be added directly to the markdown. Readers therefore do not need to navigate to a notebook server or a repository to explicitly view the notebook.&lt;/p&gt;
 &lt;p&gt;This post assumes that the reader has some experience of working with Github and is familiar with Python and pip.&lt;/p&gt;
 &lt;p&gt;To start, we will create a &lt;strong&gt;&lt;a href="https://gist.github.com/"&gt;Github Gist&lt;/a&gt;&lt;/strong&gt; by uploading a Jupyter Notebook (a file with extension &lt;code&gt;.ipynb&lt;/code&gt;). To keep it simple, we will be using a notebook containing some Math formulae written in markdown. We can use a repository instead of a gist. However, since we are dealing with just a few lines of code, a gist seems more appropriate.&lt;/p&gt;
 &lt;p&gt;Once our gist is in place, we will be using a tool called &lt;strong&gt;NBInteract&lt;/strong&gt; to generate an html file corresponding to our notebook. After a few modifications to the html file, we will embed the content in this blog post using an &lt;code&gt;iframe&lt;/code&gt; tag. Agreed, that there might be other and no doubt better ways to achieve the same results. However, this is one of the simplest methods to achieve our result.&lt;/p&gt;
@@ -3548,7 +3548,7 @@ That's it! Now, whenever the script runs and finds an event that is due on the c
 &lt;p&gt;Before we proceed, we will need a Jupyter Notebook to work with. The one used for this blog is available in this &lt;em&gt;&lt;a href="https://github.com/AbhishekPednekar84/codedisciples-blog-posts/tree/master/Index_2-embed-jupyter"&gt;Github repository&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;With our notebook now in place, we can simply drag and drop it on the page to create a new gist. If there are any dependencies (third-party packages) that are needed in order for the code in our notebook to run, we will need to add those as well. Dependencies if any, will need to be added to either a &lt;code&gt;requirements.txt&lt;/code&gt; file (for pypi) or an &lt;code&gt;environment.yml&lt;/code&gt; file (for Conda / pypi). These files will also need to be added to the gist. Finally, to create the gist click either of the &lt;strong&gt;Create gist&lt;/strong&gt; buttons. Our gist will be public in this case.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Gist" src="http://localhost:8000/images/index2/gist.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Gist" src="https://codedisciples.in/images/index2/gist.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2&gt;Creating the iframe&lt;/h2&gt;
 &lt;p&gt;As mentioned earlier, we will be using the &lt;code&gt;iframe&lt;/code&gt; tag in html to embed our notebook. Before we can do that, our notebook will need to be converted to an html file. This will be achieved via a third-party package called &lt;em&gt;&lt;a href="https://www.nbinteract.com/"&gt;nbinteract&lt;/a&gt;&lt;/em&gt;. So let's first create a &lt;em&gt;&lt;a href="https://www.youtube.com/watch?v=APOPm01BVrk"&gt;virtual environment&lt;/a&gt;&lt;/em&gt; in the directory containing our notebook. Creating a virtual environment is optional but is a good practice as it isolates all our project dependencies.&lt;/p&gt;
@@ -3558,7 +3558,7 @@ That's it! Now, whenever the script runs and finds an event that is due on the c
 
 
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="NBInteract" src="http://localhost:8000/images/index2/nbinteract.jpg"&gt;&lt;/p&gt;
+&lt;img alt="NBInteract" src="https://codedisciples.in/images/index2/nbinteract.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;This will create an html file with the same name as our Jupyter Notebook. Now before creating the &lt;code&gt;iframe&lt;/code&gt;, we will need to make a couple of changes to the html file.&lt;/p&gt;
 &lt;p&gt;In the embedded JavaScript at the end of the file, we will change the provider from &lt;code&gt;gh&lt;/code&gt; to gist. Had we used a Github repository instead of a gist, no change was needed.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="o"&gt;&amp;lt;!--&lt;/span&gt; &lt;span class="nv"&gt;Loads&lt;/span&gt; &lt;span class="nv"&gt;nbinteract&lt;/span&gt; &lt;span class="nv"&gt;package&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
@@ -3588,10 +3588,10 @@ That's it! Now, whenever the script runs and finds an event that is due on the c
 &lt;p&gt;Also, &lt;code&gt;nbinteract&lt;/code&gt; inserts a whole bunch of Bootstrap and Font-Awesome CSS in the file. So we can keep as much or as little of it. Finally, some sections of the notebook can be excluded if needed by simply removing the corresponding &lt;code&gt;div&lt;/code&gt; tags.&lt;/p&gt;
 &lt;p&gt;For example, to exclude this cell,&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="delete-nb" src="http://localhost:8000/images/index2/delete-nb.jpg"&gt;&lt;/p&gt;
+&lt;img alt="delete-nb" src="https://codedisciples.in/images/index2/delete-nb.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;we can remove this block from the html file&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="delete-html" src="http://localhost:8000/images/index2/delete-html.jpg"&gt;&lt;/p&gt;
+&lt;img alt="delete-html" src="https://codedisciples.in/images/index2/delete-html.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Now, let's embed an &lt;code&gt;iframe&lt;/code&gt; tag in our blog that links to the html file created by &lt;code&gt;nbinteract&lt;/code&gt;. we will be adding the below iframe tag directly to the markdown of this blog post.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://codedisciples.in/Index_2-Embed_Jupyter.html&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -3604,7 +3604,7 @@ That's it! Now, whenever the script runs and finds an event that is due on the c
 In conclusion, one of the best use cases for embedding a notebook is interactive content. If a notebook contains plots which have interactive &lt;code&gt;IPython widgets&lt;/code&gt;, then those can be embedded into a website. Users can then interact with the plot on the website using the widgets. Some great examples have been provided in the &lt;a href="https://www.nbinteract.com/examples/examples_intro.html"&gt;NBInteract documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2&gt;Further Reading&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Ezequiel Leonardo Castaño&lt;/strong&gt; goes over some of the topics discussed here in further detail. Please check out his excellent article &lt;a href="https://elc.github.io/posts/embed-interactive-notebooks/"&gt;Embed Interactive Jupyter Notebooks in Static Websites for Free&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="Jupyter"></category></entry><entry><title>Pre-commit hooks for Python code</title><link href="http://localhost:8000/pre-commit.html" rel="alternate"></link><published>2019-08-12T12:00:00+05:30</published><updated>2019-08-12T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:localhost,2019-08-12:/pre-commit.html</id><summary type="html">&lt;p&gt;Using &lt;em&gt;black&lt;/em&gt; and &lt;em&gt;flake-8&lt;/em&gt; as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively&lt;/p&gt;</summary><content type="html">&lt;p&gt;Code reviews are great. But at the same time, they can be frustrating if the code being reviewed is not formatted uniformly. This is a common scenario in large teams wherein multiple developers are working on the same feature branch or code base. More hours spent on fixing the formatting also results in loss of productive time which could be used to further improve code logic. Also, none of us like being that super nitpicky team member who comments on a trailing whitespace or the fact that one string has single quotes while another is enclosed within double quotes. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ezequiel Leonardo Castaño&lt;/strong&gt; goes over some of the topics discussed here in further detail. Please check out his excellent article &lt;a href="https://elc.github.io/posts/embed-interactive-notebooks/"&gt;Embed Interactive Jupyter Notebooks in Static Websites for Free&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="Jupyter"></category></entry><entry><title>Pre-commit hooks for Python code</title><link href="https://codedisciples.in/pre-commit.html" rel="alternate"></link><published>2019-08-12T12:00:00+05:30</published><updated>2019-08-12T12:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2019-08-12:/pre-commit.html</id><summary type="html">&lt;p&gt;Using &lt;em&gt;black&lt;/em&gt; and &lt;em&gt;flake-8&lt;/em&gt; as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively&lt;/p&gt;</summary><content type="html">&lt;p&gt;Code reviews are great. But at the same time, they can be frustrating if the code being reviewed is not formatted uniformly. This is a common scenario in large teams wherein multiple developers are working on the same feature branch or code base. More hours spent on fixing the formatting also results in loss of productive time which could be used to further improve code logic. Also, none of us like being that super nitpicky team member who comments on a trailing whitespace or the fact that one string has single quotes while another is enclosed within double quotes. &lt;/p&gt;
 &lt;p&gt;Luckily, &lt;a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks"&gt;pre-commit&lt;/a&gt; hooks exist to alleviate these concerns by eliminating the need to manually review formatting and &lt;a href="https://www.python.org/dev/peps/pep-0008/"&gt;PEP8&lt;/a&gt; checks. A pre-commit hook is a short script that runs before committing our code. The script can be a means to check the code formatting or its compliance to PEP8. If the script runs successfully, the code is committed to source control, else the commit is unsuccessful.&lt;/p&gt;
 &lt;p&gt;In this post, we’ll take a look at two popular Python libraries and how we can add them to a pre-commit hook. Please note that I am using a &lt;strong&gt;Windows&lt;/strong&gt; laptop for this demo. The same commands should work on &lt;strong&gt;macOS&lt;/strong&gt; as well.&lt;/p&gt;
 &lt;ol&gt;
@@ -3680,20 +3680,20 @@ In conclusion, one of the best use cases for embedding a notebook is interactive
 &lt;p&gt;That's it, with all this in place, we are ready to run the hook on our code. &lt;/p&gt;
 &lt;p&gt;Here's some rather sloppily formatted code. Notice that there is no space prior to the equal to (=) operator. One element of the list uses double quotes while the rest are enclosed within single quotes and there is only one blank line prior to and after the function definition. There is also an additional whitespace on line 1 at the end of the (''') quotes.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Unformatted-Code" src="http://localhost:8000/images/index1/Unformatted_Code.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Unformatted-Code" src="https://codedisciples.in/images/index1/Unformatted_Code.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Let's create and run our hook on this code. As indicated earlier, once we &lt;code&gt;pip install&lt;/code&gt; the &lt;em&gt;pre-commit&lt;/em&gt; library, we need to install it using the &lt;code&gt;pre-commit install&lt;/code&gt; command.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Pre-Commit" src="http://localhost:8000/images/index1/Pre-Commit.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Pre-Commit" src="https://codedisciples.in/images/index1/Pre-Commit.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Now, when we run our &lt;code&gt;git commit&lt;/code&gt;, we see that &lt;em&gt;black&lt;/em&gt; fails the commit but auto-formats the file. &lt;em&gt;flake8&lt;/em&gt; fails the commit due to the whitespace on line 1. This whitespace needs to be removed manually before our next &lt;code&gt;git commit&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Initial-Commit" src="http://localhost:8000/images/index1/Initial_Commit.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Initial-Commit" src="https://codedisciples.in/images/index1/Initial_Commit.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Here's what our code looks like after all the formatting and the whitespace correction. Note that the list elements are now wrapped on separate lines. The spacing around the operators and the function definition is uniform. Also, all our strings are now enclosed within double quotes.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Formatted-Code" src="http://localhost:8000/images/index1/Formatted_Code.jpg"&gt;&lt;/p&gt;
+&lt;img alt="Formatted-Code" src="https://codedisciples.in/images/index1/Formatted_Code.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
 Let's go ahead and commit this. If all is good, both our hooks should pass followed by a successful &lt;code&gt;git commit&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt;
-&lt;img alt="Final-Commit" src="http://localhost:8000/images/index1/Final_Commit.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category></entry></feed>
+&lt;img alt="Final-Commit" src="https://codedisciples.in/images/index1/Final_Commit.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category></entry></feed>

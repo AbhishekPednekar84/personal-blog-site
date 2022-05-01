@@ -46,7 +46,7 @@ print(f"y = {y}")
 
 <br />
 
-## Why does this work
+## Why does this work?
 
 To understand why this works, we need to delve into the world of tuples. Tuples are immutable data structures in Python. Traditionally, a tuple is represented as x = (1, 2). Its elements can be accessed using the index values.
 
