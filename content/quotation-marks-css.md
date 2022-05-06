@@ -37,6 +37,4 @@ blockquote::after {
 
 <br />
 
-Check out the full [https://codepen.io/abhishekpednekar84/pen/ZErboOb](codepen).
-
-<iframe src="https://codepen.io/abhishekpednekar84/pen/ZErboOb" style="width: 846px; height: 700px"></iframe>
+Check out the [codepen](https://codepen.io/abhishekpednekar84/pen/ZErboOb).

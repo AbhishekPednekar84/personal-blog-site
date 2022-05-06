@@ -23,8 +23,7 @@
 
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p&gt;Check out the full &lt;a href="codepen"&gt;https://codepen.io/abhishekpednekar84/pen/ZErboOb&lt;/a&gt;.&lt;/p&gt;
-&lt;iframe src="https://codepen.io/abhishekpednekar84/pen/ZErboOb" style="width: 846px; height: 700px"&gt;&lt;/iframe&gt;</content><category term="CSS"></category></entry><entry><title>CSS ::selection Selector</title><link href="https://codedisciples.in/css-selection.html" rel="alternate"></link><published>2022-04-06T22:00:00+05:30</published><updated>2022-04-06T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-06:/css-selection.html</id><summary type="html">&lt;p&gt;Add a little more pizzazz to your modern website with &lt;code&gt;::selection&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we'll learn how we can change the default text selection color on a website.&lt;/p&gt;
+&lt;p&gt;Check out the &lt;a href="https://codepen.io/abhishekpednekar84/pen/ZErboOb"&gt;codepen&lt;/a&gt;.&lt;/p&gt;</content><category term="CSS"></category></entry><entry><title>CSS ::selection Selector</title><link href="https://codedisciples.in/css-selection.html" rel="alternate"></link><published>2022-04-06T22:00:00+05:30</published><updated>2022-04-06T22:00:00+05:30</updated><author><name>Abhishek Pednekar</name></author><id>tag:codedisciples.in,2022-04-06:/css-selection.html</id><summary type="html">&lt;p&gt;Add a little more pizzazz to your modern website with &lt;code&gt;::selection&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post, we'll learn how we can change the default text selection color on a website.&lt;/p&gt;
 &lt;p&gt;By default, a browser applies a dark blue background with black text when the text on a webpage is selected.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;
 &lt;img alt="css-selection-default" src="https://codedisciples.in/images/index25/css-selection-default.jpg"&gt;&lt;/p&gt;
