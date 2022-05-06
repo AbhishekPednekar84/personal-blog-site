@@ -1,7 +1,7 @@
 Title: Swapping Variables in Python - How & Why
 Date: 2022-05-01 21:00
-Category: Javascript
-Tags: Javascript
+Category: Python
+Tags: Python
 Slug: variable-swapping-python
 Authors: Abhishek Pednekar
 Summary: How and why does Python's succinct variable swapping syntax work

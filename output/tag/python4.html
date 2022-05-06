@@ -5,16 +5,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
+    <meta name="description" content=" Posts tagged with Python" />
     <meta name="author" content="Abhishek Pednekar" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
- <meta property="og:type" content="article" />
-<meta property="og:title" content="Presentations with Markdown" />
-<meta property="og:url" content="https://codedisciples.in/markdown-presentations.html" />
- <meta property="article:section" content="Markdown" />
-  <meta property="article:tag" content="Markdown" />
-        
-    <title>Presentations with Markdown - Code Disciples</title>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Code Disciples"/>
+        <meta property="og:url" content="https://codedisciples.in"/>
+        <meta property="og:description" content="codedisciples.in is a compilation of programming articles related to fullstack web development."/>
+
+    <title>Tag:Python - Code Disciples</title>
 
    
         <link rel="stylesheet"
@@ -87,158 +86,67 @@
 		<p class="lead">A blog for all things code</p>
 	  </div>
 	</div>
-  
+
     <div class="container" id="main-container">
-        <div class="row">
+      <div class="row">
         <div class="col-md-9" id="content">
-  <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
-  <header class="article-header">
- <abbr class="article-header-date">
-  Thu 30 January 2020
+<ol class="breadcrumb">
+    <li><a href="https://codedisciples.in/" title="Home" rel="home">
+		<i class="fas fa-home fa-fw fa-lg"></i> </a></li>
+    <li>Tags </li>
+    <li class="active">Python</li>
+</ol>
+    <article>
+<abbr class="article-header-date">
+  Mon 12 August 2019
 </abbr> <h1>
-  <a href="https://codedisciples.in/markdown-presentations.html" rel="bookmark"
-     title="Permalink to Presentations with Markdown">
-    Presentations with Markdown
+  <a href="https://codedisciples.in/pre-commit.html" rel="bookmark"
+     title="Permalink to Pre-commit hooks for Python code">
+    Pre-commit hooks for Python code
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="https://codedisciples.in/author/abhishek-pednekar.html">Abhishek Pednekar</a>
     in 
-    <a href="https://codedisciples.in/category/markdown.html">
-      Markdown</a>
+    <a href="https://codedisciples.in/category/python.html">
+      Python</a>
     &nbsp;&nbsp;
   </p>
-</div> <!-- /.article-header-info -->   </header>
-  <div class="content-body" itemprop="text articleBody">
-   <p>For several years, Microsoft Powerpoint has been the industry's goto software for creating presentation slides. While Powerpoint is great and comes with a lot of features out of the box, there is a bit of a learning curve for beginners. Today, however, several other options make creating slides a lot easier and therefore a lot less time-consuming. One of them is to use Markdown to create slide decks. In this post, we will be using simple Markdown syntax and convert it to a presentation with Pandoc and LaTeX.</p>
-<p>The post assumes that the reader is familiar with basic Markdown syntax (if not, <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this</a> is a nice cheatsheet).</p>
-<p>At the end of this post, the reader will be able to install all the pre-requisite software and create presentation slides using Markdown.</p>
-<h2>Software Installation</h2>
-<p>As touched upon already, we will need to install some software before we start writing our Markdown code.</p>
-<h3>Pandoc</h3>
-<p>Pandoc will allow us to convert files from one format to another. In our case, that will be Markdown to PDF. Pandoc can be installed from the <a href="https://pandoc.org/installing.html">official website</a>. Installers are available for different platforms. The installation process will add Pandoc to the system <code>PATH</code>. </p>
-<h3>LaTeX</h3>
-<p>To install LaTeX, we will install <strong>MiKTeX</strong> which is a free distribution for LaTeX. Installing LaTeX will allow us to use the <code>beamer</code> class which is needed to create our slides and will also enable us to download the <code>PdfLaTeX</code> package, which we will use to convert our Markdown file to a PDF output.</p>
-<p>The MiKTeX installer can be downloaded from the <a href="https://miktex.org/download">official website</a>. If there are any issues with downloading the Windows installer, using the <code>wget</code> package on Windows Subsystem for Linux is a good alternative. <a href="https://www.youtube.com/watch?v=xzgwDbe7foQ">Here</a> is a nice tutorial on setting up WSL. Once the Linux shell is up and running, execute the command <code>apt install wget</code> to install the <code>wget</code> package. Once installed, run <code>wget https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7269-x64.exe</code> to download the MiKTeX installer.</p>
-<p>Once the installation is complete, we will have access to the MikTex console on our computer and the path to the binary file will be added to the system <code>PATH</code>. First, we will open the <code>Tasks</code> menu and click <code>Refresh file name database</code>.  Next, in the <code>Packages</code> section of the console, we will select the <code>beamer</code>, <code>pdftex</code> and <code>pdftexcmds</code> packages and install them.</p>
-<p><br />
-<img alt="miktex" src="https://codedisciples.in/images/index17/miktex.jpg"></p>
-<h2>Writing our Markdown</h2>
-<p>With all our pre-requisite software now installed, we can write some Markdown. The following code is written in a file named <code>demo.md</code>.</p>
-<div class="highlight"><pre><span></span>---
-title: 
-- Create slides in Markdown
-author:
-- Abhishek Pednekar
----
+</div> <!-- /.article-header-info -->
+      <div class="summary">
+		<p>Using <em>black</em> and <em>flake-8</em> as pre-commit hooks in Python for code formatting and complying to PEP8 norms respectively</p>
+		<p class="content-emphasis"><a href="https://codedisciples.in/pre-commit.html">
+			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
+		</a></p>
+      </div>    </article>
+    <hr />
 
+<nav class="index-pager">
+	<ul class="pagination">
+		<li class="prev">
+		  <a href="https://codedisciples.in/tag/python3.html">
+			<i class="fas fa-chevron-circle-left fa-fw fa-lg"></i> Previous
+		  </a>
+		</li>
 
-# Text
-### Basic text formatting
-| Markdown Syntax | Output |
-| ---------------|--------- |
-| `**Bold**` | **Bold** |
-| `*Emphasis*` | *Emphasis* |
-| `~~Strikethrough~~` | ~~Strikethrough~~|
+        <li>
+          <a href="https://codedisciples.in/tag/python.html">1</a>
+        </li>
+        <li>
+          <a href="https://codedisciples.in/tag/python2.html">2</a>
+        </li>
+        <li>
+          <a href="https://codedisciples.in/tag/python3.html">3</a>
+        </li>
+        <li class="active"> <span>4</span> </li>
 
+        <li class="next disabled">
+          <span><i class="fas fa-chevron-circle-right fa-fw fa-lg"></i> Next</span>
+        </li>
+	</ul>
 
-# Lists
-### Markdown syntax:
-<span class="nt">&lt;pre&gt;</span>
-+ Item1
-+ Item2
-+ Item3
-<span class="nt">&lt;/pre&gt;</span>
-
-### Output:
-+ Item1
-+ Item2
-+ Item3
-</pre></div>
-
-
-<ul>
-<li>The first section (enclosed within <code>---</code>) is the introduction and will be the first slide in our deck. Here we can specify the topic, author, date etc..</li>
-<li>Each section that starts with a Markdown heading (<code>#</code> in this case) will correspond to a distinct slide in our deck. It is critical to note that the headings here follow a hierarchical structure. We have used the Markdown <code>#</code> to specify the title of our first slide. Any smaller heading Markdown's like <code>##</code> or <code>###</code> on the slide will therefore just be sub-sections on the slide. Until the next <code>#</code> is encountered, all the content will be on the first slide itself. Had we used <code>##</code> to specify the title of the first slide, then <code>###</code>, <code>####</code> etc.. would have been subsections on the slide. Also, each section starting with <code>##</code> would have then corresponded to a distinct slide in our deck.</li>
-</ul>
-<p>The content of each slide is written in Markdown syntax. In the next section, we will convert our Markdown file into a PDF slide deck.</p>
-<h2>Generating the slides</h2>
-<p>To generate the slides, navigate to the folder containing the <code>demo.md</code> file in the command prompt / terminal and run the command <code>pandoc demo.md -t beamer -o presentation.pdf</code>. </p>
-<p>By running this command, we are telling <code>pandoc</code> to (<code>-t</code>) use the <code>beamer</code> class and generate an output (<code>-o</code>) file called <code>presentation.pdf</code> using the contents of <code>demo.md</code>.</p>
-<p>That's it! We should now see a PDF file called <code>presentation.pdf</code> in the same folder as <code>demo.md</code>.</p>
-<p><br />
-<img alt="slide1" src="https://codedisciples.in/images/index17/slide1.jpg"></p>
-<p><img alt="slide2" src="https://codedisciples.in/images/index17/slide2.jpg"></p>
-<p><img alt="slide3" src="https://codedisciples.in/images/index17/slide3.jpg"></p>
-<h2>Adding themes</h2>
-<p>While our presentation looks okay, it would be good to add a nice theme and make it look a lot better. Luckily for us, <code>beamer</code> comes with some built-in themes and colors to choose from. The <a href="http://deic.uab.es/~iblanes/beamer_gallery/">Beamer theme gallery</a> website lists all the available themes and color schemes.</p>
-<p>To specify a theme, we just need a small change to our introduction section.</p>
-<div class="highlight"><pre><span></span><span class="c1">---</span>
-<span class="n">title</span><span class="p">:</span> 
-<span class="o">-</span> <span class="k">Create</span> <span class="n">slides</span> <span class="k">in</span> <span class="n">Markdown</span>
-<span class="n">author</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">Abhishek</span> <span class="n">Pednekar</span>
-<span class="n">theme</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">Madrid</span>
-<span class="c1">---</span>
-</pre></div>
-
-
-<p>Here's how we can specify both, a theme and a color scheme.</p>
-<div class="highlight"><pre><span></span><span class="c1">---</span>
-<span class="n">title</span><span class="p">:</span> 
-<span class="o">-</span> <span class="k">Create</span> <span class="n">slides</span> <span class="k">in</span> <span class="n">Markdown</span>
-<span class="n">author</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">Abhishek</span> <span class="n">Pednekar</span>
-<span class="n">theme</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">Madrid</span>
-<span class="n">colortheme</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">lily</span>
-<span class="c1">---</span>
-</pre></div>
-
-
-<p>To generate our new slide deck, we can again run <code>pandoc demo.md -t beamer -o presentation.pdf</code>.</p>
-<p><br />
-<img alt="theme1" src="https://codedisciples.in/images/index17/theme1.jpg"></p>
-<p><img alt="theme2" src="https://codedisciples.in/images/index17/theme2.jpg"></p>
-<p><img alt="theme3" src="https://codedisciples.in/images/index17/theme3.jpg"></p>
-  </div>
-
-  <br />
-  <div class="comments">
-    <h2>Share</h2>
-    <br />
-    <!-- AddToAny BEGIN -->
-    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-      <a class="a2a_button_email"></a>
-      <a class="a2a_button_linkedin"></a>
-      <a class="a2a_button_telegram"></a>
-      <a class="a2a_button_twitter"></a>
-      <a class="a2a_button_whatsapp"></a>
-    </div>
-    <script async src="https://static.addtoany.com/menu/page.js"></script>
-    <!-- AddToAny END -->
-  </div>
-  <br />
-  <div class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      (function () {
-        var dsq = document.createElement("script");
-        dsq.type = "text/javascript";
-        dsq.async = true;
-        dsq.src = "//code-disciples.disqus.com/embed.js";
-        (
-          document.getElementsByTagName("head")[0] ||
-          document.getElementsByTagName("body")[0]
-        ).appendChild(dsq);
-      })();
-    </script>
-  </div>
-</article>
-          </div><!-- /content -->
+</nav> <!-- /index-pager -->
+        </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">
 
@@ -357,7 +265,7 @@ author:
 
         </div><!--/sidebar -->
       </div><!--/row-->
-      </div><!--/.container /#main-container -->
+    </div><!--/.container /#main-container -->
     <br>
     <footer id="site-footer">
  
@@ -387,5 +295,5 @@ author:
             crossorigin="anonymous"></script>
 
 
-    </body>
+  </body>
 </html>
